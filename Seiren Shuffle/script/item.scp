@@ -1,0 +1,4564 @@
+#include "inc/mons.h"
+#include "inc/def.h"
+#include "inc/flag.h"
+#include "inc/scr_inc.h"
+#include "inc/3dicon.h"
+#include "inc/efx.h"
+#include "inc/se.h"
+#include "inc/vo.h"
+#include "inc/skilldef.h"
+
+//
+// �C���X�^���g�A�C�e������莞�C�x���g��������A�C�e�����̃X�N���v�g
+// �s�K�v�ȃA�C�e���͏����Ȃ��ق����y��
+// function���̋L�q�̓A�C�e���e�[�u���iitem.csv�j�́u�g�p���X�N���v�g�v��ɐݒ肵�Ă��镨�������ĉ������B
+// �i��Ys7����̖��c�ŁA[item_]�{�A�C�e���ԍ��i%03d�j�ł��Ăяo���܂��B�j
+// ���A�C�e���ԍ��� 3dicon.h ���Q�Ƃ��ĉ������B
+//
+// �����̃X�N���v�g�͑S�ăA�C�e���p�̃T�u�X���b�h�ŋN������̂ŁA
+// �C�x���g���Ń��C���X���b�h�Ɉڍs�������ꍇ��
+// EventCue���ߓ����g���ă��C���X���b�h�ɕʂ̃X�N���v�g���Ăяo���Ȃ����ĉ������B
+//
+// �A�C�e���̏���́AUseItem�R�}���h�ōs���܂��B�i����Ȃ��A�C�e���̏ꍇ�AUseItem���Ăяo���Ă�����܂���j
+//
+
+/////////////////////////////////////
+// �񕜖�n
+function "it_pt1"
+{
+	SetFlag(TF_MENU_SELECT2, 1)
+	if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+	{
+		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+		YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		// �|�[�V�����P�iHP 60% �񕜁j
+		HP_Heal( this , (this.CHRWORK[CWK_MAXHP] * 0.6f))
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		if (this.CHRWORK[CWK_CHRID] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == DANA)
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+
+		// �����
+		UseItem(ICON3D_US_HEALSOLO_01, 1)
+
+		if(!FLAG[SF_INFERNO])	//INFERNO�ł͋󂫕r�c��Ȃ�
+		{
+			Wait(5)
+			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "���c�����B" , 0 , 0 )
+			WaitPrompt()
+			WaitCloseWindow()
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_HEALSOLO_01)
+//		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_pt2"
+{
+	SetFlag(TF_MENU_SELECT2, 1)
+	if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+	{
+		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+		YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		// �|�[�V�����Q�iHP 100% �񕜁j
+		HP_Heal( this , (this.CHRWORK[CWK_MAXHP]))
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		if (this.CHRWORK[CWK_CHRID] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == DANA)
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+
+		// �����
+		UseItem(ICON3D_US_HEALSOLO_02, 1)
+		if(!FLAG[SF_INFERNO])	//INFERNO�ł͋󂫕r�c��Ȃ�
+		{
+			Wait(5)
+			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "���c�����B" , 0 , 0 )
+			WaitPrompt()
+			WaitCloseWindow()
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_HEALSOLO_02)
+//		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_old_pt1"
+{
+	SetFlag(TF_MENU_SELECT2, 1)
+	if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+	{
+		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+		YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		// �ߋ��҃|�[�V�����P�iHP 50% �񕜁j
+		HP_Heal( this , (this.CHRWORK[CWK_MAXHP] * 0.5f))
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		if (this.CHRWORK[CWK_CHRID] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == DANA)
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+
+		// �����
+		UseItem(ICON3D_US_OLD_HEAL01, 1)
+		// �ߋ��҂͕r���c��Ȃ�
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_OLD_HEAL01)
+//		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_old_pt2"
+{
+	SetFlag(TF_MENU_SELECT2, 1)
+	if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+	{
+		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+		YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		// �ߋ��҃|�[�V�����Q�iHP 100% �񕜁j
+		HP_Heal( this , (this.CHRWORK[CWK_MAXHP]))
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		if (this.CHRWORK[CWK_CHRID] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else if (this.CHRWORK[CWK_CHRID] == DANA)
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+
+		// �����
+		UseItem(ICON3D_US_OLD_HEAL02, 1)
+		// �ߋ��҂͕r���c��Ȃ�
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_OLD_HEAL02)
+//		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "HealVoice"//�񕜃{�C�X
+{
+	if (this.CHRWORK[CWK_CHRID] == ADOL)
+	{
+		PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+	}
+	else if (this.CHRWORK[CWK_CHRID] == LAXIA)
+	{
+		PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+	}
+	else if (this.CHRWORK[CWK_CHRID] == SAHAD)
+	{
+		PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+	}
+	else if (this.CHRWORK[CWK_CHRID] == HUMMEL)
+	{
+		PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+	}
+	else if (this.CHRWORK[CWK_CHRID] == RICOTTA)
+	{
+		PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+	}
+	else if (this.CHRWORK[CWK_CHRID] == DANA)
+	{
+		PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+	}
+}
+
+/////////////////////////////////////
+// ������n
+function "it_res1"
+{
+	SetFlag(TF_MENU_SELECT2, 1)
+	if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+	{
+		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+		YesNoMenu(TF_MENU_SELECT2,"�񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		// ������P�i�P�O���񕜁j
+		HP_ORecover( this , (this.CHRWORK[CWK_MAXHP] * 0.1f))
+		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_RESSURECT_01, 1)
+		if(!FLAG[SF_INFERNO])	//INFERNO�ł͋󂫕r�c��Ȃ�
+		{
+			Wait(5)
+			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "���c�����B" , 0 , 0 )
+			WaitPrompt()
+			WaitCloseWindow()
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_RESSURECT_01)
+//		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_res11"
+{
+	SetFlag(TF_MENU_SELECT2, 1)
+	if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+	{
+		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+		YesNoMenu(TF_MENU_SELECT2,"�񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		// ������P�D�T�i�T�O���񕜁j
+		HP_ORecover( this , (this.CHRWORK[CWK_MAXHP] * 0.5f))
+		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_RESSURECT_11, 1)
+		if(!FLAG[SF_INFERNO])	//INFERNO�ł͋󂫕r�c��Ȃ�
+		{
+			Wait(5)
+			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "���c�����B" , 0 , 0 )
+			WaitPrompt()
+			WaitCloseWindow()
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_RESSURECT_11)
+//		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_res2"
+{
+	SetFlag(TF_MENU_SELECT2, 1)
+	if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP] &&
+		!this.CHRWORK[CWK_DARK] && !this.CHRWORK[CWK_PARALYZE] && !this.CHRWORK[CWK_POISON] &&
+		!this.CHRWORK[CWK_FREEZE] && !this.CHRWORK[CWK_FLAME] &&  !this.CHRWORK[CWK_BLOODLOSS])
+	{
+		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+		YesNoMenu(TF_MENU_SELECT2,"�񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		// ������Q�i�P�O�O���񕜁j
+		HP_ORecover( this , (this.CHRWORK[CWK_MAXHP]))
+
+		//��Ԉُ�����S��
+		Cure(this, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_RESSURECT_02, 1)
+		if(!FLAG[SF_INFERNO])	//INFERNO�ł͋󂫕r�c��Ȃ�
+		{
+			Wait(5)
+			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "���c�����B" , 0 , 0 )
+			WaitPrompt()
+			WaitCloseWindow()
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_RESSURECT_02)
+//		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_res3"
+{
+	//���g�p
+
+
+//	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP] ||
+//		this.CHRWORK[CWK_DARK] || this.CHRWORK[CWK_PARALYZE] || this.CHRWORK[CWK_POISON] ||
+//		this.CHRWORK[CWK_HEAVY] || this.CHRWORK[CWK_FREEZE] || this.CHRWORK[CWK_FLAME])
+//	{
+//		// ������R�i�P�O�O���񕜁j
+//		HP_ORecover( this , (this.CHRWORK[CWK_MAXHP]))
+//
+//		//��Ԉُ�����S��
+//		Cure(this, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_HEAVY | EFXFLAG1_FREEZE | EFXFLAG1_FLAME))
+//		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
+//
+//		// �����
+//		UseItem(ICON3D_US_RESSURECT_02, 1)
+//		Wait(5)
+//		GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
+//		GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "���c�����B" , 0 , 0 )
+//		WaitPrompt()
+//		WaitCloseWindow()
+//	}
+//	else
+//	{
+//		// �g�����Ⴞ��	// ���������߂�
+//		SetCantUseItem(ICON3D_US_RESSURECT_02)
+//		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+//	}
+}
+
+/////////////////////////////////////
+// �d�w�s�q�`��n
+function "it_extra_up1"
+{
+	SetFlag(TF_MENU_SELECT2, 1)
+	if (FLAG[SF_EXPOWER] >= MAX_EXTRA)
+	{
+		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+		YesNoMenu(TF_MENU_SELECT2,"�񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		// �d�w�s�q�`��P�i�T�O���񕜁j
+		AddEX(50.0f)
+		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_EXTRA_01, 1)
+		if(!FLAG[SF_INFERNO])	//INFERNO�ł͋󂫕r�c��Ȃ�
+		{
+			Wait(5)
+			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "���c�����B" , 0 , 0 )
+			WaitPrompt()
+			WaitCloseWindow()
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_EXTRA_01)
+//		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_extra_up2"
+{
+	SetFlag(TF_MENU_SELECT2, 1)
+	if (FLAG[SF_EXPOWER] >= MAX_EXTRA)
+	{
+		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+		YesNoMenu(TF_MENU_SELECT2,"�񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		// �d�w�s�q�`��P�i�P�O�O���񕜁j
+		AddEX(100.0f)
+		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_EXTRA_02, 1)
+		if(!FLAG[SF_INFERNO])	//INFERNO�ł͋󂫕r�c��Ȃ�
+		{
+			Wait(5)
+			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "���c�����B" , 0 , 0 )
+			WaitPrompt()
+			WaitCloseWindow()
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_EXTRA_01)
+//		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_extra_up3"
+{
+	//���g�p
+}
+
+
+
+
+/////////////////////////////////////
+// �u�[�X�g��n
+
+function "it_bst1"
+{
+	//���g�p
+
+
+//	// �u�[�X�g�P�iHP 15% �񕜁j
+//	HP_Heal( this , (this.CHRWORK[CWK_MAXHP] * 0.15f))
+//
+//	// �^�_���A�b�v
+//	SetCondition(this, SC_STRUP)
+//	// ��_���J�b�g
+//	SetCondition(this, SC_DEFUP)
+//
+//	PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
+//
+//	// �����
+//	UseItem(ICON3D_US_BOOST_01, 1)
+//	Wait(5)
+//	GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
+//	GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "���c�����B" , 0 , 0 )
+//	WaitPrompt()
+//	WaitCloseWindow()
+}
+
+
+
+/////////////////////////////////////
+// ��Ԉُ�񕜌n
+
+//���u��莞�ԗ\�h�v�������d�l�ɂȂ�΁A�g���邩�ǂ�������͂���Ȃ�
+
+function "it_cure1"
+{
+
+	if (this.CHRWORK[CWK_POISON])
+	{
+		// �g���Ă���
+		// �ŉ�
+		Cure(this, EFXFLAG1_POISON)
+
+		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_CURE_POISON, 1)
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_CURE_POISON)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+function "it_cure2"
+{
+
+	if (this.CHRWORK[CWK_DARK])
+	{
+		// �g���Ă���
+		// �Èŉ�
+		Cure(this, EFXFLAG1_DARK)
+
+		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_CURE_DARK, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_CURE_DARK)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+function "it_cure3"
+{
+
+	if (this.CHRWORK[CWK_PARALYZE])
+	{
+		// �g���Ă���
+		// ��჉�
+		Cure(this, EFXFLAG1_PARALYZE)
+	
+		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_CURE_PARALYZE, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_CURE_PARALYZE)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+function "it_old_cure3"
+{
+
+	if (this.CHRWORK[CWK_PARALYZE])
+	{
+		// �g���Ă���
+		// ��჉�
+		Cure(this, EFXFLAG1_PARALYZE)
+	
+		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_OLD_CURE_PARALYZE, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_OLD_CURE_PARALYZE)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+function "it_cure4"
+{
+
+	if (this.CHRWORK[CWK_FREEZE])
+	{
+		// �g���Ă���
+		// ������
+		Cure(this, EFXFLAG1_FREEZE)
+	
+		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_CURE_FREEZE, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_CURE_FREEZE)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+function "it_cure5"
+{
+
+	if (this.CHRWORK[CWK_FLAME])
+	{
+		// �g���Ă���
+		// �R�ĉ�
+		Cure(this, EFXFLAG1_FLAME)
+	
+		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_CURE_FLAME, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_CURE_FLAME)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+function "it_old_cure5"
+{
+
+	if (this.CHRWORK[CWK_FLAME])
+	{
+		// �g���Ă���
+		// �R�ĉ�
+		Cure(this, EFXFLAG1_FLAME)
+	
+		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_OLD_CURE_FLAME, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_OLD_CURE_FLAME)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+function "it_cure6"
+{
+
+	if (this.CHRWORK[CWK_BLOODLOSS] )
+	{
+		// �g���Ă���
+		// �u�����v�񕜏���
+		Cure(this, EFXFLAG1_BLOOD_LOSS)
+	
+		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_CURE_BLOODLOSS, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_CURE_BLOODLOSS)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_cureall"
+{
+	if (this.CHRWORK[CWK_POISON] ||
+		this.CHRWORK[CWK_PARALYZE] ||
+		this.CHRWORK[CWK_FLAME] ||
+		this.CHRWORK[CWK_FREEZE] ||
+		this.CHRWORK[CWK_DARK] ||
+		this.CHRWORK[CWK_BLOODLOSS])
+	{
+		// �g���Ă���
+		Cure(this, EFXFLAG1_POISON)
+		Cure(this, EFXFLAG1_PARALYZE)
+		Cure(this, EFXFLAG1_FLAME)
+		Cure(this, EFXFLAG1_FREEZE)
+		Cure(this, EFXFLAG1_DARK)
+		Cure(this, EFXFLAG1_BLOOD_LOSS)
+	
+		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_CURE_ALL, 1)
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_CURE_ALL)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_old_cureall"
+{
+	if (this.CHRWORK[CWK_POISON] ||
+		this.CHRWORK[CWK_PARALYZE] ||
+		this.CHRWORK[CWK_FLAME] ||
+		this.CHRWORK[CWK_FREEZE] ||
+		this.CHRWORK[CWK_DARK] ||
+		this.CHRWORK[CWK_BLOODLOSS])
+	{
+		// �g���Ă���
+		Cure(this, EFXFLAG1_POISON)
+		Cure(this, EFXFLAG1_PARALYZE)
+		Cure(this, EFXFLAG1_FLAME)
+		Cure(this, EFXFLAG1_FREEZE)
+		Cure(this, EFXFLAG1_DARK)
+		Cure(this, EFXFLAG1_BLOOD_LOSS)
+	
+		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_OLD_CURE_ALL, 1)
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_OLD_CURE_ALL)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+/////////////////////////////////////
+// �X�e�[�^�X�A�b�v�n
+
+function it_hpup
+{
+	// �����
+	UseItem(ICON3D_US_ADD_HP, 1)
+
+	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+	//SetStopFlag(STOPFLAG_FREEZE)
+	//ResetMoveVec("PARTYALL")
+
+	// �g�o�A�b�v
+	SetChrWork(this,CWK_SUP_MAXHP,(this.CHRWORK[CWK_SUP_MAXHP] + 100))
+
+	PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+//	Wait(30)
+
+	Message("#4C�g�o�̍ő�l���P�O�O�������B")
+	WaitPrompt()
+	//Wait(10)
+	WaitCloseWindow()
+
+	//ResetStopFlag(STOPFLAG_FREEZE)
+	//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+
+}
+
+function it_strup
+{
+	// �����
+	UseItem(ICON3D_US_ADD_STR, 1)
+
+	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+	//SetStopFlag(STOPFLAG_FREEZE)
+	//ResetMoveVec("PARTYALL")
+
+	// �r�s�q�A�b�v
+	SetChrWork(this,CWK_SUP_STR,(this.CHRWORK[CWK_SUP_STR] + 3))
+
+	PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+//	Wait(30)
+
+	Message("#4C�r�s�q���R�������B")
+	WaitPrompt()
+	//Wait(10)
+	WaitCloseWindow()
+
+	//ResetStopFlag(STOPFLAG_FREEZE)
+	//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+}
+
+function it_defup
+{
+	// �����
+	UseItem(ICON3D_US_ADD_DEF, 1)
+
+	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+	//SetStopFlag(STOPFLAG_FREEZE)
+	//ResetMoveVec("PARTYALL")
+
+	// �c�d�e�A�b�v
+	SetChrWork(this,CWK_SUP_DEF,(this.CHRWORK[CWK_SUP_DEF] + 3))
+
+	PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+//	Wait(30)
+
+	Message("#4C�c�d�e���R�������B")
+	WaitPrompt()
+	//Wait(10)
+	WaitCloseWindow()
+
+	//ResetStopFlag(STOPFLAG_FREEZE)
+	//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+}
+
+/////////////////////////////////////
+// �x�X�e�B�A���|�[�V����
+function "it_bestiary"
+{
+	// �����
+	UseItem(ICON3D_US_BESTIARYPT, 1)
+
+	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+	//SetStopFlag(STOPFLAG_FREEZE)
+	//ResetMoveVec("PARTYALL")
+
+	// �g�o�A�b�v
+	SetChrWork(this,CWK_SUP_MAXHP,(this.CHRWORK[CWK_SUP_MAXHP] + 100))
+	// �r�s�q�A�b�v
+	SetChrWork(this,CWK_SUP_STR,(this.CHRWORK[CWK_SUP_STR] + 3))
+	// �c�d�e�A�b�v
+	SetChrWork(this,CWK_SUP_DEF,(this.CHRWORK[CWK_SUP_DEF] + 3))
+
+
+	PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+//	Wait(30)
+
+	Message("#4C�g�o�̍ő�l���P�O�O�������B\n#4C�r�s�q���R�������B\n#4C�c�d�e���R�������B\n#4C�b�̗��Ƃ��A�C�e�����킩��悤�ɂȂ����B")
+	WaitPrompt()
+	//Wait(10)
+	WaitCloseWindow()
+
+	SetFlag(SF_BESTIARYPOTION, 1)
+
+	//ResetStopFlag(STOPFLAG_FREEZE)
+	//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+}
+
+/////////////////////////////////////
+// �S�_�̗썁
+function it_spup
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"#2C�S�_�̗썁#0C���g���܂����H",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �����
+		UseItem(ICON3D_US_ADD_SP, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �r�o�̍ő�l���₷
+		SetFlag(SF_SPMAX, (FLAG[SF_SPMAX]+10) )
+		if( FLAG[SF_SPMAX] >200 )
+		{
+			SetFlag(SF_SPMAX,200)		//�ő�łQ�O�O
+		}
+
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+	//	Wait(30)
+
+		Message("#4C�r�o�̍ő�l���P�O�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// �C���҂̔��
+function it_lvup
+{
+	if (this.CHRWORK[CWK_LV] < LV_MAX )
+	{
+		// �����
+		UseItem(ICON3D_US_ADD_LEVEL, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// ���x���A�b�v�ɕK�v�Ȍo���l���擾���邱�ƂŁA���x���A�b�v����B
+		GetExp((this.CHRWORK[CWK_EXPNEXTLV]))
+
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+	//	Wait(30)
+
+		Message("#4C���x�����P�オ�����B")			//�V�X�e���̃G�t�F�N�g������΁A���b�Z�[�W����Ȃ������B
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_ADD_LEVEL)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function it_expup1
+{
+	if (this.CHRWORK[CWK_LV] < LV_MAX )
+	{
+		// �����
+		UseItem(ICON3D_US_ADD_EXP_01, 1)
+	
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+	
+		// �d�w�o�A�b�v
+		GetExp(100)
+	
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+	
+	//	Wait(30)
+	
+		Message("#4C�o���l����肵���B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_ADD_EXP_01)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function it_expup2
+{
+	if (this.CHRWORK[CWK_LV] < LV_MAX )
+	{
+		// �����
+		UseItem(ICON3D_US_ADD_EXP_02, 1)
+	
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+	
+		// �d�w�o�A�b�v
+		GetExp(1000)
+	
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+	
+	//	Wait(30)
+	
+		Message("#4C�o���l����肵���B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_ADD_EXP_02)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function it_expup3
+{
+	if (this.CHRWORK[CWK_LV] < LV_MAX )
+	{
+		// �����
+		UseItem(ICON3D_US_ADD_EXP_03, 1)
+	
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+	
+		// �d�w�o�A�b�v
+		GetExp(10000)
+	
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+	
+	//	Wait(30)
+	
+		Message("#4C�o���l����肵���B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_ADD_EXP_03)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+/////////////////////////////////////
+// �ߋ��҃X�e�[�^�X�A�b�v�n
+
+function it_old_hpup
+{
+	// �����
+	UseItem(ICON3D_US_OLD_ADD_HP, 1)
+
+	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+	//SetStopFlag(STOPFLAG_FREEZE)
+	//ResetMoveVec("PARTYALL")
+
+	// �g�o�A�b�v
+	SetChrWork(this,CWK_SUP_MAXHP,(this.CHRWORK[CWK_SUP_MAXHP] + 100))
+
+	PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+//	Wait(30)
+
+	Message("#4C�g�o�̍ő�l���P�O�O�������B")
+	WaitPrompt()
+	//Wait(10)
+	WaitCloseWindow()
+
+	//ResetStopFlag(STOPFLAG_FREEZE)
+	//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+
+}
+
+function it_old_strup
+{
+	// �����
+	UseItem(ICON3D_US_OLD_ADD_STR, 1)
+
+	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+	//SetStopFlag(STOPFLAG_FREEZE)
+	//ResetMoveVec("PARTYALL")
+
+	// �r�s�q�A�b�v
+	SetChrWork(this,CWK_SUP_STR,(this.CHRWORK[CWK_SUP_STR] + 3))
+
+	PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+//	Wait(30)
+
+	Message("#4C�r�s�q���R�������B")
+	WaitPrompt()
+	//Wait(10)
+	WaitCloseWindow()
+
+	//ResetStopFlag(STOPFLAG_FREEZE)
+	//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+}
+
+function it_old_defup
+{
+	// �����
+	UseItem(ICON3D_US_OLD_ADD_DEF, 1)
+
+	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+	//SetStopFlag(STOPFLAG_FREEZE)
+	//ResetMoveVec("PARTYALL")
+
+	// �c�d�e�A�b�v
+	SetChrWork(this,CWK_SUP_DEF,(this.CHRWORK[CWK_SUP_DEF] + 3))
+
+	PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+//	Wait(30)
+
+	Message("#4C�c�d�e���R�������B")
+	WaitPrompt()
+	//Wait(10)
+	WaitCloseWindow()
+
+	//ResetStopFlag(STOPFLAG_FREEZE)
+	//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+}
+
+// �ߋ��ҏC���҂̔��
+function it_old_lvup
+{
+	if (this.CHRWORK[CWK_LV] < LV_MAX )
+	{
+		// �����
+		UseItem(ICON3D_US_OLD_ADD_LEVEL, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// ���x���A�b�v�ɕK�v�Ȍo���l���擾���邱�ƂŁA���x���A�b�v����B
+		GetExp((this.CHRWORK[CWK_EXPNEXTLV]))
+
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+	//	Wait(30)
+
+		Message("#4C���x�����P�オ�����B")			//�V�X�e���̃G�t�F�N�g������΁A���b�Z�[�W����Ȃ������B
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_OLD_ADD_LEVEL)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+
+///////////////////////////////////////
+//// �ꎞ�⏕�n	��Ys8�ɂ͖����\��B�d�l�ύX�������Ƃ������؂�Ȃ��̂ŁA�T���v���Ƃ��Ēu���Ă���
+//function "it_supstr"
+//{
+//	// �^�_���A�b�v
+//	SetCondition(this, SC_STRUP)
+//
+//	PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
+//}
+
+
+
+/////////////////////////////////////
+// �e�X�g�E�A�C�e���X�N���v�g
+
+/////////////////////////////////////
+// �I�̑������i���j�@�����j���[��ŃA�C�e���g�������ɌĂ΂��
+function "it_pestcide"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"#2C���쏜��#0C���g���܂����H",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_PESTCIDE, 1)
+
+		// �A�C�e���X�N���v�g�X���b�h�Ŏ��ۂ̌��ʂ����s
+		ItemCue("item:do_pestcide")
+
+		// �L�����v���j���[�����
+		MenuClose(0, 0)
+	}
+}
+
+/////////////////////////////////////
+// �I�̑������i���j�@�����ۂɃQ�[����Ō��ʂ𔭊�����ۂɌĂ΂��
+function "do_pestcide"
+{
+	ChrEffect(PLAYER1, SYSEFX_ITEM_PESTCIDE, 0, 0, 0, 0, 0, IMPACT_NONE, KNOCK_EFXPOS, 0.0f, 0.0f, EFXFLAG1_NODMGMISSILE, 1.0f, 1.0f)
+}
+
+/////////////////////////////////////
+// �T���̐S���s�X�t
+function it_search_book01
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"#2C�T���̐S���s�X�t#0C���g���܂����H\n�`�����#2C������#0C���P�������܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �����
+		UseItem(ICON3D_US_SEARCH_BOOK01, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �������̐����₷
+		SetFlag(SF_ITEMSLOT_NUM, (FLAG[SF_ITEMSLOT_NUM]+1) )
+		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//�ő吔�`�F�b�N
+		{
+			SetFlag(SF_ITEMSLOT_NUM, ITEMSLOT_MAX)
+		}
+
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		Message("#4C�`����̑��������P�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+
+	//	// �L�����v���j���[�����E���Ȃ��ƍX�V����Ȃ�
+	//	MenuClose(0, 0)
+	}
+}
+
+/////////////////////////////////////
+// �T���̐S���s�C�t
+function it_search_book02
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"#2C�T���̐S���s�C�t#0C���g���܂����H\n�`�����#2C������#0C���P�������܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �����
+		UseItem(ICON3D_US_SEARCH_BOOK02, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �������̐����₷
+		SetFlag(SF_ITEMSLOT_NUM, (FLAG[SF_ITEMSLOT_NUM]+1) )
+		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//�ő吔�`�F�b�N
+		{
+			SetFlag(SF_ITEMSLOT_NUM, ITEMSLOT_MAX)
+		}
+
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		Message("#4C�`����̑��������P�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+
+	//	// �L�����v���j���[�����E���Ȃ��ƍX�V����Ȃ�
+	//	MenuClose(0, 0)
+	}
+}
+
+/////////////////////////////////////
+// �T���̐S���s�R�t
+function it_search_book03
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"#2C�T���̐S���s�R�t#0C���g���܂����H\n�`�����#2C������#0C���P�������܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �����
+		UseItem(ICON3D_US_SEARCH_BOOK03, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �������̐����₷
+		SetFlag(SF_ITEMSLOT_NUM, (FLAG[SF_ITEMSLOT_NUM]+1) )
+		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//�ő吔�`�F�b�N
+		{
+			SetFlag(SF_ITEMSLOT_NUM, ITEMSLOT_MAX)
+		}
+
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		Message("#4C�`����̑��������P�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+
+	//	// �L�����v���j���[�����E���Ȃ��ƍX�V����Ȃ�
+	//	MenuClose(0, 0)
+	}
+}
+
+/////////////////////////////////////
+// �T���̐S���s���t
+function it_search_book04
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"#2C�T���̐S���s���t#0C���g���܂����H\n�`�����#2C������#0C���P�������܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �����
+		UseItem(ICON3D_US_SEARCH_BOOK04, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �������̐����₷
+		SetFlag(SF_ITEMSLOT_NUM, (FLAG[SF_ITEMSLOT_NUM]+1) )
+		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//�ő吔�`�F�b�N
+		{
+			SetFlag(SF_ITEMSLOT_NUM, ITEMSLOT_MAX)
+		}
+
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		Message("#4C�`����̑��������P�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+
+	//	// �L�����v���j���[�����E���Ȃ��ƍX�V����Ȃ�
+	//	MenuClose(0, 0)
+	}
+}
+
+/////////////////////////////////////
+// �T���̐S���s�b�t
+function it_search_book05
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"#2C�T���̐S���s�b�t#0C���g���܂����H\n�`�����#2C������#0C���P�������܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �����
+		UseItem(ICON3D_US_SEARCH_BOOK05, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �������̐����₷
+		SetFlag(SF_ITEMSLOT_NUM, (FLAG[SF_ITEMSLOT_NUM]+1) )
+		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//�ő吔�`�F�b�N
+		{
+			SetFlag(SF_ITEMSLOT_NUM, ITEMSLOT_MAX)
+		}
+
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		Message("#4C�`����̑��������P�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+
+	//	// �L�����v���j���[�����E���Ȃ��ƍX�V����Ȃ�
+	//	MenuClose(0, 0)
+	}
+}
+
+/////////////////////////////////////
+// �X�L���̏�
+function "it_skill_book_a"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@�@#2C�g���w�쏑�s���t#0C���g���܂����H\n�A�h�����X�L��#2C�y�g���l�[�h�\�[�h�z#0C���K�����܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_SKILL_BOOK_A, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �X�L������
+		GetSkill(PARTY_ADOL, SKILL_ADOL_SP_B4, 1)	// �g���l�[�h�\�[�h
+
+		Message("#4C�A�h���̓X�L��#2C�y�g���l�[�h�\�[�h�z#4C���K�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// �X�L���̏�
+function "it_skill_book_l"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@�@#2C�g���w�쏑�s��t#0C���g���܂����H\n���N�V�����X�L��#2C�y�V���t�B�[�h�L�X�z#0C���K�����܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_SKILL_BOOK_L, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �X�L������
+		GetSkill(PARTY_LAXIA, SKILL_LAXIA_SP_B3, 1)	// �V���t�B�[�h�L�X
+
+		Message("#4C���N�V���̓X�L��#2C�y�V���t�B�[�h�L�X�z#4C���K�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// �X�L���̏�
+function "it_skill_book_s"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@�@#2C�g���w�쏑�s��t#0C���g���܂����H\n�T�n�h���X�L��#2C�y���C���h�A�s�[���z#0C���K�����܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_SKILL_BOOK_S, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �X�L������
+		GetSkill(PARTY_SAHAD, SKILL_SAHAD_SP_C3, 1)	// ����
+
+		Message("#4C�T�n�h�̓X�L��#2C�y���C���h�A�s�[���z#4C���K�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// �X�L���̏�
+function "it_skill_book_h"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@�@#2C�g���w�쏑�s�k�t#0C���g���܂����H\n�q�����������X�L��#2C�y�N�G�C�J�[�z#0C���K�����܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_SKILL_BOOK_H, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �X�L������
+		GetSkill(PARTY_HUMMEL, SKILL_HUMMEL_SP_C4, 1)	// �N�G�C�J�[
+
+		Message("#4C�q���������̓X�L��#2C�y�N�G�C�J�[�z#4C���K�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// �X�L���̏�
+function "it_skill_book_r"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@�@#2C�g���w�쏑�s��t#0C���g���܂����H\n���R�b�^���X�L��#2C�y�����u���\�[���z#0C���K�����܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_SKILL_BOOK_R, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �X�L������
+		GetSkill(PARTY_RICOTTA, SKILL_RICOTTA_SP_B3, 1)	// �헎�Ƃ�
+
+		Message("#4C���R�b�^�̓X�L��#2C�y�����u���\�[���z#4C���K�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// �X�L���̏�
+function "it_skill_book_d"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@�@#2C�g���w�쏑�s���t#0C���g���܂����H\n�_�[�i���X�L��#2C�y�A�C�X�G�C�W�z#0C���K�����܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_SKILL_BOOK_D, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �X�L������
+		GetSkill(PARTY_DANA, SKILL_DANA_SP_A1, 1)	// �A�C�X�G�C�W
+
+		Message("#4C�_�[�i�̓X�L��#2C�y�A�C�X�G�C�W�z#4C���K�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+function "it_skill_book_a2"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"���@�@�@�@#2C�������w�쏑�s���t#0C���g���܂����H\n�A�h�����X�L��#2C�y�����������z#0C���K�����܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_SKILL_BOOK_A2, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �X�L������
+		GetSkill(PARTY_ADOL, SKILL_ADOL_SP_B4, 1)	// ����������
+
+		Message("��#4C�A�h���̓X�L��#2C�y�����������z#4C���K�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// �X�L���̏�
+function "it_skill_book_l2"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"���@�@�@�@#2C�������w�쏑�s���t#0C���g���܂����H\n���N�V�����X�L��#2C�y�����������z#0C���K�����܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_SKILL_BOOK_L2, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �X�L������
+		GetSkill(PARTY_LAXIA, SKILL_LAXIA_SP_B3, 1)	// ����������
+
+		Message("��#4C���N�V���̓X�L��#2C�y�����������z#4C���K�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// �X�L���̏�
+function "it_skill_book_s2"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"���@�@�@�@#2C�������w�쏑�s���t#0C���g���܂����H\n�T�n�h���X�L��#2C�y�����������z#0C���K�����܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_SKILL_BOOK_S2, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �X�L������
+		GetSkill(PARTY_SAHAD, SKILL_SAHAD_SP_C3, 1)	// ����������
+
+		Message("��#4C�T�n�h�̓X�L��#2C�y�����������z#4C���K�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// �X�L���̏�
+function "it_skill_book_h2"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"���@�@�@�@#2C�������w�쏑�s���t#0C���g���܂����H\n�q�����������X�L��#2C�y�����������z#0C���K�����܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_SKILL_BOOK_H2, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �X�L������
+		GetSkill(PARTY_HUMMEL, SKILL_HUMMEL_SP_C4, 1)	// ����������
+
+		Message("��#4C�q���������̓X�L��#2C�y�����������z#4C���K�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// �X�L���̏�
+function "it_skill_book_r2"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"���@�@�@�@#2C�������w�쏑�s���t#0C���g���܂����H\n���R�b�^���X�L��#2C�y�����������z#0C���K�����܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_SKILL_BOOK_R2, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �X�L������
+		GetSkill(PARTY_RICOTTA, SKILL_RICOTTA_SP_B3, 1)	// ����������
+
+		Message("��#4C���R�b�^�̓X�L��#2C�y�����������z#4C���K�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// �X�L���̏�
+function "it_skill_book_d2"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"���@�@�@�@#2C�������w�쏑�s���t#0C���g���܂����H\n�_�[�i���X�L��#2C�y�����������z#0C���K�����܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_SKILL_BOOK_D2, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// �X�L������
+		GetSkill(PARTY_DANA, SKILL_DANA_SP_A1, 1)	// ����������
+
+		Message("��#4C�_�[�i�̓X�L��#2C�y�����������z#4C���K�������B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+
+/////////////////////////////////////
+// ���V�s���E�I�����c
+function "it_cook_book01"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@#2C�u���V�s���E�I�����c�v#0C���g���܂����H\n�����΂�#2C�y�L�m�R�I�����c�z#0C������悤�ɂȂ�܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		// �����
+		UseItem(ICON3D_COOK_RECIPE01, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// ���V�s����
+		SetFlag( GF_RECIPE_02, 1)					// �L�m�R�I�����c
+
+		Message("#4C�����΂�#2C�y�L�m�R�I�����c�z#4C������悤�ɂȂ����B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// ���V�s���E���^�g�D�C��
+function "it_cook_book02"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@#2C�u���V�s���E���^�g�D�C���v#0C���g���܂����H\n�����΂�#2C�y�������^�g�D�C���z#0C������悤�ɂȂ�܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		// �����
+		UseItem(ICON3D_COOK_RECIPE02, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// ���V�s����
+		SetFlag( GF_RECIPE_03, 1)					// �������^�g�D�C��
+
+		Message("#4C�����΂�#2C�y�������^�g�D�C���z#4C������悤�ɂȂ����B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// ���V�s���E���j�G��
+function "it_cook_book03"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@#2C�u���V�s���E���j�G���v#0C���g���܂����H\n�����΂�#2C�y�ʂ胀�j�G���z#0C������悤�ɂȂ�܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		// �����
+		UseItem(ICON3D_COOK_RECIPE03, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// ���V�s����
+		SetFlag( GF_RECIPE_04, 1)					// �ʂ胀�j�G��
+
+		Message("#4C�����΂�#2C�y�ʂ胀�j�G���z#4C������悤�ɂȂ����B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// ���V�s���E�L�b�V��
+function "it_cook_book04"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@#2C�u���V�s���E�L�b�V���v#0C���g���܂����H\n�����΂�#2C�y�C�N�L�b�V���z#0C������悤�ɂȂ�܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		// �����
+		UseItem(ICON3D_COOK_RECIPE04, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// ���V�s����
+		SetFlag( GF_RECIPE_05, 1)					// �C�N�L�b�V��
+
+		Message("#4C�����΂�#2C�y�C�N�L�b�V���z#4C������悤�ɂȂ����B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// ���V�s���E�L���x�c
+function "it_cook_book05"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@#2C�u���V�s���E�L���x�c�v#0C���g���܂����H\n�����΂�#2C�y���[���L���x�c�z#0C������悤�ɂȂ�܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		// �����
+		UseItem(ICON3D_COOK_RECIPE05, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// ���V�s����
+		SetFlag( GF_RECIPE_06, 1)					// ���[���L���x�c
+
+		Message("#4C�����΂�#2C�y���[���L���x�c�z#4C������悤�ɂȂ����B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// ���V�s���E���ƃL�m�R
+function "it_cook_book06"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@#2C�u���V�s���E���ƃL�m�R�v#0C���g���܂����H\n�����΂�#2C�y�������L�m�R�[���z#0C������悤�ɂȂ�܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		// �����
+		UseItem(ICON3D_COOK_RECIPE06, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// ���V�s����
+		SetFlag( GF_RECIPE_07, 1)					// �������L�m�R�[��
+
+		Message("#4C�����΂�#2C�y�������L�m�R�[���z#4C������悤�ɂȂ����B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// ���V�s���E�t���C
+function "it_cook_book07"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@#2C�u���V�s���E�t���C�v#0C���g���܂����H\n�����΂�#2C�y�t�B�b�V���t���C�z#0C������悤�ɂȂ�܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		// �����
+		UseItem(ICON3D_COOK_RECIPE07, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// ���V�s����
+		SetFlag( GF_RECIPE_08, 1)					// �t�B�b�V���t���C
+
+		Message("#4C�����΂�#2C�y�t�B�b�V���t���C�z#4C������悤�ɂȂ����B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// ���V�s���E�C����
+function "it_cook_book08"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@#2C�u���V�s���E�C���сv#0C���g���܂����H\n�����΂�#2C�y�p�C���[�c�f�B�b�V���z#0C������悤�ɂȂ�܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		// �����
+		UseItem(ICON3D_COOK_RECIPE08, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// ���V�s����
+		SetFlag( GF_RECIPE_09, 1)					// �p�C���[�c�f�B�b�V��
+
+		Message("#4C�����΂�#2C�y�p�C���[�c�f�B�b�V���z#4C������悤�ɂȂ����B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// ���V�s���E�R�[���X���[
+function "it_cook_book09"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@#2C�u���V�s���E�R�[���X���[�v#0C���g���܂����H\n�����΂�#2C�y�ґ�R�[���X���[�z#0C������悤�ɂȂ�܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		// �����
+		UseItem(ICON3D_COOK_RECIPE09, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// ���V�s����
+		SetFlag( GF_RECIPE_10, 1)					// �ґ�R�[���X���[
+
+		Message("#4C�����΂�#2C�y�ґ�R�[���X���[�z#4C������悤�ɂȂ����B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// ���V�s���E�{���l�[�[
+function "it_cook_book10"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@#2C�u���V�s���E�{���l�[�[�v#0C���g���܂����H\n�����΂�#2C�y�^�S�{���l�[�[�z#0C������悤�ɂȂ�܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		// �����
+		UseItem(ICON3D_COOK_RECIPE10, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// ���V�s����
+		SetFlag( GF_RECIPE_11, 1)					// �^�S�{���l�[�[
+
+		Message("#4C�����΂�#2C�y�^�S�{���l�[�[�z#4C������悤�ɂȂ����B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// ���V�s���E�p���v�L���p�C
+function "it_cook_book11"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@#2C�u���V�s���E�p���v�L���p�C�v#0C���g���܂����H\n�����΂�#2C�y���l�p���v�L���p�C�z#0C������悤�ɂȂ�܂��B",1)
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+//		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+
+		// �����
+		UseItem(ICON3D_COOK_RECIPE11, 1)
+
+		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
+		//SetStopFlag(STOPFLAG_FREEZE)
+		//ResetMoveVec("PARTYALL")
+
+		// ���V�s����
+		SetFlag( GF_RECIPE_12, 1)					// ���l�p���v�L���p�C
+
+		Message("#4C�����΂�#2C�y���l�p���v�L���p�C�z#4C������悤�ɂȂ����B")
+		WaitPrompt()
+		//Wait(10)
+		WaitCloseWindow()
+
+		//ResetStopFlag(STOPFLAG_FREEZE)
+		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
+	}
+}
+
+/////////////////////////////////////
+// �ʕ�
+function "it_fruits01"
+{
+
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		// �N���̎��i�P�O�O�񕜁j
+		HP_Heal( this , 100)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_BERRY, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_BERRY)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+
+function "it_fruits02"
+{
+
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		// �R�R���V�i�Q�O�O�񕜁j
+		HP_Heal( this , 200)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_COCONUT, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_COCONUT)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+
+function "it_fruits03"
+{
+
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		// �}���S�[�i�T�O�O�񕜁j
+		HP_Heal( this , 500)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_MANGO, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_MANGO)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+
+function "it_fruits04"
+{
+
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		// �����̎��i�P�O�O�O�񕜁j
+		HP_Heal( this , 1000)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_DRAGONFRUIT, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_DRAGONFRUIT)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+
+/////////////////////////////////////
+// �ʕ��i���n�j
+
+function "it_fruits01s"
+{
+
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		// �N���̖L���i�P�O�O�񕜁j
+		HP_ORecover( this , 100 )
+		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_BERRY_S, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_BERRY_S)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+
+function "it_fruits02s"
+{
+
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		// ���n�R�R���V�i�Q�O�O�񕜁j
+		HP_ORecover( this , 200 )
+		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_COCONUT_S, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_COCONUT_S)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+
+function "it_fruits03s"
+{
+
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		// ���n�}���S�[�i�T�O�O�񕜁j
+		HP_ORecover( this , 500 )
+		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_MANGO_S, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_MANGO_S)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+
+function "it_fruits04s"
+{
+
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		// �����̕�ʁi�P�O�O�O�񕜁j
+		HP_ORecover( this , 1000 )
+		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_US_DRAGONFRUIT_S, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_US_DRAGONFRUIT_S)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+
+function "FoodVoice"//�����{�C�X
+{
+	SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+	SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+	SetFlag(TF_MENU_SELECT,0)					
+	while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+	{
+		if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+		{
+			SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+		}
+		else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+		{
+			SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+		}
+		else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+		{
+			SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+		}
+		else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+		{
+			SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+		}
+		else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+		{
+			SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+		}
+		else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+		{
+			SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+		}
+		else 
+		{
+			SetFlag(TF_MENU_SELECT,1)					
+		}
+	}
+
+	if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+	{
+		PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+	}
+	else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+	{
+		PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+	}
+	else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+	{
+		PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+	}
+	else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+	{
+		PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+	}
+	else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+	{
+		PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+	}
+	else
+	{
+		PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+	}		
+}
+/////////////////////////////////////
+// ����
+//
+// ���ꂼ��̌��ʂ� balance.csv
+// ���̌��ʎ��Ԃ� item.csv
+// �񕜗ʂ� ���͂�߂āA�Œ�l�ɁB�ŏ��̂�500�B�ō���3000�ɂ���B
+
+
+function "it_usfood01"	//����X�[�v
+{
+	if( WORK[WK_FOODEFFTIME] > 0 ){
+		SetFlag( TF_MENU_SELECT2, 0 )
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+		TalkPopup(UNDEF,0,5,0,0,0)
+		{
+			"#8S"
+			"#-1W#4C�����̌��ʂ������Ă���Ԃ́A�H�ׂ��܂���B#10W" 
+			"#8S"
+		}
+		Wait(10)
+		WaitPrompt()
+		WaitCloseWindow()
+	}
+	else{
+		SetFlag( TF_MENU_SELECT2, 1 )
+		if ((ADOL.CHRWORK[CWK_MAXHP] <= ADOL.CHRWORK[CWK_HP])&&
+			(LAXIA.CHRWORK[CWK_MAXHP] <= LAXIA.CHRWORK[CWK_HP])&&
+			(SAHAD.CHRWORK[CWK_MAXHP] <= SAHAD.CHRWORK[CWK_HP])&&
+			(HUMMEL.CHRWORK[CWK_MAXHP] <= HUMMEL.CHRWORK[CWK_HP])&&
+			(RICOTTA.CHRWORK[CWK_MAXHP] <= RICOTTA.CHRWORK[CWK_HP])&&
+			(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
+		//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+		{
+			SetFlag( TF_MENU_SELECT2, 0 )
+			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+			YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+		}
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		HP_Heal( ADOL ,    400)
+		HP_Heal( LAXIA ,   400)
+		HP_Heal( SAHAD ,   400)
+		HP_Heal( HUMMEL ,  400)
+		HP_Heal( RICOTTA , 400)
+		HP_Heal( DANA ,    400)
+
+		UseFood(FOODEFFID_BREAKUP1)			// �^�u���C�N�ʃA�b�v1
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_USFD_FOOD00, 1)
+
+		SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_USFD_FOOD00)
+
+		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+	
+
+}
+function "it_usfood02"	//�L�m�R�I�����c
+{
+	if( WORK[WK_FOODEFFTIME] > 0 ){
+		SetFlag( TF_MENU_SELECT2, 0 )
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+		TalkPopup(UNDEF,0,5,0,0,0)
+		{
+			"#8S"
+			"#-1W#4C�����̌��ʂ������Ă���Ԃ́A�H�ׂ��܂���B#10W" 
+			"#8S"
+		}
+		Wait(10)
+		WaitPrompt()
+		WaitCloseWindow()
+	}
+	else{
+		SetFlag( TF_MENU_SELECT2, 1 )
+		if ((ADOL.CHRWORK[CWK_MAXHP] <= ADOL.CHRWORK[CWK_HP])&&
+			(LAXIA.CHRWORK[CWK_MAXHP] <= LAXIA.CHRWORK[CWK_HP])&&
+			(SAHAD.CHRWORK[CWK_MAXHP] <= SAHAD.CHRWORK[CWK_HP])&&
+			(HUMMEL.CHRWORK[CWK_MAXHP] <= HUMMEL.CHRWORK[CWK_HP])&&
+			(RICOTTA.CHRWORK[CWK_MAXHP] <= RICOTTA.CHRWORK[CWK_HP])&&
+			(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
+		//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+		{
+			SetFlag( TF_MENU_SELECT2, 0 )
+			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+			YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+		}
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		HP_Heal( ADOL ,    350)
+		HP_Heal( LAXIA ,   350)
+		HP_Heal( SAHAD ,   350)
+		HP_Heal( HUMMEL ,  350)
+		HP_Heal( RICOTTA , 350)
+		HP_Heal( DANA ,    350)
+
+		//��Ԉُ�����S��
+		Cure(ADOL, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(LAXIA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(SAHAD, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(HUMMEL, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(RICOTTA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(DANA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		UseFood(FOODEFFID_CURE1)			// ��Ԉُ�񕜁A�������P
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_USFD_FOOD01, 1)
+
+		SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_USFD_FOOD01)
+
+		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+function "it_usfood03"	//�������^�g�D�C��
+{
+	if( WORK[WK_FOODEFFTIME] > 0 ){
+		SetFlag( TF_MENU_SELECT2, 0 )
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+		TalkPopup(UNDEF,0,5,0,0,0)
+		{
+			"#8S"
+			"#-1W#4C�����̌��ʂ������Ă���Ԃ́A�H�ׂ��܂���B#10W" 
+			"#8S"
+		}
+		Wait(10)
+		WaitPrompt()
+		WaitCloseWindow()
+	}
+	else{
+		SetFlag( TF_MENU_SELECT2, 1 )
+		//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+		if ((ADOL.CHRWORK[CWK_MAXHP] <= ADOL.CHRWORK[CWK_HP])&&
+			(LAXIA.CHRWORK[CWK_MAXHP] <= LAXIA.CHRWORK[CWK_HP])&&
+			(SAHAD.CHRWORK[CWK_MAXHP] <= SAHAD.CHRWORK[CWK_HP])&&
+			(HUMMEL.CHRWORK[CWK_MAXHP] <= HUMMEL.CHRWORK[CWK_HP])&&
+			(RICOTTA.CHRWORK[CWK_MAXHP] <= RICOTTA.CHRWORK[CWK_HP])&&
+			(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
+		{
+			SetFlag( TF_MENU_SELECT2, 0 )
+			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+			YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+		}
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		HP_Heal( ADOL ,    600)
+		HP_Heal( LAXIA ,   600)
+		HP_Heal( SAHAD ,   600)
+		HP_Heal( HUMMEL ,  600)
+		HP_Heal( RICOTTA , 600)
+		HP_Heal( DANA ,    600)
+
+		UseFood(FOODEFFID_SPHEAL1)			// SP��1
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_USFD_FOOD02, 1)
+
+		SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_USFD_FOOD02)
+
+		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+function "it_usfood04"	//�ʂ胀�j�G��
+{
+	if( WORK[WK_FOODEFFTIME] > 0 ){
+		SetFlag( TF_MENU_SELECT2, 0 )
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+		TalkPopup(UNDEF,0,5,0,0,0)
+		{
+			"#8S"
+			"#-1W#4C�����̌��ʂ������Ă���Ԃ́A�H�ׂ��܂���B#10W" 
+			"#8S"
+		}
+		Wait(10)
+		WaitPrompt()
+		WaitCloseWindow()
+	}
+	else{
+		SetFlag( TF_MENU_SELECT2, 1 )
+		//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+		if ((ADOL.CHRWORK[CWK_MAXHP] <= ADOL.CHRWORK[CWK_HP])&&
+			(LAXIA.CHRWORK[CWK_MAXHP] <= LAXIA.CHRWORK[CWK_HP])&&
+			(SAHAD.CHRWORK[CWK_MAXHP] <= SAHAD.CHRWORK[CWK_HP])&&
+			(HUMMEL.CHRWORK[CWK_MAXHP] <= HUMMEL.CHRWORK[CWK_HP])&&
+			(RICOTTA.CHRWORK[CWK_MAXHP] <= RICOTTA.CHRWORK[CWK_HP])&&
+			(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
+		{
+			SetFlag( TF_MENU_SELECT2, 0 )
+			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+			YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+		}
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		HP_Heal( ADOL ,    300)
+		HP_Heal( LAXIA ,   300)
+		HP_Heal( SAHAD ,   300)
+		HP_Heal( HUMMEL ,  300)
+		HP_Heal( RICOTTA , 300)
+		HP_Heal( DANA ,    300)
+
+		UseFood(FOODEFFID_STRDEFUP1)		// �^�_���t�o�C��_���c�n�v�m2
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_USFD_FOOD03, 1)
+
+		SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_USFD_FOOD03)
+
+		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+function "it_usfood05"	//�C�N�L�b�V��
+{
+	if( WORK[WK_FOODEFFTIME] > 0 ){
+		SetFlag( TF_MENU_SELECT2, 0 )
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+		TalkPopup(UNDEF,0,5,0,0,0)
+		{
+			"#8S"
+			"#-1W#4C�����̌��ʂ������Ă���Ԃ́A�H�ׂ��܂���B#10W" 
+			"#8S"
+		}
+		Wait(10)
+		WaitPrompt()
+		WaitCloseWindow()
+	}
+	else{
+		SetFlag( TF_MENU_SELECT2, 1 )
+		//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+		if ((ADOL.CHRWORK[CWK_MAXHP] <= ADOL.CHRWORK[CWK_HP])&&
+			(LAXIA.CHRWORK[CWK_MAXHP] <= LAXIA.CHRWORK[CWK_HP])&&
+			(SAHAD.CHRWORK[CWK_MAXHP] <= SAHAD.CHRWORK[CWK_HP])&&
+			(HUMMEL.CHRWORK[CWK_MAXHP] <= HUMMEL.CHRWORK[CWK_HP])&&
+			(RICOTTA.CHRWORK[CWK_MAXHP] <= RICOTTA.CHRWORK[CWK_HP])&&
+			(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
+		{
+			SetFlag( TF_MENU_SELECT2, 0 )
+			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+			YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+		}
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		HP_Heal( ADOL ,    500)
+		HP_Heal( LAXIA ,   500)
+		HP_Heal( SAHAD ,   500)
+		HP_Heal( HUMMEL ,  500)
+		HP_Heal( RICOTTA , 500)
+		HP_Heal( DANA ,    500)
+
+		UseFood(FOODEFFID_EXPUP1)			// ����o���l�A�b�v�P
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_USFD_FOOD04, 1)
+
+		SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_USFD_FOOD04)
+
+		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+function "it_usfood06"	//���[���L���x�c
+{
+	if( WORK[WK_FOODEFFTIME] > 0 ){
+		SetFlag( TF_MENU_SELECT2, 0 )
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+		TalkPopup(UNDEF,0,5,0,0,0)
+		{
+			"#8S"
+			"#-1W#4C�����̌��ʂ������Ă���Ԃ́A�H�ׂ��܂���B#10W" 
+			"#8S"
+		}
+		Wait(10)
+		WaitPrompt()
+		WaitCloseWindow()
+	}
+	else{
+		SetFlag( TF_MENU_SELECT2, 1 )
+		//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+		if ((ADOL.CHRWORK[CWK_MAXHP] <= ADOL.CHRWORK[CWK_HP])&&
+			(LAXIA.CHRWORK[CWK_MAXHP] <= LAXIA.CHRWORK[CWK_HP])&&
+			(SAHAD.CHRWORK[CWK_MAXHP] <= SAHAD.CHRWORK[CWK_HP])&&
+			(HUMMEL.CHRWORK[CWK_MAXHP] <= HUMMEL.CHRWORK[CWK_HP])&&
+			(RICOTTA.CHRWORK[CWK_MAXHP] <= RICOTTA.CHRWORK[CWK_HP])&&
+			(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
+		{
+			SetFlag( TF_MENU_SELECT2, 0 )
+			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+			YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+		}
+	}
+
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		HP_Heal( ADOL ,    700)
+		HP_Heal( LAXIA ,   700)
+		HP_Heal( SAHAD ,   700)
+		HP_Heal( HUMMEL ,  700)
+		HP_Heal( RICOTTA , 700)
+		HP_Heal( DANA ,    700)
+
+		UseFood(FOODEFFID_HPHEAL1)			// HP�񕜂P
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_USFD_FOOD05, 1)
+
+		SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_USFD_FOOD05)
+
+		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+
+//----��ʗ���----//
+
+function "it_usfood11"	//�������L�m�R�[��
+{
+	if( WORK[WK_FOODEFFTIME] > 0 ){
+		SetFlag( TF_MENU_SELECT2, 0 )
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+		TalkPopup(UNDEF,0,5,0,0,0)
+		{
+			"#8S"
+			"#-1W#4C�����̌��ʂ������Ă���Ԃ́A�H�ׂ��܂���B#10W" 
+			"#8S"
+		}
+		Wait(10)
+		WaitPrompt()
+		WaitCloseWindow()
+	}
+	else{
+		SetFlag( TF_MENU_SELECT2, 1 )
+		if ((ADOL.CHRWORK[CWK_MAXHP] <= ADOL.CHRWORK[CWK_HP])&&
+			(LAXIA.CHRWORK[CWK_MAXHP] <= LAXIA.CHRWORK[CWK_HP])&&
+			(SAHAD.CHRWORK[CWK_MAXHP] <= SAHAD.CHRWORK[CWK_HP])&&
+			(HUMMEL.CHRWORK[CWK_MAXHP] <= HUMMEL.CHRWORK[CWK_HP])&&
+			(RICOTTA.CHRWORK[CWK_MAXHP] <= RICOTTA.CHRWORK[CWK_HP])&&
+			(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
+		//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+		{
+			SetFlag( TF_MENU_SELECT2, 0 )
+			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+			YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+		}
+	}
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		HP_Heal( ADOL ,    2000)
+		HP_Heal( LAXIA ,   2000)
+		HP_Heal( SAHAD ,   2000)
+		HP_Heal( HUMMEL ,  2000)
+		HP_Heal( RICOTTA , 2000)
+		HP_Heal( DANA ,    2000)
+
+		Cure(ADOL, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(LAXIA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(SAHAD, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(HUMMEL, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(RICOTTA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(DANA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		UseFood(FOODEFFID_CURE2)			// ��Ԉُ�񕜁A������2
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_USFD_FOOD10, 1)
+
+		SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_USFD_FOOD10)
+
+		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+function "it_usfood12"	//�t�B�b�V���t���C
+{
+	if( WORK[WK_FOODEFFTIME] > 0 ){
+		SetFlag( TF_MENU_SELECT2, 0 )
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+		TalkPopup(UNDEF,0,5,0,0,0)
+		{
+			"#8S"
+			"#-1W#4C�����̌��ʂ������Ă���Ԃ́A�H�ׂ��܂���B#10W" 
+			"#8S"
+		}
+		Wait(10)
+		WaitPrompt()
+		WaitCloseWindow()
+	}
+	else{
+		SetFlag( TF_MENU_SELECT2, 1 )
+		if ((ADOL.CHRWORK[CWK_MAXHP] <= ADOL.CHRWORK[CWK_HP])&&
+			(LAXIA.CHRWORK[CWK_MAXHP] <= LAXIA.CHRWORK[CWK_HP])&&
+			(SAHAD.CHRWORK[CWK_MAXHP] <= SAHAD.CHRWORK[CWK_HP])&&
+			(HUMMEL.CHRWORK[CWK_MAXHP] <= HUMMEL.CHRWORK[CWK_HP])&&
+			(RICOTTA.CHRWORK[CWK_MAXHP] <= RICOTTA.CHRWORK[CWK_HP])&&
+			(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
+		//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+		{
+			SetFlag( TF_MENU_SELECT2, 0 )
+			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+			YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+		}
+	}
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		HP_Heal( ADOL ,    1800)
+		HP_Heal( LAXIA ,   1800)
+		HP_Heal( SAHAD ,   1800)
+		HP_Heal( HUMMEL ,  1800)
+		HP_Heal( RICOTTA , 1800)
+		HP_Heal( DANA ,    1800)
+
+		UseFood(FOODEFFID_BREAKUP2)			// �^�u���C�N�ʃA�b�v2
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_USFD_FOOD11, 1)
+
+		SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_USFD_FOOD11)
+
+		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+function "it_usfood13"	//�p�C���[�c�v���[�g
+{
+	if( WORK[WK_FOODEFFTIME] > 0 ){
+		SetFlag( TF_MENU_SELECT2, 0 )
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+		TalkPopup(UNDEF,0,5,0,0,0)
+		{
+			"#8S"
+			"#-1W#4C�����̌��ʂ������Ă���Ԃ́A�H�ׂ��܂���B#10W" 
+			"#8S"
+		}
+		Wait(10)
+		WaitPrompt()
+		WaitCloseWindow()
+	}
+	else{
+		SetFlag( TF_MENU_SELECT2, 1 )
+		if ((ADOL.CHRWORK[CWK_MAXHP] <= ADOL.CHRWORK[CWK_HP])&&
+			(LAXIA.CHRWORK[CWK_MAXHP] <= LAXIA.CHRWORK[CWK_HP])&&
+			(SAHAD.CHRWORK[CWK_MAXHP] <= SAHAD.CHRWORK[CWK_HP])&&
+			(HUMMEL.CHRWORK[CWK_MAXHP] <= HUMMEL.CHRWORK[CWK_HP])&&
+			(RICOTTA.CHRWORK[CWK_MAXHP] <= RICOTTA.CHRWORK[CWK_HP])&&
+			(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
+		//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+		{
+			SetFlag( TF_MENU_SELECT2, 0 )
+			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+			YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+		}
+	}
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		HP_Heal( ADOL ,    1500)
+		HP_Heal( LAXIA ,   1500)
+		HP_Heal( SAHAD ,   1500)
+		HP_Heal( HUMMEL ,  1500)
+		HP_Heal( RICOTTA , 1500)
+		HP_Heal( DANA ,    1500)
+		
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		UseFood(FOODEFFID_EXPUP2)			// ����o���l�A�b�v2
+
+		// �����
+		UseItem(ICON3D_USFD_FOOD12, 1)
+
+		SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_USFD_FOOD12)
+
+		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+function "it_usfood14"	//�ґ�R�[���X���[
+{
+	if( WORK[WK_FOODEFFTIME] > 0 ){
+		SetFlag( TF_MENU_SELECT2, 0 )
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+		TalkPopup(UNDEF,0,5,0,0,0)
+		{
+			"#8S"
+			"#-1W#4C�����̌��ʂ������Ă���Ԃ́A�H�ׂ��܂���B#10W" 
+			"#8S"
+		}
+		Wait(10)
+		WaitPrompt()
+		WaitCloseWindow()
+	}
+	else{
+		SetFlag( TF_MENU_SELECT2, 1 )
+		if ((ADOL.CHRWORK[CWK_MAXHP] <= ADOL.CHRWORK[CWK_HP])&&
+			(LAXIA.CHRWORK[CWK_MAXHP] <= LAXIA.CHRWORK[CWK_HP])&&
+			(SAHAD.CHRWORK[CWK_MAXHP] <= SAHAD.CHRWORK[CWK_HP])&&
+			(HUMMEL.CHRWORK[CWK_MAXHP] <= HUMMEL.CHRWORK[CWK_HP])&&
+			(RICOTTA.CHRWORK[CWK_MAXHP] <= RICOTTA.CHRWORK[CWK_HP])&&
+			(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
+		//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+		{
+			SetFlag( TF_MENU_SELECT2, 0 )
+			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+			YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+		}
+	}
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		HP_Heal( ADOL ,    2100)
+		HP_Heal( LAXIA ,   2100)
+		HP_Heal( SAHAD ,   2100)
+		HP_Heal( HUMMEL ,  2100)
+		HP_Heal( RICOTTA , 2100)
+		HP_Heal( DANA ,    2100)
+		
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		UseFood(FOODEFFID_HPHEAL2)			// HP��2
+
+		// �����
+		UseItem(ICON3D_USFD_FOOD13, 1)
+
+		SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_USFD_FOOD13)
+
+		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+function "it_usfood15"	//�^�S�{���l�[�[
+{
+	if( WORK[WK_FOODEFFTIME] > 0 ){
+		SetFlag( TF_MENU_SELECT2, 0 )
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+		TalkPopup(UNDEF,0,5,0,0,0)
+		{
+			"#8S"
+			"#-1W#4C�����̌��ʂ������Ă���Ԃ́A�H�ׂ��܂���B#10W" 
+			"#8S"
+		}
+		Wait(10)
+		WaitPrompt()
+		WaitCloseWindow()
+	}
+	else{
+		SetFlag( TF_MENU_SELECT2, 1 )
+		if ((ADOL.CHRWORK[CWK_MAXHP] <= ADOL.CHRWORK[CWK_HP])&&
+			(LAXIA.CHRWORK[CWK_MAXHP] <= LAXIA.CHRWORK[CWK_HP])&&
+			(SAHAD.CHRWORK[CWK_MAXHP] <= SAHAD.CHRWORK[CWK_HP])&&
+			(HUMMEL.CHRWORK[CWK_MAXHP] <= HUMMEL.CHRWORK[CWK_HP])&&
+			(RICOTTA.CHRWORK[CWK_MAXHP] <= RICOTTA.CHRWORK[CWK_HP])&&
+			(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
+		//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+		{
+			SetFlag( TF_MENU_SELECT2, 0 )
+			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+			YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+		}
+	}
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		HP_Heal( ADOL ,    2200)
+		HP_Heal( LAXIA ,   2200)
+		HP_Heal( SAHAD ,   2200)
+		HP_Heal( HUMMEL ,  2200)
+		HP_Heal( RICOTTA , 2200)
+		HP_Heal( DANA ,    2200)
+		
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+		UseFood(FOODEFFID_SPHEAL2)			// SP��2
+
+		// �����
+		UseItem(ICON3D_USFD_FOOD14, 1)
+
+		SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_USFD_FOOD14)
+
+		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+function "it_usfood16"	//���l�p���v�L���p�C
+{
+	if( WORK[WK_FOODEFFTIME] > 0 ){
+		SetFlag( TF_MENU_SELECT2, 0 )
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//�`���[�g���A��
+		TalkPopup(UNDEF,0,5,0,0,0)
+		{
+			"#8S"
+			"#-1W#4C�����̌��ʂ������Ă���Ԃ́A�H�ׂ��܂���B#10W" 
+			"#8S"
+		}
+		Wait(10)
+		WaitPrompt()
+		WaitCloseWindow()
+	}
+	else{
+		SetFlag( TF_MENU_SELECT2, 1 )
+		if ((ADOL.CHRWORK[CWK_MAXHP] <= ADOL.CHRWORK[CWK_HP])&&
+			(LAXIA.CHRWORK[CWK_MAXHP] <= LAXIA.CHRWORK[CWK_HP])&&
+			(SAHAD.CHRWORK[CWK_MAXHP] <= SAHAD.CHRWORK[CWK_HP])&&
+			(HUMMEL.CHRWORK[CWK_MAXHP] <= HUMMEL.CHRWORK[CWK_HP])&&
+			(RICOTTA.CHRWORK[CWK_MAXHP] <= RICOTTA.CHRWORK[CWK_HP])&&
+			(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
+		//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+		{
+			SetFlag( TF_MENU_SELECT2, 0 )
+			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+			YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+		}
+	}
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		HP_Heal( ADOL ,    2500)
+		HP_Heal( LAXIA ,   2500)
+		HP_Heal( SAHAD ,   2500)
+		HP_Heal( HUMMEL ,  2500)
+		HP_Heal( RICOTTA , 2500)
+		HP_Heal( DANA ,    2500)
+		
+		UseFood(FOODEFFID_STRDEFUP2)		// �^�_���t�o�C��_���c�n�v�m2
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_USFD_FOOD15, 1)
+
+		SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_USFD_FOOD15)
+
+		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+
+function "it_usdrink"	//��؃W���[�X
+{
+	SetFlag( TF_MENU_SELECT2, 1 )
+	
+	if ((ADOL.CHRWORK[CWK_MAXHP] <= ADOL.CHRWORK[CWK_HP])&&
+		(LAXIA.CHRWORK[CWK_MAXHP] <= LAXIA.CHRWORK[CWK_HP])&&
+		(SAHAD.CHRWORK[CWK_MAXHP] <= SAHAD.CHRWORK[CWK_HP])&&
+		(HUMMEL.CHRWORK[CWK_MAXHP] <= HUMMEL.CHRWORK[CWK_HP])&&
+		(RICOTTA.CHRWORK[CWK_MAXHP] <= RICOTTA.CHRWORK[CWK_HP])&&
+		(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
+	//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
+	{
+		// ���A�S������
+		SetFlag( TF_MENU_SELECT2, 0 )
+		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
+		YesNoMenu(TF_MENU_SELECT2,"�g�o���񕜂���K�v������܂��񂪁A�g�p���܂����H",0)
+	}
+	
+	if( FLAG[TF_MENU_SELECT2] )
+	{
+		// �g���Ă���
+		HP_Heal( ADOL ,    100)
+		HP_Heal( LAXIA ,   100)
+		HP_Heal( SAHAD ,   100)
+		HP_Heal( HUMMEL ,  100)
+		HP_Heal( RICOTTA , 100)
+		HP_Heal( DANA ,    100)
+		
+		UseFood(-1)		// �������ʉ���
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		SetFlag( TF_VOICEPLY_CHR, 0)			// �K�v�Ȃ������܂��Ȃ�
+		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+
+		SetFlag(TF_MENU_SELECT,0)					
+		while(!FLAG[TF_MENU_SELECT])		//�I�����ꂽ�L���������S���Ă���ꍇ�V���b�t������
+		{
+			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == LAXIA) && (LAXIA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == SAHAD) && (SAHAD.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == HUMMEL) && (HUMMEL.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == RICOTTA) && (RICOTTA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else if((FLAG[TF_VOICEPLY_CHR] == DANA) && (DANA.CHRWORK[CWK_HP] <= 0 ))
+			{
+				SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
+			}
+			else 
+			{
+				SetFlag(TF_MENU_SELECT,1)					
+			}
+		}
+
+		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
+		{
+			PlayVoice(Y8V_0037,"ADOL",100)			//�܂��܂��s����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
+		{
+			PlayVoice(Y8V_0237,"LAXIA",100)			// �܂��܂��s���܂��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
+		{
+			PlayVoice(Y8V_1281,"SAHAD",100)			// �����A�K���K���s�����I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
+		{
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// �������炪�{�Ԃ��I
+		}
+		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
+		{
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// �Ȃ͂́A�������I
+		}
+		else
+		{
+			PlayVoice(Y8V_2864,"DANA",100)			// �܂��܂��s�����I
+		}
+		
+		// �����
+		UseItem(ICON3D_USFD_JUICE, 1)
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_USFD_JUICE)
+
+		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+
+}
+
+/////////////////////////////////////
+// �H�ތn
+
+function "it_foodstuff01"//	�≖
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 2)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_SEA_SALT, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_SEA_SALT)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff02"//	�I��
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 8)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_LAND_HONEY, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_LAND_HONEY)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff03"//	�Z�C������
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 2)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_WHEAT, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_WHEAT)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff04"//	�R���̗�
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 5)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_LAND_EGG, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_LAND_EGG)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff05"//	���I��
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 5)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_MUSHROOM, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_MUSHROOM)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff06"//	���A�[���L
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 5)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_SEA_SHELLFISH, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_SEA_SHELLFISH)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff07"//	�ԓ�
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 10)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_MEAT_01, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_MEAT_01)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff08"//	����
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 10)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_MEAT_02, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_MEAT_02)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff09"//	�n����
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 20)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_MEAT_03, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_MEAT_03)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff10"//	�p�v���J
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 5)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_VG_PAPRIKA, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_VG_PAPRIKA)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff11"//	�^���{�i�X
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 8)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_VG_EGGPLANT, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_VG_EGGPLANT)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff12"//	�L���x�c
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 10)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_VG_CABBAGE, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_VG_CABBAGE)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff13"//	�V���C���R�[��
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 15)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_VG_CORN, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_VG_CORN)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff14"//	�N�C�[���g�}�g
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 20)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_VG_TOMATO, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_VG_TOMATO)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_foodstuff15"//	�L���O�p���v�L��
+{
+	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
+	{
+		// �g���Ă���
+		HP_Heal( this , 50)
+		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
+
+		// �����
+		UseItem(ICON3D_FD_VG_PUMPKIN, 1)
+
+	}
+	else
+	{
+		// �g�����Ⴞ��	// ���������߂�
+		SetCantUseItem(ICON3D_FD_VG_PUMPKIN)
+
+		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
+	}
+}
+
+function "it_receive_items"
+{
+	SetFlag( TF_MENU_SELECT2, 0 )
+	YesNoMenu(TF_MENU_SELECT2,"�@�@�@Receive #2CAP Items#0C that cannot be obtained automatically",1)
+	
+	if(FLAG[TF_MENU_SELECT2])
+	{
+		if(!FLAG[SF_BOSS_BATTLE] &&  && !FLAG[SF_RETRY])
+		{
+			if(FLAG[GF_TBOX_DUMMY071] && !FLAG[GF_TBOX_DUMMY109] && ALLITEMWORK[ICON3D_WP_ADOL_008] < 1) 
+			{
+				SetFlag(GF_ADOLWEAPON_BACKUP,(ADOL.CHRWORK[CWK_WEAPON]))
+				GetItem(ICON3D_WP_ADOL_008,1)
+				EquipWeapon(ADOL,ICON3D_WP_ADOL_008)
+				Message("#4CMistilteinn Received")
+				WaitPrompt()
+				WaitCloseWindow()
+			}
+			if(FLAG[GF_TBOX_DUMMY108] && !FLAG[GF_TBOX_DUMMY109] && ALLITEMWORK[ICON3D_WP_DANA_005] < 1)
+			{
+				GetItem(ICON3D_WP_DANA_005,1)
+				EquipWeapon(DANA,ICON3D_WP_DANA_005)
+				Message("#4CSpirit Ring Celesdia Received")
+				WaitPrompt()
+				WaitCloseWindow()
+			}
+			if(FLAG[SF_ADOL_JOINED] && !FLAG[SF_ADOL_JOINOK])
+			{
+				SetFlag(SF_ADOL_JOINOK, 1)
+        		JoinParty(PARTY_ADOL)
+				Message("#4CAdol Received")
+				WaitPrompt()
+				WaitCloseWindow()
+				CallFunc("rng:0520")
+        		CallFunc("rng:0521")
+			}
+			if(FLAG[SF_LAXIA_JOINED] && !FLAG[SF_LAXIA_JOINOK])
+			{
+				SetFlag(SF_LAXIA_JOINOK, 1)
+        		JoinParty(PARTY_LAXIA)
+				SetDiaryFlag( DF_JOIN_LAXIA, 1 )
+				Message("#4CLaxia Received")
+				WaitPrompt()
+				WaitCloseWindow()
+				CallFunc("rng:0522")
+        		CallFunc("rng:0523")
+			}
+			if(FLAG[SF_SAHAD_JOINED] && !FLAG[SF_SAHAD_JOINOK])
+			{
+				etFlag(SF_SAHAD_JOINOK, 1)
+        		JoinParty(PARTY_SAHAD)
+				SetDiaryFlag( DF_JOIN_SAHAD, 1 )
+				Message("#4CSahad Received")
+				WaitPrompt()
+				WaitCloseWindow()
+				CallFunc("rng:0524")
+        		CallFunc("rng:0525")
+			}
+			if(FLAG[SF_HUMMEL_JOINED] && !FLAG[SF_HUMMEL_JOINOK])
+			{
+				SetFlag(SF_HUMMEL_JOINOK, 1)
+        		JoinParty(PARTY_HUMMEL)
+				SetDiaryFlag( DF_JOIN_HUMMEL, 1 )
+				Message("#4CHummel Received")
+				WaitPrompt()
+				WaitCloseWindow()
+				CallFunc("rng:0526")
+        		CallFunc("rng:0527")
+			}
+			if(FLAG[SF_RICOTTA_JOINED] && !FLAG[SF_RICOTTA_JOINOK])
+			{
+				SetFlag(SF_RICOTTA_JOINOK, 1)
+        		JoinParty(PARTY_RICOTTA)
+				SetDiaryFlag( DF_JOIN_RICOTTA, 1 )
+    			SetFlag( GF_QUEST_400, QUEST_START )
+    			SetDiaryFlag( DF_QS400_START, 1 )
+				Message("#4CRicotta Received")
+				WaitPrompt()
+				WaitCloseWindow()
+				CallFunc("rng:0528")
+        		CallFunc("rng:0529")
+			}
+			if(FLAG[SF_DANA_JOINED] && !FLAG[SF_DANA_JOINOK])
+			{
+				SetFlag(SF_DANA_JOINOK, 1)
+    			SetDiaryFlag( DF_JOIN_DANA, 1 )
+    			JoinParty(PARTY_DANA)
+				Message("#4CDana Received")
+				WaitPrompt()
+				WaitCloseWindow()
+				CallFunc("rng:0530")
+        		CallFunc("rng:0531")
+			}
+		}
+		else
+		{
+			Message("Can't receive items right now.")
+			WaitPrompt()
+			WaitCloseWindow()
+		}
+	}
+
+	
+}
+/////////////////////////////////////
+// ���ȉ��̓Z���Z�^����̕��B�A�C�e����`���c���Ă���̂ňꉞ�A���߂Ŏc���Ă���B
+// Ys8�ł͕s�v�Ȃ͂��B
+
+//
+///////////////////////////////////////
+//// �P�r�o
+//function it_getsp1
+//{
+//	SP_Recover(1)
+//	ChrEffect( PLAYER1 , SYSEFX_ITEM_SPGET , 0,0,0, 0,0, IMPACT_NONE , KNOCK_EFXPOS, 0,0,0, 1.0f, 1.0f)
+//}
+//
+///////////////////////////////////////
+//// �T�r�o
+//function it_getsp5
+//{
+//	SP_Recover(5)
+//	ChrEffect( PLAYER1 , SYSEFX_ITEM_SPGET , 0,0,0, 0,0, IMPACT_NONE , KNOCK_EFXPOS, 0,0,0, 1.0f, 1.0f)
+//}
+//
+//
+///////////////////////////////////////
+//// �P�d�w
+//function it_getex1
+//{
+//	AddEX(0.1f)
+//	ChrEffect( PLAYER1 , SYSEFX_ITEM_EXGET , 0,0,0, 0,0, IMPACT_NONE , KNOCK_EFXPOS, 0,0,0, 1.0f, 1.0f)
+//}
+//
+///////////////////////////////////////
+//// �T�d�w
+//function it_getex5
+//{
+//	AddEX(0.5f)
+//	ChrEffect( PLAYER1 , SYSEFX_ITEM_EXGET , 0,0,0, 0,0, IMPACT_NONE , KNOCK_EFXPOS, 0,0,0, 1.0f, 1.0f)
+//}
+//
+///////////////////////////////////////
+//// ���P
+//function item_660
+//{
+//	SetWork(WK_GOLD , (WORK[WK_GOLD] + 1) )
+//}
+//
+///////////////////////////////////////
+//// ���T
+//function item_661
+//{
+//	SetWork(WK_GOLD , (WORK[WK_GOLD] + 5) )
+//}
+//
+///////////////////////////////////////
+//// ���P�O
+//function item_662
+//{
+//	SetWork(WK_GOLD , (WORK[WK_GOLD] + 10) )
+//}
+//
+///////////////////////////////////////
+//// ���T�O
+//function item_663
+//{
+//	SetWork(WK_GOLD , (WORK[WK_GOLD] + 50) )
+//}
+//
+///////////////////////////////////////
+//// ���P�O�O
+//function item_664
+//{
+//	SetWork(WK_GOLD , (WORK[WK_GOLD] + 100) )
+//}
+//
+///////////////////////////////////////
+//// ���T�O�O
+//function item_665
+//{
+//	SetWork(WK_GOLD , (WORK[WK_GOLD] + 500) )
+//}
+//
+///////////////////////////////////////
+//// ���P�O�O�O
+//function item_666
+//{
+//	SetWork(WK_GOLD , (WORK[WK_GOLD] + 1000) )
+//}
+//
+///////////////////////////////////////
+//// ���T�O�O�O
+//function item_667
+//{
+//	SetWork(WK_GOLD , (WORK[WK_GOLD] + 5000) )
+//}
+//
+///////////////////////////////////////
+//// �P�g�o
+//function it_getmp1
+//{
+////	SetFlag(SF_MEMORYPOINT , (FLAG[SF_MEMORYPOINT] + 1) )
+//	// �񕜂���
+//	HP_Heal(PLAYER1, 0.25f)
+//	HP_Heal(PLAYER2, 0.25f)
+//	HP_Heal(PLAYER3, 0.25f)
+//
+//	ChrEffect( PLAYER1 , SYSEFX_ITEM_MPGET , 0,0,0, 0,0, IMPACT_NONE , KNOCK_EFXPOS, 0,0,0, 1.0f, 1.0f)
+//	ChrEffect( PLAYER2 , SYSEFX_ITEM_MPGET , 0,0,0, 0,0, IMPACT_NONE , KNOCK_EFXPOS, 0,0,0, 1.0f, 1.0f)
+//	ChrEffect( PLAYER3 , SYSEFX_ITEM_MPGET , 0,0,0, 0,0, IMPACT_NONE , KNOCK_EFXPOS, 0,0,0, 1.0f, 1.0f)
+//
+//}
+//
+///////////////////////////////////////
+//// �T�g�o
+//function it_getmp5
+//{
+////	SetFlag(SF_MEMORYPOINT , (FLAG[SF_MEMORYPOINT] + 5) )
+//	// �񕜂���
+//	HP_Heal(PLAYER1, 5.0f)
+//	HP_Heal(PLAYER2, 5.0f)
+//	HP_Heal(PLAYER3, 5.0f)
+//
+//	ChrEffect( PLAYER1 , SYSEFX_ITEM_MPGET , 0,0,0, 0,0, IMPACT_NONE , KNOCK_EFXPOS, 0,0,0, 1.0f, 1.0f)
+//}
+

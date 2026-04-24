@@ -1,0 +1,811 @@
+//冒険日誌、メインストーリー用テーブル					
+//					
+//項目定義セクション					
+//[STORY]	定義ＩＤ（マップマーカーに使用:flag.hで定義）	項目名	タイトル	メイン?	過去編?
+//[STORYEND]					
+//					
+//コンテンツ内容定義（[STORY]～[STORYEND]）					
+//フラグ番号	テキスト				
+//					
+//フラグ番号はテキスト表示のチェック用。二行目以降で省略した場合、以前に設定したフラグ番号でチェックを行う。					
+//テキストは日誌のコンテンツとして表示するテキスト、１テキスト１行固定。					
+//					
+//<記入例>					
+//					
+//[STORY]	DIARY_STORY	キャスナン	キャスナン　～始まりの地～	1	0
+//GF_TBOX_DUMMY116	ここはどこなのだろう？				
+//GF_TBOX_DUMMY116	記憶を失い行き倒れた所を酒場の女将に拾われた。				
+//	そこに「デュレン」と名乗る男が現れた。				
+//	どうやら彼は僕を知っているらしい。				
+//GF_TBOX_DUMMY116	鉱山で何かあったらしい。				
+//	・・・				
+//[STORYEND]					
+//					
+					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_STORY	Prologue	Prologue: Night on the Gaete Sea	1	0
+GF_TBOX_DUMMY116	★The captain wants to see me in his quarters.				
+GF_TBOX_DUMMY116	★I'm working as security and patrolling the ship.				
+GF_TBOX_DUMMY116	★I must go to the captain's quarters.				
+GF_TBOX_DUMMY116	★I need to check out what's happening outside.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_STORY	Chapter 1	Ch. 1: The Isle of Seiren	1	0
+GF_TBOX_DUMMY116	★I've arrived on a strange beach. I should explore the area.				
+GF_TBOX_DUMMY116	★I'm going to head deeper inland.				
+GF_TBOX_DUMMY116	★Laxia and I need to find a safe location.				
+GF_TBOX_DUMMY116	★I found a quiet inlet. Let's explore it.				
+GF_TBOX_DUMMY116	★Let's follow the shadow that Laxia saw.				
+GF_TBOX_DUMMY116	★I found an old cave. Could people be inside?				
+GF_TBOX_DUMMY116	★We should continue searching the cave.				
+GF_TBOX_DUMMY116	★Let's map the island and search for castaways.				
+GF_TBOX_DUMMY116	★Let's return to base with Sahad.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_STORY	Chapter 2	Ch. 2: The Castaway Banquet	1	0
+GF_TBOX_DUMMY116	★I should talk to Sahad before we leave.				
+GF_TBOX_DUMMY116	★Check out the village and catch some fish.				
+GF_TBOX_DUMMY116	★Go back and report to Dogi.				
+GF_TBOX_DUMMY116	★I need to speak with Captain Barbaros.				
+GF_TBOX_DUMMY116	★Let's map the island and search for castaways.				
+GF_TBOX_DUMMY116	★Paro has asked us to return to the village right away.				
+GF_TBOX_DUMMY116	★Let's work together to fend off this beast raid.				
+GF_TBOX_DUMMY116	★Continue mapping the island and searching for castaways.				
+GF_TBOX_DUMMY116	★We should ask Kathleen to refine our weapons.				
+GF_TBOX_DUMMY116	★Continue mapping the island and searching for castaways.				
+GF_TBOX_DUMMY116	★I found a watchtower. Have people been here before?				
+GF_TBOX_DUMMY116	★Continue mapping the island and searching for castaways.				
+GF_TBOX_DUMMY116	★Where can I use this insect repellent I got?				
+GF_TBOX_DUMMY116	★Continue mapping the island and searching for castaways.				
+GF_TBOX_DUMMY116	★Whose scream did I just hear at the village?				
+GF_TBOX_DUMMY116	★Let's work together to fend off this beast raid.				
+GF_TBOX_DUMMY116	★We must search for Sir Carlan.				
+GF_TBOX_DUMMY116	★We had better rescue Sir Carlan.				
+GF_TBOX_DUMMY116	★Let's gather information about the incident.				
+GF_TBOX_DUMMY116	★We should follow the person that Sahad saw.				
+GF_TBOX_DUMMY116	★Let's examine the nearby trees.				
+GF_TBOX_DUMMY116	★We must capture Kiergaard.				
+GF_TBOX_DUMMY116	★We can't let Kiergaard escape.				
+GF_TBOX_DUMMY116	★Return to Captain Barbaros.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_STORY	Chapter 3	Ch. 3: Surpassing Gendarme	1	0
+GF_TBOX_DUMMY116	★Let's get ready to leave.				
+GF_TBOX_DUMMY116	★I better talk to Laxia and Sahad.				
+GF_TBOX_DUMMY116	★Let's explore Gendarme.				
+GF_TBOX_DUMMY116	★We found a cabin. I wonder what's inside...				
+GF_TBOX_DUMMY116	★Let's explore Gendarme.				
+GF_TBOX_DUMMY116	★Let's take Ricotta back to Castaway Village.				
+GF_TBOX_DUMMY116	★Let's check the cave at foot of Gendarme for orichalcum.				
+GF_TBOX_DUMMY116	★Let's look for orichalcum inside the cave.				
+GF_TBOX_DUMMY116	★Let's give the orichalcum to Kathleen.				
+GF_TBOX_DUMMY116	★Let's work together to fend off this beast raid.				
+GF_TBOX_DUMMY116	★Let's explore Gendarme.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_STORY	Chapter 4	Ch. 4: The Lost World	1	0
+GF_TBOX_DUMMY116	★The northern region of the island awaits.				
+GF_TBOX_DUMMY116	★Ricotta has vanished. Let's search for her.				
+GF_TBOX_DUMMY116	★Escape the cave with Ricotta.				
+GF_TBOX_DUMMY116	★Let's explore the northing region of the island.				
+GF_TBOX_DUMMY116	★A strange resonance is emitting from the crystal.				
+GF_TBOX_DUMMY116	★We've arrived at the ruins. Let's start exploring.				
+GF_TBOX_DUMMY116	★Let's follow that man.				
+GF_TBOX_DUMMY116	★Thanatos wants to go to the Temple of the Great Tree.				
+GF_TBOX_DUMMY116	★Approach the Great Tree of Origins.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_STORY	Chapter 5	Ch. 5: Maiden of the Great Tree	1	0
+GF_TBOX_DUMMY116	★Let's work together to fend off this beast raid.				
+GF_TBOX_DUMMY116	★Let's explore Baja Tower with Dana.				
+GF_TBOX_DUMMY116	★Find a working monolith in the top floor of the tower.				
+GF_TBOX_DUMMY116	★Let's return to Castaway Village.				
+GF_TBOX_DUMMY116	★Climb the watchtower and see what has everyone so spooked.				
+GF_TBOX_DUMMY116	★Explore the ghost ship.				
+GF_TBOX_DUMMY116	★Captain Reed has passed on. Return to the village.				
+GF_TBOX_DUMMY116	★Let's explore the Archeozoic Chasm.				
+GF_TBOX_DUMMY116	★We found the Oceanus's nest. Let's prepare our strategy.				
+GF_TBOX_DUMMY116	★The time has come to defeat the Oceanus.				
+GF_TBOX_DUMMY116	★What will Dana do now? I better talk to her.				
+GF_TBOX_DUMMY116	★Let's follow Dana to the Valley of Kings.				
+GF_TBOX_DUMMY116	★Explore the Valley of Kings with Dana.				
+GF_TBOX_DUMMY116	★Leave the Valley of Kings for now.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_STORY	Chapter 6	Ch. 6: Lacrimosa of the Distant Sea	1	0
+GF_TBOX_DUMMY116	★Let's work together to fend off this beast raid.				
+GF_TBOX_DUMMY116	★Head to the top of Gendarme and find out what's happening.				
+GF_TBOX_DUMMY116	★We need to get closer to the Great Tree.				
+GF_TBOX_DUMMY116	★Seren Garden is in the Valley of Kings.				
+GF_TBOX_DUMMY116	★Let's examine the Tree of Psyches.				
+GF_TBOX_DUMMY116	★Go to the Great Tree of Origins to stop the Lacrimosa.				
+GF_TBOX_DUMMY116	★At Octus Overlook, we can release the captured psyches.				
+GF_TBOX_DUMMY116	★We've released the psyches. Let's go to Seren Garden.				
+GF_TBOX_DUMMY116	★The time has come to stop the Lacrimosa.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_STORY	Epilogue	Epilogue: End of the Blue Waves	1	0
+GF_TBOX_DUMMY116	★We're preparing to leave the island...				
+GF_TBOX_DUMMY116	★I want to talk with Sahad and the others.				
+GF_TBOX_DUMMY116	★Let's go to the northern region of the island.				
+GF_TBOX_DUMMY116	★Let's explore this area together.				
+GF_TBOX_DUMMY116	★Let's overcome the Abyss of Origins and see Dana again.				
+GF_TBOX_DUMMY116	★Let's get ready to leave without any regrets.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_STORY	Progress Notes	Progress Notes	0	0
+GF_TBOX_DUMMY116	★Laxia joined the party.				
+GF_TBOX_DUMMY116	★Reunited with Captain Barbaros.				
+GF_TBOX_DUMMY116	★Reunited with Dogi.				
+GF_TBOX_DUMMY116	★Sahad joined the party.				
+GF_TBOX_DUMMY116	★Rescued Alison.				
+GF_TBOX_DUMMY116	★Rescued Sir Carlan.				
+GF_TBOX_DUMMY116	★Rescued Kiergaard.				
+GF_TBOX_DUMMY116	★Rescued Kathleen.				
+GF_TBOX_DUMMY116	★Rescued Sister Nia.				
+GF_TBOX_DUMMY116	★Hummel joined our party.				
+GF_TBOX_DUMMY116	★Rescued Dina.				
+GF_TBOX_DUMMY116	★Rescued Reja.				
+GF_TBOX_DUMMY116	★Rescued Miralda.				
+GF_TBOX_DUMMY116	★Euron joined Castaway Village.				
+GF_TBOX_DUMMY116	★Rescued Licht.				
+GF_TBOX_DUMMY116	★Rescued Quina.				
+GF_TBOX_DUMMY116	★Ricotta joined the party.				
+GF_TBOX_DUMMY116	★Rescued Austin.				
+GF_TBOX_DUMMY116	★Silvia joined Castaway Village.				
+GF_TBOX_DUMMY116	★Thanatos joined Castaway Village.				
+GF_TBOX_DUMMY116	★Dana joined the party.				
+GF_TBOX_DUMMY116	★Rescued Katthew.				
+GF_TBOX_DUMMY116	★Rescued Ed.				
+GF_TBOX_DUMMY116	★Franz joined Castaway Village.				
+GF_TBOX_DUMMY116	★Sir Carlan rejoined Castaway Village.				
+GF_TBOX_DUMMY116	★Griselda joined Castaway Village.				
+GF_TBOX_DUMMY116	★Cleared a giant tree at the Nameless Coast.				
+GF_TBOX_DUMMY116	★Cleared a boulder near the Nameless Coast.				
+GF_TBOX_DUMMY116	★Cleared a landslide in the forest near the Nameless Coast.				
+GF_TBOX_DUMMY116	★Cleared a boulder in the Great River Valley.				
+GF_TBOX_DUMMY116	★Cleared a boulder west of the Nameless Coast.				
+GF_TBOX_DUMMY116	★Cleared a giant tree at the Water and Wood Hills.				
+GF_TBOX_DUMMY116	★Cleared a boulder at the Roaring Shore.				
+GF_TBOX_DUMMY116	★Repaired a bridge in the Great River Valley.				
+GF_TBOX_DUMMY116	★Reinforced a crumbling cliff in the Beast Hills.				
+GF_TBOX_DUMMY116	★Cleared a landslide at the Nostalgic Cape.				
+GF_TBOX_DUMMY116	★Removed a stone pillar on the Pangaian Plains.				
+GF_TBOX_DUMMY116	★Cleared the mud at White Sand Cape.				
+GF_TBOX_DUMMY116	★Set up a rope ladder at Vista Ridge.				
+GF_TBOX_DUMMY116	★Cleared the landslide in Lodinia Marsh.				
+GF_TBOX_DUMMY116	★Removed a stone pillar at the Archeozoic Chasm.				
+GF_TBOX_DUMMY116	★Cleared a landslide beyond the Water and Wood Hills.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_TIPS	T's Note 1	T's Note 1	0	0
+GF_TBOX_DUMMY116	"Ten days have passed since I first arrived here."				
+					
+	"No matter how far I look out to sea, I have				
+	yet to see a single ship pass by..."				
+					
+	"I guess it's time for me to make a decision."				
+					
+	"If I'm going to survive this cursed island, I have				
+	to figure out how to escape it on my own..." -T				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_TIPS	T's Note 2	T's Note 2	0	0
+GF_TBOX_DUMMY116	"I know how to hunt and fish, so I'm in good				
+	shape as far as survival is concerned."				
+					
+	"I've left no stone unturned, and yet I'm no				
+	closer to finding a way off this island..."				
+					
+	"I managed to build a raft, but the current				
+	was too strong. I didn't make it very far.				
+	Maybe I really am trapped here. Forever..."				
+					
+	"No, I can't give up yet.				
+	Not while I'm still alive." -T				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_TIPS	T's Note 3	T's Note 3	0	0
+GF_TBOX_DUMMY116	"I've discovered the remains of several pirates				
+	on this island. Near as I can tell, these men				
+	were marooned here."				
+					
+	"This intrigued me, so I decided to do a little				
+	more research into the matter."				
+					
+	"As it turns out, an infamous pirate came ashore				
+	on this island nearly a century ago."				
+					
+	"Now if I could only find a clue as to how I can				
+	escape this island..." -T				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_TIPS	T's Note 4	T's Note 4	0	0
+GF_TBOX_DUMMY116	"My investigation of the Primordials has				
+	somehow led me up this mountain."				
+					
+	"Their diversity and numbers are endless. I have				
+	no idea how many centuries they've been here."				
+					
+	"Is this the secret that the Isle of Seiren keeps				
+	hidden from the world at large...?"				
+					
+	"I can't pass on this opportunity...				
+	I must continue delving into this island's secrets,				
+	and see what mysteries I unearth..." -T				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_TIPS	Pirate's Note 1	Pirate's Note 1	0	0
+GF_TBOX_DUMMY116	"Following those fools is what brought me here..."				
+					
+	"It's dark... So very, very dark..."				
+					
+	"Hell hides beneath the darkness...!"				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_TIPS	Pirate's Note 2	Pirate's Note 2	0	0
+GF_TBOX_DUMMY116	"Hahaha! Addlepated fools!				
+	Making all this ruckus over				
+	some dead comrades!"				
+					
+	"I don't take orders from anyone!				
+	Not even the captain!"				
+					
+	I'll kill anyone who defies me! Hahaha!"				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_TIPS	Pirate's Note 3	Pirate's Note 3	0	0
+GF_TBOX_DUMMY116	"I was planning to kill the captain				
+	and steal his ship..."				
+					
+	"But Zoey got torn to bits!				
+	What manner of monster got at him?!"				
+					
+	"I'm not ready to die!!!"				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_TIPS	Pirate's Note 4	Pirate's Note 4	0	0
+GF_TBOX_DUMMY116	"More than half of us have died since				
+	we came ashore on this island..."				
+					
+	"Things have gotten a lot quieter now those				
+	treacherous mutineers have been dealt with."				
+					
+	"Even a fool knows that riches and power				
+	won't help you on this island..."				
+					
+	"Pity I didn't realize that sooner..."				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_TIPS	Pirate's Note 5	Pirate's Note 5	0	0
+GF_TBOX_DUMMY116	"Keep your ears open for hissing sounds,				
+	like you'd hear a lizard or snake make..."				
+					
+	"That means they're close...				
+	They can appear from anywhere and everywhere..."				
+					
+	"Those among us who've gone mad				
+	are sure to be eaten by those things..."				
+					
+	"I thought we were dreaded pirates...				
+	When did we become cornered prey?"				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_TIPS	Pirate's Note 6	Pirate's Note 6	0	0
+GF_TBOX_DUMMY116	"I've been told to investigate the island...				
+	Captain's orders."				
+					
+	"I think that's all that's kept me alive, really..."				
+					
+	"But is there really a chance we'll get				
+	out of here with our lives...?"				
+					
+	"I don't know...				
+	but I'll do as the captain says."				
+					
+	"I have to believe there's a chance..."				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_VOYAGE	Ship's Log 1	Ship's Log 1	0	0
+GF_TBOX_DUMMY116	"Day Three since leaving Altas Port--				
+	The Eleftheria is handling the journey well.				
+	We should soon make land on the Isle of Seiren,				
+	ominous as it is."				
+					
+	"It is imperative that I reach the island				
+	and return safely.				
+	Indeed, they must be exposed and shown				
+	for what they are."				
+					
+	"I must do this. Should I fail, I will forswear				
+	my own rank and name, and be Captain Reed no more."				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_VOYAGE	Ship's Log 2	Ship's Log 2	0	0
+GF_TBOX_DUMMY116	"Before I reach the Isle of Seiren, I must				
+	reveal a simple truth, regarding the scouring				
+	by fire of the archipelago's villages. 				
+	None were spared...certainly not the men, but				
+	women and children fell victim just as surely."				
+					
+	"The people curse the name of Captain Reed, and				
+	blame me for these heinous acts...but I tell you,				
+	I am innocent."				
+					
+	"The Eleftheria is crewed mostly by victims of the				
+	slave trade... including myself.				
+	It seems the authorities did not appreciate us				
+	banding together and fighting to emancipate the				
+	slaves, that we could all stand free.				
+	The people of the archipelago accepted us, and				
+	even took to calling us the Pirates of Justice.				
+	Truly kind folk, they were."				
+					
+	"And just as truly, it was the men of Greek's				
+	navy that put the villages to the torch.				
+	Word later reached my ears that they did this to				
+	draw us out, to purge the Gaete Sea of our ilk."				
+					
+	"I'd sooner wallow in horse manure for a				
+	hundred days than obey those of so twisted				
+	sense of justice.				
+	But the people have suffered enough, and I				
+	would trouble them no further."				
+					
+	"After giving it much thought... I have decided to				
+	go to the naval headquarters and turn myself in."				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_VOYAGE	Ship's Log 3	Ship's Log 3	0	0
+GF_TBOX_DUMMY116	"...I am held captive. The Navy has sent				
+	a strange, bearded pig to visit me.				
+	I'd not think the Navy to keep a pet for				
+	themselves, nor defer to it as 'Captain.'"				
+					
+	"For all its brutish smell, it spoke with				
+	words like a man, and told me that it wanted				
+	to negotiate.				
+	It instructed me to investigate an island,				
+	where none have been able to safely approach.				
+	Yes, the infamous Isle of Seiren."				
+					
+	"In exchange for investigating the island and				
+	returning alive, it would graciously release				
+	my entire crew from incarceration."				
+					
+	"I've always had a gift for spotting a liar				
+	by observing faces.				
+	And I don't trust that grotesque swine				
+	to keep its promise for a moment."				
+					
+	"But had I refused, I believe it would have				
+	kept its other promise--to hang my crew.				
+	Truly, we live in mad times...				
+	I reminded myself that I want to be a good man,				
+	and agreed to be the pig's lickspittle.				
+	And so I find myself before the Isle of Seiren."				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_VOYAGE	Ship's Log 4	Ship's Log 4	0	0
+GF_TBOX_DUMMY116	"I have escaped the tentacled titan and set foot				
+	on the island to begin investigating."				
+					
+	"Unfortunately, the Eleftheria is crewed this time				
+	by naught but rabble, barely worth their own				
+	weight in horse manure.				
+	The Navy picked these lot. They are criminals				
+	to a man, and inexperienced, besides."				
+					
+	"Obviously, no seasoned sailor would agree to				
+	come near the Isle of Seiren, but that changes				
+	nothing of this madness.				
+	One of the fools thought to mutiny and take				
+	my ship, but I put the boot to him and sent				
+	him into the water."				
+					
+	"I have too many rebellious men to contend with,				
+	to say nothing of the beasts of this island.				
+	I've not seen their like before.				
+	I'm continuing to investigate, but my progress				
+	is held back by some malady. I am tired, and				
+	I believe a fever has taken hold of me."				
+					
+	"Loath as I am to admit it, I may be in peril.				
+	Once I am done with my writing, I will take				
+	to my bed and attempt to rest."				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY_VOYAGE	Ship's Log 5	Ship's Log 5	0	0
+GF_TBOX_DUMMY116	"...My health grows worse by the day.				
+	I am overcome by some unusual sickness.				
+	It appears that this fever is something				
+	only found on this island."				
+					
+	"I've received word that my family has escaped and				
+	taken refuge on a small island in the Gaete Sea.				
+	But my mates...				
+	The real crew of the Eleftheria				
+	still await my return.				
+	It's entirely possible that they're				
+	all dancing the hempin jig already."				
+					
+	"But I will not give up. Not so long as I believe				
+	I have a sliver of a chance of succeeding.				
+	In addition, some of those here have come to				
+	admire me, fools that they are.				
+	I'd like to see them returned safely, as well...				
+	so I must stay the course."				
+					
+	"Worthless fool that I am, I've never been				
+	known to surrender or accept defeat...				
+	Not even if I should wither to bones and dust..."				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_STORY	Arboreal Awakening	Arboreal Awakening	1	1
+GF_TBOX_DUMMY116	Objective: 				
+	★ Wander around the temple. 				
+GF_TBOX_DUMMY116	★ Speak to my handmaid to depart for the Great Valley. 				
+GF_TBOX_DUMMY116	★ Head to the deepest part of the Great Valley. 				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_STORY	Audience and Reunion	Audience and Reunion	1	1
+GF_TBOX_DUMMY116	Objective:				
+	★ Wander around Aegias.				
+GF_TBOX_DUMMY116	★ Head to the royal palace. 				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_STORY	The Red-haired Swordsman	The Red-haired Swordsman	1	1
+GF_TBOX_DUMMY116	Objective: 				
+	★ The red-haired swordsman was at the outskirts east of the capital.				
+GF_TBOX_DUMMY116	★ Find out where that voice came from. 				
+GF_TBOX_DUMMY116	★ Continue traveling to the outskirts east of the capital.				
+GF_TBOX_DUMMY116					
+	Events: 				
+GF_TBOX_DUMMY116	★ Completed Eternia Quest [Forgotten Waterway].				
+GF_TBOX_DUMMY116	★ Rescued the spirit Jenya.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_STORY	The Guiding Sapling	The Guiding Sapling	1	1
+GF_TBOX_DUMMY116	Objective: 				
+	★ Take the bridge south of Aegias and guide Adol. 				
+GF_TBOX_DUMMY116	★ Find those kids playing hide-and-seek. 				
+GF_TBOX_DUMMY116	★ The stupa seems strange... Might be worth examining.				
+GF_TBOX_DUMMY116	★ Explore the crypt.				
+GF_TBOX_DUMMY116	★ Return to the surface and comfort Sia. 				
+GF_TBOX_DUMMY116	★ Resuming heading to the bridge south of Aegias. 				
+GF_TBOX_DUMMY116					
+	Events: 				
+GF_TBOX_DUMMY116	★ Completed Eternia Quest [Twin's Hide-and-Seek].				
+GF_TBOX_DUMMY116	★ Rescued the spirit Amy.				
+GF_TBOX_DUMMY116	★ Completed Eternia Quest [Sunken Key].				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_STORY	A Day in the Life of a Wandering Maiden	A Day in the Life of a Wandering Maiden	1	1
+GF_TBOX_DUMMY116	Objective: 				
+	★ Travel to Baja Tower and guide Adol. 				
+GF_TBOX_DUMMY116	★ Defeat the Saurian that has appeared along the highway.				
+GF_TBOX_DUMMY116	★ Explore the side roads near Baja Tower.				
+GF_TBOX_DUMMY116					
+	Events: 				
+GF_TBOX_DUMMY116	★ Completed Eternia Quest [Saurian Hunt I].				
+GF_TBOX_DUMMY116	★ Rescued the spirit Wagmur.				
+	★ Obtained the Gratika Style.				
+GF_TBOX_DUMMY116	★ Completed Eternia Quest [Maiden's Charity].				
+GF_TBOX_DUMMY116	★ Rescued the spirit Lindell.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_STORY	Gloom	Gloom	1	1
+GF_TBOX_DUMMY116	Objective: 				
+	★ Guide Adol from the royal palace.				
+GF_TBOX_DUMMY116					
+	Events: 				
+GF_TBOX_DUMMY116	★ Completed Eternia Quest [Old Gate of Happiness].				
+GF_TBOX_DUMMY116	★ Rescued the spirit Plau.				
+GF_TBOX_DUMMY116	★ Rescued the spirit Eld.				
+	★ Enhanced your Iclucian Style.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_STORY	The Fated Day	The Fated Day	1	1
+GF_TBOX_DUMMY116	Objective: 				
+	★ Provide assistance at the Aerial Corridor!				
+GF_TBOX_DUMMY116					
+	Events: 				
+GF_TBOX_DUMMY116	★ Rescued the spirit Astios.				
+	★ Obtained the Luminous Style.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_STORY	Beneath the Sullen Clouds	Beneath the Sullen Clouds	1	1
+GF_TBOX_DUMMY116	Objective: 				
+	★ Travel to the Valley of Kings to guide Adol. 				
+GF_TBOX_DUMMY116					
+	Events: 				
+GF_TBOX_DUMMY116	★ Completed Eternia Quest [Lost Refugee].				
+GF_TBOX_DUMMY116	★ Completed Eternia Quest [Saurian Hunt II].				
+GF_TBOX_DUMMY116	★ Rescued the spirit Orvis.				
+	★ Enhanced your Gratika Style.				
+GF_TBOX_DUMMY116	★ Rescued the spirit Kushna.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_STORY	A Painful Decision	A Painful Decision	1	1
+GF_TBOX_DUMMY116	Objective: 				
+	★ Travel to Seren Garden to look for clues.				
+GF_TBOX_DUMMY116	★ Find a way to enter the central district.				
+GF_TBOX_DUMMY116	★ Use the temple's mountain gate to reach the Old Ganna Approach.				
+GF_TBOX_DUMMY116	★ Travel to Seren Garden.				
+GF_TBOX_DUMMY116					
+	Events: 				
+GF_TBOX_DUMMY116	★ Completed Eternia Quest [Saurian Hunt III].				
+GF_TBOX_DUMMY116	★ Completed Eternia Quest [Blessing the Withered Land].				
+GF_TBOX_DUMMY116	★ Rescued the spirit Selene. 				
+	★ Enhanced your Luminous Style.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_STORY	White Memory	White Memory	1	1
+GF_TBOX_DUMMY116	Objective: 				
+	★ Speak to Olga in front of the throne.				
+GF_TBOX_DUMMY116	★ Wandering around Aegias.				
+GF_TBOX_DUMMY116	★ Go after Io, who ran into the crypt.				
+GF_TBOX_DUMMY116	★ Explore the newly discovered lower floors.				
+GF_TBOX_DUMMY116					
+	Events: 				
+GF_TBOX_DUMMY116	★ Completed Eternia Quest [Flower of Gratitude].				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_MONOLITH	Chamber of Braziers	Chamber of Braziers	0	1
+GF_TBOX_DUMMY116	In the Beginning was the Sage.				
+					
+	The Sage, a wise Man of enduring Intelligence, embarked				
+	on a long Journey, when he discovered a colossal Tree.				
+	Seating himself at the Foot of the Tree, the Sage began to meditate.				
+	And in his Trance, a mysterious Power was revealed to him.				
+					
+	The Sage could read the Wind as easily as a Bird.				
+	He achieved Mastery over the Elements of Fire and Water.				
+	He could even see future Events,				
+	yet to occur in distant Lands.				
+	The Sage had tapped into that Power which				
+	governed the very Laws of Nature, and he saw				
+	fit to call it Essence.				
+					
+	When the Sage returned to his Homeland, he used Essence				
+	to drive out the Saurians that threatened his People.				
+	Freed from the Threat that had plagued them for so long,				
+	Peace had finally come to the Sage's Homeland.				
+	The People honored the Sage, learned from him the				
+	Art of Essence, and with it achieved untold Prosperity.				
+					
+	With his newfound Influence, the Sage assembled his People and established a Nation.				
+	So it was that His Radiance, Light King Alchea, became the first King of Eternia. 				
+					
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_MONOLITH	Chamber of Stone 	Chamber of Stone 	0	1
+GF_TBOX_DUMMY116	Thanks to the Wisdom of Essence, 				
+	Eternia's grow continued unabated. 				
+					
+	Thus by vanquishing Saurians and cultivating				
+	the Earth, did the Kingdom expand its Domain.				
+	In time, the Kingdom of Eternia grew to				
+	become the mightiest Nation in the land.				
+	With its Expansion came a Golden Age of				
+	Prosperity for Eternia, celebrated by Lords				
+	and loyal Retainers alike.				
+					
+	It was during this Golden Age that Light King				
+	Alchea issued the Edict of Southerly Migration.				
+	With this Edict, the Kingdom set forth migrating				
+	its Capital to the Site of the Great Tree, where				
+	the Light King discovered Essence.				
+					
+	"Our new Capital will endure for Eternity!"				
+	declared the Light King to his roused Nation.				
+	And so, at the Site where the Light King				
+	first gained the Knowledge of Essence...				
+	Where the Great Tree of Origins, Giver				
+	of Knowledge, stands tall to this day...				
+					
+	The Eternians devoted themselves Body and Soul to the establishment 				
+	of a Capital worthy of the Great Tree and their King.				
+	A grand Capital, housing an enormous Crystal				
+	with which to amplify Essence, was unveiled				
+	to the world.				
+	In this way, the new Capital was more than the center of				
+	the Kingdom; it was the very Heart of the land itself.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_MONOLITH	Chamber of Clairvoyance	Chamber of Clairvoyance	0	1
+GF_TBOX_DUMMY116	There will always be those who, in the presence				
+	of Glory, seek to claim it for themselves.				
+	Thus did weaker Nations seek to wage War				
+	against Eternia, and usurp its Golden Age				
+	for themselves.				
+					
+	With its Essence and its powerful Military,				
+	Eternia was in no danger of falling.				
+	But civilian casualties mounted along Eternia's borders,				
+	threatening the Peace and Security of the People.				
+	Amidst the Fog of War, one Man stepped forth				
+	and ensured his place in Eternia's history:				
+					
+	Urianus.				
+	Though he appeared to be an unassuming Traveler,				
+	he possessed calm Essence and a powerful Will that				
+	could withstand any Hardship.				
+					
+	Urianus was a peaceful man above all else. He preached his Word				
+	to all who would hear, tended to the Poor, and healed the Sick.				
+	Whilst traveling through a region ravaged				
+	by War, Urianus was set upon by Bandits.				
+	A young Woman, believed to be the Leader,				
+	drew her Sword from its Sheath.				
+	As she made ready to cut him down,				
+	Urianus, ever Tranquil, said thusly:				
+					
+	"Wrath will not				
+	calm your Wrath."				
+	"You need not feel Wrath.				
+	You need not feel Fear."				
+	"Embrace Tranquility...				
+	Only when you abandon Wrath,				
+	can you walk a new Path."				
+					
+	She did not understand Urianus at first, but				
+	when his meaning dawned on her, she wept.				
+	Thus did the bandit Leader become				
+	his Disciple and traveling Companion.				
+	With each passing Day, Urianus drew more Disciples.				
+	Even the Beasts of the Earth began to follow him.				
+					
+	With his Tranquil demeanor, he later became known				
+	as the Saint of Salvation for his role in saving				
+	the People of Eternia from a great Cataclysm.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_MONOLITH	Chamber of Frost	Chamber of Frost	0	1
+GF_TBOX_DUMMY116	The Capital's relocation was				
+	progressing without delay.				
+	The energetic Light King did not shirk				
+	a single duty during the transfer.				
+	He focused on paving highways to other				
+	nations, and other infrastructural endeavors.				
+	One day, while the King was deeply focused				
+	on making History, a woman came to visit him..				
+					
+	A beautiful Princess from a provincial Nation,				
+	who brought with her a Letter.				
+	"Princess Baja is as lovely as a summer Peahen,				
+	and sings more beautifully than an Orsun harp."				
+	Her Beauty so enchanted the King, that it would				
+	come to be chronicled in the Tome of Five Histories.				
+	He fulfilled his Royal Duties while courting the Princess in equal 				
+	measure, before finally deciding he would make her his Queen.				
+					
+	The two were wed on the same day that				
+	the Capital's relocation was completed.				
+	The wise King's marriage was celebrated				
+	throughout the entire nation.				
+	On the outskirts, a great Spire called Baja Tower				
+	was erected in honor of their new Queen.				
+					
+	The Queen asked that the Tower be dedicated to the research of 				
+	Essence and medicine, which quickly garnered her much admiration.				
+	She was dedicated to her People, and their				
+	well-being was never far from her mind.				
+					
+	But she was a frail Woman, and often				
+	confined to her bed due to Illness.				
+	Because of his Queen's condition, the Light King				
+	ordered the construction of a Villa near the Capital.				
+	It was to be built by a beautiful lake				
+	in the western region of the kingdom.				
+	Unbeknownst to the Light King, this decision				
+	would bring about unmitigated Disaster.				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_MONOLITH	Chamber of Magma	Chamber of Magma	0	1
+GF_TBOX_DUMMY116	During construction of the Villa,				
+	an ancient Ruin was unearthed.				
+	While exploring this Ruin, researchers found old records				
+	in areas they named "The Wall of Truth" and "The Garden."				
+	When these records were decoded,				
+	a terrible truth was revealed.				
+					
+	The Great Tree of Origins, giver of Essence,				
+	was the harbinger of the world's doom.				
+	This Revelation undermined all that Eternia				
+	had done to achieve its Prosperity.				
+	Upon notifying the King, he ordered that				
+	the Ruin be concealed from the public.				
+					
+	Unfortunately, an errant nobleman had also learned				
+	the truth, and took matters into his own hands.				
+	"The Great Tree will bring about a terrible				
+	calamity that threatens all of Eternia!"				
+	Gathering his most loyal retainers, the nobleman				
+	set forth to burn the Great Tree to cinders.				
+					
+	Flaming arrows were loosed				
+	upon the Great Tree...				
+	And the Heavens cried out, and the Men who				
+	loosed those arrows were swiftly turned to dust.				
+					
+	The Cataclysm had begun.				
+	Bolts of roaring lightning carved terrible scars				
+	into the land, tearing the Earth asunder.				
+	The Eternians believed themselves 				
+	above reproach. That they faced				
+	no threats due to their Essence...				
+	Within their new Capital, the Cataclysm				
+	worked the citizenry into a panic.				
+					
+	Yet amidst the Horror, there was a group				
+	of people who roamed the Earth unabated.				
+	Urianus ventured across blasted Lands, saving many,				
+	until He finally arrived at the Roots of the Great Tree.				
+	"Calm your Heart, for this time of Tribulation				
+	is when the Heart is tested most."				
+	With these words, Urianus led all				
+	who would hear him in prayer.				
+					
+	And as they prayed, the inexorable march of Time continued...				
+	Only when they heard the sound of bird songs,				
+	did the people notice the Wind's gentle touch,				
+	and the soothing kiss of the Sun's light...				
+					
+	The Cataclysm had ended, leaving behind				
+	a vast, deep-set scar in the southern lands...				
+[STORYEND]					
+//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 					
+[STORY]	DIARY2_MONOLITH	Chamber of the Final Trial	Chamber of the Final Trial	0	1
+GF_TBOX_DUMMY116	"...The Great Tree can never be uprooted."				
+					
+	The Light King accepted the Wisdom of the Saint,				
+	and placed the Great Tree under his Protection.				
+	The Wall of Truth and the Garden, which				
+	depict the Threat posed by the Great Tree,				
+	were sealed deep underground.				
+					
+	As time passed, the Light King grew old,				
+	and Urianus, the Saint of Salvation,				
+	died as he lived--in total Tranquility.				
+	Rain fell upon the Capital for over a month,				
+	as if the Sky itself was in mourning.				
+					
+	But when a Woman--the bandit Disciple of				
+	the Saint--offered a prayer, the Rain ceased,				
+	and Sunlight shined down upon the Capital.				
+	She erected a Temple south of the Capital, where she would calm the Great				
+	Tree, and reports of her exploits soon found their way to the King.				
+	The King approved of this, and Eternians				
+	received the Blessings of the Heavens				
+	as they entered a new Era of Prosperity.				
+	The Woman remained in Eternia, and became the				
+	first Maiden to devote herself to the Great Tree.				
+					
+	In time, the Great Tree became				
+	a symbol of Prosperity for the Kingdom.				
+	The King decreed that the Temple stood				
+	on equal footing as the Palace, and thus				
+	was the Kingdom of Eternia founded.				
+					
+	"As the people enjoy their prosperity..."				
+	"The threat depicted on the Wall of Truth				
+	will one day be lost to time forever."				
+	"But the threat will come one day, like				
+	a bubble that must eventually burst."				
+	"You maidens who have come to this sanctuary...				
+	You maidens who are my successors."				
+	"You will know this truth, and				
+	bear it on your soul forever."				
+	"That is the true duty of all maidens.				
+	The reason for their very existence."				
+	"Until such a day that the final maiden arrives."				
+[STORYEND]			
+
+

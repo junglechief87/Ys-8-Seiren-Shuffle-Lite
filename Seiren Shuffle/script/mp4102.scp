@@ -1,0 +1,155 @@
+#include "inc/mons.h"
+#include "inc/def.h"
+#include "inc/flag.h"
+#include "inc/se.h"
+#include "inc/music.h"
+#include "inc/scr_inc.h"
+#include "inc/3dicon.h"
+#include "inc/skilldef.h"
+#include "inc/vo.h"
+
+//-------------------------------------------
+// 4102�F
+//-------------------------------------------
+// init�X�N���v�g
+function "init"
+{
+	EventCue("rng:dungeonEntrances")
+	
+	//���i�s�K�v�m�[�h�폜���}�b�v��Ǝҗp
+	MapHide( "@BG2_mp4102" , 0 )
+	MapHide( "@BG2_mp1108" , 0 )
+	MapHide( "@BG2_mp1109" , 0 )
+	MapHide( "BG2_groundfog_main" , 0 )	//���i�̔t�H�O������
+	MapHide( "BG2_groundfog_S1" , 0 )	//���i�̔t�H�O������
+	MapHide( "BG2_groundfog_SW1" , 0 )	//���i�̔t�H�O������
+	MapHide( "BG2_groundfog_SW2" , 0 )	//���i�̔t�H�O������
+	MapHide( "BG2_groundfog_SE1" , 0 )	//���i�̔t�H�O������
+	MapHide( "BG2_groundfog_SE2" , 0 )	//���i�̔t�H�O������
+
+	MapHide( "camp_fire1" , 0 )		//�Ώ���
+	MapHide( "camp_fire2" , 0 )		//�Ώ���
+	MapHide( "camp_smoke1" , 0 )		//������
+
+//	if( FLAG[SF_EVENT_ON] ){
+//	// �C�x���g��������
+//		if( !FLAG[GF_02MP4102_MAKE_CAMP] && !FLAG[GF_02MP1201_BEFORE_INTERCEPT2] ){			// mp4102�Ŗ�c���Ă��Ȃ�		//�������t���O�͉�
+//			MapAnime( "camp_all" , off )	//�L�����v���ݒu
+//			EventCue("mp4102:EV_M02S330")
+//
+//		}
+//	}
+
+	//�}�b�v���\��
+	if(!FLAG[SF_LOADINIT] && !FLAG[GF_MPxxxx_MAP_NAME_NO_DRAW] && !FLAG[TF_MAPNAME_SHOWN]){
+		if( FLAG[SF_LASTENTRY_NO] == 1 || FLAG[SF_LASTENTRY_NO] == 100 ){
+			VisualName("visual/mapname/mn_1108.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//�b�����̋u
+			SetFlag( TF_MAPNAME_SHOWN, 1 )				// �n���\�������i�e���|�����j
+		}
+	}
+
+}
+function "LP_tent"
+{
+
+	SetStopFlag(STOPFLAG_SIMPLEEVENT2)
+
+	ResetMotion( "ALL" , 1 )
+	StopEffect(-1,ALL,1)
+	StopEmotion( "ALL" )
+	ResetMoveVec("PARTYALL")
+
+	//�I����
+	SetFlag(TF_MENU_SELECT,0)
+	MenuReset()
+	MenuType(MENUTYPE_POPUP)
+	MenuAdd(1,"�e���g�ŋx��")
+	MenuAdd(4,"��߂�")	
+	MenuOpen( TF_MENU_SELECT , -1 , ADOLMENU_PPOSY , -2 , -2 , 10 , -1)
+	WaitMenu(0)
+	MenuClose(10,0)
+	
+	if (FLAG[TF_MENU_SELECT] == 1)
+	{
+		SetWork(WK_BGMLIMIT, 1)
+		FadeOut(FADE_BLACK,FADE_NORMAL)
+		WaitFade()
+
+		SaveCamera()
+
+		SetEnvSEPlayState(-1, 0)	//��SE�S��~
+		PlaySE(SE_ENV_FOREST_4, 20, 1, 1000, 0, 1.0f, 0)	//��̒�
+		PlaySE(SE_ENV_WATERFALL_4, 20, 1, 1000, 0, 1.0f, 0)
+		PlaySE(SE_ENV_RIVER_1, 20, 1, 1000, 0, 1.0f, 0)
+
+		CallFunc("system:TentVoice_Sleep")
+	
+		PlaySE( SE_HOTEL_JINGLE , 100 , 0,  0, 0, 1.0f, 0)	//�W���O��
+		StopSE(SE_ENV_FOREST_4, 2000)		//���̉��~�߂�
+		StopSE(SE_ENV_WATERFALL_4, 2000)
+		StopSE(SE_ENV_RIVER_1, 2000)
+
+		Wait(120)
+	
+		//�e���g�񕜏����E���g���C�Z�[�u
+		CallFunc("system:camp_rest")
+
+		PlaySE(SE_HEAL, 100, 0, 0, 0, 1.0f, 0)
+	
+		TalkPopup(UNDEF,0,5,0,0,0)
+		{
+			"#8S"
+			"#-1W#4C�S���̂g�o�A�r�o�Ƃd�w�s�q�`�Q�[�W���S�������I#10W" 
+			"#8S"
+		}
+		Wait(10)
+		WaitPrompt()
+		WaitCloseWindow()
+	
+		Wait(15)
+
+		SetChrPos("LEADER",482.72f,-36.15f,96.64f)
+		Turn("LEADER",-147.23f,360.0f)
+	
+		ResetPartyPos()
+		ResetFollowPoint()
+		//Wait(1) //�����҂��p
+	
+		RestoreCamera(0,0)
+		ResetCameraObserver(0)
+		ResetCameraZPlane()
+	
+		ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
+
+		SetEnvSEPlayState(-1, 1)	//��SE���A
+
+		SetWork(WK_BGMLIMIT, 0) 	
+		FadeIn(FADE_BLACK,FADE_FAST)
+		//WaitFade()
+
+	} else {
+		ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
+
+	}
+
+}
+
+function "LP_cook"
+{
+	SetStopFlag(STOPFLAG_TALK)
+	TurnToChr( PLAYER1 , this , 7.5f )
+	Wait(10)
+
+	CallFunc("system:GetIngredients")
+	ShopOpen( SHOP_ID_COOK, -1 )		//�������쐬�e�X�g
+
+	ResetStopFlag(STOPFLAG_TALK)
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//�����C���C�x���g�Z�N�V����
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
