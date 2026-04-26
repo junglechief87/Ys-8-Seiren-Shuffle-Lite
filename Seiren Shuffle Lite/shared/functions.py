@@ -1,6 +1,6 @@
 import os.path
 import csv
-import shared.classr as classr
+from ..shared.classr import *
 import shared.config as config
 
 encode = "utf-8"
@@ -32,7 +32,7 @@ def getLocations():
             entrance = bool(int(row['entrance']))
             exit = bool(int(row['exit']))
      
-            locationObject = classr.location(locID,mapID,locRegion,locName,mapCheckID,event,itemID,itemName,quantity,progression,nice,party,crew,item,script,skill,landmark,entrance,exit)
+            locationObject = location(locID,mapID,locRegion,locName,mapCheckID,event,itemID,itemName,quantity,progression,nice,party,crew,item,script,skill,landmark,entrance,exit)
             locations.append(locationObject)
             
     locDB.close()
@@ -141,30 +141,30 @@ def combineShuffledLocAndItem(shuffledLocation,inventory):
     entrance = inventory.entrance
     exit = inventory.exit
 
-    return classr.location(locID,mapID,locRegion,locName,mapCheckID,event,itemID,itemName,quantity,progression,nice,party,crew,item,script,skill,landmark,entrance,exit)
+    return location(locID,mapID,locRegion,locName,mapCheckID,event,itemID,itemName,quantity,progression,nice,party,crew,item,script,skill,landmark,entrance,exit)
 
-def copyLocationToNewLoc(location):
-    locID = location.locID
-    mapID = location.mapID
-    locRegion = location.locRegion
-    locName = location.locName
-    mapCheckID = location.mapCheckID
-    event = location.event
-    itemID = location.itemID
-    itemName = location.itemName
-    quantity = location.quantity
-    progression = location.progression
-    nice = location.nice
-    party = location.party
-    crew = location.crew
-    item = location.item
-    script = location.script
-    skill = location.skill
-    landmark = location.landmark
-    entrance = location.entrance
-    exit = location.exit
+def copyLocationToNewLoc(locationToCopy):
+    locID = locationToCopy.locID
+    mapID = locationToCopy.mapID
+    locRegion = locationToCopy.locRegion
+    locName = locationToCopy.locName
+    mapCheckID = locationToCopy.mapCheckID
+    event = locationToCopy.event
+    itemID = locationToCopy.itemID
+    itemName = locationToCopy.itemName
+    quantity = locationToCopy.quantity
+    progression = locationToCopy.progression
+    nice = locationToCopy.nice
+    party = locationToCopy.party
+    crew = locationToCopy.crew
+    item = locationToCopy.item
+    script = locationToCopy.script
+    skill = locationToCopy.skill
+    landmark = locationToCopy.landmark
+    entrance = locationToCopy.entrance
+    exit = locationToCopy.exit
 
-    return classr.location(locID,mapID,locRegion,locName,mapCheckID,event,itemID,itemName,quantity,progression,nice,party,crew,item,script,skill,landmark,entrance,exit)
+    return location(locID,mapID,locRegion,locName,mapCheckID,event,itemID,itemName,quantity,progression,nice,party,crew,item,script,skill,landmark,entrance,exit)
 
 def getIntRewards():
     with open(os.path.join(config.current_directory, "database/interceptionRewards.csv"), encoding=encode) as rewardDB:
@@ -184,7 +184,7 @@ def getIntRewards():
                 else: 
                     rewards.append(row[col])
 
-            stageReward = classr.interceptReward(stage,rewards)
+            stageReward = interceptReward(stage,rewards)
             intRewards.append(stageReward)
             
     rewardDB.close()

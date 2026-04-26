@@ -1,51 +1,37 @@
-try:
-	from randomizer.spoiler import shuffledEntranceList
-except ImportError:
-	from randomizer.spoiler import mock_entrances as shuffledEntranceList  # Use a mock object as a fallback
-
-entranceList ={
-        'Archeozoic Chasm Dungeon': {'load': 'map/mp6361/mp6361.arg', 'entry_event': 'rng:6361_entry'},
-        'Baja Tower Dungeon': {'load': 'map/mp6321/mp6321.arg', 'entry_event': 'rng:6321_entry'},
-        'Beast Hills - Camp North': {'load': 'map/mp4102/mp4102.arg', 'entry_event': 'rng:4102_entry'},
-        'Beast Hills - Camp South': {'load': 'map/mp2103/mp2103.arg', 'entry_event': 'rng:2103_entry'},
-        'Calm Inlet - Castaway Village Area': {'load': 'map/mp1201/mp1201.arg', 'entry_event': 'rng:1201_entry'},
-        'East Coast Cave Dungeon': {'load': 'map/mp7411/mp7411.arg', 'entry_event': 'rng:7411_entry'},
-        'Eroded Valley Dungeon Back': {'load': 'map/mp4309/mp4309.arg', 'entry_event': 'rng:4309_entry'},
-        'Eroded Valley Dungeon Front': {'load': 'map/mp4301/mp4301.arg', 'entry_event': 'rng:4301_entry'},
-        'Mont Gendarme Dungeon Back': {'load': 'map/mp4107/mp4107.arg', 'entry_event': 'rng:4107_entry'},
-        'Mont Gendarme Dungeon Front': {'load': 'map/mp4331/mp4331.arg', 'entry_event': 'rng:4331_entry'},
-        'Mountain Pinnacle Trail - Top': {'load': 'map/mp4103/mp4103.arg', 'entry_event': 'rng:4103_entry'},
-        'Nameless Coast - Camp': {'load': 'map/mp1105/mp1105.arg', 'entry_event': 'rng:1105_entry'},
-        'Nostalgia Cape - Nostalgia Cape': {'load': 'map/mp1116/mp1116.arg', 'entry_event': 'rng:1116_entry'},
-        'Octus Dungeon': {'load': 'map/mp6301/mp6301.arg', 'entry_event': 'rng:6301_entry'},
-        'Odd Rock Coast - Odd Rock Coast': {'load': 'map/mp1118/mp1118.arg', 'entry_event': 'rng:1118_entry'},
-        'Primordial Passage - Camp': {'load': 'map/mp3105/mp3105.arg', 'entry_event': 'rng:3105_entry'},
-        'Roaring Seashore - Metavolicalis': {'load': 'map/mp1117/mp1117.arg', 'entry_event': 'rng:1117_entry'},
-        'Schlamm Jungle Dungeon Back': {'load': 'map/mp2308/mp2308.arg', 'entry_event': 'rng:2308_entry'},
-        'Schlamm Jungle Dungeon Front': {'load': 'map/mp2301/mp2301.arg', 'entry_event': 'rng:2301_entry'},
-        'Sunrise Beach - Sunrise Beach': {'load': 'map/mp1119/mp1119.arg', 'entry_event': 'rng:1119_entry'},
-        'Temple of the Great Tree - Great Tree Garden': {'load': 'map/mp6409/mp6409.arg', 'entry_event': 'rng:6409_entry'},
-        'The Ruins of Eternia - Palace Ruins': {'load': 'map/mp6204/mp6204.arg', 'entry_event': 'rng:6204_entry'},
-        'Towal Highway - Camp': {'load': 'map/mp6110/mp6110.arg', 'entry_event': 'rng:6110_entry'},
-        'Towering Coral Forest Dungeon Back': {'load': 'map/mp1308/mp1308.arg', 'entry_event': 'rng:1308_entry'},
-        'Towering Coral Forest Dungeon Front': {'load': 'map/mp1301/mp1301.arg', 'entry_event': 'rng:1301_entry'},
-        'Valley of Kings - Camp': {'load': 'map/mp6108/mp6108.arg', 'entry_event': 'rng:6108_entry'},
-        'Valley of Kings Dungeon': {'load': 'map/mp6341/mp6341.arg', 'entry_event': 'rng:6341_entry'},
-        'Waterdrop Cave Dungeon': {'load': 'map/mp7301/mp7301.arg', 'entry_event': 'rng:7301_entry'},
+entranceEvent =	{
+        "Archeozoic Chasm Front": {'load': 'map/mp6361/mp6361.arg', 'entry_event': 'rng:6361_entry'},
+        "Baja Tower Lower Floors": {'load': 'map/mp6321/mp6321.arg', 'entry_event': 'rng:6321_entry'},
+        "Great River Valley Area": {'load': 'map/mp4102/mp4102.arg', 'entry_event': 'rng:4102_entry'},
+        "Great River Valley South Camp": {'load': 'map/mp2103/mp2103.arg', 'entry_event': 'rng:2103_entry'},
+        "Calm Inlet Area": {'load': 'map/mp1201/mp1201.arg', 'entry_event': 'rng:1201_entry'},
+        "East Coast Cave Before Gilkyra": {'load': 'map/mp7411/mp7411.arg', 'entry_event': 'rng:7411_entry'},
+        "Eroded Valley After Boss": {'load': 'map/mp4309/mp4309.arg', 'entry_event': 'rng:4309_entry'},
+        "Eroded Valley Front": {'load': 'map/mp4301/mp4301.arg', 'entry_event': 'rng:4301_entry'},
+        "Mont Gendarme After Boss": {'load': 'map/mp4107/mp4107.arg', 'entry_event': 'rng:4107_entry'},
+        "Mont Gendarme Front": {'load': 'map/mp4331/mp4331.arg', 'entry_event': 'rng:4331_entry'},
+        "Seiren North Access": {'load': 'map/mp4103/mp4103.arg', 'entry_event': 'rng:4103_entry'},
+        "Nameless Coast North": {'load': 'map/mp1105/mp1105.arg', 'entry_event': 'rng:1105_entry'},
+        "Nostalgia Cape Area": {'load': 'map/mp1116/mp1116.arg', 'entry_event': 'rng:1116_entry'},
+        "Octus Overlook": {'load': 'map/mp6301/mp6301.arg', 'entry_event': 'rng:6301_entry'},
+        "Odd Rock Coast": {'load': 'map/mp1118/mp1118.arg', 'entry_event': 'rng:1118_entry'},
+        "Primordial Passage Gendarme Entrance": {'load': 'map/mp3105/mp3105.arg', 'entry_event': 'rng:3105_entry'},
+        "Metavolicalis Area": {'load': 'map/mp1117/mp1117.arg', 'entry_event': 'rng:1117_entry'},
+        "Schlamm Jungle After Boss": {'load': 'map/mp2308/mp2308.arg', 'entry_event': 'rng:2308_entry'},
+        "Schlamm Jungle Front": {'load': 'map/mp2301/mp2301.arg', 'entry_event': 'rng:2301_entry'},
+        "Sunrise Beach": {'load': 'map/mp1119/mp1119.arg', 'entry_event': 'rng:1119_entry'},
+        "Temple of the Great Tree Garden": {'load': 'map/mp6409/mp6409.arg', 'entry_event': 'rng:6409_entry'},
+        "Bridge to Archeozoic Chasm": {'load': 'map/mp6204/mp6204.arg', 'entry_event': 'rng:6204_entry'},
+        "Towal Highway Baja Tower Entrance": {'load': 'map/mp6110/mp6110.arg', 'entry_event': 'rng:6110_entry'},
+        "Towering Coral Forest After Boss": {'load': 'map/mp1308/mp1308.arg', 'entry_event': 'rng:1308_entry'},
+        "Towering Coral Forest Front": {'load': 'map/mp1301/mp1301.arg', 'entry_event': 'rng:1301_entry'},
+        "Lodinia Marshlands Back": {'load': 'map/mp6108/mp6108.arg', 'entry_event': 'rng:6108_entry'},
+        "Valley of Kings Before Door": {'load': 'map/mp6341/mp6341.arg', 'entry_event': 'rng:6341_entry'},
+        "Waterdrop Cave": {'load': 'map/mp7301/mp7301.arg', 'entry_event': 'rng:7301_entry'},
     }
 
-def getEntrance(region, check):
-	for entrance in shuffledEntranceList:
-		if entrance.locRegion == region and entrance.mapCheckID == check:
-			ent = entranceList.get(entrance.itemName)
-			try: 
-				if ent:
-					return ent['load'], ent['entry_event']
-			except Exception as e:
-				print(f"Error retrieving entrance data for {entrance.mapCheckID}: {e}")
-
-def buildEntrances():
+def buildEntrances(entranceList):
 	print('buildEntrances')
+	# A note on naming, entering a dungeon is always labeled an entrance, leaving a dungeon to a field is labled an exit
 	entranceScript ="""
 	function "dungeonEntrances"
 	{{
@@ -59,7 +45,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)
-			}}""".format(getEntrance('Beast Hills', 'Eroded Valley Front Entrance')[0], getEntrance('Beast Hills', 'Eroded Valley Front Entrance')[1])
+			}}""".format(entranceEvent[entranceList["GRV EVF Entrance"]]["load"], entranceEvent[entranceList["GRV EVF Entrance"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_SOUTHWEST_PLANE_MP1105) //entrance from Towering Coral Forest - Exit to Nameless Coast
@@ -68,7 +54,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)
-			}}""".format(getEntrance('Towering Coral Forest', 'Exit to Nameless Coast')[0], getEntrance('Towering Coral Forest', 'Exit to Nameless Coast')[1])
+			}}""".format(entranceEvent[entranceList["TCF NCN Exit"]]["load"], entranceEvent[entranceList["TCF NCN Exit"]]["entry_event"])
     
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 2 && WORK[WK_MAPNAMENO] == MN_D_MP1301) //entrance from Nameless Coast - Towering Coral Forest Front Entrance
@@ -77,7 +63,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Nameless Coast', 'Towering Coral Forest Front Entrance')[0], getEntrance('Nameless Coast', 'Towering Coral Forest Front Entrance')[1])
+			}}""".format(entranceEvent[entranceList["NCN TCF Entrance"]]["load"], entranceEvent[entranceList["NCN TCF Entrance"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_F_MP1118) //entrance from Schlamm Jungle - Exit to Odd Rock Coast
@@ -86,7 +72,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Schlamm Jungle', 'Exit to Odd Rock Coast')[0], getEntrance('Schlamm Jungle', 'Exit to Odd Rock Coast')[1])
+			}}""".format(entranceEvent[entranceList["SJAB ORC Exit"]]["load"], entranceEvent[entranceList["SJAB ORC Exit"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_D_MP1308) //entrance from Roaring Seashore - Towering Coral Forest Back Entrance
@@ -95,7 +81,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Roaring Seashore', 'Towering Coral Forest Back Entrance')[0], getEntrance('Roaring Seashore', 'Towering Coral Forest Back Entrance')[1])
+			}}""".format(entranceEvent[entranceList["Meta TCF Entrance"]]["load"], entranceEvent[entranceList["Meta TCF Entrance"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_F_MP1117) //entrance from Towering Coral Forest - Exit to Roaring Seashore
@@ -104,7 +90,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Towering Coral Forest', 'Exit to Roaring Seashore')[0], getEntrance('Towering Coral Forest', 'Exit to Roaring Seashore')[1])
+			}}""".format(entranceEvent[entranceList["TCFAB Meta Exit"]]["load"], entranceEvent[entranceList["TCFAB Meta Exit"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP2103) //entrance from Schlamm Jungle - Exit to Beast Hills South
@@ -113,7 +99,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Schlamm Jungle', 'Exit to Beast Hills South')[0], getEntrance('Schlamm Jungle', 'Exit to Beast Hills South')[1])
+			}}""".format(entranceEvent[entranceList["SJF GRVSC Exit"]]["load"], entranceEvent[entranceList["SJF GRVSC Exit"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP2301) //entrance from Beast Hills - Schlamm Jungle Front Entrance
@@ -122,7 +108,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Beast Hills', 'Schlamm Jungle Front Entrance')[0], getEntrance('Beast Hills', 'Schlamm Jungle Front Entrance')[1])
+			}}""".format(entranceEvent[entranceList["GRVSC SJ Entrance"]]["load"], entranceEvent[entranceList["GRVSC SJ Entrance"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_D_MP2308) //entrance from Odd Rock Coast - Schlamm Jungle Back Entrance
@@ -131,7 +117,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Odd Rock Coast', 'Schlamm Jungle Back Entrance')[0], getEntrance('Odd Rock Coast', 'Schlamm Jungle Back Entrance')[1])
+			}}""".format(entranceEvent[entranceList["ORC SJ Entrance"]]["load"], entranceEvent[entranceList["ORC SJ Entrance"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 5 && WORK[WK_MAPNAMENO] == MN_T_VILLAGE_MP1201) //entrance from Waterdrop Cave - Exit to Calm Inlet
@@ -140,7 +126,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Waterdrop Cave', 'Exit to Calm Inlet')[0], getEntrance('Waterdrop Cave', 'Exit to Calm Inlet')[1])
+			}}""".format(entranceEvent[entranceList["WC Exit"]]["load"], entranceEvent[entranceList["WC Exit"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_CELLAR_MP7301) //entrance from Calm Inlet - Waterdrop Cave Entrance
@@ -149,7 +135,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Calm Inlet', 'Waterdrop Cave Entrance')[0], getEntrance('Calm Inlet', 'Waterdrop Cave Entrance')[1])
+			}}""".format(entranceEvent[entranceList["WC Entrance"]]["load"], entranceEvent[entranceList["WC Entrance"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP4102) //entrance from Eroded Valley - Exit to Beast Hills North
@@ -158,7 +144,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Eroded Valley', 'Exit to Beast Hills North')[0], getEntrance('Eroded Valley', 'Exit to Beast Hills North')[1])
+			}}""".format(entranceEvent[entranceList["EVF GRV Exit"]]["load"], entranceEvent[entranceList["EVF GRV Exit"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_D_EROSIONVALLEY_MP4309) //entrance from Sunrise Beach - Eroded Valley Back Entrance
@@ -167,7 +153,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Sunrise Beach', 'Eroded Valley Back Entrance')[0], getEntrance('Sunrise Beach', 'Eroded Valley Back Entrance')[1])
+			}}""".format(entranceEvent[entranceList["SB EV Entrance"]]["load"], entranceEvent[entranceList["SB EV Entrance"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_F_MP1119) //entrance from Eroded Valley - Exit to Sunrise Beach
@@ -176,7 +162,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Eroded Valley', 'Exit to Sunrise Beach')[0], getEntrance('Eroded Valley', 'Exit to Sunrise Beach')[1])
+			}}""".format(entranceEvent[entranceList["EVAB SB Exit"]]["load"], entranceEvent[entranceList["EVAB SB Exit"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP7411) //entrance from Nostalgia Cape - East Coast Cave Entrance
@@ -185,7 +171,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Nostalgia Cape', 'East Coast Cave Entrance')[0], getEntrance('Nostalgia Cape', 'East Coast Cave Entrance')[1])
+			}}""".format(entranceEvent[entranceList["NCA ECCBG Entrance"]]["load"], entranceEvent[entranceList["NCA ECCBG Entrance"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 2 && WORK[WK_MAPNAMENO] == MN_F_MP1116) //entrance from East Coast Cave - Exit to Nostalgia Cape
@@ -194,7 +180,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('East Coast Cave', 'Exit to Nostalgia Cape')[0], getEntrance('East Coast Cave', 'Exit to Nostalgia Cape')[1])
+			}}""".format(entranceEvent[entranceList["ECCBG NCA Exit"]]["load"], entranceEvent[entranceList["ECCBG NCA Exit"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP3105) //entrance from Mont Gendarme - Exit to Primordial Passage
@@ -203,7 +189,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Mont Gendarme', 'Exit to Primordial Passage')[0], getEntrance('Mont Gendarme', 'Exit to Primordial Passage')[1])
+			}}""".format(entranceEvent[entranceList["MGF PPGE Exit"]]["load"], entranceEvent[entranceList["MGF PPGE Exit"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP4331) //entrance from The Primordial Passage - Mont Gendarme Front Entrance
@@ -212,7 +198,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('The Primordial Passage', 'Mont Gendarme Front Entrance')[0], getEntrance('The Primordial Passage', 'Mont Gendarme Front Entrance')[1])
+			}}""".format(entranceEvent[entranceList["PP MG Entrance"]]["load"], entranceEvent[entranceList["PP MG Entrance"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP4107) //entrance from Mountain Pinnacle Trail - Mont Gendarme Back Entrance
@@ -221,7 +207,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Mountain Pinnacle Trail', 'Mont Gendarme Back Entrance')[0], getEntrance('Mountain Pinnacle Trail', 'Mont Gendarme Back Entrance')[1])
+			}}""".format(entranceEvent[entranceList["SNA MGAB Entrance"]]["load"], entranceEvent[entranceList["SNA MGAB Entrance"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_F_MP4103) //entrance from Mont Gendarme - Exit to Mountain Pinnacle Trail
@@ -230,7 +216,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Mont Gendarme', 'Exit to Mountain Pinnacle Trail')[0], getEntrance('Mont Gendarme', 'Exit to Mountain Pinnacle Trail')[1])
+			}}""".format(entranceEvent[entranceList["MGAB SNA Exit"]]["load"], entranceEvent[entranceList["MGAB SNA Exit"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP6110) //entrance from Baja Tower - Exit to Towal Highway
@@ -239,7 +225,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Baja Tower', 'Exit to Towal Highway')[0], getEntrance('Baja Tower', 'Exit to Towal Highway')[1])
+			}}""".format(entranceEvent[entranceList["BTLF THBTE Exit"]]["load"], entranceEvent[entranceList["BTLF THBTE Exit"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP6321) //entrance from Towal Highway - Baja Tower Entrance
@@ -248,7 +234,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Towal Highway', 'Baja Tower Entrance')[0], getEntrance('Towal Highway', 'Baja Tower Entrance')[1])
+			}}""".format(entranceEvent[entranceList["BTLF Entrance"]]["load"], entranceEvent[entranceList["BTLF Entrance"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP6204) //entrance from Archeozoic Chasm - Exit to The Ruins of Eternia
@@ -257,7 +243,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Archeozoic Chasm', 'Exit to The Ruins of Eternia')[0], getEntrance('Archeozoic Chasm', 'Exit to The Ruins of Eternia')[1])
+			}}""".format(entranceEvent[entranceList["ACF BTAC Exit"]]["load"], entranceEvent[entranceList["ACF BTAC Exit"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 2 && WORK[WK_MAPNAMENO] == MN_D_MP6361) //entrance from The Ruins of Eternia - Archeozoic Chasm Entrance
@@ -266,7 +252,7 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('The Ruins of Eternia', 'Archeozoic Chasm Entrance')[0], getEntrance('The Ruins of Eternia', 'Archeozoic Chasm Entrance')[1])
+			}}""".format(entranceEvent[entranceList["AC Entrance"]]["load"], entranceEvent[entranceList["AC Entrance"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP6108) //entrance from Valley of Kings - Exit to Valley of Kings - Camp
@@ -275,16 +261,16 @@ def buildEntrances():
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Valley of Kings', 'Exit to Valley of Kings - Camp')[0], getEntrance('Valley of Kings', 'Exit to Valley of Kings - Camp')[1])
+			}}""".format(entranceEvent[entranceList["VOKBD LMB Exit"]]["load"], entranceEvent[entranceList["VOKBD LMB Exit"]]["entry_event"])
 	
 	entranceScript = entranceScript + """
-			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP6341) //entrance from Lodinia Marshland - Lodinia Marshlands Back
+			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP6341) //entrance from Lodinia Marshland - Valley of Kings Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
 				CallFunc("rng:warpmask")
 				LoadArg("{0}")
 				EventCue("{1}",1)	
-			}}""".format(getEntrance('Lodinia Marshland', 'Lodinia Marshlands Back')[0], getEntrance('Lodinia Marshland', 'Lodinia Marshlands Back')[1])
+			}}""".format(entranceEvent[entranceList["LMB VOKBD Entrance"]]["load"], entranceEvent[entranceList["LMB VOKBD Entrance"]]["entry_event"])
     
 	entranceScript = entranceScript + """
 		}
@@ -325,8 +311,8 @@ def buildEntrances():
 			EventCue("{3}",1)
 		}}
 	}}
-	""".format(getEntrance('The Primordial Passage', 'Mont Gendarme Front Entrance')[0], getEntrance('The Primordial Passage', 'Mont Gendarme Front Entrance')[1],\
-			getEntrance('The Ruins of Eternia', 'Archeozoic Chasm Entrance')[0], getEntrance('The Ruins of Eternia', 'Archeozoic Chasm Entrance')[1])
+	""".format(entranceEvent[entranceList["PP MG Entrance"]]["load"], entranceEvent[entranceList["PP MG Entrance"]]["entry_event"],\
+			entranceEvent[entranceList["AC Entrance"]]["load"], entranceEvent[entranceList["AC Entrance"]]["entry_event"])
 
 	entranceScript = entranceScript + """
 
@@ -337,7 +323,7 @@ def buildEntrances():
 		CallFunc("rng:warpmask")
 		LoadArg("{0}")
 		EventCue("{1}",1)
-	}}""".format(getEntrance('Temple of the Great Tree', 'Octus Entrance')[0], getEntrance('Temple of the Great Tree', 'Octus Entrance')[1])
+	}}""".format(entranceEvent[entranceList["TGTG OO Entrance"]]["load"], entranceEvent[entranceList["TGTG OO Entrance"]]["entry_event"])
 
 	entranceScript = entranceScript + """
 
@@ -348,7 +334,7 @@ def buildEntrances():
 		CallFunc("rng:warpmask")
 		LoadArg("{0}")
 		EventCue("{1}",1)
-	}}""".format(getEntrance('Octus Overlook', 'Exit to Temple of the Great Tree')[0], getEntrance('Octus Overlook', 'Exit to Temple of the Great Tree')[1])
+	}}""".format(entranceEvent[entranceList["OO TGT Exit"]]["load"], entranceEvent[entranceList["OO TGT Exit"]]["entry_event"])
 
 	entranceScript = entranceScript + """
 

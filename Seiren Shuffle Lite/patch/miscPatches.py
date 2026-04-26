@@ -1,10 +1,9 @@
 import os.path
 import csv
 import sys
-import shared.classr as classr
 import random
 import shared.config as config
-from shared.functions import *
+from ..shared.functions import *
 
 #right now this is only to get rid of some logically problematic beehives but could do more later
 def miscFixes():

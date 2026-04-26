@@ -1,4 +1,4 @@
-from randomizer.crew import *
+from crew import *
 from numpy import float32
 
 #This functions was getting too big with so many flags so I split it into it's own file

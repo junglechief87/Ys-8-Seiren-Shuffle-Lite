@@ -1,5 +1,4 @@
-from shared.functions import * 
-from randomizer.accessLogic import *
+from ..shared.functions import * 
 
 class playthrough:
   def __init__(self):
@@ -78,3 +77,8 @@ class inventory(location):
     self.landmark = location.landmark
     self.entrance = location.entrance
     self.exit = location.exit
+  
+class interceptReward:
+  def __init__(self,stage,rewards):
+    self.stage = stage
+    self.rewards = rewards

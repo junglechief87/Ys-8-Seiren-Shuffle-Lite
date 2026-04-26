@@ -1,4 +1,4 @@
-from shared.functions import getCharacterJoinLv 
+from ..shared.functions import getCharacterJoinLv 
 
 def getCrewFlags(name):
     flag = ''

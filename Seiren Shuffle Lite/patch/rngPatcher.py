@@ -1,16 +1,10 @@
-import csv
-import os.path
-import shared.classr as classr
 import random
-import math
-from shared.functions import *  
-from randomizer.crew import *
-from randomizer.shuffle import *
-from randomizer.gameStartFunctions import *
-from patch.chestPatcher import *
-from randomizer.audioShuffle import *
-from patch.miscPatches import pastDanaFixes, randomizeOctoBosses, newExpMult
-from randomizer.buildEntrances import *
+from ..shared.functions import *  
+from crew import *
+from gameStartFunctions import *
+from chestPatcher import *
+from miscPatches import randomizeOctoBosses, newExpMult
+from buildEntrances import *
 
 #This is essentially the BnB for how this rando works. This script writes a big .scp file, the game's native scripting files, that we call for all randomized locations (as well as some other important functions for a rando)
 #This takes in the game's shuffled list of loctions and then builds the scripts.
@@ -108,7 +102,7 @@ def rngPatcherMain(patch):
     patchFile = patchFile + expMult(patch.settings['experience_multiplier'])
     
     if patch.settings['options']['entranceShuffle']:
-        patchFile = patchFile + buildEntrances()
+        patchFile = patchFile + buildEntrances(patch.dungeon_entrance_randomization)
     with open(rngScriptFile, 'w', encoding = 'Shift-JIS') as fileToPatch: #build the entire rng file from one big string
         fileToPatch.write(patchFile)
         fileToPatch.close()

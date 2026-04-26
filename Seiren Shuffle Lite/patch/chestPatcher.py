@@ -1,7 +1,7 @@
 import os.path
 import csv
-import shared.classr as classr
-from shared.functions import *
+from ..shared.classr import *
+from ..shared.functions import *
 
 #Every chest in Ys can take a script parameter that it calls on open, if there is something in it.
 #We write a series of scripts onto that chest paremeter based on the randos locID, we want the scripts to be exactly 8 character lengths as this is the game's min script length for the chests. 
