@@ -4,7 +4,7 @@ import sys
 import fsspec
 import shared.config as config
 
-repo = fsspec.filesystem("github", org="junglechief87", repo="Seiren-Shuffle-An-Ys-8-Randomizer-", sha='main')
+repo = fsspec.filesystem("github", org="junglechief87", repo="Ys-8-Seiren-Shuffle-Lite", sha='master')
 folders = ['script/',
            'inc/',
            'text/en/']
