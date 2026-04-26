@@ -9,10 +9,10 @@ import os
 import sys
 import subprocess
 from pathlib import Path
-from patch.chestPatcher import cleanChests
-from patch.fileManagement import copyOriginalGameFiles, downloadFiles, restoreOriginalGameFiles
-from patch.rngPatcher import rngPatcherMain
-from patch.miscPatches import AddWarpToFSCCrystal, makeResourceDropsGuaranteed, readFileIntoBuffer, miscFixes
+from .patch.chestPatcher import cleanChests
+from .patch.fileManagement import copyOriginalGameFiles, downloadFiles, restoreOriginalGameFiles
+from .patch.rngPatcher import rngPatcherMain
+from .patch.miscPatches import AddWarpToFSCCrystal, readFileIntoBuffer, miscFixes, makeResourceDropsGuaranteed
 import shared.config as config
 # Import file management functions
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'patch'))
@@ -240,7 +240,7 @@ class CommandsFrame(ctk.CTkFrame):
             messagebox.showinfo("Patching", "Starting patch process...\nThis may take a moment.")
             
             # Backup original game files if not already backed up
-            backup_dir = os.path.join(os.path.dirname(), 'Original Game Files')
+            backup_dir = os.path.join(os.path.dirname(config.executable_directory), 'Original Game Files')
             if not os.path.exists(backup_dir):
                 messagebox.showinfo("Backup", "Creating backup of original game files...")
                 copyOriginalGameFiles()
@@ -312,7 +312,7 @@ class CommandsFrame(ctk.CTkFrame):
             messagebox.showerror("Error", f"Seed generation failed: {str(e)}")
 
     def launchGame(self):
-        executable_path = self.master.executable_frame.get_path()
+        executable_path = config.executable_path
         if executable_path and os.path.exists(executable_path):
             try:
                 subprocess.Popen(executable_path)

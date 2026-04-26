@@ -3,6 +3,7 @@ import os
 import sys
 from collections import defaultdict
 import csv
+import shared.config as config
 
 # Bulletin board character portraits
 PORTRAITS = [
@@ -378,7 +379,7 @@ def format_memo_hint(itemName, quantity, hintNumber, isFoolish, isRequired, char
 # This function is responsible for writing the hints on the quest.csv file to display them in the bulletin board. If hints are off it will Clear the hints from the file
 def generateHint(hints, parameters, hintType):
     random.seed(parameters.seed)
-    exe_dir = os.path.dirname(sys.executable)
+    exe_dir = config.executable_directory
     if hintType == 'quest':
         csv_path = os.path.join(exe_dir, 'text', 'en', 'quest.csv')
         ind = '[QUEST]'

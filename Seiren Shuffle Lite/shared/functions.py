@@ -5,11 +5,9 @@ import shared.config as config
 
 encode = "utf-8"
 sourceScript = "rng"
-
 _cache = None  # Global variable for lazy loading
-    
 def getLocations():
-    with open(os.path.join(config.executable_directory, "database/location.csv"), encoding=encode) as locDB:
+    with open(os.path.join(config.current_directory, "database/location.csv"), encoding=encode) as locDB:
         
         locRows = csv.DictReader(locDB)
         locations = []
@@ -43,7 +41,7 @@ def getLocations():
 #def getItems:
 
 def getIcon(itemID):
-    with open(os.path.join(config.executable_directory, "database/itemTable.csv"), encoding=encode) as itemDB:
+    with open(os.path.join(config.current_directory, "database/itemTable.csv"), encoding=encode) as itemDB:
         itemRows = csv.DictReader(itemDB) 
         for itemRow in itemRows:
             if int(itemRow['ID']) == itemID:
@@ -52,7 +50,7 @@ def getIcon(itemID):
                 return icon
 
 def getSkillInfo(itemName):
-    with open(os.path.join(config.executable_directory, "database/skillTable.csv"), encoding=encode) as skillDB:
+    with open(os.path.join(config.current_directory, "database/skillTable.csv"), encoding=encode) as skillDB:
         skillRows = csv.DictReader(skillDB) 
         for skillRow in skillRows:
             if skillRow['skillName'] == itemName:
@@ -95,9 +93,6 @@ def getLocFile(mapID, fileType):
                     return os.path.join(root, file)
     else:
         raise Exception('Must specify either script or map for file retrieval or specify correct mapID')
-
-def getExecutable():
-    return config.executable_path
 
 def buildLocScripts(locID, source):
 
@@ -172,7 +167,7 @@ def copyLocationToNewLoc(location):
     return classr.location(locID,mapID,locRegion,locName,mapCheckID,event,itemID,itemName,quantity,progression,nice,party,crew,item,script,skill,landmark,entrance,exit)
 
 def getIntRewards():
-    with open(os.path.join(config.executable_directory, "database/interceptionRewards.csv"), encoding=encode) as rewardDB:
+    with open(os.path.join(config.current_directory, "database/interceptionRewards.csv"), encoding=encode) as rewardDB:
         
         rewardRows = csv.DictReader(rewardDB)
         intRewards = []

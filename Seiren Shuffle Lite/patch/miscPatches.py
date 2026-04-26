@@ -6,8 +6,6 @@ import random
 import shared.config as config
 from shared.functions import *
 
-YS8 = getExecutable()
-
 #right now this is only to get rid of some logically problematic beehives but could do more later
 def miscFixes():
     deleteHives = ['mons47','mons48','mons49']
@@ -28,7 +26,7 @@ def miscFixes():
     writeBufferIntoFile(locFile,fileBytes)
     
     #executable patches
-    exeBytes = readFileIntoBuffer(YS8)
+    exeBytes = readFileIntoBuffer(config.executable_path)
 
     """
     # remove exp level scaling: old but might be useful in the future so commenting it out
@@ -42,7 +40,7 @@ def miscFixes():
     exeBytes[0x28FD0E:0x28FD16] = [0xF3,0x0F,0x10,0x05,0xCA,0x83,0x31,0x00]
     exeBytes[0x29B698:0x29B6A0] = [0xF3,0x0F,0x10,0x05,0x40,0xCA,0x30,0x00]
     
-    writeBufferIntoFile(YS8,exeBytes)
+    writeBufferIntoFile(config.executable_path,exeBytes)
     
     # speeds up respawn time of exploding plants to reduce downtime in Oceanus fight
     explosivePlant = os.path.join(config.executable_directory, "chr/enemy/m0660/m0660.mtb")

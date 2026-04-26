@@ -3,14 +3,13 @@ import csv
 import shared.classr as classr
 from shared.functions import *
 
-locations = getLocations() #putting location at module level to make it easier to access
-
 #Every chest in Ys can take a script parameter that it calls on open, if there is something in it.
 #We write a series of scripts onto that chest paremeter based on the randos locID, we want the scripts to be exactly 8 character lengths as this is the game's min script length for the chests. 
 #This guarantees we don't overwrite important bytes.
 #All other random locations are handled in the game's script .scp files. By reworking the chests like this we can handle all randomization via calls to our own .scp file.
 #This allows for greater flexibility as it lets us use whatever we want from the games myriad of prebuilt functions and scripting tools on our chests themselves.
 def cleanChests():
+    locations = getLocations()
     itemIDOffset = 9
     quatityOffset = 15
     scriptOffset = 107
@@ -78,6 +77,7 @@ def clearBytes(byteArray,startOffset,clearType):
 
 #places item in the chest
 def fillChest(location,itemID,quantity):
+    locations = getLocations()
     itemIDOffset = 9
     quantityOffset = 15
     jingleOffset = 27

@@ -1,10 +1,10 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 a = Analysis(
-    ['../Seiren Shuffle.pyw'],
+    ['../Seiren Shuffle Lite.py'],
     pathex=[],
     binaries=[('../shared/ysR Logo.ico','shared/')],
-    datas=[('../shared/','shared/'),('../randomizer/','randomizer/'),('../patch/','patch/')],
+    datas=[('../shared/','shared/'),('../patch/','patch/')],
     hiddenimports=['soundfile','fsspec'],
     hookspath=[],
     hooksconfig={},
