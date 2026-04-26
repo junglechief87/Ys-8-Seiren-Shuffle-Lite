@@ -1,4 +1,4 @@
-from ..shared.functions import * 
+from shared.functions import * 
 
 class playthrough:
   def __init__(self):

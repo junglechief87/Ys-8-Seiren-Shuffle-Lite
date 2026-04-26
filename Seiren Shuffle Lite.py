@@ -9,10 +9,10 @@ import os
 import sys
 import subprocess
 from pathlib import Path
-from .patch.chestPatcher import cleanChests
-from .patch.fileManagement import copyOriginalGameFiles, downloadFiles, restoreOriginalGameFiles
-from .patch.rngPatcher import rngPatcherMain
-from .patch.miscPatches import AddWarpToFSCCrystal, readFileIntoBuffer, miscFixes, makeResourceDropsGuaranteed
+from patch.chestPatcher import cleanChests
+from patch.fileManagement import copyOriginalGameFiles, downloadFiles, restoreOriginalGameFiles
+from patch.rngPatcher import rngPatcherMain
+from patch.miscPatches import AddWarpToFSCCrystal, readFileIntoBuffer, miscFixes, makeResourceDropsGuaranteed
 import shared.config as config
 # Import file management functions
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'patch'))

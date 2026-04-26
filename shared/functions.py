@@ -1,6 +1,6 @@
 import os.path
 import csv
-from ..shared.classr import *
+from shared.classr import *
 import shared.config as config
 
 encode = "utf-8"

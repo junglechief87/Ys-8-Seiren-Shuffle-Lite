@@ -1,10 +1,10 @@
 import random
-from ..shared.functions import *  
-from crew import *
-from gameStartFunctions import *
-from chestPatcher import *
-from miscPatches import randomizeOctoBosses, newExpMult
-from buildEntrances import *
+from shared.functions import *  
+from patch.crew import *
+from patch.gameStartFunctions import *
+from patch.chestPatcher import *
+from patch.miscPatches import randomizeOctoBosses, newExpMult
+from patch.buildEntrances import *
 
 #This is essentially the BnB for how this rando works. This script writes a big .scp file, the game's native scripting files, that we call for all randomized locations (as well as some other important functions for a rando)
 #This takes in the game's shuffled list of loctions and then builds the scripts.
