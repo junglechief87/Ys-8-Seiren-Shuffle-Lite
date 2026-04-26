@@ -82,27 +82,27 @@ def rngPatcherMain(patch):
     patchFile = patchFile + bossScalingScript
 
     if patch.settings['options']['final_boss_access'] == 2:
-        patchFile = patchFile + buildPsyches(patch.item_map, patch.settings)
+        patchFile = patchFile + buildPsyches(patch.settings)
     if patch.settings['options']['former_sanctuary_crypt'] == 1:
         patchFile = patchFile + buildFSCWarp()
 
-    patchFile = patchFile + interceptionHandler(patch.settings)
+    patchFile = patchFile + interceptionHandler(patch.settings['options'])
     patchFile = patchFile + jewelTrade(patch.item_map)
     patchFile = patchFile + talkHints(patch.item_map)
-    patchFile = patchFile + octusGoal(patch.settings)
-    patchFile = patchFile + goal(patch.settings)
+    patchFile = patchFile + octusGoal(patch.settings['options'])
+    patchFile = patchFile + goal(patch.settings['options'])
 
-    if patch.settings['options']['openOctusPaths']:
+    if patch.settings['options']['octus_paths_opened'] == 1:
         patchFile = patchFile + octoBosses(patch.settings)
     else:
         #this is to restore the original values
         randomizeOctoBosses(patch.settings)
     
-    patchFile = patchFile + endingHandler(patch.settings)
-    patchFile = patchFile + expMult(patch.settings['experience_multiplier'])
+    patchFile = patchFile + endingHandler(patch.settings['options'])
+    patchFile = patchFile + expMult(patch.settings['options'])
     
-    if patch.settings['options']['entranceShuffle']:
-        patchFile = patchFile + buildEntrances(patch.dungeon_entrance_randomization)
+    if patch.settings['options']['dungeon_entrance_shuffle'] == 1:
+        patchFile = patchFile + buildEntrances(patch.dungeon_entrance_randomization, patch.settings['options'])
     with open(rngScriptFile, 'w', encoding = 'Shift-JIS') as fileToPatch: #build the entire rng file from one big string
         fileToPatch.write(patchFile)
         fileToPatch.close()
@@ -638,7 +638,7 @@ def bossScaling():
 #GF_TBOX_DUMMY112 is our flag for release the psyches so these won't get called outside this game mode.
 #New version of this script hacks the checkpoint in Castaway Village and uses the boss flags for activation of the custom shop
 #The boss menu is essentially a custom shop, it uses Dina's jewel trade menu as a base, there are two version of it depending on game mode
-def buildPsyches(options):
+def buildPsyches(settings):
     class PsycheBoss:
         def __init__(self, mapLoad, eventCue, mapID, characterID):
             self.mapLoad = mapLoad
@@ -704,7 +704,7 @@ def buildPsyches(options):
         
         //--------------------------------------------------------------------------------------
     """
-    rewards = options['psyche_rewards']
+    rewards = settings['psyche_rewards']
     menuAdd = 10
     menuAddList = []
     menuEnableList = []
@@ -715,7 +715,7 @@ def buildPsyches(options):
     # this hurts readability a little since these are out of order from when they're
     # inserted into the boss checkpoint function but it makes it much easier to manage since we only need one loop instead of three.
     # this will also allow for any number of psyche bosses or combinations.
-    for i, (psyche, accessBoss) in enumerate(options['psyche_map'].items()):
+    for i, (psyche, accessBoss) in enumerate(settings['psyche_map'].items()):
         if i != 0:
             condition = "else if"
         bossCheckpoint = bossCheckpoint + """
@@ -1465,8 +1465,8 @@ function "goal"
 # ==========================================================================================================
 #  Randomize Octus Bosses and levels, also make them more rewarding.
 # ==========================================================================================================
-def octoBosses(options):
-    random.seed(options['seed'])
+def octoBosses(settings):
+    random.seed(settings['seed'])
     octoBossAliases = ['"ev_mons01"','"ev_mons02"','"ev_mons03"','"ev_mons04"','"ev_mons05"','"ev_mons06"','"ev_mons07"','"ev_mons08"','"ev_mons09"','"ev_mons10"']
     #octus bosses exp and HP go up based on bosses leading into the end game. This is to help prep for the final boss.
     #the HP mod is just a percentage of a rough approcimation of the highest level the final boss could get to if unlucky.
@@ -1481,7 +1481,7 @@ def octoBosses(options):
         script = script + '\t\tSetChrWorkGroup(' + boss + ', CWK_EXPMUL, ' + str(EXPMod) + 'f)\n'
     script = script + '\t}\n'
 
-    randomizeOctoBosses(options)
+    randomizeOctoBosses(settings)
 
     return script
 

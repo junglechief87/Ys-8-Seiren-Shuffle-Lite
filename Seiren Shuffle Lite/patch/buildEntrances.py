@@ -27,9 +27,13 @@ entranceEvent =	{
         "Lodinia Marshlands Back": {'load': 'map/mp6108/mp6108.arg', 'entry_event': 'rng:6108_entry'},
         "Valley of Kings Before Door": {'load': 'map/mp6341/mp6341.arg', 'entry_event': 'rng:6341_entry'},
         "Waterdrop Cave": {'load': 'map/mp7301/mp7301.arg', 'entry_event': 'rng:7301_entry'},
+		"Silent Tower Entrance": {'load': 'map/mp2104/mp2104.arg', 'entry_event': 'rng:2104_entry'},
+		"Silent Tower": {'load': 'map/mp6411/mp6411.arg', 'entry_event': 'rng:6411_entry'},
+		"Former Sanctuary Crypt Front": {'load': 'map/mp6511/mp6511.arg', 'entry_event': 'rng:6511_entry'},
+		"Ruins of Eternia Hidden Passage": {'load': 'map/mp6211/mp6211.arg', 'entry_event': 'rng:6211_entry'},
     }
 
-def buildEntrances(entranceList):
+def buildEntrances(entranceList, options):
 	print('buildEntrances')
 	# A note on naming, entering a dungeon is always labeled an entrance, leaving a dungeon to a field is labled an exit
 	entranceScript ="""
@@ -273,6 +277,44 @@ def buildEntrances(entranceList):
 			}}""".format(entranceEvent[entranceList["LMB VOKBD Entrance"]]["load"], entranceEvent[entranceList["LMB VOKBD Entrance"]]["entry_event"])
     
 	entranceScript = entranceScript + """
+			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP2104) //entrance from Silent Tower - Exit to Near Silent Tower
+			{{
+				SetFlag(SF_LASTENTRY_NO, -2)
+				CallFunc("rng:warpmask")
+				LoadArg("{0}")
+				EventCue("{1}",1)	
+			}}""".format(entranceEvent[entranceList["STE OST Exit"]]["load"], entranceEvent[entranceList["STE OST Exit"]]["entry_event"])
+	
+	entranceScript = entranceScript + """
+			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP6411) //entrance from Near Silent Tower - Silent Tower Entrance
+			{{
+				SetFlag(SF_LASTENTRY_NO, -2)
+				CallFunc("rng:warpmask")
+				LoadArg("{0}")
+				EventCue("{1}",1)	
+			}}""".format(entranceEvent[entranceList["ST Entrance"]]["load"], entranceEvent[entranceList["ST Entrance"]]["entry_event"])
+	
+
+	if options['former_sanctuary_crypt'] == 1:
+		entranceScript = entranceScript + """
+				if(FLAG[SF_LASTENTRY_NO] == 2 && WORK[WK_MAPNAMENO] == MN_F_MP6211) //entrance from FSC - Exit to Central Stupa
+				{{
+					SetFlag(SF_LASTENTRY_NO, -2)
+					CallFunc("rng:warpmask")
+					LoadArg("{0}")
+					EventCue("{1}",1)	
+				}}""".format(entranceEvent[entranceList["FSCF ROEHP Exit"]]["load"], entranceEvent[entranceList["FSCF ROEHP Exit"]]["entry_event"])
+		
+		entranceScript = entranceScript + """
+				if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP6511) //entrance from Central Stupa - FSC Entrance
+				{{
+					SetFlag(SF_LASTENTRY_NO, -2)
+					CallFunc("rng:warpmask")
+					LoadArg("{0}")
+					EventCue("{1}",1)	
+				}}""".format(entranceEvent[entranceList["FSC Entrance"]]["load"], entranceEvent[entranceList["FSC Entrance"]]["entry_event"])
+	
+	entranceScript = entranceScript + """
 		}
 	}
 	"""
@@ -313,6 +355,26 @@ def buildEntrances(entranceList):
 	}}
 	""".format(entranceEvent[entranceList["PP MG Entrance"]]["load"], entranceEvent[entranceList["PP MG Entrance"]]["entry_event"],\
 			entranceEvent[entranceList["AC Entrance"]]["load"], entranceEvent[entranceList["AC Entrance"]]["entry_event"])
+
+	if options['former_sanctuary_crypt'] == 1:
+		entranceScript = entranceScript + """
+		function "disableRuinsOfEterniaCentralStupa"
+		{{
+			if (!FLAG[SF_SYS_CLEARED] || !FLAG[GF_SUBEV_PAST_07_CLEAR])
+			{{
+				SetStopFlag(STOPFLAG_SIMPLEEVENT2)
+				TalkPopup("UNDEF",0,3,STOPPER_PPOSX,STOPPER_PPOSY,0)
+				{{
+					"#7CA Mysterious Presence Stops Your Progress."
+				}}
+				WaitPrompt()
+				WaitCloseWindow()
+				ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
+				LoadArg("{4}")
+				EventCue("{5}",1)
+			}}
+		}}
+		""".format(entranceEvent[entranceList["FSC Entrance"]]["load"], entranceEvent[entranceList["FSC Entrance"]]["entry_event"])
 
 	entranceScript = entranceScript + """
 
@@ -849,6 +911,115 @@ def buildEntrances(entranceList):
 		ResetPartyPos()
 		ResetFollowPoint()
 		RotateCamera(0, 270.0f, 0)				// 角度
+		CallFunc("system:camera_reset")
+		ResetStopFlag(STOPFLAG_EVENT)
+		FadeIn(FADE_BLACK, FADE_FAST)
+	}
+
+	function "6411_entry"
+	{
+		VisualName("visual/mapname/mn_6411.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//浸食谷
+		SetFlag( TF_MAPNAME_SHOWN, 1 )				// 地名表示した（テンポラリ）
+		SetStopFlag(STOPFLAG_EVENT)
+		RestoreEventState()
+		ReleaseEventPartyChr()
+		ResetMapParam(-1)
+		CallFunc("6411:init")
+		SetChrPos("LEADER",0.0f,23.3f,16.1f)
+		Turn("LEADER",180.0f,360.0f)
+		ResetPartyPos()
+		ResetFollowPoint()
+		RotateCamera(0, 0.0f, 0)				// 角度
+		CallFunc("system:camera_reset")
+		ResetStopFlag(STOPFLAG_EVENT)
+		FadeIn(FADE_BLACK, FADE_FAST)
+	}
+	
+	function "2104_entry"
+	{
+		if (!FLAG[GF_SUBEV_2104_REMOVE_SAND])
+		{
+			
+			if(WORK[WK_NPCNUM] >= 24 )
+			{
+				EventCue("mp2104:SubEV_Sien16")
+			}
+			else 
+			{
+				SetStopFlag(STOPFLAG_SIMPLEEVENT2)
+				TalkPopup("UNDEF",0,3,STOPPER_PPOSX,STOPPER_PPOSY,0)
+				{
+					"#7C A towering pile of earth and debris"
+					"#7C is blocking the exit."
+				}
+				WaitPrompt()
+				WaitCloseWindow()
+				ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
+				LoadArg("map/mp6321/mp6321.arg")
+				EventCue("rng:6321_entry",1)
+
+			}	
+		}
+		else
+		{
+			VisualName("visual/mapname/mn_2104.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//浸食谷
+			SetFlag( TF_MAPNAME_SHOWN, 1 )				// 地名表示した（テンポラリ）
+			SetStopFlag(STOPFLAG_EVENT)
+			RestoreEventState()
+			ReleaseEventPartyChr()
+			ResetMapParam(-1)
+			CallFunc("2104:init")
+			SetChrPos("LEADER", 1038.85f,-339.96f,72.75f)
+			Turn("LEADER",0.0f,360.0f)
+			ResetPartyPos()
+			ResetFollowPoint()
+			RotateCamera(0, 180.0f, 0)				// 角度
+			CallFunc("system:camera_reset")
+			ResetStopFlag(STOPFLAG_EVENT)
+			FadeIn(FADE_BLACK, FADE_FAST)
+		}
+	}
+	
+	function "6211_entry"
+	{
+		if (!FLAG[SF_SYS_CLEARED] || !FLAG[GF_SUBEV_PAST_07_CLEAR])
+		{
+			CallFunc("rng:disableRuinsOfEterniaCentralStupa")
+		}
+		else
+		{
+			VisualName("visual/mapname/mn_6201.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//浸食谷
+			SetFlag( TF_MAPNAME_SHOWN, 1 )				// 地名表示した（テンポラリ）
+			SetStopFlag(STOPFLAG_EVENT)
+			RestoreEventState()
+			ReleaseEventPartyChr()
+			ResetMapParam(-1)
+			CallFunc("mp6211:init")
+			SetChrPos("LEADER", -426.75f, 950.0f, 10.57f)
+			Turn("LEADER", 80.23f, 360.0f)
+			ResetPartyPos()
+			ResetFollowPoint()
+			RotateCamera(0, 100.0f, 0)				// 角度
+			CallFunc("system:camera_reset")
+			ResetStopFlag(STOPFLAG_EVENT)
+			FadeIn(FADE_BLACK, FADE_FAST)
+		}
+	}
+	
+	function "6511_entry"
+	{
+		VisualName("visual/mapname/mn_6511.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//浸食谷
+		SetFlag( TF_MAPNAME_SHOWN, 1 )				// 地名表示した（テンポラリ）
+		SetStopFlag(STOPFLAG_EVENT)
+		RestoreEventState()
+		ReleaseEventPartyChr()
+		ResetMapParam(-1)
+		CallFunc("6511:init")
+		SetChrPos("LEADER",-30.8f,-71.98f,24.5f)
+		Turn("LEADER",90.0f,360.0f)
+		ResetPartyPos()
+		ResetFollowPoint()
+		RotateCamera(0, 90.0f, 0)				// 角度
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)

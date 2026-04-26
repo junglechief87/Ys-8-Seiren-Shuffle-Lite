@@ -152,7 +152,7 @@ class APPatchFileFrame(ctk.CTkFrame):
     def browsePatchFile(self):
         file_path = filedialog.askopenfilename(
             title="Select AP Patch File",
-            filetypes=(("Patch Files", "*.apbp"), ("All Files", "*.*")),
+            filetypes=(("Patch Files", "*.dana"), ("All Files", "*.*")),
         )
         if file_path:
             self.patch_file_path = file_path
@@ -262,7 +262,7 @@ class CommandsFrame(ctk.CTkFrame):
             patch_path = Path(config.patch_file_path)
             
             # Check if patch file exists and is readable
-            if patch_path.suffix.lower() == '.apbp':
+            if patch_path.suffix.lower() == '.dana':
                 # AP patch files are typically archives or contain patch instructions
                 # For now, we'll document that this needs AP-specific patch application
                 messagebox.showinfo(
@@ -273,7 +273,7 @@ class CommandsFrame(ctk.CTkFrame):
                 messagebox.showwarning(
                     "Warning",
                     "Patch file format may not be recognized.\n"
-                    "Ensure this is a valid AP patch file (.apbp)"
+                    "Ensure this is a valid AP patch file (.dana)"
                 )
                 
         except Exception as e:

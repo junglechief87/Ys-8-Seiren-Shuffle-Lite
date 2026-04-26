@@ -48,8 +48,8 @@ def miscFixes():
 
     writeBufferIntoFile(explosivePlant,plantRespawn)
 
-def randomizeOctoBosses(options):
-    random.seed(options['seed'])
+def randomizeOctoBosses(settings):
+    random.seed(settings['seed'])
     octus1 = getLocFile('mp6301','map')
     octus2 = getLocFile('mp6302','map')
     octus3 = getLocFile('mp6303','map')
@@ -78,7 +78,7 @@ def randomizeOctoBosses(options):
     octus1Mons = ['ev_mons09','ev_mons10']
     for index,octoMon in enumerate(octus1Mons):
         octoMonLoc = octus1bytes.find(octoMon.encode('utf-8'))
-        if options.octus_paths_opened == 1:
+        if settings['options']['octus_paths_opened'] == 1:
             selectedOctoMon = random.choice(list(octoMonData.items()))
         else:
             #this is to restore the original values
@@ -97,7 +97,7 @@ def randomizeOctoBosses(options):
     octus2Mons = ['ev_mons01','ev_mons02','ev_mons03']
     for index,octoMon in enumerate(octus2Mons):
         octoMonLoc = octus2bytes.find(octoMon.encode('utf-8'))
-        if options.octus_paths_opened == 1:
+        if settings['options']['octus_paths_opened'] == 1:
             selectedOctoMon = random.choice(list(octoMonData.items()))
         else:
             #this is to restore the original values
@@ -116,7 +116,7 @@ def randomizeOctoBosses(options):
     octus3Mons = ['ev_mons04','ev_mons05','ev_mons06']
     for index,octoMon in enumerate(octus3Mons):
         octoMonLoc = octus3bytes.find(octoMon.encode('utf-8'))
-        if options.octus_paths_opened == 1:
+        if settings['options']['octus_paths_opened'] == 1:
             selectedOctoMon = random.choice(list(octoMonData.items()))
         else:
             #this is to restore the original values
@@ -135,7 +135,7 @@ def randomizeOctoBosses(options):
     octus4Mons = ['ev_mons07','ev_mons08']
     for index,octoMon in enumerate(octus4Mons):
         octoMonLoc = octus4bytes.find(octoMon.encode('utf-8'))
-        if options.octus_paths_opened == 1:
+        if settings['options']['octus_paths_opened'] == 1:
             selectedOctoMon = random.choice(list(octoMonData.items()))
         else:
             #this is to restore the original values
