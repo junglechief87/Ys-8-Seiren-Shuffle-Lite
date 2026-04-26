@@ -2655,7 +2655,7 @@ enum {
 	GF_TBOX_DUMMY115, //flag for recipes come with ingredients
 	GF_TBOX_DUMMY116, //open all diary entries
 	GF_TBOX_DUMMY117, //store AP seed
-	GF_TBOX_DUMMY118, 
+	GF_TBOX_DUMMY118, //store exp multiplier
 	GF_TBOX_DUMMY119, 
 	GF_TBOX_DUMMY120, 
 	GF_TBOX_DUMMY121, 

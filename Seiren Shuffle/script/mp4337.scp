@@ -2855,6 +2855,8 @@ function "Speedrun_Missy"
 		WaitPrompt()
 		WaitCloseWindow()
 
+		CallFunc("rng:foodRewardPreview")
+
 		////‘I‘ðŽˆ
 		//SetFlag(TF_MENU_SELECT,0)
 		//MenuReset()

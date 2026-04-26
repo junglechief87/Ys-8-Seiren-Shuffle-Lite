@@ -16084,6 +16084,8 @@ function "Talk_Speedrun_Aaron"
 
 	LookChr("this", "LEADER")
 
+	CallFunc("rng:mapRewardPreview")
+
 	if (rand() % 100 < 50)
 	{
 		PlayVoice(Y8V_3841,"Aaron",100)	//‚»‚ñ‚¶‚áŒ©‚¹‚Ä‚à‚ç‚¤‚ºB
@@ -22991,6 +22993,8 @@ function "Talk_Speedrun_Austen"
 		}
 		WaitPrompt()
 		WaitCloseWindow()
+
+		CallFunc("rng:discoveryRewardPreview1")
 	}
 	//	Ë‚P‚Q‰ÓŠ”­Œ©ƒCƒxƒ“ƒg‚ðŒ©‚½A‚©‚ÂA‚Q‚S^‚Q‚S–¢–ž‚Ìê‡
 	else
@@ -23004,6 +23008,8 @@ function "Talk_Speedrun_Austen"
 		}
 		WaitPrompt()
 		WaitCloseWindow()
+
+		CallFunc("rng:discoveryRewardPreview2")
 	}
 	//„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
 }

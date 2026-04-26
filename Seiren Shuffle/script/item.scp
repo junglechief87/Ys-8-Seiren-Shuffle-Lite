@@ -9,77 +9,77 @@
 #include "inc/skilldef.h"
 
 //
-// ï¿½Cï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½gï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½èŽžï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ÌƒXï¿½Nï¿½ï¿½ï¿½vï¿½g
-// ï¿½sï¿½Kï¿½vï¿½ÈƒAï¿½Cï¿½eï¿½ï¿½ï¿½Íï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Ù‚ï¿½ï¿½ï¿½ï¿½yï¿½ï¿½
-// functionï¿½ï¿½ï¿½Ì‹Lï¿½qï¿½ÍƒAï¿½Cï¿½eï¿½ï¿½ï¿½eï¿½[ï¿½uï¿½ï¿½ï¿½iitem.csvï¿½jï¿½Ìuï¿½gï¿½pï¿½ï¿½ï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½gï¿½vï¿½ï¿½ÉÝ’è‚µï¿½Ä‚ï¿½ï¿½é•¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
-// ï¿½iï¿½ï¿½Ys7ï¿½ï¿½ï¿½ï¿½Ì–ï¿½ï¿½cï¿½ÅA[item_]ï¿½{ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½Ôï¿½ï¿½i%03dï¿½jï¿½Å‚ï¿½ï¿½Ä‚Ñoï¿½ï¿½ï¿½Ü‚ï¿½ï¿½Bï¿½j
-// ï¿½ï¿½ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½Ôï¿½ï¿½ï¿½ 3dicon.h ï¿½ï¿½ï¿½Qï¿½Æ‚ï¿½ï¿½Ä‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
+// ƒCƒ“ƒXƒ^ƒ“ƒgƒAƒCƒeƒ€‚â“üŽèŽžƒCƒxƒ“ƒg”­“®‚·‚éƒAƒCƒeƒ€“™‚ÌƒXƒNƒŠƒvƒg
+// •s•K—v‚ÈƒAƒCƒeƒ€‚Í‘‚©‚È‚¢‚Ù‚¤‚ªŒy‚¢
+// function–¼‚Ì‹Lq‚ÍƒAƒCƒeƒ€ƒe[ƒuƒ‹iitem.csvj‚ÌuŽg—pŽžƒXƒNƒŠƒvƒgv—ñ‚ÉÝ’è‚µ‚Ä‚¢‚é•¨‚ð‘‚¢‚Ä‰º‚³‚¢B
+// i¦Ys7Žž‘ã‚Ì–¼Žc‚ÅA[item_]{ƒAƒCƒeƒ€”Ô†i%03dj‚Å‚àŒÄ‚Ño‚¹‚Ü‚·Bj
+// ¦ƒAƒCƒeƒ€”Ô†‚Í 3dicon.h ‚ðŽQÆ‚µ‚Ä‰º‚³‚¢B
 //
-// ï¿½ï¿½ï¿½ï¿½ï¿½ÌƒXï¿½Nï¿½ï¿½ï¿½vï¿½gï¿½Í‘Sï¿½ÄƒAï¿½Cï¿½eï¿½ï¿½ï¿½pï¿½ÌƒTï¿½uï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½Å‹Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÅA
-// ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Åƒï¿½ï¿½Cï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½ÉˆÚsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½ï¿½
-// EventCueï¿½ï¿½ï¿½ß“ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Äƒï¿½ï¿½Cï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½É•Ê‚ÌƒXï¿½Nï¿½ï¿½ï¿½vï¿½gï¿½ï¿½ï¿½Ä‚Ñoï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½Ä‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
+// ‚±‚±‚ÌƒXƒNƒŠƒvƒg‚Í‘S‚ÄƒAƒCƒeƒ€—p‚ÌƒTƒuƒXƒŒƒbƒh‚Å‹N“®‚·‚é‚Ì‚ÅA
+// ƒCƒxƒ“ƒg“™‚ÅƒƒCƒ“ƒXƒŒƒbƒh‚ÉˆÚs‚µ‚½‚¢ê‡‚Í
+// EventCue–½—ß“™‚ðŽg‚Á‚ÄƒƒCƒ“ƒXƒŒƒbƒh‚É•Ê‚ÌƒXƒNƒŠƒvƒg‚ðŒÄ‚Ño‚µ‚È‚¨‚µ‚Ä‰º‚³‚¢B
 //
-// ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ÍAUseItemï¿½Rï¿½}ï¿½ï¿½ï¿½hï¿½Åsï¿½ï¿½ï¿½Ü‚ï¿½ï¿½Bï¿½iï¿½ï¿½ï¿½ï‚µï¿½È‚ï¿½ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½Ìê‡ï¿½AUseItemï¿½ï¿½ï¿½Ä‚Ñoï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï‚µï¿½Ü‚ï¿½ï¿½ï¿½j
+// ƒAƒCƒeƒ€‚ÌÁ”ï‚ÍAUseItemƒRƒ}ƒ“ƒh‚Ås‚¢‚Ü‚·BiÁ”ï‚µ‚È‚¢ƒAƒCƒeƒ€‚Ìê‡AUseItem‚ðŒÄ‚Ño‚µ‚Ä‚àÁ”ï‚µ‚Ü‚¹‚ñj
 //
 
 /////////////////////////////////////
-// ï¿½ñ•œ–ï¿½n
+// ‰ñ•œ–òŒn
 function "it_pt1"
 {
 	SetFlag(TF_MENU_SELECT2, 1)
 	if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
 	{
 		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-		YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+		YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½|ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½iHP 60% ï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// ƒ|[ƒVƒ‡ƒ“‚PiHP 60% ‰ñ•œj
 		HP_Heal( this , (this.CHRWORK[CWK_MAXHP] * 0.6f))
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
 		if (this.CHRWORK[CWK_CHRID] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if (this.CHRWORK[CWK_CHRID] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if (this.CHRWORK[CWK_CHRID] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if (this.CHRWORK[CWK_CHRID] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if (this.CHRWORK[CWK_CHRID] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else if (this.CHRWORK[CWK_CHRID] == DANA)
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_HEALSOLO_01, 1)
 
-		if(!FLAG[SF_INFERNO])	//INFERNOï¿½Å‚Í‹ó‚«•rï¿½cï¿½ï¿½È‚ï¿½
+		if(!FLAG[SF_INFERNO])	//INFERNO‚Å‚Í‹ó‚«•rŽc‚ç‚È‚¢
 		{
 			Wait(5)
 			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
-			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½ï¿½B" , 0 , 0 )
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "‚ªŽc‚Á‚½B" , 0 , 0 )
 			WaitPrompt()
 			WaitCloseWindow()
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_HEALSOLO_01)
 //		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
@@ -91,55 +91,55 @@ function "it_pt2"
 	if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
 	{
 		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-		YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+		YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½|ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½iHP 100% ï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// ƒ|[ƒVƒ‡ƒ“‚QiHP 100% ‰ñ•œj
 		HP_Heal( this , (this.CHRWORK[CWK_MAXHP]))
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
 		if (this.CHRWORK[CWK_CHRID] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if (this.CHRWORK[CWK_CHRID] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if (this.CHRWORK[CWK_CHRID] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if (this.CHRWORK[CWK_CHRID] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if (this.CHRWORK[CWK_CHRID] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else if (this.CHRWORK[CWK_CHRID] == DANA)
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_HEALSOLO_02, 1)
-		if(!FLAG[SF_INFERNO])	//INFERNOï¿½Å‚Í‹ó‚«•rï¿½cï¿½ï¿½È‚ï¿½
+		if(!FLAG[SF_INFERNO])	//INFERNO‚Å‚Í‹ó‚«•rŽc‚ç‚È‚¢
 		{
 			Wait(5)
 			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
-			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½ï¿½B" , 0 , 0 )
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "‚ªŽc‚Á‚½B" , 0 , 0 )
 			WaitPrompt()
 			WaitCloseWindow()
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_HEALSOLO_02)
 //		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
@@ -151,48 +151,48 @@ function "it_old_pt1"
 	if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
 	{
 		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-		YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+		YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½ß‹ï¿½ï¿½Òƒ|ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½iHP 50% ï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// ‰ß‹Ž•Òƒ|[ƒVƒ‡ƒ“‚PiHP 50% ‰ñ•œj
 		HP_Heal( this , (this.CHRWORK[CWK_MAXHP] * 0.5f))
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
 		if (this.CHRWORK[CWK_CHRID] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if (this.CHRWORK[CWK_CHRID] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if (this.CHRWORK[CWK_CHRID] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if (this.CHRWORK[CWK_CHRID] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if (this.CHRWORK[CWK_CHRID] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else if (this.CHRWORK[CWK_CHRID] == DANA)
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_OLD_HEAL01, 1)
-		// ï¿½ß‹ï¿½ï¿½Ò‚Í•rï¿½ï¿½ï¿½cï¿½ï¿½È‚ï¿½
+		// ‰ß‹Ž•Ò‚Í•r‚ªŽc‚ç‚È‚¢
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_OLD_HEAL01)
 //		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
@@ -204,113 +204,113 @@ function "it_old_pt2"
 	if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
 	{
 		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-		YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+		YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½ß‹ï¿½ï¿½Òƒ|ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½iHP 100% ï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// ‰ß‹Ž•Òƒ|[ƒVƒ‡ƒ“‚QiHP 100% ‰ñ•œj
 		HP_Heal( this , (this.CHRWORK[CWK_MAXHP]))
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
 		if (this.CHRWORK[CWK_CHRID] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if (this.CHRWORK[CWK_CHRID] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if (this.CHRWORK[CWK_CHRID] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if (this.CHRWORK[CWK_CHRID] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if (this.CHRWORK[CWK_CHRID] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else if (this.CHRWORK[CWK_CHRID] == DANA)
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_OLD_HEAL02, 1)
-		// ï¿½ß‹ï¿½ï¿½Ò‚Í•rï¿½ï¿½ï¿½cï¿½ï¿½È‚ï¿½
+		// ‰ß‹Ž•Ò‚Í•r‚ªŽc‚ç‚È‚¢
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_OLD_HEAL02)
 //		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "HealVoice"//ï¿½ñ•œƒ{ï¿½Cï¿½X
+function "HealVoice"//‰ñ•œƒ{ƒCƒX
 {
 	if (this.CHRWORK[CWK_CHRID] == ADOL)
 	{
-		PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+		PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 	}
 	else if (this.CHRWORK[CWK_CHRID] == LAXIA)
 	{
-		PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+		PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 	}
 	else if (this.CHRWORK[CWK_CHRID] == SAHAD)
 	{
-		PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+		PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 	}
 	else if (this.CHRWORK[CWK_CHRID] == HUMMEL)
 	{
-		PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+		PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 	}
 	else if (this.CHRWORK[CWK_CHRID] == RICOTTA)
 	{
-		PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+		PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 	}
 	else if (this.CHRWORK[CWK_CHRID] == DANA)
 	{
-		PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+		PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 	}
 }
 
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½n
+// •œŠˆ–òŒn
 function "it_res1"
 {
 	SetFlag(TF_MENU_SELECT2, 1)
 	if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
 	{
 		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-		YesNoMenu(TF_MENU_SELECT2,"ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+		YesNoMenu(TF_MENU_SELECT2,"‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½iï¿½Pï¿½Oï¿½ï¿½ï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// •œŠˆ–ò‚Pi‚P‚O“‰ñ•œj
 		HP_ORecover( this , (this.CHRWORK[CWK_MAXHP] * 0.1f))
 		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_RESSURECT_01, 1)
-		if(!FLAG[SF_INFERNO])	//INFERNOï¿½Å‚Í‹ó‚«•rï¿½cï¿½ï¿½È‚ï¿½
+		if(!FLAG[SF_INFERNO])	//INFERNO‚Å‚Í‹ó‚«•rŽc‚ç‚È‚¢
 		{
 			Wait(5)
 			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
-			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½ï¿½B" , 0 , 0 )
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "‚ªŽc‚Á‚½B" , 0 , 0 )
 			WaitPrompt()
 			WaitCloseWindow()
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_RESSURECT_01)
 //		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
@@ -322,30 +322,30 @@ function "it_res11"
 	if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
 	{
 		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-		YesNoMenu(TF_MENU_SELECT2,"ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+		YesNoMenu(TF_MENU_SELECT2,"‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½Dï¿½Tï¿½iï¿½Tï¿½Oï¿½ï¿½ï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// •œŠˆ–ò‚PD‚Ti‚T‚O“‰ñ•œj
 		HP_ORecover( this , (this.CHRWORK[CWK_MAXHP] * 0.5f))
 		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_RESSURECT_11, 1)
-		if(!FLAG[SF_INFERNO])	//INFERNOï¿½Å‚Í‹ó‚«•rï¿½cï¿½ï¿½È‚ï¿½
+		if(!FLAG[SF_INFERNO])	//INFERNO‚Å‚Í‹ó‚«•rŽc‚ç‚È‚¢
 		{
 			Wait(5)
 			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
-			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½ï¿½B" , 0 , 0 )
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "‚ªŽc‚Á‚½B" , 0 , 0 )
 			WaitPrompt()
 			WaitCloseWindow()
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_RESSURECT_11)
 //		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
@@ -359,33 +359,33 @@ function "it_res2"
 		!this.CHRWORK[CWK_FREEZE] && !this.CHRWORK[CWK_FLAME] &&  !this.CHRWORK[CWK_BLOODLOSS])
 	{
 		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-		YesNoMenu(TF_MENU_SELECT2,"ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+		YesNoMenu(TF_MENU_SELECT2,"‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½iï¿½Pï¿½Oï¿½Oï¿½ï¿½ï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// •œŠˆ–ò‚Qi‚P‚O‚O“‰ñ•œj
 		HP_ORecover( this , (this.CHRWORK[CWK_MAXHP]))
 
-		//ï¿½ï¿½ÔˆÙï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½
+		//ó‘ÔˆÙí‚àŠ®‘S‰ñ•œ
 		Cure(this, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_RESSURECT_02, 1)
-		if(!FLAG[SF_INFERNO])	//INFERNOï¿½Å‚Í‹ó‚«•rï¿½cï¿½ï¿½È‚ï¿½
+		if(!FLAG[SF_INFERNO])	//INFERNO‚Å‚Í‹ó‚«•rŽc‚ç‚È‚¢
 		{
 			Wait(5)
 			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
-			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½ï¿½B" , 0 , 0 )
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "‚ªŽc‚Á‚½B" , 0 , 0 )
 			WaitPrompt()
 			WaitCloseWindow()
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_RESSURECT_02)
 //		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
@@ -393,68 +393,68 @@ function "it_res2"
 
 function "it_res3"
 {
-	//ï¿½ï¿½ï¿½gï¿½p
+	//–¢Žg—p
 
 
 //	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP] ||
 //		this.CHRWORK[CWK_DARK] || this.CHRWORK[CWK_PARALYZE] || this.CHRWORK[CWK_POISON] ||
 //		this.CHRWORK[CWK_HEAVY] || this.CHRWORK[CWK_FREEZE] || this.CHRWORK[CWK_FLAME])
 //	{
-//		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Rï¿½iï¿½Pï¿½Oï¿½Oï¿½ï¿½ï¿½ñ•œj
+//		// •œŠˆ–ò‚Ri‚P‚O‚O“‰ñ•œj
 //		HP_ORecover( this , (this.CHRWORK[CWK_MAXHP]))
 //
-//		//ï¿½ï¿½ÔˆÙï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½
+//		//ó‘ÔˆÙí‚àŠ®‘S‰ñ•œ
 //		Cure(this, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_HEAVY | EFXFLAG1_FREEZE | EFXFLAG1_FLAME))
 //		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
 //
-//		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+//		// Á”ï‚·‚é
 //		UseItem(ICON3D_US_RESSURECT_02, 1)
 //		Wait(5)
 //		GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
-//		GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½ï¿½B" , 0 , 0 )
+//		GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "‚ªŽc‚Á‚½B" , 0 , 0 )
 //		WaitPrompt()
 //		WaitCloseWindow()
 //	}
 //	else
 //	{
-//		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+//		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 //		SetCantUseItem(ICON3D_US_RESSURECT_02)
 //		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 //	}
 }
 
 /////////////////////////////////////
-// ï¿½dï¿½wï¿½sï¿½qï¿½`ï¿½ï¿½n
+// ‚d‚w‚s‚q‚`–òŒn
 function "it_extra_up1"
 {
 	SetFlag(TF_MENU_SELECT2, 1)
 	if (FLAG[SF_EXPOWER] >= MAX_EXTRA)
 	{
 		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-		YesNoMenu(TF_MENU_SELECT2,"ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+		YesNoMenu(TF_MENU_SELECT2,"‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½dï¿½wï¿½sï¿½qï¿½`ï¿½ï¿½Pï¿½iï¿½Tï¿½Oï¿½ï¿½ï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// ‚d‚w‚s‚q‚`–ò‚Pi‚T‚O“‰ñ•œj
 		AddEX(50.0f)
 		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_EXTRA_01, 1)
-		if(!FLAG[SF_INFERNO])	//INFERNOï¿½Å‚Í‹ó‚«•rï¿½cï¿½ï¿½È‚ï¿½
+		if(!FLAG[SF_INFERNO])	//INFERNO‚Å‚Í‹ó‚«•rŽc‚ç‚È‚¢
 		{
 			Wait(5)
 			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
-			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½ï¿½B" , 0 , 0 )
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "‚ªŽc‚Á‚½B" , 0 , 0 )
 			WaitPrompt()
 			WaitCloseWindow()
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_EXTRA_01)
 //		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
@@ -466,30 +466,30 @@ function "it_extra_up2"
 	if (FLAG[SF_EXPOWER] >= MAX_EXTRA)
 	{
 		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-		YesNoMenu(TF_MENU_SELECT2,"ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+		YesNoMenu(TF_MENU_SELECT2,"‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½dï¿½wï¿½sï¿½qï¿½`ï¿½ï¿½Pï¿½iï¿½Pï¿½Oï¿½Oï¿½ï¿½ï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// ‚d‚w‚s‚q‚`–ò‚Pi‚P‚O‚O“‰ñ•œj
 		AddEX(100.0f)
 		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_EXTRA_02, 1)
-		if(!FLAG[SF_INFERNO])	//INFERNOï¿½Å‚Í‹ó‚«•rï¿½cï¿½ï¿½È‚ï¿½
+		if(!FLAG[SF_INFERNO])	//INFERNO‚Å‚Í‹ó‚«•rŽc‚ç‚È‚¢
 		{
 			Wait(5)
 			GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
-			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½ï¿½B" , 0 , 0 )
+			GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "‚ªŽc‚Á‚½B" , 0 , 0 )
 			WaitPrompt()
 			WaitCloseWindow()
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_EXTRA_01)
 //		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
@@ -497,35 +497,35 @@ function "it_extra_up2"
 
 function "it_extra_up3"
 {
-	//ï¿½ï¿½ï¿½gï¿½p
+	//–¢Žg—p
 }
 
 
 
 
 /////////////////////////////////////
-// ï¿½uï¿½[ï¿½Xï¿½gï¿½ï¿½n
+// ƒu[ƒXƒg–òŒn
 
 function "it_bst1"
 {
-	//ï¿½ï¿½ï¿½gï¿½p
+	//–¢Žg—p
 
 
-//	// ï¿½uï¿½[ï¿½Xï¿½gï¿½Pï¿½iHP 15% ï¿½ñ•œj
+//	// ƒu[ƒXƒg‚PiHP 15% ‰ñ•œj
 //	HP_Heal( this , (this.CHRWORK[CWK_MAXHP] * 0.15f))
 //
-//	// ï¿½^ï¿½_ï¿½ï¿½ï¿½Aï¿½bï¿½v
+//	// —^ƒ_ƒƒAƒbƒv
 //	SetCondition(this, SC_STRUP)
-//	// ï¿½ï¿½_ï¿½ï¿½ï¿½Jï¿½bï¿½g
+//	// ”íƒ_ƒƒJƒbƒg
 //	SetCondition(this, SC_DEFUP)
 //
 //	PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
 //
-//	// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+//	// Á”ï‚·‚é
 //	UseItem(ICON3D_US_BOOST_01, 1)
 //	Wait(5)
 //	GetItem(ICON3D_EV_EMPTY_BOTTLE,1)
-//	GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½ï¿½B" , 0 , 0 )
+//	GetItemMessageExPlus( ICON3D_EV_EMPTY_BOTTLE, 1 , ITEMMSG_SE_BETTER , "‚ªŽc‚Á‚½B" , 0 , 0 )
 //	WaitPrompt()
 //	WaitCloseWindow()
 }
@@ -533,27 +533,27 @@ function "it_bst1"
 
 
 /////////////////////////////////////
-// ï¿½ï¿½ÔˆÙï¿½ñ•œŒn
+// ó‘ÔˆÙí‰ñ•œŒn
 
-//ï¿½ï¿½ï¿½uï¿½ï¿½èŽžï¿½Ô—\ï¿½hï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½dï¿½lï¿½É‚È‚ï¿½ÎAï¿½gï¿½ï¿½ï¿½é‚©ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ï¿½È‚ï¿½
+//¦uˆê’èŽžŠÔ—\–hv‚ª³Ž®Žd—l‚É‚È‚ê‚ÎAŽg‚¦‚é‚©‚Ç‚¤‚©”»’è‚Í‚¢‚ç‚È‚¢
 
 function "it_cure1"
 {
 
 	if (this.CHRWORK[CWK_POISON])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½Å‰ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
+		// “Å‰ñ•œ
 		Cure(this, EFXFLAG1_POISON)
 
 		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_CURE_POISON, 1)
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_CURE_POISON)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -564,19 +564,19 @@ function "it_cure2"
 
 	if (this.CHRWORK[CWK_DARK])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½ÃˆÅ‰ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
+		// ˆÃˆÅ‰ñ•œ
 		Cure(this, EFXFLAG1_DARK)
 
 		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_CURE_DARK, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_CURE_DARK)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -587,19 +587,19 @@ function "it_cure3"
 
 	if (this.CHRWORK[CWK_PARALYZE])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½ï¿½áƒ‰ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
+		// –ƒáƒ‰ñ•œ
 		Cure(this, EFXFLAG1_PARALYZE)
 	
 		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_CURE_PARALYZE, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_CURE_PARALYZE)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -610,19 +610,19 @@ function "it_old_cure3"
 
 	if (this.CHRWORK[CWK_PARALYZE])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½ï¿½áƒ‰ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
+		// –ƒáƒ‰ñ•œ
 		Cure(this, EFXFLAG1_PARALYZE)
 	
 		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_OLD_CURE_PARALYZE, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_OLD_CURE_PARALYZE)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -633,19 +633,19 @@ function "it_cure4"
 
 	if (this.CHRWORK[CWK_FREEZE])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
+		// “€Œ‹‰ñ•œ
 		Cure(this, EFXFLAG1_FREEZE)
 	
 		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_CURE_FREEZE, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_CURE_FREEZE)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -656,19 +656,19 @@ function "it_cure5"
 
 	if (this.CHRWORK[CWK_FLAME])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½Rï¿½Ä‰ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
+		// ”RÄ‰ñ•œ
 		Cure(this, EFXFLAG1_FLAME)
 	
 		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_CURE_FLAME, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_CURE_FLAME)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -679,19 +679,19 @@ function "it_old_cure5"
 
 	if (this.CHRWORK[CWK_FLAME])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½Rï¿½Ä‰ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
+		// ”RÄ‰ñ•œ
 		Cure(this, EFXFLAG1_FLAME)
 	
 		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_OLD_CURE_FLAME, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_OLD_CURE_FLAME)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -702,19 +702,19 @@ function "it_cure6"
 
 	if (this.CHRWORK[CWK_BLOODLOSS] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ñ•œï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
+		// uŽ¸ŒŒv‰ñ•œˆ—
 		Cure(this, EFXFLAG1_BLOOD_LOSS)
 	
 		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_CURE_BLOODLOSS, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_CURE_BLOODLOSS)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -730,7 +730,7 @@ function "it_cureall"
 		this.CHRWORK[CWK_DARK] ||
 		this.CHRWORK[CWK_BLOODLOSS])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		Cure(this, EFXFLAG1_POISON)
 		Cure(this, EFXFLAG1_PARALYZE)
 		Cure(this, EFXFLAG1_FLAME)
@@ -740,12 +740,12 @@ function "it_cureall"
 	
 		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_CURE_ALL, 1)
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_CURE_ALL)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -761,7 +761,7 @@ function "it_old_cureall"
 		this.CHRWORK[CWK_DARK] ||
 		this.CHRWORK[CWK_BLOODLOSS])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		Cure(this, EFXFLAG1_POISON)
 		Cure(this, EFXFLAG1_PARALYZE)
 		Cure(this, EFXFLAG1_FLAME)
@@ -771,12 +771,12 @@ function "it_old_cureall"
 	
 		PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_OLD_CURE_ALL, 1)
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_OLD_CURE_ALL)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -784,25 +784,25 @@ function "it_old_cureall"
 }
 
 /////////////////////////////////////
-// ï¿½Xï¿½eï¿½[ï¿½^ï¿½Xï¿½Aï¿½bï¿½vï¿½n
+// ƒXƒe[ƒ^ƒXƒAƒbƒvŒn
 
 function it_hpup
 {
-	// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+	// Á”ï‚·‚é
 	UseItem(ICON3D_US_ADD_HP, 1)
 
 	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 	//SetStopFlag(STOPFLAG_FREEZE)
 	//ResetMoveVec("PARTYALL")
 
-	// ï¿½gï¿½oï¿½Aï¿½bï¿½v
+	// ‚g‚oƒAƒbƒv
 	SetChrWork(this,CWK_SUP_MAXHP,(this.CHRWORK[CWK_SUP_MAXHP] + 100))
 
 	PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
 //	Wait(30)
 
-	Message("#4Cï¿½gï¿½oï¿½ÌÅ‘ï¿½lï¿½ï¿½ï¿½Pï¿½Oï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+	Message("#4C‚g‚o‚ÌÅ‘å’l‚ª‚P‚O‚O‘‚¦‚½B")
 	WaitPrompt()
 	//Wait(10)
 	WaitCloseWindow()
@@ -814,21 +814,21 @@ function it_hpup
 
 function it_strup
 {
-	// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+	// Á”ï‚·‚é
 	UseItem(ICON3D_US_ADD_STR, 1)
 
 	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 	//SetStopFlag(STOPFLAG_FREEZE)
 	//ResetMoveVec("PARTYALL")
 
-	// ï¿½rï¿½sï¿½qï¿½Aï¿½bï¿½v
+	// ‚r‚s‚qƒAƒbƒv
 	SetChrWork(this,CWK_SUP_STR,(this.CHRWORK[CWK_SUP_STR] + 3))
 
 	PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
 //	Wait(30)
 
-	Message("#4Cï¿½rï¿½sï¿½qï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+	Message("#4C‚r‚s‚q‚ª‚R‘‚¦‚½B")
 	WaitPrompt()
 	//Wait(10)
 	WaitCloseWindow()
@@ -839,21 +839,21 @@ function it_strup
 
 function it_defup
 {
-	// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+	// Á”ï‚·‚é
 	UseItem(ICON3D_US_ADD_DEF, 1)
 
 	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 	//SetStopFlag(STOPFLAG_FREEZE)
 	//ResetMoveVec("PARTYALL")
 
-	// ï¿½cï¿½dï¿½eï¿½Aï¿½bï¿½v
+	// ‚c‚d‚eƒAƒbƒv
 	SetChrWork(this,CWK_SUP_DEF,(this.CHRWORK[CWK_SUP_DEF] + 3))
 
 	PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
 //	Wait(30)
 
-	Message("#4Cï¿½cï¿½dï¿½eï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+	Message("#4C‚c‚d‚e‚ª‚R‘‚¦‚½B")
 	WaitPrompt()
 	//Wait(10)
 	WaitCloseWindow()
@@ -863,21 +863,21 @@ function it_defup
 }
 
 /////////////////////////////////////
-// ï¿½xï¿½Xï¿½eï¿½Bï¿½Aï¿½ï¿½ï¿½|ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½
+// ƒxƒXƒeƒBƒAƒŠƒ|[ƒVƒ‡ƒ“
 function "it_bestiary"
 {
-	// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+	// Á”ï‚·‚é
 	UseItem(ICON3D_US_BESTIARYPT, 1)
 
 	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 	//SetStopFlag(STOPFLAG_FREEZE)
 	//ResetMoveVec("PARTYALL")
 
-	// ï¿½gï¿½oï¿½Aï¿½bï¿½v
+	// ‚g‚oƒAƒbƒv
 	SetChrWork(this,CWK_SUP_MAXHP,(this.CHRWORK[CWK_SUP_MAXHP] + 100))
-	// ï¿½rï¿½sï¿½qï¿½Aï¿½bï¿½v
+	// ‚r‚s‚qƒAƒbƒv
 	SetChrWork(this,CWK_SUP_STR,(this.CHRWORK[CWK_SUP_STR] + 3))
-	// ï¿½cï¿½dï¿½eï¿½Aï¿½bï¿½v
+	// ‚c‚d‚eƒAƒbƒv
 	SetChrWork(this,CWK_SUP_DEF,(this.CHRWORK[CWK_SUP_DEF] + 3))
 
 
@@ -885,7 +885,7 @@ function "it_bestiary"
 
 //	Wait(30)
 
-	Message("#4Cï¿½gï¿½oï¿½ÌÅ‘ï¿½lï¿½ï¿½ï¿½Pï¿½Oï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B\n#4Cï¿½rï¿½sï¿½qï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B\n#4Cï¿½cï¿½dï¿½eï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B\n#4Cï¿½bï¿½Ì—ï¿½ï¿½Æ‚ï¿½ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½ï¿½í‚©ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½B")
+	Message("#4C‚g‚o‚ÌÅ‘å’l‚ª‚P‚O‚O‘‚¦‚½B\n#4C‚r‚s‚q‚ª‚R‘‚¦‚½B\n#4C‚c‚d‚e‚ª‚R‘‚¦‚½B\n#4Cb‚Ì—Ž‚Æ‚·ƒAƒCƒeƒ€‚ª‚í‚©‚é‚æ‚¤‚É‚È‚Á‚½B")
 	WaitPrompt()
 	//Wait(10)
 	WaitCloseWindow()
@@ -897,33 +897,33 @@ function "it_bestiary"
 }
 
 /////////////////////////////////////
-// ï¿½Sï¿½_ï¿½Ì—ì
+// ‹S_‚Ì—ì
 function it_spup
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"#2Cï¿½Sï¿½_ï¿½Ì—ì#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",1)
+	YesNoMenu(TF_MENU_SELECT2,"#2C‹S_‚Ì—ì#0C‚ðŽg‚¢‚Ü‚·‚©H",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_ADD_SP, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½rï¿½oï¿½ÌÅ‘ï¿½lï¿½ï¿½ï¿½â‚·
+		// ‚r‚o‚ÌÅ‘å’l‘‚â‚·
 		SetFlag(SF_SPMAX, (FLAG[SF_SPMAX]+10) )
 		if( FLAG[SF_SPMAX] >200 )
 		{
-			SetFlag(SF_SPMAX,200)		//ï¿½Å‘ï¿½Å‚Qï¿½Oï¿½O
+			SetFlag(SF_SPMAX,200)		//Å‘å‚Å‚Q‚O‚O
 		}
 
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
 	//	Wait(30)
 
-		Message("#4Cï¿½rï¿½oï¿½ÌÅ‘ï¿½lï¿½ï¿½ï¿½Pï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C‚r‚o‚ÌÅ‘å’l‚ª‚P‚O‘‚¦‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -934,26 +934,26 @@ function it_spup
 }
 
 /////////////////////////////////////
-// ï¿½Cï¿½ï¿½ï¿½Ò‚Ì”ï¿½ï¿½
+// CŒ±ŽÒ‚Ì”é–ò
 function it_lvup
 {
 	if (this.CHRWORK[CWK_LV] < LV_MAX )
 	{
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_ADD_LEVEL, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½Aï¿½bï¿½vï¿½É•Kï¿½vï¿½ÈŒoï¿½ï¿½ï¿½lï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½é‚±ï¿½Æ‚ÅAï¿½ï¿½ï¿½xï¿½ï¿½ï¿½Aï¿½bï¿½vï¿½ï¿½ï¿½ï¿½B
+		// ƒŒƒxƒ‹ƒAƒbƒv‚É•K—v‚ÈŒoŒ±’l‚ðŽæ“¾‚·‚é‚±‚Æ‚ÅAƒŒƒxƒ‹ƒAƒbƒv‚·‚éB
 		GetExp((this.CHRWORK[CWK_EXPNEXTLV]))
 
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
 	//	Wait(30)
 
-		Message("#4Cï¿½ï¿½ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½ã‚ªï¿½ï¿½ï¿½ï¿½ï¿½B")			//ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½ÌƒGï¿½tï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎAï¿½ï¿½ï¿½bï¿½Zï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
+		Message("#4CƒŒƒxƒ‹‚ª‚Pã‚ª‚Á‚½B")			//ƒVƒXƒeƒ€‚ÌƒGƒtƒFƒNƒg‚ª‚ ‚ê‚ÎAƒƒbƒZ[ƒW‚¢‚ç‚È‚¢‚©‚àB
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -963,7 +963,7 @@ function it_lvup
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_ADD_LEVEL)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -974,21 +974,22 @@ function it_expup1
 {
 	if (this.CHRWORK[CWK_LV] < LV_MAX )
 	{
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_ADD_EXP_01, 1)
 	
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 	
-		// ï¿½dï¿½wï¿½oï¿½Aï¿½bï¿½v
-		GetExp(100)
+		// ‚d‚w‚oƒAƒbƒv
+		CallFunc("rng:expup1")
+		//GetExp(100)
 	
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 	
 	//	Wait(30)
 	
-		Message("#4Cï¿½oï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½è‚µï¿½ï¿½ï¿½B")
+		Message("#4CŒoŒ±’l‚ð“üŽè‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -998,7 +999,7 @@ function it_expup1
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_ADD_EXP_01)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -1009,21 +1010,22 @@ function it_expup2
 {
 	if (this.CHRWORK[CWK_LV] < LV_MAX )
 	{
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_ADD_EXP_02, 1)
 	
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 	
-		// ï¿½dï¿½wï¿½oï¿½Aï¿½bï¿½v
-		GetExp(1000)
+		// ‚d‚w‚oƒAƒbƒv
+		CallFunc("rng:expup2")
+		//GetExp(1000)
 	
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 	
 	//	Wait(30)
 	
-		Message("#4Cï¿½oï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½è‚µï¿½ï¿½ï¿½B")
+		Message("#4CŒoŒ±’l‚ð“üŽè‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1033,7 +1035,7 @@ function it_expup2
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_ADD_EXP_02)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -1044,21 +1046,22 @@ function it_expup3
 {
 	if (this.CHRWORK[CWK_LV] < LV_MAX )
 	{
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_ADD_EXP_03, 1)
 	
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 	
-		// ï¿½dï¿½wï¿½oï¿½Aï¿½bï¿½v
-		GetExp(10000)
+		// ‚d‚w‚oƒAƒbƒv
+		CallFunc("rng:expup3")
+		//GetExp(10000)
 	
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 	
 	//	Wait(30)
 	
-		Message("#4Cï¿½oï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½è‚µï¿½ï¿½ï¿½B")
+		Message("#4CŒoŒ±’l‚ð“üŽè‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1068,7 +1071,7 @@ function it_expup3
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_ADD_EXP_03)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -1076,25 +1079,25 @@ function it_expup3
 }
 
 /////////////////////////////////////
-// ï¿½ß‹ï¿½ï¿½ÒƒXï¿½eï¿½[ï¿½^ï¿½Xï¿½Aï¿½bï¿½vï¿½n
+// ‰ß‹Ž•ÒƒXƒe[ƒ^ƒXƒAƒbƒvŒn
 
 function it_old_hpup
 {
-	// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+	// Á”ï‚·‚é
 	UseItem(ICON3D_US_OLD_ADD_HP, 1)
 
 	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 	//SetStopFlag(STOPFLAG_FREEZE)
 	//ResetMoveVec("PARTYALL")
 
-	// ï¿½gï¿½oï¿½Aï¿½bï¿½v
+	// ‚g‚oƒAƒbƒv
 	SetChrWork(this,CWK_SUP_MAXHP,(this.CHRWORK[CWK_SUP_MAXHP] + 100))
 
 	PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
 //	Wait(30)
 
-	Message("#4Cï¿½gï¿½oï¿½ÌÅ‘ï¿½lï¿½ï¿½ï¿½Pï¿½Oï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+	Message("#4C‚g‚o‚ÌÅ‘å’l‚ª‚P‚O‚O‘‚¦‚½B")
 	WaitPrompt()
 	//Wait(10)
 	WaitCloseWindow()
@@ -1106,21 +1109,21 @@ function it_old_hpup
 
 function it_old_strup
 {
-	// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+	// Á”ï‚·‚é
 	UseItem(ICON3D_US_OLD_ADD_STR, 1)
 
 	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 	//SetStopFlag(STOPFLAG_FREEZE)
 	//ResetMoveVec("PARTYALL")
 
-	// ï¿½rï¿½sï¿½qï¿½Aï¿½bï¿½v
+	// ‚r‚s‚qƒAƒbƒv
 	SetChrWork(this,CWK_SUP_STR,(this.CHRWORK[CWK_SUP_STR] + 3))
 
 	PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
 //	Wait(30)
 
-	Message("#4Cï¿½rï¿½sï¿½qï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+	Message("#4C‚r‚s‚q‚ª‚R‘‚¦‚½B")
 	WaitPrompt()
 	//Wait(10)
 	WaitCloseWindow()
@@ -1131,21 +1134,21 @@ function it_old_strup
 
 function it_old_defup
 {
-	// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+	// Á”ï‚·‚é
 	UseItem(ICON3D_US_OLD_ADD_DEF, 1)
 
 	//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 	//SetStopFlag(STOPFLAG_FREEZE)
 	//ResetMoveVec("PARTYALL")
 
-	// ï¿½cï¿½dï¿½eï¿½Aï¿½bï¿½v
+	// ‚c‚d‚eƒAƒbƒv
 	SetChrWork(this,CWK_SUP_DEF,(this.CHRWORK[CWK_SUP_DEF] + 3))
 
 	PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
 //	Wait(30)
 
-	Message("#4Cï¿½cï¿½dï¿½eï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+	Message("#4C‚c‚d‚e‚ª‚R‘‚¦‚½B")
 	WaitPrompt()
 	//Wait(10)
 	WaitCloseWindow()
@@ -1154,26 +1157,26 @@ function it_old_defup
 	//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
 }
 
-// ï¿½ß‹ï¿½ï¿½ÒCï¿½ï¿½ï¿½Ò‚Ì”ï¿½ï¿½
+// ‰ß‹Ž•ÒCŒ±ŽÒ‚Ì”é–ò
 function it_old_lvup
 {
 	if (this.CHRWORK[CWK_LV] < LV_MAX )
 	{
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_OLD_ADD_LEVEL, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½Aï¿½bï¿½vï¿½É•Kï¿½vï¿½ÈŒoï¿½ï¿½ï¿½lï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½é‚±ï¿½Æ‚ÅAï¿½ï¿½ï¿½xï¿½ï¿½ï¿½Aï¿½bï¿½vï¿½ï¿½ï¿½ï¿½B
+		// ƒŒƒxƒ‹ƒAƒbƒv‚É•K—v‚ÈŒoŒ±’l‚ðŽæ“¾‚·‚é‚±‚Æ‚ÅAƒŒƒxƒ‹ƒAƒbƒv‚·‚éB
 		GetExp((this.CHRWORK[CWK_EXPNEXTLV]))
 
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
 	//	Wait(30)
 
-		Message("#4Cï¿½ï¿½ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½ã‚ªï¿½ï¿½ï¿½ï¿½ï¿½B")			//ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½ÌƒGï¿½tï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎAï¿½ï¿½ï¿½bï¿½Zï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
+		Message("#4CƒŒƒxƒ‹‚ª‚Pã‚ª‚Á‚½B")			//ƒVƒXƒeƒ€‚ÌƒGƒtƒFƒNƒg‚ª‚ ‚ê‚ÎAƒƒbƒZ[ƒW‚¢‚ç‚È‚¢‚©‚àB
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1183,7 +1186,7 @@ function it_old_lvup
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_OLD_ADD_LEVEL)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -1192,10 +1195,10 @@ function it_old_lvup
 
 
 ///////////////////////////////////////
-//// ï¿½êŽžï¿½â•ï¿½n	ï¿½ï¿½Ys8ï¿½É‚Í–ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½Bï¿½dï¿½lï¿½ÏXï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø‚ï¿½È‚ï¿½ï¿½Ì‚ÅAï¿½Tï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Ä’uï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+//// ˆêŽž•â•Œn	¦Ys8‚É‚Í–³‚¢—\’èBŽd—l•ÏX‚ª–³‚¢‚Æ‚àŒ¾‚¢Ø‚ê‚È‚¢‚Ì‚ÅAƒTƒ“ƒvƒ‹‚Æ‚µ‚Ä’u‚¢‚Ä‚¨‚­
 //function "it_supstr"
 //{
-//	// ï¿½^ï¿½_ï¿½ï¿½ï¿½Aï¿½bï¿½v
+//	// —^ƒ_ƒƒAƒbƒv
 //	SetCondition(this, SC_STRUP)
 //
 //	PlaySE( SE_CURE , 100 , 0,  0, 0, 1.0f, 0)
@@ -1204,65 +1207,65 @@ function it_old_lvup
 
 
 /////////////////////////////////////
-// ï¿½eï¿½Xï¿½gï¿½Eï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½g
+// ƒeƒXƒgEƒAƒCƒeƒ€ƒXƒNƒŠƒvƒg
 
 /////////////////////////////////////
-// ï¿½Iï¿½Ì‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½ï¿½ï¿½jï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½ï¿½ÅƒAï¿½Cï¿½eï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÉŒÄ‚Î‚ï¿½ï¿½
+// –I‚Ì‘ƒœ‹Ži‰¼j@¦ƒƒjƒ…[ã‚ÅƒAƒCƒeƒ€Žg‚Á‚½Žž‚ÉŒÄ‚Î‚ê‚é
 function "it_pestcide"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"#2Cï¿½ï¿½ï¿½ìœï¿½ï¿½#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",1)
+	YesNoMenu(TF_MENU_SELECT2,"#2C’Ž‹ìœÜ#0C‚ðŽg‚¢‚Ü‚·‚©H",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_PESTCIDE, 1)
 
-		// ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½gï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½ÅŽï¿½ï¿½Û‚ÌŒï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½s
+		// ƒAƒCƒeƒ€ƒXƒNƒŠƒvƒgƒXƒŒƒbƒh‚ÅŽÀÛ‚ÌŒø‰Ê‚ðŽÀs
 		ItemCue("item:do_pestcide")
 
-		// ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½ï¿½Â‚ï¿½ï¿½ï¿½
+		// ƒLƒƒƒ“ƒvƒƒjƒ…[‚ð•Â‚¶‚é
 		MenuClose(0, 0)
 	}
 }
 
 /////////////////////////////////////
-// ï¿½Iï¿½Ì‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½ï¿½ï¿½jï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½Û‚ÉƒQï¿½[ï¿½ï¿½ï¿½ï¿½ÅŒï¿½ï¿½Ê‚ð”­Šï¿½ï¿½ï¿½ï¿½ï¿½Û‚ÉŒÄ‚Î‚ï¿½ï¿½
+// –I‚Ì‘ƒœ‹Ži‰¼j@¦ŽÀÛ‚ÉƒQ[ƒ€ã‚ÅŒø‰Ê‚ð”­Šö‚·‚éÛ‚ÉŒÄ‚Î‚ê‚é
 function "do_pestcide"
 {
 	ChrEffect(PLAYER1, SYSEFX_ITEM_PESTCIDE, 0, 0, 0, 0, 0, IMPACT_NONE, KNOCK_EFXPOS, 0.0f, 0.0f, EFXFLAG1_NODMGMISSILE, 1.0f, 1.0f)
 }
 
 /////////////////////////////////////
-// ï¿½Tï¿½ï¿½ï¿½ÌSï¿½ï¿½ï¿½sï¿½Xï¿½t
+// ’Tõ‚ÌS“¾sXt
 function it_search_book01
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"#2Cï¿½Tï¿½ï¿½ï¿½ÌSï¿½ï¿½ï¿½sï¿½Xï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½#2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½#0Cï¿½ï¿½ï¿½Pï¿½Â‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"#2C’Tõ‚ÌS“¾sXt#0C‚ðŽg‚¢‚Ü‚·‚©H\n–`Œ¯‹ï‚Ì#2C‘•”õ”#0C‚ª‚P‚Â‘‰Á‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SEARCH_BOOK01, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½â‚·
+		// ‘•”õ—“‚Ì”‘‚â‚·
 		SetFlag(SF_ITEMSLOT_NUM, (FLAG[SF_ITEMSLOT_NUM]+1) )
-		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//ï¿½Å‘å”ï¿½`ï¿½Fï¿½bï¿½N
+		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//Å‘å”ƒ`ƒFƒbƒN
 		{
 			SetFlag(SF_ITEMSLOT_NUM, ITEMSLOT_MAX)
 		}
 
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		Message("#4Cï¿½`ï¿½ï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½Â‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C–`Œ¯‹ï‚Ì‘•”õ”‚ª‚P‚Â‘‚¦‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1270,38 +1273,38 @@ function it_search_book01
 		//ResetStopFlag(STOPFLAG_FREEZE)
 		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
 
-	//	// ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½ï¿½Â‚ï¿½ï¿½ï¿½Eï¿½Â‚ï¿½ï¿½È‚ï¿½ï¿½ÆXï¿½Vï¿½ï¿½ï¿½ï¿½È‚ï¿½
+	//	// ƒLƒƒƒ“ƒvƒƒjƒ…[‚ð•Â‚¶‚éE•Â‚¶‚È‚¢‚ÆXV‚³‚ê‚È‚¢
 	//	MenuClose(0, 0)
 	}
 }
 
 /////////////////////////////////////
-// ï¿½Tï¿½ï¿½ï¿½ÌSï¿½ï¿½ï¿½sï¿½Cï¿½t
+// ’Tõ‚ÌS“¾sŠCt
 function it_search_book02
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"#2Cï¿½Tï¿½ï¿½ï¿½ÌSï¿½ï¿½ï¿½sï¿½Cï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½#2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½#0Cï¿½ï¿½ï¿½Pï¿½Â‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"#2C’Tõ‚ÌS“¾sŠCt#0C‚ðŽg‚¢‚Ü‚·‚©H\n–`Œ¯‹ï‚Ì#2C‘•”õ”#0C‚ª‚P‚Â‘‰Á‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SEARCH_BOOK02, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½â‚·
+		// ‘•”õ—“‚Ì”‘‚â‚·
 		SetFlag(SF_ITEMSLOT_NUM, (FLAG[SF_ITEMSLOT_NUM]+1) )
-		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//ï¿½Å‘å”ï¿½`ï¿½Fï¿½bï¿½N
+		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//Å‘å”ƒ`ƒFƒbƒN
 		{
 			SetFlag(SF_ITEMSLOT_NUM, ITEMSLOT_MAX)
 		}
 
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		Message("#4Cï¿½`ï¿½ï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½Â‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C–`Œ¯‹ï‚Ì‘•”õ”‚ª‚P‚Â‘‚¦‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1309,38 +1312,38 @@ function it_search_book02
 		//ResetStopFlag(STOPFLAG_FREEZE)
 		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
 
-	//	// ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½ï¿½Â‚ï¿½ï¿½ï¿½Eï¿½Â‚ï¿½ï¿½È‚ï¿½ï¿½ÆXï¿½Vï¿½ï¿½ï¿½ï¿½È‚ï¿½
+	//	// ƒLƒƒƒ“ƒvƒƒjƒ…[‚ð•Â‚¶‚éE•Â‚¶‚È‚¢‚ÆXV‚³‚ê‚È‚¢
 	//	MenuClose(0, 0)
 	}
 }
 
 /////////////////////////////////////
-// ï¿½Tï¿½ï¿½ï¿½ÌSï¿½ï¿½ï¿½sï¿½Rï¿½t
+// ’Tõ‚ÌS“¾sŽRt
 function it_search_book03
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"#2Cï¿½Tï¿½ï¿½ï¿½ÌSï¿½ï¿½ï¿½sï¿½Rï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½#2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½#0Cï¿½ï¿½ï¿½Pï¿½Â‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"#2C’Tõ‚ÌS“¾sŽRt#0C‚ðŽg‚¢‚Ü‚·‚©H\n–`Œ¯‹ï‚Ì#2C‘•”õ”#0C‚ª‚P‚Â‘‰Á‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SEARCH_BOOK03, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½â‚·
+		// ‘•”õ—“‚Ì”‘‚â‚·
 		SetFlag(SF_ITEMSLOT_NUM, (FLAG[SF_ITEMSLOT_NUM]+1) )
-		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//ï¿½Å‘å”ï¿½`ï¿½Fï¿½bï¿½N
+		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//Å‘å”ƒ`ƒFƒbƒN
 		{
 			SetFlag(SF_ITEMSLOT_NUM, ITEMSLOT_MAX)
 		}
 
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		Message("#4Cï¿½`ï¿½ï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½Â‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C–`Œ¯‹ï‚Ì‘•”õ”‚ª‚P‚Â‘‚¦‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1348,38 +1351,38 @@ function it_search_book03
 		//ResetStopFlag(STOPFLAG_FREEZE)
 		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
 
-	//	// ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½ï¿½Â‚ï¿½ï¿½ï¿½Eï¿½Â‚ï¿½ï¿½È‚ï¿½ï¿½ÆXï¿½Vï¿½ï¿½ï¿½ï¿½È‚ï¿½
+	//	// ƒLƒƒƒ“ƒvƒƒjƒ…[‚ð•Â‚¶‚éE•Â‚¶‚È‚¢‚ÆXV‚³‚ê‚È‚¢
 	//	MenuClose(0, 0)
 	}
 }
 
 /////////////////////////////////////
-// ï¿½Tï¿½ï¿½ï¿½ÌSï¿½ï¿½ï¿½sï¿½ï¿½ï¿½t
+// ’Tõ‚ÌS“¾s•—t
 function it_search_book04
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"#2Cï¿½Tï¿½ï¿½ï¿½ÌSï¿½ï¿½ï¿½sï¿½ï¿½ï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½#2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½#0Cï¿½ï¿½ï¿½Pï¿½Â‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"#2C’Tõ‚ÌS“¾s•—t#0C‚ðŽg‚¢‚Ü‚·‚©H\n–`Œ¯‹ï‚Ì#2C‘•”õ”#0C‚ª‚P‚Â‘‰Á‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SEARCH_BOOK04, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½â‚·
+		// ‘•”õ—“‚Ì”‘‚â‚·
 		SetFlag(SF_ITEMSLOT_NUM, (FLAG[SF_ITEMSLOT_NUM]+1) )
-		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//ï¿½Å‘å”ï¿½`ï¿½Fï¿½bï¿½N
+		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//Å‘å”ƒ`ƒFƒbƒN
 		{
 			SetFlag(SF_ITEMSLOT_NUM, ITEMSLOT_MAX)
 		}
 
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		Message("#4Cï¿½`ï¿½ï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½Â‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C–`Œ¯‹ï‚Ì‘•”õ”‚ª‚P‚Â‘‚¦‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1387,38 +1390,38 @@ function it_search_book04
 		//ResetStopFlag(STOPFLAG_FREEZE)
 		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
 
-	//	// ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½ï¿½Â‚ï¿½ï¿½ï¿½Eï¿½Â‚ï¿½ï¿½È‚ï¿½ï¿½ÆXï¿½Vï¿½ï¿½ï¿½ï¿½È‚ï¿½
+	//	// ƒLƒƒƒ“ƒvƒƒjƒ…[‚ð•Â‚¶‚éE•Â‚¶‚È‚¢‚ÆXV‚³‚ê‚È‚¢
 	//	MenuClose(0, 0)
 	}
 }
 
 /////////////////////////////////////
-// ï¿½Tï¿½ï¿½ï¿½ÌSï¿½ï¿½ï¿½sï¿½bï¿½t
+// ’Tõ‚ÌS“¾sbt
 function it_search_book05
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"#2Cï¿½Tï¿½ï¿½ï¿½ÌSï¿½ï¿½ï¿½sï¿½bï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½#2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½#0Cï¿½ï¿½ï¿½Pï¿½Â‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"#2C’Tõ‚ÌS“¾sbt#0C‚ðŽg‚¢‚Ü‚·‚©H\n–`Œ¯‹ï‚Ì#2C‘•”õ”#0C‚ª‚P‚Â‘‰Á‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SEARCH_BOOK05, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½â‚·
+		// ‘•”õ—“‚Ì”‘‚â‚·
 		SetFlag(SF_ITEMSLOT_NUM, (FLAG[SF_ITEMSLOT_NUM]+1) )
-		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//ï¿½Å‘å”ï¿½`ï¿½Fï¿½bï¿½N
+		if( FLAG[SF_ITEMSLOT_NUM] >ITEMSLOT_MAX )	//Å‘å”ƒ`ƒFƒbƒN
 		{
 			SetFlag(SF_ITEMSLOT_NUM, ITEMSLOT_MAX)
 		}
 
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		Message("#4Cï¿½`ï¿½ï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½Â‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C–`Œ¯‹ï‚Ì‘•”õ”‚ª‚P‚Â‘‚¦‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1426,35 +1429,35 @@ function it_search_book05
 		//ResetStopFlag(STOPFLAG_FREEZE)
 		//ResetStopFlag(STOPFLAG_SIMPLEEVENT)
 
-	//	// ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½ï¿½Â‚ï¿½ï¿½ï¿½Eï¿½Â‚ï¿½ï¿½È‚ï¿½ï¿½ÆXï¿½Vï¿½ï¿½ï¿½ï¿½È‚ï¿½
+	//	// ƒLƒƒƒ“ƒvƒƒjƒ…[‚ð•Â‚¶‚éE•Â‚¶‚È‚¢‚ÆXV‚³‚ê‚È‚¢
 	//	MenuClose(0, 0)
 	}
 }
 
 /////////////////////////////////////
-// ï¿½Xï¿½Lï¿½ï¿½ï¿½Ìï¿½
+// ƒXƒLƒ‹‚Ì‘
 function "it_skill_book_a"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@ï¿½@#2Cï¿½gï¿½ï¿½ï¿½wï¿½ì‘ï¿½sï¿½ï¿½ï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½Aï¿½hï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½Lï¿½ï¿½#2Cï¿½yï¿½gï¿½ï¿½ï¿½lï¿½[ï¿½hï¿½\ï¿½[ï¿½hï¿½z#0Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@@#2Cg‚«Žw“ì‘sùt#0C‚ðŽg‚¢‚Ü‚·‚©H\nƒAƒhƒ‹‚ªƒXƒLƒ‹#2Cyƒgƒ‹ƒl[ƒhƒ\[ƒhz#0C‚ðK“¾‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SKILL_BOOK_A, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		GetSkill(PARTY_ADOL, SKILL_ADOL_SP_B4, 1)	// ï¿½gï¿½ï¿½ï¿½lï¿½[ï¿½hï¿½\ï¿½[ï¿½h
+		// ƒXƒLƒ‹“üŽè
+		GetSkill(PARTY_ADOL, SKILL_ADOL_SP_B4, 1)	// ƒgƒ‹ƒl[ƒhƒ\[ƒh
 
-		Message("#4Cï¿½Aï¿½hï¿½ï¿½ï¿½ÍƒXï¿½Lï¿½ï¿½#2Cï¿½yï¿½gï¿½ï¿½ï¿½lï¿½[ï¿½hï¿½\ï¿½[ï¿½hï¿½z#4Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4CƒAƒhƒ‹‚ÍƒXƒLƒ‹#2Cyƒgƒ‹ƒl[ƒhƒ\[ƒhz#4C‚ðK“¾‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1465,29 +1468,29 @@ function "it_skill_book_a"
 }
 
 /////////////////////////////////////
-// ï¿½Xï¿½Lï¿½ï¿½ï¿½Ìï¿½
+// ƒXƒLƒ‹‚Ì‘
 function "it_skill_book_l"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@ï¿½@#2Cï¿½gï¿½ï¿½ï¿½wï¿½ì‘ï¿½sï¿½ï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½Lï¿½ï¿½#2Cï¿½yï¿½Vï¿½ï¿½ï¿½tï¿½Bï¿½[ï¿½hï¿½Lï¿½Xï¿½z#0Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@@#2Cg‚«Žw“ì‘s—ìt#0C‚ðŽg‚¢‚Ü‚·‚©H\nƒ‰ƒNƒVƒƒ‚ªƒXƒLƒ‹#2CyƒVƒ‹ƒtƒB[ƒhƒLƒXz#0C‚ðK“¾‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SKILL_BOOK_L, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		GetSkill(PARTY_LAXIA, SKILL_LAXIA_SP_B3, 1)	// ï¿½Vï¿½ï¿½ï¿½tï¿½Bï¿½[ï¿½hï¿½Lï¿½X
+		// ƒXƒLƒ‹“üŽè
+		GetSkill(PARTY_LAXIA, SKILL_LAXIA_SP_B3, 1)	// ƒVƒ‹ƒtƒB[ƒhƒLƒX
 
-		Message("#4Cï¿½ï¿½ï¿½Nï¿½Vï¿½ï¿½ï¿½ÍƒXï¿½Lï¿½ï¿½#2Cï¿½yï¿½Vï¿½ï¿½ï¿½tï¿½Bï¿½[ï¿½hï¿½Lï¿½Xï¿½z#4Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4Cƒ‰ƒNƒVƒƒ‚ÍƒXƒLƒ‹#2CyƒVƒ‹ƒtƒB[ƒhƒLƒXz#4C‚ðK“¾‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1498,29 +1501,29 @@ function "it_skill_book_l"
 }
 
 /////////////////////////////////////
-// ï¿½Xï¿½Lï¿½ï¿½ï¿½Ìï¿½
+// ƒXƒLƒ‹‚Ì‘
 function "it_skill_book_s"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@ï¿½@#2Cï¿½gï¿½ï¿½ï¿½wï¿½ì‘ï¿½sï¿½ï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½Tï¿½nï¿½hï¿½ï¿½ï¿½Xï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½hï¿½Aï¿½sï¿½[ï¿½ï¿½ï¿½z#0Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@@#2Cg‚«Žw“ì‘s–ìt#0C‚ðŽg‚¢‚Ü‚·‚©H\nƒTƒnƒh‚ªƒXƒLƒ‹#2CyƒƒCƒ‹ƒhƒAƒs[ƒ‹z#0C‚ðK“¾‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SKILL_BOOK_S, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		GetSkill(PARTY_SAHAD, SKILL_SAHAD_SP_C3, 1)	// ï¿½ï¿½ï¿½ï¿½
+		// ƒXƒLƒ‹“üŽè
+		GetSkill(PARTY_SAHAD, SKILL_SAHAD_SP_C3, 1)	// ’§”­
 
-		Message("#4Cï¿½Tï¿½nï¿½hï¿½ÍƒXï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½hï¿½Aï¿½sï¿½[ï¿½ï¿½ï¿½z#4Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4CƒTƒnƒh‚ÍƒXƒLƒ‹#2CyƒƒCƒ‹ƒhƒAƒs[ƒ‹z#4C‚ðK“¾‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1531,29 +1534,29 @@ function "it_skill_book_s"
 }
 
 /////////////////////////////////////
-// ï¿½Xï¿½Lï¿½ï¿½ï¿½Ìï¿½
+// ƒXƒLƒ‹‚Ì‘
 function "it_skill_book_h"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@ï¿½@#2Cï¿½gï¿½ï¿½ï¿½wï¿½ì‘ï¿½sï¿½kï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½qï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½Lï¿½ï¿½#2Cï¿½yï¿½Nï¿½Gï¿½Cï¿½Jï¿½[ï¿½z#0Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@@#2Cg‚«Žw“ì‘skt#0C‚ðŽg‚¢‚Ü‚·‚©H\nƒqƒ…ƒ“ƒƒ‹‚ªƒXƒLƒ‹#2CyƒNƒGƒCƒJ[z#0C‚ðK“¾‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SKILL_BOOK_H, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		GetSkill(PARTY_HUMMEL, SKILL_HUMMEL_SP_C4, 1)	// ï¿½Nï¿½Gï¿½Cï¿½Jï¿½[
+		// ƒXƒLƒ‹“üŽè
+		GetSkill(PARTY_HUMMEL, SKILL_HUMMEL_SP_C4, 1)	// ƒNƒGƒCƒJ[
 
-		Message("#4Cï¿½qï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÍƒXï¿½Lï¿½ï¿½#2Cï¿½yï¿½Nï¿½Gï¿½Cï¿½Jï¿½[ï¿½z#4Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4Cƒqƒ…ƒ“ƒƒ‹‚ÍƒXƒLƒ‹#2CyƒNƒGƒCƒJ[z#4C‚ðK“¾‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1564,29 +1567,29 @@ function "it_skill_book_h"
 }
 
 /////////////////////////////////////
-// ï¿½Xï¿½Lï¿½ï¿½ï¿½Ìï¿½
+// ƒXƒLƒ‹‚Ì‘
 function "it_skill_book_r"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@ï¿½@#2Cï¿½gï¿½ï¿½ï¿½wï¿½ì‘ï¿½sï¿½ï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½Rï¿½bï¿½^ï¿½ï¿½ï¿½Xï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½\ï¿½[ï¿½ï¿½ï¿½z#0Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@@#2Cg‚«Žw“ì‘sˆït#0C‚ðŽg‚¢‚Ü‚·‚©H\nƒŠƒRƒbƒ^‚ªƒXƒLƒ‹#2Cyƒ‰ƒ“ƒuƒ‹ƒ\[ƒ“z#0C‚ðK“¾‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SKILL_BOOK_R, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		GetSkill(PARTY_RICOTTA, SKILL_RICOTTA_SP_B3, 1)	// ï¿½í—Žï¿½Æ‚ï¿½
+		// ƒXƒLƒ‹“üŽè
+		GetSkill(PARTY_RICOTTA, SKILL_RICOTTA_SP_B3, 1)	// Ží—Ž‚Æ‚µ
 
-		Message("#4Cï¿½ï¿½ï¿½Rï¿½bï¿½^ï¿½ÍƒXï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½\ï¿½[ï¿½ï¿½ï¿½z#4Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4CƒŠƒRƒbƒ^‚ÍƒXƒLƒ‹#2Cyƒ‰ƒ“ƒuƒ‹ƒ\[ƒ“z#4C‚ðK“¾‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1597,29 +1600,29 @@ function "it_skill_book_r"
 }
 
 /////////////////////////////////////
-// ï¿½Xï¿½Lï¿½ï¿½ï¿½Ìï¿½
+// ƒXƒLƒ‹‚Ì‘
 function "it_skill_book_d"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@ï¿½@#2Cï¿½gï¿½ï¿½ï¿½wï¿½ì‘ï¿½sï¿½ï¿½ï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½_ï¿½[ï¿½iï¿½ï¿½ï¿½Xï¿½Lï¿½ï¿½#2Cï¿½yï¿½Aï¿½Cï¿½Xï¿½Gï¿½Cï¿½Wï¿½z#0Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@@#2Cg‚«Žw“ì‘s“€t#0C‚ðŽg‚¢‚Ü‚·‚©H\nƒ_[ƒi‚ªƒXƒLƒ‹#2CyƒAƒCƒXƒGƒCƒWz#0C‚ðK“¾‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SKILL_BOOK_D, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		GetSkill(PARTY_DANA, SKILL_DANA_SP_A1, 1)	// ï¿½Aï¿½Cï¿½Xï¿½Gï¿½Cï¿½W
+		// ƒXƒLƒ‹“üŽè
+		GetSkill(PARTY_DANA, SKILL_DANA_SP_A1, 1)	// ƒAƒCƒXƒGƒCƒW
 
-		Message("#4Cï¿½_ï¿½[ï¿½iï¿½ÍƒXï¿½Lï¿½ï¿½#2Cï¿½yï¿½Aï¿½Cï¿½Xï¿½Gï¿½Cï¿½Wï¿½z#4Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4Cƒ_[ƒi‚ÍƒXƒLƒ‹#2CyƒAƒCƒXƒGƒCƒWz#4C‚ðK“¾‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1632,25 +1635,25 @@ function "it_skill_book_d"
 function "it_skill_book_a2"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½ï¿½ï¿½@ï¿½@ï¿½@ï¿½@#2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½wï¿½ì‘ï¿½sï¿½ï¿½ï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½Aï¿½hï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½z#0Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"Ÿ@@@@#2CŸ››Žw“ì‘s›t#0C‚ðŽg‚¢‚Ü‚·‚©H\nƒAƒhƒ‹‚ªƒXƒLƒ‹#2CyŸ››››z#0C‚ðK“¾‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SKILL_BOOK_A2, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		GetSkill(PARTY_ADOL, SKILL_ADOL_SP_B4, 1)	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// ƒXƒLƒ‹“üŽè
+		GetSkill(PARTY_ADOL, SKILL_ADOL_SP_B4, 1)	// Ÿ››››
 
-		Message("ï¿½ï¿½#4Cï¿½Aï¿½hï¿½ï¿½ï¿½ÍƒXï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½z#4Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("Ÿ#4CƒAƒhƒ‹‚ÍƒXƒLƒ‹#2CyŸ››››z#4C‚ðK“¾‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1661,29 +1664,29 @@ function "it_skill_book_a2"
 }
 
 /////////////////////////////////////
-// ï¿½Xï¿½Lï¿½ï¿½ï¿½Ìï¿½
+// ƒXƒLƒ‹‚Ì‘
 function "it_skill_book_l2"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½ï¿½ï¿½@ï¿½@ï¿½@ï¿½@#2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½wï¿½ì‘ï¿½sï¿½ï¿½ï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½z#0Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"Ÿ@@@@#2CŸ››Žw“ì‘s›t#0C‚ðŽg‚¢‚Ü‚·‚©H\nƒ‰ƒNƒVƒƒ‚ªƒXƒLƒ‹#2CyŸ››››z#0C‚ðK“¾‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SKILL_BOOK_L2, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		GetSkill(PARTY_LAXIA, SKILL_LAXIA_SP_B3, 1)	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// ƒXƒLƒ‹“üŽè
+		GetSkill(PARTY_LAXIA, SKILL_LAXIA_SP_B3, 1)	// Ÿ››››
 
-		Message("ï¿½ï¿½#4Cï¿½ï¿½ï¿½Nï¿½Vï¿½ï¿½ï¿½ÍƒXï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½z#4Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("Ÿ#4Cƒ‰ƒNƒVƒƒ‚ÍƒXƒLƒ‹#2CyŸ››››z#4C‚ðK“¾‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1694,29 +1697,29 @@ function "it_skill_book_l2"
 }
 
 /////////////////////////////////////
-// ï¿½Xï¿½Lï¿½ï¿½ï¿½Ìï¿½
+// ƒXƒLƒ‹‚Ì‘
 function "it_skill_book_s2"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½ï¿½ï¿½@ï¿½@ï¿½@ï¿½@#2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½wï¿½ì‘ï¿½sï¿½ï¿½ï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½Tï¿½nï¿½hï¿½ï¿½ï¿½Xï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½z#0Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"Ÿ@@@@#2CŸ››Žw“ì‘s›t#0C‚ðŽg‚¢‚Ü‚·‚©H\nƒTƒnƒh‚ªƒXƒLƒ‹#2CyŸ››››z#0C‚ðK“¾‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SKILL_BOOK_S2, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		GetSkill(PARTY_SAHAD, SKILL_SAHAD_SP_C3, 1)	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// ƒXƒLƒ‹“üŽè
+		GetSkill(PARTY_SAHAD, SKILL_SAHAD_SP_C3, 1)	// Ÿ››››
 
-		Message("ï¿½ï¿½#4Cï¿½Tï¿½nï¿½hï¿½ÍƒXï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½z#4Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("Ÿ#4CƒTƒnƒh‚ÍƒXƒLƒ‹#2CyŸ››››z#4C‚ðK“¾‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1727,29 +1730,29 @@ function "it_skill_book_s2"
 }
 
 /////////////////////////////////////
-// ï¿½Xï¿½Lï¿½ï¿½ï¿½Ìï¿½
+// ƒXƒLƒ‹‚Ì‘
 function "it_skill_book_h2"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½ï¿½ï¿½@ï¿½@ï¿½@ï¿½@#2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½wï¿½ì‘ï¿½sï¿½ï¿½ï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½qï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½z#0Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"Ÿ@@@@#2CŸ››Žw“ì‘s›t#0C‚ðŽg‚¢‚Ü‚·‚©H\nƒqƒ…ƒ“ƒƒ‹‚ªƒXƒLƒ‹#2CyŸ››››z#0C‚ðK“¾‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SKILL_BOOK_H2, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		GetSkill(PARTY_HUMMEL, SKILL_HUMMEL_SP_C4, 1)	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// ƒXƒLƒ‹“üŽè
+		GetSkill(PARTY_HUMMEL, SKILL_HUMMEL_SP_C4, 1)	// Ÿ››››
 
-		Message("ï¿½ï¿½#4Cï¿½qï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÍƒXï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½z#4Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("Ÿ#4Cƒqƒ…ƒ“ƒƒ‹‚ÍƒXƒLƒ‹#2CyŸ››››z#4C‚ðK“¾‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1760,29 +1763,29 @@ function "it_skill_book_h2"
 }
 
 /////////////////////////////////////
-// ï¿½Xï¿½Lï¿½ï¿½ï¿½Ìï¿½
+// ƒXƒLƒ‹‚Ì‘
 function "it_skill_book_r2"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½ï¿½ï¿½@ï¿½@ï¿½@ï¿½@#2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½wï¿½ì‘ï¿½sï¿½ï¿½ï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½Rï¿½bï¿½^ï¿½ï¿½ï¿½Xï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½z#0Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"Ÿ@@@@#2CŸ››Žw“ì‘s›t#0C‚ðŽg‚¢‚Ü‚·‚©H\nƒŠƒRƒbƒ^‚ªƒXƒLƒ‹#2CyŸ››››z#0C‚ðK“¾‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SKILL_BOOK_R2, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		GetSkill(PARTY_RICOTTA, SKILL_RICOTTA_SP_B3, 1)	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// ƒXƒLƒ‹“üŽè
+		GetSkill(PARTY_RICOTTA, SKILL_RICOTTA_SP_B3, 1)	// Ÿ››››
 
-		Message("ï¿½ï¿½#4Cï¿½ï¿½ï¿½Rï¿½bï¿½^ï¿½ÍƒXï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½z#4Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("Ÿ#4CƒŠƒRƒbƒ^‚ÍƒXƒLƒ‹#2CyŸ››››z#4C‚ðK“¾‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1793,29 +1796,29 @@ function "it_skill_book_r2"
 }
 
 /////////////////////////////////////
-// ï¿½Xï¿½Lï¿½ï¿½ï¿½Ìï¿½
+// ƒXƒLƒ‹‚Ì‘
 function "it_skill_book_d2"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½ï¿½ï¿½@ï¿½@ï¿½@ï¿½@#2Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½wï¿½ì‘ï¿½sï¿½ï¿½ï¿½t#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½_ï¿½[ï¿½iï¿½ï¿½ï¿½Xï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½z#0Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"Ÿ@@@@#2CŸ››Žw“ì‘s›t#0C‚ðŽg‚¢‚Ü‚·‚©H\nƒ_[ƒi‚ªƒXƒLƒ‹#2CyŸ››››z#0C‚ðK“¾‚µ‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		PlaySE( SE_SKILLLEARN , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_SKILL_BOOK_D2, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½Xï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		GetSkill(PARTY_DANA, SKILL_DANA_SP_A1, 1)	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// ƒXƒLƒ‹“üŽè
+		GetSkill(PARTY_DANA, SKILL_DANA_SP_A1, 1)	// Ÿ››››
 
-		Message("ï¿½ï¿½#4Cï¿½_ï¿½[ï¿½iï¿½ÍƒXï¿½Lï¿½ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½z#4Cï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B")
+		Message("Ÿ#4Cƒ_[ƒi‚ÍƒXƒLƒ‹#2CyŸ››››z#4C‚ðK“¾‚µ‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1827,29 +1830,29 @@ function "it_skill_book_d2"
 
 
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½c
+// ƒŒƒVƒs’ EƒIƒ€ƒŒƒc
 function "it_cook_book01"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@#2Cï¿½uï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½cï¿½v#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½Lï¿½mï¿½Rï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½cï¿½z#0Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@#2CuƒŒƒVƒs’ EƒIƒ€ƒŒƒcv#0C‚ðŽg‚¢‚Ü‚·‚©H\n•°‚«‰Î‚Å#2CyƒLƒmƒRƒIƒ€ƒŒƒcz#0C‚ðì‚ê‚é‚æ‚¤‚É‚È‚è‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_COOK_RECIPE01, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½ï¿½
-		SetFlag( GF_RECIPE_02, 1)					// ï¿½Lï¿½mï¿½Rï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½c
+		// ƒŒƒVƒs“üŽè
+		SetFlag( GF_RECIPE_02, 1)					// ƒLƒmƒRƒIƒ€ƒŒƒc
 
-		Message("#4Cï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½Lï¿½mï¿½Rï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½cï¿½z#4Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C•°‚«‰Î‚Å#2CyƒLƒmƒRƒIƒ€ƒŒƒcz#4C‚ðì‚ê‚é‚æ‚¤‚É‚È‚Á‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1860,29 +1863,29 @@ function "it_cook_book01"
 }
 
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½^ï¿½gï¿½Dï¿½Cï¿½ï¿½
+// ƒŒƒVƒs’ Eƒ‰ƒ^ƒgƒDƒCƒ†
 function "it_cook_book02"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@#2Cï¿½uï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½^ï¿½gï¿½Dï¿½Cï¿½ï¿½ï¿½v#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½gï¿½Dï¿½Cï¿½ï¿½ï¿½z#0Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@#2CuƒŒƒVƒs’ Eƒ‰ƒ^ƒgƒDƒCƒ†v#0C‚ðŽg‚¢‚Ü‚·‚©H\n•°‚«‰Î‚Å#2Cy“÷Œúƒ‰ƒ^ƒgƒDƒCƒ†z#0C‚ðì‚ê‚é‚æ‚¤‚É‚È‚è‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_COOK_RECIPE02, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½ï¿½
-		SetFlag( GF_RECIPE_03, 1)					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½gï¿½Dï¿½Cï¿½ï¿½
+		// ƒŒƒVƒs“üŽè
+		SetFlag( GF_RECIPE_03, 1)					// “÷Œúƒ‰ƒ^ƒgƒDƒCƒ†
 
-		Message("#4Cï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½gï¿½Dï¿½Cï¿½ï¿½ï¿½z#4Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C•°‚«‰Î‚Å#2Cy“÷Œúƒ‰ƒ^ƒgƒDƒCƒ†z#4C‚ðì‚ê‚é‚æ‚¤‚É‚È‚Á‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1893,29 +1896,29 @@ function "it_cook_book02"
 }
 
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½jï¿½Gï¿½ï¿½
+// ƒŒƒVƒs’ Eƒ€ƒjƒGƒ‹
 function "it_cook_book03"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@#2Cï¿½uï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½jï¿½Gï¿½ï¿½ï¿½v#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½Ê‚èƒ€ï¿½jï¿½Gï¿½ï¿½ï¿½z#0Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@#2CuƒŒƒVƒs’ Eƒ€ƒjƒGƒ‹v#0C‚ðŽg‚¢‚Ü‚·‚©H\n•°‚«‰Î‚Å#2CyÊ‚èƒ€ƒjƒGƒ‹z#0C‚ðì‚ê‚é‚æ‚¤‚É‚È‚è‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_COOK_RECIPE03, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½ï¿½
-		SetFlag( GF_RECIPE_04, 1)					// ï¿½Ê‚èƒ€ï¿½jï¿½Gï¿½ï¿½
+		// ƒŒƒVƒs“üŽè
+		SetFlag( GF_RECIPE_04, 1)					// Ê‚èƒ€ƒjƒGƒ‹
 
-		Message("#4Cï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½Ê‚èƒ€ï¿½jï¿½Gï¿½ï¿½ï¿½z#4Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C•°‚«‰Î‚Å#2CyÊ‚èƒ€ƒjƒGƒ‹z#4C‚ðì‚ê‚é‚æ‚¤‚É‚È‚Á‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1926,29 +1929,29 @@ function "it_cook_book03"
 }
 
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½Lï¿½bï¿½Vï¿½ï¿½
+// ƒŒƒVƒs’ EƒLƒbƒVƒ…
 function "it_cook_book04"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@#2Cï¿½uï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½Lï¿½bï¿½Vï¿½ï¿½ï¿½v#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½Cï¿½Nï¿½Lï¿½bï¿½Vï¿½ï¿½ï¿½z#0Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@#2CuƒŒƒVƒs’ EƒLƒbƒVƒ…v#0C‚ðŽg‚¢‚Ü‚·‚©H\n•°‚«‰Î‚Å#2CyŠC‘NƒLƒbƒVƒ…z#0C‚ðì‚ê‚é‚æ‚¤‚É‚È‚è‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_COOK_RECIPE04, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½ï¿½
-		SetFlag( GF_RECIPE_05, 1)					// ï¿½Cï¿½Nï¿½Lï¿½bï¿½Vï¿½ï¿½
+		// ƒŒƒVƒs“üŽè
+		SetFlag( GF_RECIPE_05, 1)					// ŠC‘NƒLƒbƒVƒ…
 
-		Message("#4Cï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½Cï¿½Nï¿½Lï¿½bï¿½Vï¿½ï¿½ï¿½z#4Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C•°‚«‰Î‚Å#2CyŠC‘NƒLƒbƒVƒ…z#4C‚ðì‚ê‚é‚æ‚¤‚É‚È‚Á‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1959,29 +1962,29 @@ function "it_cook_book04"
 }
 
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½Lï¿½ï¿½ï¿½xï¿½c
+// ƒŒƒVƒs’ EƒLƒƒƒxƒc
 function "it_cook_book05"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@#2Cï¿½uï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½Lï¿½ï¿½ï¿½xï¿½cï¿½v#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½xï¿½cï¿½z#0Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@#2CuƒŒƒVƒs’ EƒLƒƒƒxƒcv#0C‚ðŽg‚¢‚Ü‚·‚©H\n•°‚«‰Î‚Å#2Cyƒ[ƒ‹ƒLƒƒƒxƒcz#0C‚ðì‚ê‚é‚æ‚¤‚É‚È‚è‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_COOK_RECIPE05, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½ï¿½
-		SetFlag( GF_RECIPE_06, 1)					// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½xï¿½c
+		// ƒŒƒVƒs“üŽè
+		SetFlag( GF_RECIPE_06, 1)					// ƒ[ƒ‹ƒLƒƒƒxƒc
 
-		Message("#4Cï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½xï¿½cï¿½z#4Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C•°‚«‰Î‚Å#2Cyƒ[ƒ‹ƒLƒƒƒxƒcz#4C‚ðì‚ê‚é‚æ‚¤‚É‚È‚Á‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -1992,29 +1995,29 @@ function "it_cook_book05"
 }
 
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½ÆƒLï¿½mï¿½R
+// ƒŒƒVƒs’ E“÷‚ÆƒLƒmƒR
 function "it_cook_book06"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@#2Cï¿½uï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½ÆƒLï¿½mï¿½Rï¿½v#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½mï¿½Rï¿½[ï¿½ï¿½ï¿½z#0Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@#2CuƒŒƒVƒs’ E“÷‚ÆƒLƒmƒRv#0C‚ðŽg‚¢‚Ü‚·‚©H\n•°‚«‰Î‚Å#2Cy“÷Šª‚«ƒLƒmƒR[ƒ“z#0C‚ðì‚ê‚é‚æ‚¤‚É‚È‚è‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_COOK_RECIPE06, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½ï¿½
-		SetFlag( GF_RECIPE_07, 1)					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½mï¿½Rï¿½[ï¿½ï¿½
+		// ƒŒƒVƒs“üŽè
+		SetFlag( GF_RECIPE_07, 1)					// “÷Šª‚«ƒLƒmƒR[ƒ“
 
-		Message("#4Cï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½mï¿½Rï¿½[ï¿½ï¿½ï¿½z#4Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C•°‚«‰Î‚Å#2Cy“÷Šª‚«ƒLƒmƒR[ƒ“z#4C‚ðì‚ê‚é‚æ‚¤‚É‚È‚Á‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -2025,29 +2028,29 @@ function "it_cook_book06"
 }
 
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½tï¿½ï¿½ï¿½C
+// ƒŒƒVƒs’ Eƒtƒ‰ƒC
 function "it_cook_book07"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@#2Cï¿½uï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½tï¿½ï¿½ï¿½Cï¿½v#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½tï¿½Bï¿½bï¿½Vï¿½ï¿½ï¿½tï¿½ï¿½ï¿½Cï¿½z#0Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@#2CuƒŒƒVƒs’ Eƒtƒ‰ƒCv#0C‚ðŽg‚¢‚Ü‚·‚©H\n•°‚«‰Î‚Å#2CyƒtƒBƒbƒVƒ…ƒtƒ‰ƒCz#0C‚ðì‚ê‚é‚æ‚¤‚É‚È‚è‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_COOK_RECIPE07, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½ï¿½
-		SetFlag( GF_RECIPE_08, 1)					// ï¿½tï¿½Bï¿½bï¿½Vï¿½ï¿½ï¿½tï¿½ï¿½ï¿½C
+		// ƒŒƒVƒs“üŽè
+		SetFlag( GF_RECIPE_08, 1)					// ƒtƒBƒbƒVƒ…ƒtƒ‰ƒC
 
-		Message("#4Cï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½tï¿½Bï¿½bï¿½Vï¿½ï¿½ï¿½tï¿½ï¿½ï¿½Cï¿½z#4Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C•°‚«‰Î‚Å#2CyƒtƒBƒbƒVƒ…ƒtƒ‰ƒCz#4C‚ðì‚ê‚é‚æ‚¤‚É‚È‚Á‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -2058,29 +2061,29 @@ function "it_cook_book07"
 }
 
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½Cï¿½ï¿½ï¿½ï¿½
+// ƒŒƒVƒs’ EŠC‘¯”Ñ
 function "it_cook_book08"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@#2Cï¿½uï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½Cï¿½ï¿½ï¿½Ñv#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½pï¿½Cï¿½ï¿½ï¿½[ï¿½cï¿½fï¿½Bï¿½bï¿½Vï¿½ï¿½ï¿½z#0Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@#2CuƒŒƒVƒs’ EŠC‘¯”Ñv#0C‚ðŽg‚¢‚Ü‚·‚©H\n•°‚«‰Î‚Å#2CyƒpƒCƒŒ[ƒcƒfƒBƒbƒVƒ…z#0C‚ðì‚ê‚é‚æ‚¤‚É‚È‚è‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_COOK_RECIPE08, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½ï¿½
-		SetFlag( GF_RECIPE_09, 1)					// ï¿½pï¿½Cï¿½ï¿½ï¿½[ï¿½cï¿½fï¿½Bï¿½bï¿½Vï¿½ï¿½
+		// ƒŒƒVƒs“üŽè
+		SetFlag( GF_RECIPE_09, 1)					// ƒpƒCƒŒ[ƒcƒfƒBƒbƒVƒ…
 
-		Message("#4Cï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½pï¿½Cï¿½ï¿½ï¿½[ï¿½cï¿½fï¿½Bï¿½bï¿½Vï¿½ï¿½ï¿½z#4Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C•°‚«‰Î‚Å#2CyƒpƒCƒŒ[ƒcƒfƒBƒbƒVƒ…z#4C‚ðì‚ê‚é‚æ‚¤‚É‚È‚Á‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -2091,29 +2094,29 @@ function "it_cook_book08"
 }
 
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½Rï¿½[ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½[
+// ƒŒƒVƒs’ EƒR[ƒ‹ƒXƒ[
 function "it_cook_book09"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@#2Cï¿½uï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½Rï¿½[ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½[ï¿½v#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½Ò‘ï¿½Rï¿½[ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½[ï¿½z#0Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@#2CuƒŒƒVƒs’ EƒR[ƒ‹ƒXƒ[v#0C‚ðŽg‚¢‚Ü‚·‚©H\n•°‚«‰Î‚Å#2CyæÒ‘òƒR[ƒ‹ƒXƒ[z#0C‚ðì‚ê‚é‚æ‚¤‚É‚È‚è‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_COOK_RECIPE09, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½ï¿½
-		SetFlag( GF_RECIPE_10, 1)					// ï¿½Ò‘ï¿½Rï¿½[ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½[
+		// ƒŒƒVƒs“üŽè
+		SetFlag( GF_RECIPE_10, 1)					// æÒ‘òƒR[ƒ‹ƒXƒ[
 
-		Message("#4Cï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½Ò‘ï¿½Rï¿½[ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½[ï¿½z#4Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C•°‚«‰Î‚Å#2CyæÒ‘òƒR[ƒ‹ƒXƒ[z#4C‚ðì‚ê‚é‚æ‚¤‚É‚È‚Á‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -2124,29 +2127,29 @@ function "it_cook_book09"
 }
 
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½{ï¿½ï¿½ï¿½lï¿½[ï¿½[
+// ƒŒƒVƒs’ Eƒ{ƒƒl[ƒ[
 function "it_cook_book10"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@#2Cï¿½uï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½{ï¿½ï¿½ï¿½lï¿½[ï¿½[ï¿½v#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½^ï¿½Sï¿½{ï¿½ï¿½ï¿½lï¿½[ï¿½[ï¿½z#0Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@#2CuƒŒƒVƒs’ Eƒ{ƒƒl[ƒ[v#0C‚ðŽg‚¢‚Ü‚·‚©H\n•°‚«‰Î‚Å#2Cy^Sƒ{ƒƒl[ƒ[z#0C‚ðì‚ê‚é‚æ‚¤‚É‚È‚è‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_COOK_RECIPE10, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½ï¿½
-		SetFlag( GF_RECIPE_11, 1)					// ï¿½^ï¿½Sï¿½{ï¿½ï¿½ï¿½lï¿½[ï¿½[
+		// ƒŒƒVƒs“üŽè
+		SetFlag( GF_RECIPE_11, 1)					// ^Sƒ{ƒƒl[ƒ[
 
-		Message("#4Cï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½^ï¿½Sï¿½{ï¿½ï¿½ï¿½lï¿½[ï¿½[ï¿½z#4Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C•°‚«‰Î‚Å#2Cy^Sƒ{ƒƒl[ƒ[z#4C‚ðì‚ê‚é‚æ‚¤‚É‚È‚Á‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -2157,29 +2160,29 @@ function "it_cook_book10"
 }
 
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½pï¿½ï¿½ï¿½vï¿½Lï¿½ï¿½ï¿½pï¿½C
+// ƒŒƒVƒs’ Eƒpƒ“ƒvƒLƒ“ƒpƒC
 function "it_cook_book11"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@#2Cï¿½uï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½Eï¿½pï¿½ï¿½ï¿½vï¿½Lï¿½ï¿½ï¿½pï¿½Cï¿½v#0Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H\nï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½ï¿½ï¿½lï¿½pï¿½ï¿½ï¿½vï¿½Lï¿½ï¿½ï¿½pï¿½Cï¿½z#0Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½Ü‚ï¿½ï¿½B",1)
+	YesNoMenu(TF_MENU_SELECT2,"@@@#2CuƒŒƒVƒs’ Eƒpƒ“ƒvƒLƒ“ƒpƒCv#0C‚ðŽg‚¢‚Ü‚·‚©H\n•°‚«‰Î‚Å#2Cy‰¤—lƒpƒ“ƒvƒLƒ“ƒpƒCz#0C‚ðì‚ê‚é‚æ‚¤‚É‚È‚è‚Ü‚·B",1)
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 //		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_COOK_RECIPE11, 1)
 
 		//SetStopFlag(STOPFLAG_SIMPLEEVENT)
 		//SetStopFlag(STOPFLAG_FREEZE)
 		//ResetMoveVec("PARTYALL")
 
-		// ï¿½ï¿½ï¿½Vï¿½sï¿½ï¿½ï¿½ï¿½
-		SetFlag( GF_RECIPE_12, 1)					// ï¿½ï¿½ï¿½lï¿½pï¿½ï¿½ï¿½vï¿½Lï¿½ï¿½ï¿½pï¿½C
+		// ƒŒƒVƒs“üŽè
+		SetFlag( GF_RECIPE_12, 1)					// ‰¤—lƒpƒ“ƒvƒLƒ“ƒpƒC
 
-		Message("#4Cï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½#2Cï¿½yï¿½ï¿½ï¿½lï¿½pï¿½ï¿½ï¿½vï¿½Lï¿½ï¿½ï¿½pï¿½Cï¿½z#4Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½B")
+		Message("#4C•°‚«‰Î‚Å#2Cy‰¤—lƒpƒ“ƒvƒLƒ“ƒpƒCz#4C‚ðì‚ê‚é‚æ‚¤‚É‚È‚Á‚½B")
 		WaitPrompt()
 		//Wait(10)
 		WaitCloseWindow()
@@ -2190,24 +2193,24 @@ function "it_cook_book11"
 }
 
 /////////////////////////////////////
-// ï¿½Ê•ï¿½
+// ‰Ê•¨
 function "it_fruits01"
 {
 
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½Nï¿½ï¿½ï¿½ÌŽï¿½ï¿½iï¿½Pï¿½Oï¿½Oï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// ƒNƒ‹‚ÌŽÀi‚P‚O‚O‰ñ•œj
 		HP_Heal( this , 100)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_BERRY, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_BERRY)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -2220,18 +2223,18 @@ function "it_fruits02"
 
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½Rï¿½Rï¿½ï¿½ï¿½Vï¿½iï¿½Qï¿½Oï¿½Oï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// ƒRƒRƒ„ƒVi‚Q‚O‚O‰ñ•œj
 		HP_Heal( this , 200)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_COCONUT, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_COCONUT)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -2244,18 +2247,18 @@ function "it_fruits03"
 
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½}ï¿½ï¿½ï¿½Sï¿½[ï¿½iï¿½Tï¿½Oï¿½Oï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// ƒ}ƒ“ƒS[i‚T‚O‚O‰ñ•œj
 		HP_Heal( this , 500)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_MANGO, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_MANGO)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -2268,18 +2271,18 @@ function "it_fruits04"
 
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ÌŽï¿½ï¿½iï¿½Pï¿½Oï¿½Oï¿½Oï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// —³Ž÷‚ÌŽÀi‚P‚O‚O‚O‰ñ•œj
 		HP_Heal( this , 1000)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_DRAGONFRUIT, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_DRAGONFRUIT)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -2288,25 +2291,25 @@ function "it_fruits04"
 }
 
 /////////////////////////////////////
-// ï¿½Ê•ï¿½ï¿½iï¿½ï¿½ï¿½nï¿½j
+// ‰Ê•¨iŠ®nj
 
 function "it_fruits01s"
 {
 
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½Nï¿½ï¿½ï¿½Ì–Lï¿½ï¿½ï¿½iï¿½Pï¿½Oï¿½Oï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// ƒNƒ‹‚Ì–LŽÀi‚P‚O‚O‰ñ•œj
 		HP_ORecover( this , 100 )
 		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_BERRY_S, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_BERRY_S)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -2319,18 +2322,18 @@ function "it_fruits02s"
 
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½ï¿½ï¿½nï¿½Rï¿½Rï¿½ï¿½ï¿½Vï¿½iï¿½Qï¿½Oï¿½Oï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// Š®nƒRƒRƒ„ƒVi‚Q‚O‚O‰ñ•œj
 		HP_ORecover( this , 200 )
 		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_COCONUT_S, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_COCONUT_S)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -2343,18 +2346,18 @@ function "it_fruits03s"
 
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½ï¿½ï¿½nï¿½}ï¿½ï¿½ï¿½Sï¿½[ï¿½iï¿½Tï¿½Oï¿½Oï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// Š®nƒ}ƒ“ƒS[i‚T‚O‚O‰ñ•œj
 		HP_ORecover( this , 500 )
 		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_MANGO_S, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_MANGO_S)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -2367,18 +2370,18 @@ function "it_fruits04s"
 
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
-		// ï¿½ï¿½ï¿½ï¿½ï¿½Ì•ï¿½Êiï¿½Pï¿½Oï¿½Oï¿½Oï¿½ñ•œj
+		// Žg‚Á‚Ä‚¢‚¢
+		// —³Ž÷‚Ì•ó‰Êi‚P‚O‚O‚O‰ñ•œj
 		HP_ORecover( this , 1000 )
 		PlaySE( SE_ITEM_SERUSETA , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_US_DRAGONFRUIT_S, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_US_DRAGONFRUIT_S)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -2386,13 +2389,13 @@ function "it_fruits04s"
 
 }
 
-function "FoodVoice"//ï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½Cï¿½X
+function "FoodVoice"//—¿—ƒ{ƒCƒX
 {
-	SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+	SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 	SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 	SetFlag(TF_MENU_SELECT,0)					
-	while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 	{
 		if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 		{
@@ -2426,46 +2429,46 @@ function "FoodVoice"//ï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½Cï¿½X
 
 	if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 	{
-		PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+		PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 	}
 	else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 	{
-		PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+		PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 	}
 	else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 	{
-		PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+		PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 	}
 	else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 	{
-		PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+		PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 	}
 	else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 	{
-		PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+		PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 	}
 	else
 	{
-		PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+		PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 	}		
 }
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½ï¿½
+// —¿—
 //
-// ï¿½ï¿½ï¿½ê‚¼ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½ balance.csv
-// ï¿½ï¿½ï¿½ÌŒï¿½ï¿½ÊŽï¿½ï¿½Ô‚ï¿½ item.csv
-// ï¿½ñ•œ—Ê‚ï¿½ ï¿½ï¿½ï¿½Í‚ï¿½ß‚ÄAï¿½Å’ï¿½lï¿½ÉBï¿½Åï¿½ï¿½Ì‚ï¿½500ï¿½Bï¿½Åï¿½ï¿½ï¿½3000ï¿½É‚ï¿½ï¿½ï¿½B
+// ‚»‚ê‚¼‚ê‚ÌŒø‰Ê‚Í balance.csv
+// ‚»‚ÌŒø‰ÊŽžŠÔ‚Í item.csv
+// ‰ñ•œ—Ê‚Í “‚Í‚â‚ß‚ÄAŒÅ’è’l‚ÉBÅ‰‚Ì‚ð500BÅ‚‚ð3000‚É‚·‚éB
 
 
-function "it_usfood01"	//ï¿½ï¿½ï¿½ï¿½Xï¿½[ï¿½v
+function "it_usfood01"	//‹›‰îƒX[ƒv
 {
 	if( WORK[WK_FOODEFFTIME] > 0 ){
 		SetFlag( TF_MENU_SELECT2, 0 )
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ô‚ÍAï¿½Hï¿½×‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B#10W" 
+			"#-1W#4C—¿—‚ÌŒø‰Ê‚ª‘±‚¢‚Ä‚¢‚éŠÔ‚ÍAH‚×‚ç‚ê‚Ü‚¹‚ñB#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -2484,13 +2487,13 @@ function "it_usfood01"	//ï¿½ï¿½ï¿½ï¿½Xï¿½[ï¿½v
 		{
 			SetFlag( TF_MENU_SELECT2, 0 )
 			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-			YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+			YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 		}
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( ADOL ,    400)
 		HP_Heal( LAXIA ,   400)
 		HP_Heal( SAHAD ,   400)
@@ -2498,17 +2501,17 @@ function "it_usfood01"	//ï¿½ï¿½ï¿½ï¿½Xï¿½[ï¿½v
 		HP_Heal( RICOTTA , 400)
 		HP_Heal( DANA ,    400)
 
-		UseFood(FOODEFFID_BREAKUP1)			// ï¿½^ï¿½uï¿½ï¿½ï¿½Cï¿½Nï¿½ÊƒAï¿½bï¿½v1
+		UseFood(FOODEFFID_BREAKUP1)			// —^ƒuƒŒƒCƒN—ÊƒAƒbƒv1
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_USFD_FOOD00, 1)
 
-		SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+		SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -2541,7 +2544,7 @@ function "it_usfood01"	//ï¿½ï¿½ï¿½ï¿½Xï¿½[ï¿½v
 		}
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -2575,32 +2578,32 @@ function "it_usfood01"	//ï¿½ï¿½ï¿½ï¿½Xï¿½[ï¿½v
 
 		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_USFD_FOOD00)
 
 		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -2608,15 +2611,15 @@ function "it_usfood01"	//ï¿½ï¿½ï¿½ï¿½Xï¿½[ï¿½v
 	
 
 }
-function "it_usfood02"	//ï¿½Lï¿½mï¿½Rï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½c
+function "it_usfood02"	//ƒLƒmƒRƒIƒ€ƒŒƒc
 {
 	if( WORK[WK_FOODEFFTIME] > 0 ){
 		SetFlag( TF_MENU_SELECT2, 0 )
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ô‚ÍAï¿½Hï¿½×‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B#10W" 
+			"#-1W#4C—¿—‚ÌŒø‰Ê‚ª‘±‚¢‚Ä‚¢‚éŠÔ‚ÍAH‚×‚ç‚ê‚Ü‚¹‚ñB#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -2635,13 +2638,13 @@ function "it_usfood02"	//ï¿½Lï¿½mï¿½Rï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½c
 		{
 			SetFlag( TF_MENU_SELECT2, 0 )
 			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-			YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+			YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 		}
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( ADOL ,    350)
 		HP_Heal( LAXIA ,   350)
 		HP_Heal( SAHAD ,   350)
@@ -2649,24 +2652,24 @@ function "it_usfood02"	//ï¿½Lï¿½mï¿½Rï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½c
 		HP_Heal( RICOTTA , 350)
 		HP_Heal( DANA ,    350)
 
-		//ï¿½ï¿½ÔˆÙï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½
+		//ó‘ÔˆÙí‚àŠ®‘S‰ñ•œ
 		Cure(ADOL, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		Cure(LAXIA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		Cure(SAHAD, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		Cure(HUMMEL, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		Cure(RICOTTA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		Cure(DANA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
-		UseFood(FOODEFFID_CURE1)			// ï¿½ï¿½ÔˆÙï¿½ñ•œAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½P
+		UseFood(FOODEFFID_CURE1)			// ó‘ÔˆÙí‰ñ•œA–³Œø‰»‚P
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_USFD_FOOD01, 1)
 
-		SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+		SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -2700,47 +2703,47 @@ function "it_usfood02"	//ï¿½Lï¿½mï¿½Rï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½c
 
 		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_USFD_FOOD01)
 
 		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 
 }
-function "it_usfood03"	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½gï¿½Dï¿½Cï¿½ï¿½
+function "it_usfood03"	//“÷Œúƒ‰ƒ^ƒgƒDƒCƒ†
 {
 	if( WORK[WK_FOODEFFTIME] > 0 ){
 		SetFlag( TF_MENU_SELECT2, 0 )
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ô‚ÍAï¿½Hï¿½×‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B#10W" 
+			"#-1W#4C—¿—‚ÌŒø‰Ê‚ª‘±‚¢‚Ä‚¢‚éŠÔ‚ÍAH‚×‚ç‚ê‚Ü‚¹‚ñB#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -2759,13 +2762,13 @@ function "it_usfood03"	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½gï¿½Dï¿½Cï¿½ï¿½
 		{
 			SetFlag( TF_MENU_SELECT2, 0 )
 			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-			YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+			YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 		}
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( ADOL ,    600)
 		HP_Heal( LAXIA ,   600)
 		HP_Heal( SAHAD ,   600)
@@ -2773,17 +2776,17 @@ function "it_usfood03"	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½gï¿½Dï¿½Cï¿½ï¿½
 		HP_Heal( RICOTTA , 600)
 		HP_Heal( DANA ,    600)
 
-		UseFood(FOODEFFID_SPHEAL1)			// SPï¿½ï¿½1
+		UseFood(FOODEFFID_SPHEAL1)			// SP‰ñ•œ1
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_USFD_FOOD02, 1)
 
-		SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+		SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -2817,47 +2820,47 @@ function "it_usfood03"	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½gï¿½Dï¿½Cï¿½ï¿½
 
 		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_USFD_FOOD02)
 
 		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 
 }
-function "it_usfood04"	//ï¿½Ê‚èƒ€ï¿½jï¿½Gï¿½ï¿½
+function "it_usfood04"	//Ê‚èƒ€ƒjƒGƒ‹
 {
 	if( WORK[WK_FOODEFFTIME] > 0 ){
 		SetFlag( TF_MENU_SELECT2, 0 )
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ô‚ÍAï¿½Hï¿½×‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B#10W" 
+			"#-1W#4C—¿—‚ÌŒø‰Ê‚ª‘±‚¢‚Ä‚¢‚éŠÔ‚ÍAH‚×‚ç‚ê‚Ü‚¹‚ñB#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -2876,13 +2879,13 @@ function "it_usfood04"	//ï¿½Ê‚èƒ€ï¿½jï¿½Gï¿½ï¿½
 		{
 			SetFlag( TF_MENU_SELECT2, 0 )
 			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-			YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+			YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 		}
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( ADOL ,    300)
 		HP_Heal( LAXIA ,   300)
 		HP_Heal( SAHAD ,   300)
@@ -2890,17 +2893,17 @@ function "it_usfood04"	//ï¿½Ê‚èƒ€ï¿½jï¿½Gï¿½ï¿½
 		HP_Heal( RICOTTA , 300)
 		HP_Heal( DANA ,    300)
 
-		UseFood(FOODEFFID_STRDEFUP1)		// ï¿½^ï¿½_ï¿½ï¿½ï¿½tï¿½oï¿½Cï¿½ï¿½_ï¿½ï¿½ï¿½cï¿½nï¿½vï¿½m2
+		UseFood(FOODEFFID_STRDEFUP1)		// —^ƒ_ƒ‚t‚oC”íƒ_ƒ‚c‚n‚v‚m2
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_USFD_FOOD03, 1)
 
-		SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+		SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -2934,47 +2937,47 @@ function "it_usfood04"	//ï¿½Ê‚èƒ€ï¿½jï¿½Gï¿½ï¿½
 
 		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_USFD_FOOD03)
 
 		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 
 }
-function "it_usfood05"	//ï¿½Cï¿½Nï¿½Lï¿½bï¿½Vï¿½ï¿½
+function "it_usfood05"	//ŠC‘NƒLƒbƒVƒ…
 {
 	if( WORK[WK_FOODEFFTIME] > 0 ){
 		SetFlag( TF_MENU_SELECT2, 0 )
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ô‚ÍAï¿½Hï¿½×‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B#10W" 
+			"#-1W#4C—¿—‚ÌŒø‰Ê‚ª‘±‚¢‚Ä‚¢‚éŠÔ‚ÍAH‚×‚ç‚ê‚Ü‚¹‚ñB#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -2993,13 +2996,13 @@ function "it_usfood05"	//ï¿½Cï¿½Nï¿½Lï¿½bï¿½Vï¿½ï¿½
 		{
 			SetFlag( TF_MENU_SELECT2, 0 )
 			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-			YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+			YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 		}
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( ADOL ,    500)
 		HP_Heal( LAXIA ,   500)
 		HP_Heal( SAHAD ,   500)
@@ -3007,17 +3010,17 @@ function "it_usfood05"	//ï¿½Cï¿½Nï¿½Lï¿½bï¿½Vï¿½ï¿½
 		HP_Heal( RICOTTA , 500)
 		HP_Heal( DANA ,    500)
 
-		UseFood(FOODEFFID_EXPUP1)			// ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½lï¿½Aï¿½bï¿½vï¿½P
+		UseFood(FOODEFFID_EXPUP1)			// “üŽèŒoŒ±’lƒAƒbƒv‚P
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_USFD_FOOD04, 1)
 
-		SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+		SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -3051,47 +3054,47 @@ function "it_usfood05"	//ï¿½Cï¿½Nï¿½Lï¿½bï¿½Vï¿½ï¿½
 
 		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_USFD_FOOD04)
 
 		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 
 }
-function "it_usfood06"	//ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½xï¿½c
+function "it_usfood06"	//ƒ[ƒ‹ƒLƒƒƒxƒc
 {
 	if( WORK[WK_FOODEFFTIME] > 0 ){
 		SetFlag( TF_MENU_SELECT2, 0 )
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ô‚ÍAï¿½Hï¿½×‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B#10W" 
+			"#-1W#4C—¿—‚ÌŒø‰Ê‚ª‘±‚¢‚Ä‚¢‚éŠÔ‚ÍAH‚×‚ç‚ê‚Ü‚¹‚ñB#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -3110,13 +3113,13 @@ function "it_usfood06"	//ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½xï¿½c
 		{
 			SetFlag( TF_MENU_SELECT2, 0 )
 			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-			YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+			YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 		}
 	}
 
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( ADOL ,    700)
 		HP_Heal( LAXIA ,   700)
 		HP_Heal( SAHAD ,   700)
@@ -3124,17 +3127,17 @@ function "it_usfood06"	//ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½xï¿½c
 		HP_Heal( RICOTTA , 700)
 		HP_Heal( DANA ,    700)
 
-		UseFood(FOODEFFID_HPHEAL1)			// HPï¿½ñ•œ‚P
+		UseFood(FOODEFFID_HPHEAL1)			// HP‰ñ•œ‚P
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_USFD_FOOD05, 1)
 
-		SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+		SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -3168,32 +3171,32 @@ function "it_usfood06"	//ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½xï¿½c
 
 		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_USFD_FOOD05)
 
 		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -3201,17 +3204,17 @@ function "it_usfood06"	//ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½xï¿½c
 
 }
 
-//----ï¿½ï¿½Ê—ï¿½ï¿½ï¿½----//
+//----ãˆÊ—¿—----//
 
-function "it_usfood11"	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½mï¿½Rï¿½[ï¿½ï¿½
+function "it_usfood11"	//“÷Šª‚«ƒLƒmƒR[ƒ“
 {
 	if( WORK[WK_FOODEFFTIME] > 0 ){
 		SetFlag( TF_MENU_SELECT2, 0 )
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ô‚ÍAï¿½Hï¿½×‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B#10W" 
+			"#-1W#4C—¿—‚ÌŒø‰Ê‚ª‘±‚¢‚Ä‚¢‚éŠÔ‚ÍAH‚×‚ç‚ê‚Ü‚¹‚ñB#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -3230,13 +3233,13 @@ function "it_usfood11"	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½mï¿½Rï¿½[ï¿½ï¿½
 		{
 			SetFlag( TF_MENU_SELECT2, 0 )
 			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-			YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+			YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 		}
 	}
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( ADOL ,    2000)
 		HP_Heal( LAXIA ,   2000)
 		HP_Heal( SAHAD ,   2000)
@@ -3250,17 +3253,17 @@ function "it_usfood11"	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½mï¿½Rï¿½[ï¿½ï¿½
 		Cure(HUMMEL, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		Cure(RICOTTA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		Cure(DANA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
-		UseFood(FOODEFFID_CURE2)			// ï¿½ï¿½ÔˆÙï¿½ñ•œAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2
+		UseFood(FOODEFFID_CURE2)			// ó‘ÔˆÙí‰ñ•œA–³Œø‰»2
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_USFD_FOOD10, 1)
 
-		SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+		SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -3294,47 +3297,47 @@ function "it_usfood11"	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½mï¿½Rï¿½[ï¿½ï¿½
 
 		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_USFD_FOOD10)
 
 		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 
 }
-function "it_usfood12"	//ï¿½tï¿½Bï¿½bï¿½Vï¿½ï¿½ï¿½tï¿½ï¿½ï¿½C
+function "it_usfood12"	//ƒtƒBƒbƒVƒ…ƒtƒ‰ƒC
 {
 	if( WORK[WK_FOODEFFTIME] > 0 ){
 		SetFlag( TF_MENU_SELECT2, 0 )
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ô‚ÍAï¿½Hï¿½×‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B#10W" 
+			"#-1W#4C—¿—‚ÌŒø‰Ê‚ª‘±‚¢‚Ä‚¢‚éŠÔ‚ÍAH‚×‚ç‚ê‚Ü‚¹‚ñB#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -3353,13 +3356,13 @@ function "it_usfood12"	//ï¿½tï¿½Bï¿½bï¿½Vï¿½ï¿½ï¿½tï¿½ï¿½ï¿½C
 		{
 			SetFlag( TF_MENU_SELECT2, 0 )
 			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-			YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+			YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 		}
 	}
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( ADOL ,    1800)
 		HP_Heal( LAXIA ,   1800)
 		HP_Heal( SAHAD ,   1800)
@@ -3367,17 +3370,17 @@ function "it_usfood12"	//ï¿½tï¿½Bï¿½bï¿½Vï¿½ï¿½ï¿½tï¿½ï¿½ï¿½C
 		HP_Heal( RICOTTA , 1800)
 		HP_Heal( DANA ,    1800)
 
-		UseFood(FOODEFFID_BREAKUP2)			// ï¿½^ï¿½uï¿½ï¿½ï¿½Cï¿½Nï¿½ÊƒAï¿½bï¿½v2
+		UseFood(FOODEFFID_BREAKUP2)			// —^ƒuƒŒƒCƒN—ÊƒAƒbƒv2
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_USFD_FOOD11, 1)
 
-		SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+		SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -3411,47 +3414,47 @@ function "it_usfood12"	//ï¿½tï¿½Bï¿½bï¿½Vï¿½ï¿½ï¿½tï¿½ï¿½ï¿½C
 
 		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_USFD_FOOD11)
 
 		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 
 }
-function "it_usfood13"	//ï¿½pï¿½Cï¿½ï¿½ï¿½[ï¿½cï¿½vï¿½ï¿½ï¿½[ï¿½g
+function "it_usfood13"	//ƒpƒCƒŒ[ƒcƒvƒŒ[ƒg
 {
 	if( WORK[WK_FOODEFFTIME] > 0 ){
 		SetFlag( TF_MENU_SELECT2, 0 )
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ô‚ÍAï¿½Hï¿½×‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B#10W" 
+			"#-1W#4C—¿—‚ÌŒø‰Ê‚ª‘±‚¢‚Ä‚¢‚éŠÔ‚ÍAH‚×‚ç‚ê‚Ü‚¹‚ñB#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -3470,13 +3473,13 @@ function "it_usfood13"	//ï¿½pï¿½Cï¿½ï¿½ï¿½[ï¿½cï¿½vï¿½ï¿½ï¿½[ï¿½g
 		{
 			SetFlag( TF_MENU_SELECT2, 0 )
 			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-			YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+			YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 		}
 	}
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( ADOL ,    1500)
 		HP_Heal( LAXIA ,   1500)
 		HP_Heal( SAHAD ,   1500)
@@ -3485,16 +3488,16 @@ function "it_usfood13"	//ï¿½pï¿½Cï¿½ï¿½ï¿½[ï¿½cï¿½vï¿½ï¿½ï¿½[ï¿½g
 		HP_Heal( DANA ,    1500)
 		
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		UseFood(FOODEFFID_EXPUP2)			// ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½lï¿½Aï¿½bï¿½v2
+		UseFood(FOODEFFID_EXPUP2)			// “üŽèŒoŒ±’lƒAƒbƒv2
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_USFD_FOOD12, 1)
 
-		SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+		SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -3528,47 +3531,47 @@ function "it_usfood13"	//ï¿½pï¿½Cï¿½ï¿½ï¿½[ï¿½cï¿½vï¿½ï¿½ï¿½[ï¿½g
 
 		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_USFD_FOOD12)
 
 		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 
 }
-function "it_usfood14"	//ï¿½Ò‘ï¿½Rï¿½[ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½[
+function "it_usfood14"	//æÒ‘òƒR[ƒ‹ƒXƒ[
 {
 	if( WORK[WK_FOODEFFTIME] > 0 ){
 		SetFlag( TF_MENU_SELECT2, 0 )
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ô‚ÍAï¿½Hï¿½×‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B#10W" 
+			"#-1W#4C—¿—‚ÌŒø‰Ê‚ª‘±‚¢‚Ä‚¢‚éŠÔ‚ÍAH‚×‚ç‚ê‚Ü‚¹‚ñB#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -3587,13 +3590,13 @@ function "it_usfood14"	//ï¿½Ò‘ï¿½Rï¿½[ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½[
 		{
 			SetFlag( TF_MENU_SELECT2, 0 )
 			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-			YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+			YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 		}
 	}
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( ADOL ,    2100)
 		HP_Heal( LAXIA ,   2100)
 		HP_Heal( SAHAD ,   2100)
@@ -3602,16 +3605,16 @@ function "it_usfood14"	//ï¿½Ò‘ï¿½Rï¿½[ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½[
 		HP_Heal( DANA ,    2100)
 		
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		UseFood(FOODEFFID_HPHEAL2)			// HPï¿½ï¿½2
+		UseFood(FOODEFFID_HPHEAL2)			// HP‰ñ•œ2
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_USFD_FOOD13, 1)
 
-		SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+		SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -3645,47 +3648,47 @@ function "it_usfood14"	//ï¿½Ò‘ï¿½Rï¿½[ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½[
 
 		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_USFD_FOOD13)
 
 		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 
 }
-function "it_usfood15"	//ï¿½^ï¿½Sï¿½{ï¿½ï¿½ï¿½lï¿½[ï¿½[
+function "it_usfood15"	//^Sƒ{ƒƒl[ƒ[
 {
 	if( WORK[WK_FOODEFFTIME] > 0 ){
 		SetFlag( TF_MENU_SELECT2, 0 )
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ô‚ÍAï¿½Hï¿½×‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B#10W" 
+			"#-1W#4C—¿—‚ÌŒø‰Ê‚ª‘±‚¢‚Ä‚¢‚éŠÔ‚ÍAH‚×‚ç‚ê‚Ü‚¹‚ñB#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -3704,13 +3707,13 @@ function "it_usfood15"	//ï¿½^ï¿½Sï¿½{ï¿½ï¿½ï¿½lï¿½[ï¿½[
 		{
 			SetFlag( TF_MENU_SELECT2, 0 )
 			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-			YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+			YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 		}
 	}
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( ADOL ,    2200)
 		HP_Heal( LAXIA ,   2200)
 		HP_Heal( SAHAD ,   2200)
@@ -3719,16 +3722,16 @@ function "it_usfood15"	//ï¿½^ï¿½Sï¿½{ï¿½ï¿½ï¿½lï¿½[ï¿½[
 		HP_Heal( DANA ,    2200)
 		
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
-		UseFood(FOODEFFID_SPHEAL2)			// SPï¿½ï¿½2
+		UseFood(FOODEFFID_SPHEAL2)			// SP‰ñ•œ2
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_USFD_FOOD14, 1)
 
-		SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+		SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -3762,47 +3765,47 @@ function "it_usfood15"	//ï¿½^ï¿½Sï¿½{ï¿½ï¿½ï¿½lï¿½[ï¿½[
 
 		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_USFD_FOOD14)
 
 		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 
 }
-function "it_usfood16"	//ï¿½ï¿½ï¿½lï¿½pï¿½ï¿½ï¿½vï¿½Lï¿½ï¿½ï¿½pï¿½C
+function "it_usfood16"	//‰¤—lƒpƒ“ƒvƒLƒ“ƒpƒC
 {
 	if( WORK[WK_FOODEFFTIME] > 0 ){
 		SetFlag( TF_MENU_SELECT2, 0 )
-		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
+		PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ô‚ÍAï¿½Hï¿½×‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B#10W" 
+			"#-1W#4C—¿—‚ÌŒø‰Ê‚ª‘±‚¢‚Ä‚¢‚éŠÔ‚ÍAH‚×‚ç‚ê‚Ü‚¹‚ñB#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -3821,13 +3824,13 @@ function "it_usfood16"	//ï¿½ï¿½ï¿½lï¿½pï¿½ï¿½ï¿½vï¿½Lï¿½ï¿½ï¿½pï¿½C
 		{
 			SetFlag( TF_MENU_SELECT2, 0 )
 			PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-			YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+			YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 		}
 	}
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( ADOL ,    2500)
 		HP_Heal( LAXIA ,   2500)
 		HP_Heal( SAHAD ,   2500)
@@ -3835,17 +3838,17 @@ function "it_usfood16"	//ï¿½ï¿½ï¿½lï¿½pï¿½ï¿½ï¿½vï¿½Lï¿½ï¿½ï¿½pï¿½C
 		HP_Heal( RICOTTA , 2500)
 		HP_Heal( DANA ,    2500)
 		
-		UseFood(FOODEFFID_STRDEFUP2)		// ï¿½^ï¿½_ï¿½ï¿½ï¿½tï¿½oï¿½Cï¿½ï¿½_ï¿½ï¿½ï¿½cï¿½nï¿½vï¿½m2
+		UseFood(FOODEFFID_STRDEFUP2)		// —^ƒ_ƒ‚t‚oC”íƒ_ƒ‚c‚n‚v‚m2
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_USFD_FOOD15, 1)
 
-		SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+		SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -3879,32 +3882,32 @@ function "it_usfood16"	//ï¿½ï¿½ï¿½lï¿½pï¿½ï¿½ï¿½vï¿½Lï¿½ï¿½ï¿½pï¿½C
 
 		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_USFD_FOOD15)
 
 		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -3912,7 +3915,7 @@ function "it_usfood16"	//ï¿½ï¿½ï¿½lï¿½pï¿½ï¿½ï¿½vï¿½Lï¿½ï¿½ï¿½pï¿½C
 
 }
 
-function "it_usdrink"	//ï¿½ï¿½ØƒWï¿½ï¿½ï¿½[ï¿½X
+function "it_usdrink"	//–ìØƒWƒ…[ƒX
 {
 	SetFlag( TF_MENU_SELECT2, 1 )
 	
@@ -3924,15 +3927,15 @@ function "it_usdrink"	//ï¿½ï¿½ØƒWï¿½ï¿½ï¿½[ï¿½X
 		(DANA.CHRWORK[CWK_MAXHP] <= DANA.CHRWORK[CWK_HP]))
 	//if (this.CHRWORK[CWK_MAXHP] <= this.CHRWORK[CWK_HP])
 	{
-		// ï¿½ï¿½ï¿½ÂAï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// ‚©‚ÂA‘Sˆõ–³
 		SetFlag( TF_MENU_SELECT2, 0 )
 		PlaySE( SE_CAMPMENU , 100 , 0,  0, 0, 1.0f, 0)
-		YesNoMenu(TF_MENU_SELECT2,"ï¿½gï¿½oï¿½ï¿½ï¿½ñ•œ‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ñ‚ªAï¿½gï¿½pï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",0)
+		YesNoMenu(TF_MENU_SELECT2,"‚g‚o‚ð‰ñ•œ‚·‚é•K—v‚ª‚ ‚è‚Ü‚¹‚ñ‚ªAŽg—p‚µ‚Ü‚·‚©H",0)
 	}
 	
 	if( FLAG[TF_MENU_SELECT2] )
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( ADOL ,    100)
 		HP_Heal( LAXIA ,   100)
 		HP_Heal( SAHAD ,   100)
@@ -3940,14 +3943,14 @@ function "it_usdrink"	//ï¿½ï¿½ØƒWï¿½ï¿½ï¿½[ï¿½X
 		HP_Heal( RICOTTA , 100)
 		HP_Heal( DANA ,    100)
 		
-		UseFood(-1)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê‰ï¿½ï¿½ï¿½
+		UseFood(-1)		// —¿—Œø‰Ê‰ðœ
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		SetFlag( TF_VOICEPLY_CHR, 0)			// ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½
+		SetFlag( TF_VOICEPLY_CHR, 0)			// •K—v‚È‚¢‚ª‚¨‚Ü‚¶‚È‚¢
 		SetFlag( TF_VOICEPLY_CHR, (WORK[WK_RANDJOINMB]))
 
 		SetFlag(TF_MENU_SELECT,0)					
-		while(!FLAG[TF_MENU_SELECT])		//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		while(!FLAG[TF_MENU_SELECT])		//‘I‘ð‚³‚ê‚½ƒLƒƒƒ‰‚ªŽ€–S‚µ‚Ä‚¢‚éê‡ƒVƒƒƒbƒtƒ‹‚·‚é
 		{
 			if((FLAG[TF_VOICEPLY_CHR] == ADOL) && (ADOL.CHRWORK[CWK_HP] <= 0 ))
 			{
@@ -3981,35 +3984,35 @@ function "it_usdrink"	//ï¿½ï¿½ØƒWï¿½ï¿½ï¿½[ï¿½X
 
 		if(FLAG[TF_VOICEPLY_CHR] == ADOL)
 		{
-			PlayVoice(Y8V_0037,"ADOL",100)			//ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_0037,"ADOL",100)			//‚Ü‚¾‚Ü‚¾s‚¯‚éI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == LAXIA)
 		{
-			PlayVoice(Y8V_0237,"LAXIA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½I
+			PlayVoice(Y8V_0237,"LAXIA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚Ü‚·I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == SAHAD)
 		{
-			PlayVoice(Y8V_1281,"SAHAD",100)			// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Kï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_1281,"SAHAD",100)			// ‚¨‚µAƒKƒ“ƒKƒ“s‚­‚ºI
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == HUMMEL)
 		{
-			PlayVoice(Y8V_2043,"HUMMEL",100)		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚ªï¿½{ï¿½Ô‚ï¿½ï¿½I
+			PlayVoice(Y8V_2043,"HUMMEL",100)		// ‚±‚±‚©‚ç‚ª–{”Ô‚¾I
 		}
 		else if(FLAG[TF_VOICEPLY_CHR] == RICOTTA)
 		{
-			PlayVoice(Y8V_2426,"RICOTTA",100)		// ï¿½È‚Í‚ÍAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2426,"RICOTTA",100)		// ‚È‚Í‚ÍA–ü‚³‚ê‚éI
 		}
 		else
 		{
-			PlayVoice(Y8V_2864,"DANA",100)			// ï¿½Ü‚ï¿½ï¿½Ü‚ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½I
+			PlayVoice(Y8V_2864,"DANA",100)			// ‚Ü‚¾‚Ü‚¾s‚¯‚é‚æI
 		}
 		
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_USFD_JUICE, 1)
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_USFD_JUICE)
 
 		//PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -4018,317 +4021,317 @@ function "it_usdrink"	//ï¿½ï¿½ØƒWï¿½ï¿½ï¿½[ï¿½X
 }
 
 /////////////////////////////////////
-// ï¿½Hï¿½ÞŒn
+// HÞŒn
 
-function "it_foodstuff01"//	ï¿½â‰–
+function "it_foodstuff01"//	Šâ‰–
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 2)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_SEA_SALT, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_SEA_SALT)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff02"//	ï¿½Iï¿½ï¿½
+function "it_foodstuff02"//	–I–¨
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 8)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_LAND_HONEY, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_LAND_HONEY)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff03"//	ï¿½Zï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+function "it_foodstuff03"//	ƒZƒCƒŒƒ“”ž
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 2)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_WHEAT, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_WHEAT)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff04"//	ï¿½Rï¿½ï¿½ï¿½Ì—ï¿½
+function "it_foodstuff04"//	ŽR’¹‚Ì—‘
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 5)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_LAND_EGG, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_LAND_EGG)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff05"//	ï¿½ï¿½ï¿½Iï¿½ï¿½
+function "it_foodstuff05"//	”’˜I‘ù
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 5)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_MUSHROOM, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_MUSHROOM)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff06"//	ï¿½ï¿½ï¿½Aï¿½[ï¿½ï¿½ï¿½L
+function "it_foodstuff06"//	ƒ€ƒA[ƒ‹ŠL
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 5)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_SEA_SHELLFISH, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_SEA_SHELLFISH)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff07"//	ï¿½Ô“ï¿½
+function "it_foodstuff07"//	Ô“÷
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 10)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_MEAT_01, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_MEAT_01)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff08"//	ï¿½ï¿½ï¿½ï¿½
+function "it_foodstuff08"//	”’“÷
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 10)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_MEAT_02, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_MEAT_02)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff09"//	ï¿½nï¿½ï¿½ï¿½ï¿½
+function "it_foodstuff09"//	ŽnŒ´“÷
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 20)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_MEAT_03, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_MEAT_03)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff10"//	ï¿½pï¿½vï¿½ï¿½ï¿½J
+function "it_foodstuff10"//	ƒpƒvƒŠƒJ
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 5)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_VG_PAPRIKA, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_VG_PAPRIKA)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff11"//	ï¿½^ï¿½ï¿½ï¿½{ï¿½iï¿½X
+function "it_foodstuff11"//	ƒ^ƒ‹ƒ{ƒiƒX
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 8)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_VG_EGGPLANT, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_VG_EGGPLANT)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff12"//	ï¿½Lï¿½ï¿½ï¿½xï¿½c
+function "it_foodstuff12"//	ƒLƒƒƒxƒc
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 10)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_VG_CABBAGE, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_VG_CABBAGE)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff13"//	ï¿½Vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Rï¿½[ï¿½ï¿½
+function "it_foodstuff13"//	ƒVƒƒƒCƒ“ƒR[ƒ“
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 15)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_VG_CORN, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_VG_CORN)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff14"//	ï¿½Nï¿½Cï¿½[ï¿½ï¿½ï¿½gï¿½}ï¿½g
+function "it_foodstuff14"//	ƒNƒC[ƒ“ƒgƒ}ƒg
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 20)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_VG_TOMATO, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_VG_TOMATO)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
 	}
 }
 
-function "it_foodstuff15"//	ï¿½Lï¿½ï¿½ï¿½Oï¿½pï¿½ï¿½ï¿½vï¿½Lï¿½ï¿½
+function "it_foodstuff15"//	ƒLƒ“ƒOƒpƒ“ƒvƒLƒ“
 {
 	if (this.CHRWORK[CWK_MAXHP] > this.CHRWORK[CWK_HP])
 	{
-		// ï¿½gï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// Žg‚Á‚Ä‚¢‚¢
 		HP_Heal( this , 50)
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
-		// ï¿½ï¿½ï¿½ï‚·ï¿½ï¿½
+		// Á”ï‚·‚é
 		UseItem(ICON3D_FD_VG_PUMPKIN, 1)
 
 	}
 	else
 	{
-		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½á‚¾ï¿½ï¿½	// ï¿½ï¿½ï¿½ï‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
+		// Žg‚Á‚¿‚á‚¾‚ß	// Á”ï‚µ‚½•ª‚ð–ß‚·
 		SetCantUseItem(ICON3D_FD_VG_PUMPKIN)
 
 		PlaySE( SE_BOOBOO, 100, 0,  0, 0, 1.0f, 0)
@@ -4338,7 +4341,7 @@ function "it_foodstuff15"//	ï¿½Lï¿½ï¿½ï¿½Oï¿½pï¿½ï¿½ï¿½vï¿½Lï¿½ï¿½
 function "it_receive_items"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"ï¿½@ï¿½@ï¿½@Receive #2CAP Items#0C that cannot be obtained automatically",1)
+	YesNoMenu(TF_MENU_SELECT2,"?¿½@?¿½@?¿½@Receive #2CAP Items#0C that cannot be obtained automatically",1)
 	
 	if(FLAG[TF_MENU_SELECT2])
 	{
@@ -4436,16 +4439,15 @@ function "it_receive_items"
 			WaitCloseWindow()
 		}
 	}
-
-	
 }
+
 /////////////////////////////////////
-// ï¿½ï¿½ï¿½È‰ï¿½ï¿½ÍƒZï¿½ï¿½ï¿½Zï¿½^ï¿½ï¿½ï¿½ï¿½Ì•ï¿½ï¿½Bï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ì‚Åˆê‰žï¿½Aï¿½ï¿½ï¿½ß‚ÅŽcï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½B
-// Ys8ï¿½Å‚Í•sï¿½vï¿½È‚Í‚ï¿½ï¿½B
+// ¦ˆÈ‰º‚ÍƒZƒ‹ƒZƒ^Žž‘ã‚Ì•¨BƒAƒCƒeƒ€’è‹`‚ªŽc‚Á‚Ä‚¢‚é‚Ì‚Åˆê‰žA’Žß‚ÅŽc‚µ‚Ä‚ ‚éB
+// Ys8‚Å‚Í•s—v‚È‚Í‚¸B
 
 //
 ///////////////////////////////////////
-//// ï¿½Pï¿½rï¿½o
+//// ‚P‚r‚o
 //function it_getsp1
 //{
 //	SP_Recover(1)
@@ -4453,7 +4455,7 @@ function "it_receive_items"
 //}
 //
 ///////////////////////////////////////
-//// ï¿½Tï¿½rï¿½o
+//// ‚T‚r‚o
 //function it_getsp5
 //{
 //	SP_Recover(5)
@@ -4462,7 +4464,7 @@ function "it_receive_items"
 //
 //
 ///////////////////////////////////////
-//// ï¿½Pï¿½dï¿½w
+//// ‚P‚d‚w
 //function it_getex1
 //{
 //	AddEX(0.1f)
@@ -4470,7 +4472,7 @@ function "it_receive_items"
 //}
 //
 ///////////////////////////////////////
-//// ï¿½Tï¿½dï¿½w
+//// ‚T‚d‚w
 //function it_getex5
 //{
 //	AddEX(0.5f)
@@ -4478,67 +4480,67 @@ function "it_receive_items"
 //}
 //
 ///////////////////////////////////////
-//// ï¿½ï¿½ï¿½P
+//// ‹à‚P
 //function item_660
 //{
 //	SetWork(WK_GOLD , (WORK[WK_GOLD] + 1) )
 //}
 //
 ///////////////////////////////////////
-//// ï¿½ï¿½ï¿½T
+//// ‹à‚T
 //function item_661
 //{
 //	SetWork(WK_GOLD , (WORK[WK_GOLD] + 5) )
 //}
 //
 ///////////////////////////////////////
-//// ï¿½ï¿½ï¿½Pï¿½O
+//// ‹à‚P‚O
 //function item_662
 //{
 //	SetWork(WK_GOLD , (WORK[WK_GOLD] + 10) )
 //}
 //
 ///////////////////////////////////////
-//// ï¿½ï¿½ï¿½Tï¿½O
+//// ‹à‚T‚O
 //function item_663
 //{
 //	SetWork(WK_GOLD , (WORK[WK_GOLD] + 50) )
 //}
 //
 ///////////////////////////////////////
-//// ï¿½ï¿½ï¿½Pï¿½Oï¿½O
+//// ‹à‚P‚O‚O
 //function item_664
 //{
 //	SetWork(WK_GOLD , (WORK[WK_GOLD] + 100) )
 //}
 //
 ///////////////////////////////////////
-//// ï¿½ï¿½ï¿½Tï¿½Oï¿½O
+//// ‹à‚T‚O‚O
 //function item_665
 //{
 //	SetWork(WK_GOLD , (WORK[WK_GOLD] + 500) )
 //}
 //
 ///////////////////////////////////////
-//// ï¿½ï¿½ï¿½Pï¿½Oï¿½Oï¿½O
+//// ‹à‚P‚O‚O‚O
 //function item_666
 //{
 //	SetWork(WK_GOLD , (WORK[WK_GOLD] + 1000) )
 //}
 //
 ///////////////////////////////////////
-//// ï¿½ï¿½ï¿½Tï¿½Oï¿½Oï¿½O
+//// ‹à‚T‚O‚O‚O
 //function item_667
 //{
 //	SetWork(WK_GOLD , (WORK[WK_GOLD] + 5000) )
 //}
 //
 ///////////////////////////////////////
-//// ï¿½Pï¿½gï¿½o
+//// ‚P‚g‚o
 //function it_getmp1
 //{
 ////	SetFlag(SF_MEMORYPOINT , (FLAG[SF_MEMORYPOINT] + 1) )
-//	// ï¿½ñ•œ‚ï¿½ï¿½ï¿½
+//	// ‰ñ•œ‚·‚é
 //	HP_Heal(PLAYER1, 0.25f)
 //	HP_Heal(PLAYER2, 0.25f)
 //	HP_Heal(PLAYER3, 0.25f)
@@ -4550,11 +4552,11 @@ function "it_receive_items"
 //}
 //
 ///////////////////////////////////////
-//// ï¿½Tï¿½gï¿½o
+//// ‚T‚g‚o
 //function it_getmp5
 //{
 ////	SetFlag(SF_MEMORYPOINT , (FLAG[SF_MEMORYPOINT] + 5) )
-//	// ï¿½ñ•œ‚ï¿½ï¿½ï¿½
+//	// ‰ñ•œ‚·‚é
 //	HP_Heal(PLAYER1, 5.0f)
 //	HP_Heal(PLAYER2, 5.0f)
 //	HP_Heal(PLAYER3, 5.0f)
