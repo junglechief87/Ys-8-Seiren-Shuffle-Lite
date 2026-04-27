@@ -527,7 +527,7 @@
 //	■回復アイテム		■■■■■■■■■■■■■■□■■■■■■■■■■□■■□	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 500	Heal Potion	Heal 60% HP	Drink this to heal wounds.	0	ITEM_TYPE_USEDRUG_BOTTLE_99	219	1	1	0	1	0	0	it_pt1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 501	Full Potion	Heal 100% HP	Drink this to heal grievous wounds.	0	ITEM_TYPE_USEDRUG_BOTTLE_99	220	2	3	0	1	0	0	it_pt2	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-502	AP Packages	Acquire Received Items	Use this to get certain items that require scripts.	3	ITEM_TYPE_USEEVENT_99	332	0	0	0	0	0	0	it_receive_items	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0																									
+502	AP Packages	Acquire Received Items	Use this to get certain items that require scripts.	0	ITEM_TYPE_USEEVENT_99	332	0	0	0	0	0	0	it_receive_items	0	0	0	0	0	0	0	0	0	0	0	0	0	0																									
 503	Revive Medicine	Revive/Heal 10% HP	Use this to revive a fallen ally.	0	ITEM_TYPE_USEDRUG_BOTTLE_99	221	3	2	0	1	0	0	it_res1	1	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 504	Great Tree Drop	Revive/Heal 100% HP/Heal Status	The Great Tree's all-healing sap.	0	ITEM_TYPE_USEDRUG_BOTTLE_99	222	5	4	0	1	0	0	it_res2	1	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 505	Moon Tears	Revive/Heal 50% HP	An effective revival medicine$nthat shines beautifully in moonlight.	0	ITEM_TYPE_USEDRUG_BOTTLE_99	389	4	3	0	1	0	0	it_res11	1	0	0	0	0	0	0	0	0	0	0	0	0	0																								
@@ -1009,7 +1009,7 @@
 968	---		---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 969	---		---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 970	---		---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-971	Psyches	Psyches of Eras Past	The power to end the Lacrimosa	0	ITEM_TYPE_INVENTORY	357	0	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																							
+971	---		---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0						
 972	Dana 6 Weapon	STR+4	Time Attack Weapon	0	EQ_WP_HALBERT	40	0	1	0	0	0	0		1	0	0	0	0	0	0	0	0	0	0	0	0	0	4	0	10	4	0	20	4	0	WEAPON_ABILITY_NONE	0	ITEMCATEGORY_NONE	0	WEAPON_ABILITY_NONE	0	ITEMCATEGORY_NONE	0	WEAPON_ABILITY_NONE	0	ITEMCATEGORY_NONE	0	0	0	0	0
 973	Dana 13 Weapon	STR+14	Time Attack Weapon	0	EQ_WP_HALBERT	40	0	1	0	0	0	0		1	0	0	0	0	0	0	0	0	0	0	0	0	0	14	0	10	14	0	20	14	0	WEAPON_ABILITY_NONE	0	ITEMCATEGORY_NONE	0	WEAPON_ABILITY_NONE	0	ITEMCATEGORY_NONE	0	WEAPON_ABILITY_NONE	0	ITEMCATEGORY_NONE	0	0	0	0	0
 974	Dana 20 Weapon	STR+57	Time Attack Weapon	0	EQ_WP_HALBERT	40	0	1	0	0	0	0		1	0	0	0	0	0	0	0	0	0	0	0	0	0	57	0	10	57	0	20	57	0	WEAPON_ABILITY_NONE	0	ITEMCATEGORY_NONE	0	WEAPON_ABILITY_NONE	0	ITEMCATEGORY_NONE	0	WEAPON_ABILITY_NONE	0	ITEMCATEGORY_NONE	0	0	0	0	0
