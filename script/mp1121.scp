@@ -9,26 +9,26 @@
 #include "inc/vo.h"
 
 //-------------------------------------------
-// 1121пїЅF
+// 1121ЃF
 //-------------------------------------------
-// initпїЅXпїЅNпїЅпїЅпїЅvпїЅg
+// initѓXѓNѓЉѓvѓg
 function "init"
 {
 	
-	//пїЅпїЅпїЅiпїЅsпїЅKпїЅvпїЅmпїЅ[пїЅhпїЅнЏњпїЅпїЅпїЅ}пїЅbпїЅvпїЅпїЅЖЋТ—p
+	//‰“Њi•s•K—vѓmЃ[ѓhЌнЏњЃџѓ}ѓbѓvЌм‹ЖЋТ—p
 	MapHide( "@BG2_mp1120" , 0 )
 
 	MapHide( "camp_fire1" , 0)
 	MapHide( "camp_fire2" , 0)
 	MapHide( "camp_smoke1" , 0)
-	MapHide( "skyfog1" , 0 )		//пїЅZпїЅпїЅпїЅiпїЅпїЅпїЅjпїЅпїЅ\пїЅпїЅ
+	MapHide( "skyfog1" , 0 )		//”Z–¶Ѓi”–Ѓj”с•\Ћ¦
 
-	//пїЅHпїЅпїЅDпїЅZпїЅпїЅ
+	//—H—м‘D”Z–¶
 	if( FLAG[SF_EVENT_ON] ){
 		if( FLAG[GF_05MP6330_LOOK_MONOLITH] && !FLAG[GF_NPC_5_03_GOTO_GHOSTHIP] ){
-			MapHide( "skyfog1" , 1 )		//пїЅZпїЅпїЅпїЅiпїЅпїЅпїЅjпїЅ\пїЅпїЅпїЅпїЅпїЅпїЅ
-			MapHide( "BG2_sky1" , 0 )		//пїЅпїЅпїЅМ‹пїЅпїЅ\пїЅпїЅ
-			MapHide( "BG2_sky2" , 0 )		//пїЅпїЅпїЅМ‹пїЅпїЅ\пїЅпїЅ
+			MapHide( "skyfog1" , 1 )		//”Z–¶Ѓi”–Ѓj•\Ћ¦‚·‚й
+			MapHide( "BG2_sky1" , 0 )		//Њі‚М‹у”с•\Ћ¦
+			MapHide( "BG2_sky2" , 0 )		//Њі‚М‹у”с•\Ћ¦
 
 			//SetFog(FOG_BOTH, 0x00828c9e, 0.0f, 160.0f , 1.0f, 0.1f, 0.9f, FOGPARAM_MAP_DEFAULT, FOGPARAM_MAP_DEFAULT, 0)
 			//SetFogBack(FOG_BOTH, 0x00939aa0, 0.0f, 500.0f , 1.0f , 0.5f , 0.9f , FOGPARAM_MAP_DEFAULT, FOGPARAM_MAP_DEFAULT, 0 )
@@ -43,22 +43,22 @@ function "init"
 	//EventAreaEnable("evb2_M02S270", 0)
 
 	if( FLAG[SF_EVENT_ON] ){
-	// пїЅCпїЅxпїЅпїЅпїЅgпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-		if ( FLAG[GF_02MP1120_MEET_HUMMEL] && !FLAG[GF_02MP1121_MAKE_CAMP] && FLAG[SF_ENTRY] ){			// пїЅпїЅcпїЅпїЅпїЅД‚пїЅпїЅИ‚пїЅ
+	// ѓCѓxѓ“ѓg”­ђ¶ђ§Њд
+		if ( FLAG[GF_02MP1120_MEET_HUMMEL] && !FLAG[GF_02MP1121_MAKE_CAMP] && FLAG[SF_ENTRY] ){			// –м‰c‚µ‚Д‚ў‚И‚ў
 			SetWork( WK_BGM , BGM_1120 )
 			EventCue("mp1121:EV_M02S270")
 
-			MapAnime( "camp_all" , off )	//пїЅLпїЅпїЅпїЅпїЅпїЅvпїЅпїЅпїЅЭ’u
-			SetChrPos("LP_tent",-100000.00f,0.00f,0.00f)	//пїЅLпїЅпїЅпїЅпїЅпїЅvLPпїЅпїЅпїЅпїЅ
-			SetChrPos("LP_cook",-100000.00f,0.00f,0.00f)	//пїЅпїЅпїЅпїЅLPпїЅпїЅпїЅпїЅ
+			MapAnime( "camp_all" , off )	//ѓLѓѓѓ“ѓv–ўђЭ’u
+			SetChrPos("LP_tent",-100000.00f,0.00f,0.00f)	//ѓLѓѓѓ“ѓvLPЏБ‚·
+			SetChrPos("LP_cook",-100000.00f,0.00f,0.00f)	//—ї—ќLPЏБ‚·
 		}
 	}
 
-	//пїЅ}пїЅbпїЅvпїЅпїЅпїЅ\пїЅпїЅ
+	//ѓ}ѓbѓv–ј•\Ћ¦
 	if(!FLAG[SF_LOADINIT] && !FLAG[GF_MPxxxx_MAP_NAME_NO_DRAW] && !FLAG[TF_MAPNAME_SHOWN]){
 		if( FLAG[SF_LASTENTRY_NO] == 100 ){
-			VisualName("visual/mapname/mn_2102.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//пїЅе‹¬пїЅJ(пїЅpпїЅпїЅпїЅпїЅпїЅNпїЅX)пїЅпїЅпїЅпїЅ
-			SetFlag( TF_MAPNAME_SHOWN, 1 )				// пїЅnпїЅпїЅпїЅ\пїЅпїЅпїЅпїЅпїЅпїЅпїЅiпїЅeпїЅпїЅпїЅ|пїЅпїЅпїЅпїЅпїЅj
+			VisualName("visual/mapname/mn_2102.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//‘е‹¬’J(ѓpѓ‰ѓ“ѓNѓX)—¬€ж
+			SetFlag( TF_MAPNAME_SHOWN, 1 )				// ’n–ј•\Ћ¦‚µ‚ЅЃiѓeѓ“ѓ|ѓ‰ѓЉЃj
 		}
 	}
 }
@@ -73,12 +73,12 @@ function "LP_tent"
 	StopEmotion( "ALL" )
 	ResetMoveVec("PARTYALL")
 
-	//пїЅIпїЅпїЅпїЅпїЅ
+	//‘I‘рЋ€
 	SetFlag(TF_MENU_SELECT,0)
 	MenuReset()
 	MenuType(MENUTYPE_POPUP)
-	MenuAdd(1,"пїЅeпїЅпїЅпїЅgпїЅЕ‹xпїЅпїЅ")
-	MenuAdd(4,"пїЅпїЅЯ‚пїЅ")	
+	MenuAdd(1,"ѓeѓ“ѓg‚Е‹x‚Ю")
+	MenuAdd(4,"‚в‚Я‚й")	
 	MenuOpen( TF_MENU_SELECT , -1 , ADOLMENU_PPOSY , -2 , -2 , 10 , -1)
 	WaitMenu(0)
 	MenuClose(10,0)
@@ -92,17 +92,17 @@ function "LP_tent"
 		SaveCamera()
 
 		SetEnvSEPlayState(1121102, 0)
-		PlaySE(SE_ENV_FOREST_4, 20, 1, 1000, 0, 1.0f, 0)	//пїЅпїЅМ’пїЅ
+		PlaySE(SE_ENV_FOREST_4, 20, 1, 1000, 0, 1.0f, 0)	//–й‚М’Ћ
 	
-		//пїЅQпїЅпїЅ
+		//ђQЊѕ
 		CallFunc("system:TentVoice_Sleep")
 
-		SetEnvSEPlayState(-1, 0)	//пїЅВ‹пїЅSEпїЅSпїЅпїЅ~	
-		PlaySE( SE_HOTEL_JINGLE , 100 , 0,  0, 0, 1.0f, 0)	//пїЅWпїЅпїЅпїЅOпїЅпїЅ
-		StopSE(SE_ENV_FOREST_4, 2000)	//пїЅпїЅпїЅМ‰пїЅпїЅ~пїЅЯ‚пїЅ
+		SetEnvSEPlayState(-1, 0)	//ЉВ‹«SE‘S’вЋ~	
+		PlaySE( SE_HOTEL_JINGLE , 100 , 0,  0, 0, 1.0f, 0)	//ѓWѓ“ѓOѓ‹
+		StopSE(SE_ENV_FOREST_4, 2000)	//’Ћ‚М‰№Ћ~‚Я‚й
 		Wait(120)
 
-		//пїЅeпїЅпїЅпїЅgпїЅс•њЏпїЅпїЅпїЅпїЅEпїЅпїЅпїЅgпїЅпїЅпїЅCпїЅZпїЅ[пїЅu
+		//ѓeѓ“ѓg‰с•њЏ€—ќЃEѓЉѓgѓ‰ѓCѓZЃ[ѓu
 		CallFunc("system:camp_rest")
 	
 		PlaySE(SE_HEAL, 100, 0, 0, 0, 1.0f, 0)
@@ -110,7 +110,7 @@ function "LP_tent"
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4CпїЅSпїЅпїЅпїЅМ‚gпїЅoпїЅAпїЅrпїЅoпїЅЖ‚dпїЅwпїЅsпїЅqпїЅ`пїЅQпїЅ[пїЅWпїЅпїЅпїЅSпїЅпїЅпїЅпїЅпїЅпїЅпїЅI#10W"
+			"#-1W#4C‘S€х‚М‚g‚oЃA‚r‚o‚Ж‚d‚w‚s‚q‚`ѓQЃ[ѓW‚Є‘S‰х‚µ‚ЅЃI#10W"
 			"#8S"
 		}
 		Wait(10)
@@ -124,17 +124,17 @@ function "LP_tent"
 
 		ResetPartyPos()
 		ResetFollowPoint()
-		//Wait(1) //пїЅпїЅпїЅпїЅпїЅТ‚пїЅпїЅp
+		//Wait(1) //Џ€—ќ‘Т‚ї—p
 	
 		RestoreCamera(0,0)
 		CallFunc("system:camera_reset")
 	
 		ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
 
-//		SetEnvSEPlayState(-1, 1)	//пїЅВ‹пїЅSEпїЅпїЅпїЅA
-		SetEnvSEPlayState(1121002, 1)	//пїЅВ‹пїЅSEпїЅпїЅпїЅA
-		SetEnvSEPlayState(1121101, 1)	//пїЅВ‹пїЅSEпїЅпїЅпїЅA
-		SetEnvSEPlayState(1121102, 1)	//пїЅВ‹пїЅSEпїЅпїЅпїЅA
+//		SetEnvSEPlayState(-1, 1)	//ЉВ‹«SE•њ‹A
+		SetEnvSEPlayState(1121002, 1)	//ЉВ‹«SE•њ‹A
+		SetEnvSEPlayState(1121101, 1)	//ЉВ‹«SE•њ‹A
+		SetEnvSEPlayState(1121102, 1)	//ЉВ‹«SE•њ‹A
 
 		SetWork(WK_BGMLIMIT, 0) 	
 		FadeIn(FADE_BLACK,FADE_FAST)
@@ -154,7 +154,7 @@ function "LP_cook"
 	Wait(10)
 
 	CallFunc("system:GetIngredients")
-	ShopOpen( SHOP_ID_COOK, -1 )		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅмђ¬пїЅeпїЅXпїЅg
+	ShopOpen( SHOP_ID_COOK, -1 )		//Ѓџ—ї—ќЌмђ¬ѓeѓXѓg
 
 	ResetStopFlag(STOPFLAG_TALK)
 
@@ -163,35 +163,35 @@ function "LP_cook"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//пїЅпїЅпїЅпїЅпїЅCпїЅпїЅпїЅCпїЅxпїЅпїЅпїЅgпїЅZпїЅNпїЅVпїЅпїЅпїЅпїЅ
+//ЃЎѓЃѓCѓ“ѓCѓxѓ“ѓgѓZѓNѓVѓ‡ѓ“
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-//пїЅпїЅпїЅпїЅВ–Ъ‚М–пїЅcпїЅnпїЅпїЅzпїЅпїЅ(mp1121)
-//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-function "EV_M02S270"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅ
+//„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ
+//ЃҐ“с‚В–Ъ‚М–м‰c’n‚р’z‚­(mp1121)
+//„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ
+function "EV_M02S270"	//mp1121‚Е–м‰c‚·‚й
 {
-//пїЅJпїЅnпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ----------------------------------------------------
+//ЉJЋnЏ€—ќ‚±‚±‚©‚з----------------------------------------------------
 //	CallFunc("system:event_begin")
 
 	SetStopFlag(STOPFLAG_EVENT)
 	FadeOut(FADE_BLACK,0)
 	WaitFade()
 
-	//пїЅCпїЅxпїЅпїЅпїЅgпїЅJпїЅnпїЅOпїЅпїЅпїЅМ•Ы‘пїЅ
+	//ѓCѓxѓ“ѓgЉJЋn‘OЏо•с‚М•Ы‘¶
 	SaveEventState()
 	SaveCamera()
 
-	//пїЅpпїЅ[пїЅeпїЅBпїЅпїЅФ‚МѓпїЅпїЅZпїЅbпїЅg
+	//ѓpЃ[ѓeѓBЏу‘Ф‚МѓЉѓZѓbѓg
 	CallFunc("system:party_reset")
 
-	//пїЅВ‹пїЅпїЅМЏпїЅпїЅпїЅпїЅпїЅпїЅEпїЅsпїЅvпїЅИ‚пїЅпїЅМ‚пїЅпїЅBпїЅпїЅ
+	//ЉВ‹«‚МЏ‰Љъ‰»ЃE•s—v‚И‚а‚М‚р‰B‚·
 	ClearDebris()
 	ResetChrPos((CHRTYPE_MONS | REMOVE_POS))
 	//ResetChrPos((CHRTYPE_NPC | REMOVE_POS))
 
-	//пїЅLпїЅпїЅпїЅпїЅпїЅNпїЅ^пїЅ[пїЅпїЅпїЅпїЅпїЅпїЅ
+	//ѓLѓѓѓ‰ѓNѓ^Ѓ[Џ‰Љъ‰»
 	SetChrWork("ADOL", CWK_DEFAULT_SKIPNODE_OFF, 1)
 	SetChrWork("SAHAD", CWK_DEFAULT_SKIPNODE_OFF, 1)
 	SetChrWork("LAXIA", CWK_DEFAULT_SKIPNODE_OFF, 1)
@@ -223,108 +223,108 @@ function "EV_M02S270"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅ
 	ChangeSubAnimation("SAHAD",SUBMOT_EXT1,ANI_E_LOOKC,1)
 	LookReset("SAHAD")
 
-	//пїЅJпїЅпїЅпїЅпїЅпїЅЭ’пїЅ
-	MoveCameraAt( 0 , 342.546f , -719.622f , 10.155f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 1.441f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , -2.099f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , 193.477f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 60.000f , 0 )			// пїЅпїЅпїЅпїЅp
+	//ѓJѓЃѓ‰ђЭ’и
+	MoveCameraAt( 0 , 342.546f , -719.622f , 10.155f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 1.441f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , -2.099f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , 193.477f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 60.000f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , 0.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
-	// ResetCameraZPlane()	// пїЅCпїЅxпїЅпїЅпїЅgпїЅIпїЅпїЅпїЅпїЅпїЅЙЊД‚СЏoпїЅпїЅпїЅД‰пїЅпїЅпїЅпїЅпїЅпїЅBпїЅ}пїЅbпїЅvпїЅпїЅпїЅМђЭ’пїЅЙ–Я‚пїЅпїЅЬ‚пїЅпїЅB
+	RollCamera( 0 , 0.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
+	// ResetCameraZPlane()	// ѓCѓxѓ“ѓgЏI—№Ћћ‚ЙЊД‚СЏo‚µ‚Д‰є‚і‚ўЃBѓ}ѓbѓv‘¤‚МђЭ’и‚Й–Я‚µ‚Ь‚·ЃB
 
 	MapAnime("camp_all", "off")
 
-	// пїЅпїЅКЉEпїЅ[пїЅxпїЅМђЭ’пїЅ
+	// ”нЋКЉEђ[“x‚МђЭ’и
 	SetDoF(0, LERP_LINEAR, 3.000, 90.000, 0.000, 0.150, 0.500)
-	// пїЅOпїЅпїЅпїЅAпїЅМђЭ’пїЅ
+	// ѓOѓЊѓA‚МђЭ’и
 	SetGlare(0, LERP_LINEAR, 0.700, 1.300 ,1.000 ,1.000 ,0.600 ,0.000 ,1.000)
 
-	//пїЅXпїЅLпїЅbпїЅvпїЅпїЅпїЅпїЅ
+	//ѓXѓLѓbѓv‹–‰В
 	SetSkipScript("mp1121:EV_M02S270_ED")
 
-//пїЅJпїЅnпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅЬ‚пїЅ-----------------------------------------------
+//ЉJЋnЏ€—ќ‚±‚±‚Ь‚Е-----------------------------------------------
 
-	//пїЅ@пїЅ@пїЅ}пїЅbпїЅvпїЅЙ“пїЅпїЅпїЅЖѓCпїЅxпїЅпїЅпїЅgпїЅJпїЅnпїЅB
-	//пїЅ@пїЅ@пїЅЬ‚пїЅпїЅпїЅпїЅNпїЅVпїЅпїЅпїЅпїЅпїЅoпїЅ`пїЅGпїЅпїЅпїЅ[пїЅVпїЅпїЅпїЅпїЅпїЅ\пїЅпїЅпїЅпїЅпїЅпїЅ
-	//пїЅ@пїЅ@пїЅпїЅпїЅМ‚Ь‚Ь‰пїЅК’пїЅпїЅпїЅпїЅЙђiпїЅпїЅЕ‚пїЅпїЅпїЅB
+	//Ѓ@Ѓ@ѓ}ѓbѓv‚Й“ь‚й‚ЖѓCѓxѓ“ѓgЉJЋnЃB
+	//Ѓ@Ѓ@‚Ь‚ёѓ‰ѓNѓVѓѓ‚Є‚o‚`ѓGѓ‚Ѓ[ѓVѓ‡ѓ“•\Ћ¦‚µ‚Д
+	//Ѓ@Ѓ@‚»‚М‚Ь‚Ь‰ж–К’†‰›‚Йђi‚с‚Е‚­‚йЃB
 
-	// пїЅJпїЅbпїЅgX ----------------------------------------------------------------------------------------
+	// ѓJѓbѓgX ----------------------------------------------------------------------------------------
 
-	// пїЅпїЅ\пїЅпїЅпїЅEпїЅД•\пїЅпїЅ
-	SetChrInfoFlag("ADOL", INFOFLAG_INVISIBLE)	// пїЅпїЅ\пїЅпїЅ
-	SetChrInfoFlag("LAXIA", INFOFLAG_INVISIBLE)	// пїЅпїЅ\пїЅпїЅ
-	SetChrInfoFlag("SAHAD", INFOFLAG_INVISIBLE)	// пїЅпїЅ\пїЅпїЅ
+	// ”с•\Ћ¦ЃEЌД•\Ћ¦
+	SetChrInfoFlag("ADOL", INFOFLAG_INVISIBLE)	// ”с•\Ћ¦
+	SetChrInfoFlag("LAXIA", INFOFLAG_INVISIBLE)	// ”с•\Ћ¦
+	SetChrInfoFlag("SAHAD", INFOFLAG_INVISIBLE)	// ”с•\Ћ¦
 
-	// пїЅJпїЅпїЅпїЅпїЅпїЅЪ“пїЅ
+	// ѓJѓЃѓ‰€Ъ“®
 	ExecuteCmd(1000, MoveCameraAt, INTERPOLATE_SPHERE , 344.267f , -719.208f , 10.155f , 70 )
 	ExecuteCmd(1001, ChangeCameraDistance, INTERPOLATE_SPHERE , 1.441f , 70 )
 	ExecuteCmd(1002, ChangeCameraElevation, INTERPOLATE_SPHERE ,  -2.099f , 70 )
 	ExecuteCmd(1003, RotateCamera, INTERPOLATE_SPHERE , 193.477f, 70 )
 
-	//MoveCameraAt( 0 , 344.267f , -719.208f , 10.155f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	//ChangeCameraDistance( 0 , 1.441f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	//ChangeCameraElevation( 0 , -2.099f , 0 )	// пїЅпїЅ{пїЅВЉp
-	//RotateCamera( 0 , 193.477f , 0 )				// пїЅpпїЅx
-	//ChangeCameraPers( 0 , 60.000f , 0 )			// пїЅпїЅпїЅпїЅp
+	//MoveCameraAt( 0 , 344.267f , -719.208f , 10.155f , 0 )	// ’ЌЋ‹“_
+	//ChangeCameraDistance( 0 , 1.441f , 0 )		// Љо–{‹——Ј
+	//ChangeCameraElevation( 0 , -2.099f , 0 )	// Љо–{‹ВЉp
+	//RotateCamera( 0 , 193.477f , 0 )				// Љp“x
+	//ChangeCameraPers( 0 , 60.000f , 0 )			// Ћ‹–мЉp
 	//SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	//RollCamera( 0 , 0.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
-	// ResetCameraZPlane()	// пїЅCпїЅxпїЅпїЅпїЅgпїЅIпїЅпїЅпїЅпїЅпїЅЙЊД‚СЏoпїЅпїЅпїЅД‰пїЅпїЅпїЅпїЅпїЅпїЅBпїЅ}пїЅbпїЅvпїЅпїЅпїЅМђЭ’пїЅЙ–Я‚пїЅпїЅЬ‚пїЅпїЅB
+	//RollCamera( 0 , 0.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
+	// ResetCameraZPlane()	// ѓCѓxѓ“ѓgЏI—№Ћћ‚ЙЊД‚СЏo‚µ‚Д‰є‚і‚ўЃBѓ}ѓbѓv‘¤‚МђЭ’и‚Й–Я‚µ‚Ь‚·ЃB
 
 	FadeIn(FADE_BLACK,FADE_NORMAL)
 	WaitFade()
 
-	// пїЅJпїЅпїЅпїЅпїЅпїЅТ‚пїЅ
+	// ѓJѓЃѓ‰‘Т‚ї
 	Wait(50)
 
 	StopBGM(160)
 
-	// пїЅJпїЅbпїЅgX ----------------------------------------------------------------------------------------
-	// пїЅNпїЅпїЅпїЅXпїЅtпїЅFпїЅ[пїЅh
+	// ѓJѓbѓgX ----------------------------------------------------------------------------------------
+	// ѓNѓЌѓXѓtѓFЃ[ѓh
 	CrossFade(45)
 	StopThread(1000)
 	StopThread(1001)
 	StopThread(1002)
 	StopThread(1003)
 
-	// пїЅJпїЅпїЅпїЅпїЅ
-	MoveCameraAt( 0 , 351.991f , -737.356f , 8.754f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 2.661f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , -0.291f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , 35.343f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 45.000f , 0 )			// пїЅпїЅпїЅпїЅp
+	// ѓJѓЃѓ‰
+	MoveCameraAt( 0 , 351.991f , -737.356f , 8.754f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 2.661f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , -0.291f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , 35.343f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 45.000f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , 0.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	RollCamera( 0 , 0.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 
 
-	//MoveCameraAt( 0 , 353.132f , -736.547f , 9.250f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	//ChangeCameraDistance( 0 , 2.661f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	//ChangeCameraElevation( 0 , -0.291f , 0 )	// пїЅпїЅ{пїЅВЉp
-	//RotateCamera( 0 , 78.902f , 0 )				// пїЅpпїЅx
-	//ChangeCameraPers( 0 , 45.000f , 0 )			// пїЅпїЅпїЅпїЅp
+	//MoveCameraAt( 0 , 353.132f , -736.547f , 9.250f , 0 )	// ’ЌЋ‹“_
+	//ChangeCameraDistance( 0 , 2.661f , 0 )		// Љо–{‹——Ј
+	//ChangeCameraElevation( 0 , -0.291f , 0 )	// Љо–{‹ВЉp
+	//RotateCamera( 0 , 78.902f , 0 )				// Љp“x
+	//ChangeCameraPers( 0 , 45.000f , 0 )			// Ћ‹–мЉp
 	//SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	//RollCamera( 0 , 0.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
-	// ResetCameraZPlane()	// пїЅCпїЅxпїЅпїЅпїЅgпїЅIпїЅпїЅпїЅпїЅпїЅЙЊД‚СЏoпїЅпїЅпїЅД‰пїЅпїЅпїЅпїЅпїЅпїЅBпїЅ}пїЅbпїЅvпїЅпїЅпїЅМђЭ’пїЅЙ–Я‚пїЅпїЅЬ‚пїЅпїЅB
+	//RollCamera( 0 , 0.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
+	// ResetCameraZPlane()	// ѓCѓxѓ“ѓgЏI—№Ћћ‚ЙЊД‚СЏo‚µ‚Д‰є‚і‚ўЃBѓ}ѓbѓv‘¤‚МђЭ’и‚Й–Я‚µ‚Ь‚·ЃB
 
-	// пїЅпїЅ\пїЅпїЅпїЅEпїЅД•\пїЅпїЅ
-	ResetChrInfoFlag("LAXIA", INFOFLAG_INVISIBLE)	// пїЅД•\пїЅпїЅ
+	// ”с•\Ћ¦ЃEЌД•\Ћ¦
+	ResetChrInfoFlag("LAXIA", INFOFLAG_INVISIBLE)	// ЌД•\Ћ¦
 
-	// пїЅJпїЅпїЅпїЅпїЅпїЅЪ“пїЅ
+	// ѓJѓЃѓ‰€Ъ“®
 	ExecuteCmd(1000, MoveCameraAt, INTERPOLATE_SPHERE , 349.087f , -734.642f , 9.235f , 95 )
 	ExecuteCmd(1001, ChangeCameraDistance, INTERPOLATE_SPHERE , 2.661f , 95 )
 	ExecuteCmd(1002, ChangeCameraElevation, INTERPOLATE_SPHERE , 0.879f , 95 )
 	ExecuteCmd(1003, RotateCamera, INTERPOLATE_SPHERE , 24.845f , 95 )
 
-	// пїЅЪ“пїЅ
+	// €Ъ“®
 	ExecuteCmd(1, MoveTo, "LAXIA", 349.09f, -734.59f, 7.75f, 0.1f, 0.18f)
-	LookSpd("LAXIA", 0.08f, 0.08f, 0.08f)// пїЅпїЅпїЅпїЅпїЅпїЅпїЅЯ‚ЙЋпїЅпїЅпїЅпїЅ
+	LookSpd("LAXIA", 0.08f, 0.08f, 0.08f)// ‚д‚Б‚­‚и‚Я‚ЙЋсЊь‚«
 	Look("LAXIA", -50.0f, 0f)
 
-	// пїЅtпїЅFпїЅ[пїЅhпїЅТ‚пїЅ
+	// ѓtѓFЃ[ѓh‘Т‚ї
 	Wait(FADE_NORMAL)
 	Look("LAXIA", 50.0f, 0f)
 
-	// пїЅЪ“пїЅпїЅТ‚пїЅ
+	// €Ъ“®‘Т‚ї
 	WaitThread(1)
 
 	WaitThread(1000)
@@ -333,28 +333,28 @@ function "EV_M02S270"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅ
 	WaitThread(1003)
 
 	LookReset("LAXIA")
-	ChangeAnimation( "LAXIA", "ANI_EV_UDEGUMI_S", -1, 1 )	// пїЅrпїЅg
+	ChangeAnimation( "LAXIA", "ANI_EV_UDEGUMI_S", -1, 1 )	// r‘g
 	
-	// пїЅпїЅпїЅNпїЅVпїЅпїЅ
+	// ѓ‰ѓNѓVѓѓ
 	TalkPopup("LAXIA",0,2,0,0,0) {
-		"#000e#000mпїЅcпїЅcпїЅcпїЅcпїЅcпїЅcпїЅcпїЅcпїЅcпїЅcпїЅcпїЅcпїЅcпїЅc"
+		"#000e#000mЃcЃcЃcЃcЃcЃcЃcЃcЃcЃcЃcЃcЃcЃc"
 	}
 	WaitPrompt()
 	WaitCloseWindow()
 
-	// пїЅJпїЅпїЅпїЅпїЅпїЅЪ“пїЅ
+	// ѓJѓЃѓ‰€Ъ“®
 	ExecuteCmd(1000, MoveCameraAt, INTERPOLATE_SPHERE , 349.926f , -735.234f , 9.255f , 70 )
 	ExecuteCmd(1001, ChangeCameraDistance, INTERPOLATE_SPHERE , 3.141f , 70 )
 	ExecuteCmd(1002, ChangeCameraElevation, INTERPOLATE_SPHERE , 7.182f , 70 )
 	ExecuteCmd(1003, RotateCamera, INTERPOLATE_SPHERE , 4.791f , 70 )
 
 	LookSpd("LAXIA", LOOKSPD_DEFAULT, LOOKSPD_DEFAULT, LOOKSPD_DEFAULT)
-	ChangeAnimation( "LAXIA", "ANI_EV_UDEGUMI_E", -1, 1 )	// пїЅrпїЅg
+	ChangeAnimation( "LAXIA", "ANI_EV_UDEGUMI_E", -1, 1 )	// r‘g
 
-	ResetChrInfoFlag("ADOL", INFOFLAG_INVISIBLE)	// пїЅД•\пїЅпїЅ
-	ResetChrInfoFlag("SAHAD", INFOFLAG_INVISIBLE)	// пїЅД•\пїЅпїЅ	
+	ResetChrInfoFlag("ADOL", INFOFLAG_INVISIBLE)	// ЌД•\Ћ¦
+	ResetChrInfoFlag("SAHAD", INFOFLAG_INVISIBLE)	// ЌД•\Ћ¦	
 	
-	// пїЅЪ“пїЅ
+	// €Ъ“®
 	ExecuteCmd(2, MoveTo, "SAHAD", 351.21f, -735.05f, 7.67f, 0.1f, 0.24f)
 	Wait(45)
 	ExecuteCmd(3, MoveTo, "ADOL", 350.08f, -736.38f, 7.68f, 0.1f, 0.24f)
@@ -365,17 +365,17 @@ function "EV_M02S270"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅ
 	Turn("LAXIA", -45.50f, 8.0f)
 	LookChr("LAXIA", "ADOL")
 	
-		// пїЅпїЅпїЅNпїЅVпїЅпїЅ
+		// ѓ‰ѓNѓVѓѓ
 	TalkPopup("LAXIA", 0, 2, 0, 0, 0) {
-		"#000e#000mпїЅAпїЅhпїЅпїЅпїЅEпїЅNпїЅпїЅпїЅXпїЅeпїЅBпїЅпїЅпїЅA"
-		"пїЅпїЅпїЅМ•У‚пїЅНЏbпїЅМ‹CпїЅzпїЅпїЅпїЅпїЅпїЅпїЅпїЅж‚¤пїЅЕ‚пїЅпїЅB"
+		"#000e#000mѓAѓhѓ‹ЃEѓNѓЉѓXѓeѓBѓ“ЃA"
+		"‚±‚М•У‚и‚НЏb‚М‹C”z‚Є–і‚ў‚ж‚¤‚Е‚·ЃB"
 	}
 	WaitPrompt()
 	WaitCloseWindow()
 
-	//пїЅ@пїЅпїЅпїЅпїЅпїЅД•пїЅпїЅпїЅпїЅДѓtпїЅпїЅпїЅ[пїЅпїЅпїЅCпїЅпїЅпїЅпїЅпїЅД‚пїЅпїЅпїЅAпїЅhпїЅпїЅпїЅЖѓTпїЅnпїЅhпїЅB
+	//Ѓ@‘±‚ў‚Д•а‚ў‚ДѓtѓЊЃ[ѓЂѓCѓ“‚µ‚Д‚­‚йѓAѓhѓ‹‚ЖѓTѓnѓhЃB
 
-	// пїЅЪ“пїЅпїЅТ‚пїЅ
+	// €Ъ“®‘Т‚ї
 	WaitThread(2)
 	WaitThread(3)
 
@@ -383,8 +383,8 @@ function "EV_M02S270"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅ
 	ChangeAnimation("SAHAD", "ANI_EV_RYOTEKOSI_S", -1, 1)
 
 	TalkPopup("SAHAD",0,2,0,0,0) {
-		"#000e#000mпїЅпїЅпїЅAпїЅпїЅпїЅк‚¶пїЅб‚ пїЅA"
-		"пїЅпїЅпїЅпїЅпїЅЙ–пїЅcпїЅnпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅЬ‚пїЅпїЅпїЅпїЅH"
+		"#000e#000m‚ЁЃA‚»‚к‚¶‚б‚ ЃA"
+		"‚±‚±‚Й–м‰c’n‚рЌм‚Б‚ї‚Ь‚¤‚©ЃH"
 	}
 	WaitPrompt()
 	WaitCloseWindow()
@@ -392,42 +392,42 @@ function "EV_M02S270"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅ
 	HeadYes("ADOL", 1, 25)
 	Wait(35)
 	
-	//пїЅ@пїЅ@пїЅAпїЅhпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ[пїЅVпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-	//пїЅ@пїЅ@пїЅпїЅКѓuпїЅпїЅпїЅbпїЅNпїЅAпїЅEпїЅgпїЅпїЅпїЅДЃAпїЅпїЅcпїЅnпїЅЭ‰cпїЅrпїЅdпїЅB
+	//Ѓ@Ѓ@ѓAѓhѓ‹их‚«ѓ‚Ѓ[ѓVѓ‡ѓ“Њг‚Й
+	//Ѓ@Ѓ@‰ж–Кѓuѓ‰ѓbѓNѓAѓEѓg‚µ‚ДЃA–м‰c’nђЭ‰c‚r‚dЃB
 
 	FadeOut(FADE_BLACK,FADE_NORMAL)
 	WaitFade()
 	
 
 	Wait(20)
-	PlaySE(SE_M02S270_01, 100, 0, 0, 0, 1.0f, 0)	//	пїЅeпїЅпїЅпїЅgпїЅЭ‰c
+	PlaySE(SE_M02S270_01, 100, 0, 0, 0, 1.0f, 0)	//	ѓeѓ“ѓgђЭ‰c
 	SoundEfx( SEFX_EV_CAVE_S, 15 )
 	Wait(50)
-	SetEnvSEPlayState(-1, 0)	//пїЅВ‹пїЅSEпїЅSпїЅпїЅ~
+	SetEnvSEPlayState(-1, 0)	//ЉВ‹«SE‘S’вЋ~
 	Wait(60)
 
-	//пїЅIпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ----------------------------------------------------
+	//ЏI—№Џ€—ќ‚±‚±‚©‚з----------------------------------------------------
 	CallFunc("mp1121:EV_M02S270_ED")
 
 }
 
-function "EV_M02S270_ED"											//пїЅCпїЅxпїЅпїЅпїЅgпїЅXпїЅLпїЅbпїЅvпїЅpпїЅЙЏIпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅК‚пїЅfunctionпїЅЖ‚пїЅпїЅД—pпїЅУ‚пїЅпїЅЬ‚пїЅпїЅB
+function "EV_M02S270_ED"											//ѓCѓxѓ“ѓgѓXѓLѓbѓv—p‚ЙЏI—№Џ€—ќ‚р•К‚Мfunction‚Ж‚µ‚Д—p€У‚µ‚Ь‚·ЃB
 {
-	SetSkipScript("")												//пїЅIпїЅпїЅпїЅпїЅпїЅпїЅпїЅНѓXпїЅLпїЅbпїЅvпїЅЦЋ~
+	SetSkipScript("")												//ЏI—№Џ€—ќ‚НѓXѓLѓbѓv‹ЦЋ~
 	RestoreEventState()
 
 	MapAnime("camp_all", "on")
 
-	//пїЅLпїЅпїЅпїЅпїЅпїЅNпїЅ^пїЅ[пїЅпїЅпїЅпїЅпїЅпїЅ
+	//ѓLѓѓѓ‰ѓNѓ^Ѓ[Џ‰Љъ‰»
 	CallFunc("system:reset_chrmot_ADOL")
 	CallFunc("system:reset_chrmot_LAXIA")
 	CallFunc("system:reset_chrmot_SAHAD")
 
-	//пїЅ}пїЅbпїЅvпїЅpпїЅпїЅпїЅпїЅпїЅ[пїЅ^пїЅ[пїЅпїЅпїЅZпїЅbпїЅg
+	//ѓ}ѓbѓvѓpѓ‰ѓЃЃ[ѓ^Ѓ[ѓЉѓZѓbѓg
 	ResetMapParam( -1 )
 
-	//пїЅtпїЅпїЅпїЅOпїЅпїЅпїЅпїЅ
-	SetFlag(TF_LOADING_TIPS_OFF, 1)	//NowLoading пїЅпїЅпїЅпїЅ Tips пїЅ\пїЅпїЅпїЅпїЅпїЅJпїЅbпїЅg
+	//ѓtѓ‰ѓOЏ€—ќ
+	SetFlag(TF_LOADING_TIPS_OFF, 1)	//NowLoading Ћћ‚М Tips •\Ћ¦‚рѓJѓbѓg
 
 	StopBGM(30)
 
@@ -437,33 +437,33 @@ function "EV_M02S270_ED"											//пїЅCпїЅxпїЅпїЅпїЅgпїЅXпїЅLпїЅbпїЅvпїЅpпїЅЙЏ
 	ResetStopFlag(STOPFLAG_EVENT)
 
 
-	//пїЅIпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅЬ‚пїЅ----------------------------------------------------
+	//ЏI—№Џ€—ќ‚±‚±‚Ь‚Е----------------------------------------------------
 }
 
-//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-//пїЅпїЅmp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ(mp1121)
-//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
+//„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ
+//ЃҐmp1121‚Е–м‰c‚·‚й‚Q(mp1121)
+//„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ
+function "EV_M02S271"	//mp1121‚Е–м‰c‚·‚й‚Q
 {
-	//пїЅJпїЅnпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ---------------------------------------------------
+	//ЉJЋnЏ€—ќ‚±‚±‚©‚з---------------------------------------------------
 	SetStopFlag(STOPFLAG_EVENTIMPOSE)
 	ResetStopFlag(STOPFLAG_CINEMA)
 	FadeOut(FADE_BLACK, 0)
 	WaitFade()
 	SaveCamera()
 
-	//StopBGM(0)		//пїЅпїЅBGMпїЅпїЅпїЅпїЅ
+	//StopBGM(0)		//ЃџBGMЏБ‚·
 
-	ChangeAnimation( "chkpt" , "ANI_FIRST", 0 , 1 )	//пїЅпїЅпїЅпїЅпїЅGпїЅtпїЅFпїЅNпїЅgпїЅпїЅпїЅпїЅ
+	ChangeAnimation( "chkpt" , "ANI_FIRST", 0 , 1 )	//ђ…Џ»ѓGѓtѓFѓNѓgЏБ‚·
 
-	//пїЅВ‹пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅsпїЅvпїЅИ‚пїЅпїЅМ‚пїЅпїЅBпїЅпїЅ
+	//ЉВ‹«Џ‰Љъ‰»Ѓ••s—v‚И‚а‚М‚р‰B‚·
 	CallFunc("system:party_reset")
 
 	ClearDebris()
 
 	ResetChrPos((CHRTYPE_MONS | REMOVE_POS))
 
-	//пїЅLпїЅпїЅпїЅпїЅпїЅNпїЅ^пїЅ[пїЅпїЅпїЅпїЅпїЅпїЅ
+	//ѓLѓѓѓ‰ѓNѓ^Ѓ[Џ‰Љъ‰»
 	SetChrWork("ADOL", CWK_DEFAULT_SKIPNODE_OFF, 1)
 	SetChrWork("SAHAD", CWK_DEFAULT_SKIPNODE_OFF, 1)
 	SetChrWork("LAXIA", CWK_DEFAULT_SKIPNODE_OFF, 1)
@@ -497,51 +497,51 @@ function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
 	ChangeSubAnimation("SAHAD", SUBMOT_EXT1, ANI_E_LOOKC, 1)
 	Look("SAHAD", 0f, -20.0f)
 
-	//пїЅJпїЅпїЅпїЅпїЅпїЅЭ’пїЅ
-	MoveCameraAt( 0 , 344.243f , -732.320f , 8.133f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 1.231f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , 43.374f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , 233.704f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 37.400f , 0 )			// пїЅпїЅпїЅпїЅp
+	//ѓJѓЃѓ‰ђЭ’и
+	MoveCameraAt( 0 , 344.243f , -732.320f , 8.133f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 1.231f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , 43.374f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , 233.704f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 37.400f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , 0.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	RollCamera( 0 , 0.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 
-	//пїЅпїЅcпїЅnпїЅ}пїЅbпїЅvпїЅпїЅпїЅпїЅ
-	MapAnime( "camp_all" , on )	//пїЅLпїЅпїЅпїЅпїЅпїЅvпїЅЭ’u
+	//–м‰c’nѓ}ѓbѓvђ§Њд
+	MapAnime( "camp_all" , on )	//ѓLѓѓѓ“ѓvђЭ’u
 	MapHide( "camp_fire1" , 1)
 	MapHide( "camp_fire2" , 1)
 	MapHide( "camp_smoke" , 1)
 
-	// пїЅпїЅКЉEпїЅ[пїЅxпїЅМђЭ’пїЅ
+	// ”нЋКЉEђ[“x‚МђЭ’и
 	SetDoF(0, LERP_LINEAR, 6.000, 200.000 ,0.000 ,0.500 ,2.000)
 
-	// пїЅOпїЅпїЅпїЅAпїЅМђЭ’пїЅ
+	// ѓOѓЊѓA‚МђЭ’и
 	SetGlare(0, LERP_LINEAR, 0.700, 1.300 ,1.000 ,1.000 ,0.600 ,0.000 ,1.000)
 
-	//пїЅXпїЅLпїЅbпїЅvпїЅпїЅпїЅпїЅ
+	//ѓXѓLѓbѓv‹–‰В
 	SetSkipScript("mp1121:EV_M02S271_ED")
 
-	//пїЅJпїЅnпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅЬ‚пїЅ-----------------------------------------------
+	//ЉJЋnЏ€—ќ‚±‚±‚Ь‚Е-----------------------------------------------
 
 	Wait(10)
 
 	PlayBGM(BGM_EVENT_005, 0 )
 	SoundEfx( SEFX_EV_CAVE_S, 15 )
 
-	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE ,  344.243f , -732.320f , 8.133f, 90 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE , 1.731f , 90 )				// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-//	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , 43.372f, 90 )				// пїЅпїЅ{пїЅВЉp
-//	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE , 233.705f , 90 )				// пїЅpпїЅx
-//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE ,-22.1f , 90 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE ,  344.243f , -732.320f , 8.133f, 90 )	// ’ЌЋ‹“_
+	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE , 1.731f , 90 )				// Љо–{‹——Ј
+//	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , 43.372f, 90 )				// Љо–{‹ВЉp
+//	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE , 233.705f , 90 )				// Љp“x
+//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE ,-22.1f , 90 )				// ѓЌЃ[ѓ‹‰с“]
 
-	//MoveCameraAt( 0 , 344.243f , -732.320f , 8.133f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	//ChangeCameraDistance( 0 , 2.031f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	//ChangeCameraElevation( 0 , 43.372f , 0 )	// пїЅпїЅ{пїЅВЉp
-	//RotateCamera( 0 , 233.705f , 0 )				// пїЅpпїЅx
-	//ChangeCameraPers( 0 , 37.400f , 0 )			// пїЅпїЅпїЅпїЅp
+	//MoveCameraAt( 0 , 344.243f , -732.320f , 8.133f , 0 )	// ’ЌЋ‹“_
+	//ChangeCameraDistance( 0 , 2.031f , 0 )		// Љо–{‹——Ј
+	//ChangeCameraElevation( 0 , 43.372f , 0 )	// Љо–{‹ВЉp
+	//RotateCamera( 0 , 233.705f , 0 )				// Љp“x
+	//ChangeCameraPers( 0 , 37.400f , 0 )			// Ћ‹–мЉp
 	//SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	//RollCamera( 0 , 1.1f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
-	// ResetCameraZPlane()	// пїЅCпїЅxпїЅпїЅпїЅgпїЅIпїЅпїЅпїЅпїЅпїЅЙЊД‚СЏoпїЅпїЅпїЅД‰пїЅпїЅпїЅпїЅпїЅпїЅBпїЅ}пїЅbпїЅvпїЅпїЅпїЅМђЭ’пїЅЙ–Я‚пїЅпїЅЬ‚пїЅпїЅB
+	//RollCamera( 0 , 1.1f , 0 )				// ѓЌЃ[ѓ‹‰с“]
+	// ResetCameraZPlane()	// ѓCѓxѓ“ѓgЏI—№Ћћ‚ЙЊД‚СЏo‚µ‚Д‰є‚і‚ўЃBѓ}ѓbѓv‘¤‚МђЭ’и‚Й–Я‚µ‚Ь‚·ЃB
 
 	FadeIn(FADE_BLACK, FADE_NORMAL)
 	WaitFade()
@@ -554,33 +554,33 @@ function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
 
 	Wait(15)
 
-//	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 344.288f , -732.325f , 8.183f, 145 )	// пїЅпїЅпїЅпїЅпїЅ_
-//	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE ,1.700f  , 145 )				// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-//	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , -3.013f , 145 )				// пїЅпїЅ{пїЅВЉp
-//	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE , 230.012f, 145 )				// пїЅpпїЅx
-//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE ,-22.1f , 145 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+//	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 344.288f , -732.325f , 8.183f, 145 )	// ’ЌЋ‹“_
+//	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE ,1.700f  , 145 )				// Љо–{‹——Ј
+//	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , -3.013f , 145 )				// Љо–{‹ВЉp
+//	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE , 230.012f, 145 )				// Љp“x
+//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE ,-22.1f , 145 )				// ѓЌЃ[ѓ‹‰с“]
 
-	//MoveCameraAt( 0 , 344.288f , -732.325f , 8.183f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	//ChangeCameraDistance( 0 , 1.700f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	//ChangeCameraElevation( 0 , -3.013f , 0 )	// пїЅпїЅ{пїЅВЉp
-	//RotateCamera( 0 , 230.012f , 0 )				// пїЅpпїЅx
-	//ChangeCameraPers( 0 , 37.400f , 0 )			// пїЅпїЅпїЅпїЅp
+	//MoveCameraAt( 0 , 344.288f , -732.325f , 8.183f , 0 )	// ’ЌЋ‹“_
+	//ChangeCameraDistance( 0 , 1.700f , 0 )		// Љо–{‹——Ј
+	//ChangeCameraElevation( 0 , -3.013f , 0 )	// Љо–{‹ВЉp
+	//RotateCamera( 0 , 230.012f , 0 )				// Љp“x
+	//ChangeCameraPers( 0 , 37.400f , 0 )			// Ћ‹–мЉp
 	//SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	//RollCamera( 0 , 0.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
-	//// ResetCameraZPlane()	// пїЅCпїЅxпїЅпїЅпїЅgпїЅIпїЅпїЅпїЅпїЅпїЅЙЊД‚СЏoпїЅпїЅпїЅД‰пїЅпїЅпїЅпїЅпїЅпїЅBпїЅ}пїЅbпїЅvпїЅпїЅпїЅМђЭ’пїЅЙ–Я‚пїЅпїЅЬ‚пїЅпїЅB
+	//RollCamera( 0 , 0.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
+	//// ResetCameraZPlane()	// ѓCѓxѓ“ѓgЏI—№Ћћ‚ЙЊД‚СЏo‚µ‚Д‰є‚і‚ўЃBѓ}ѓbѓv‘¤‚МђЭ’и‚Й–Я‚µ‚Ь‚·ЃB
 
-	//пїЅ@пїЅ@пїЅtпїЅFпїЅ[пїЅhпїЅCпїЅпїЅпїЅпїЅпїЅпїЅЖЃAпїЅпїЅcпїЅnпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅД‚пїЅпїЅпїЅпїЅФ‚ЙЃB
-	//пїЅ@пїЅ@пїЅzпїЅпїЅпїЅпїЅпїЅД“VпїЅпїЅпїЅOпїЅЕ•пїЅпїЅО‚пїЅпїЅН‚пїЅЕЌпїЅпїЅпїЅпїЅД‚пїЅпїЅпїЅRпїЅl
+	//Ѓ@Ѓ@ѓtѓFЃ[ѓhѓCѓ“‚·‚й‚ЖЃA–м‰c’n‚ЄЉ®ђ¬‚µ‚Д‚ў‚йЏу‘Ф‚ЙЃB
+	//Ѓ@Ѓ@—z‚а•й‚к‚Д“V–‹‘O‚Е•°‰О‚р€Н‚с‚ЕЌА‚Б‚Д‚ў‚й‚Rђl
 
 	CrossFade(FADE_NORMAL)
 
-	MoveCameraAt( 0 , 344.651f , -732.275f , 8.183f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 1.620f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , -3.013f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , 230.009f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 37.400f , 0 )			// пїЅпїЅпїЅпїЅp
+	MoveCameraAt( 0 , 344.651f , -732.275f , 8.183f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 1.620f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , -3.013f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , 230.009f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 37.400f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , 0.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	RollCamera( 0 , 0.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 
 	Wait(FADE_NORMAL)
 
@@ -588,8 +588,8 @@ function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
 	Wait(10)
 
 
-	TalkMes("SAHAD","#1620V#011e#000mпїЅcпїЅcпїЅпїЅпїЅВЃ[пїЅпїЅпїЅAпїЅпїЅпїЅпїЅпїЅО‚пїЅпїЅпїЅ",
-		"пїЅsпїЅvпїЅcпїЅЖЊпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅЬ‚пїЅпїЅпїЅИ‚пїЅпїЅB","")
+	TalkMes("SAHAD","#1620V#011e#000mЃcЃc‰Ѕ‚ВЃ[‚©ЃA•°‚«‰О‚Б‚Д",
+		"•sЋv‹c‚ЖЊ©“ь‚Б‚ї‚Ь‚¤‚ж‚И‚ ЃB","")
 	WaitPrompt()
 
 	WaitThread(1001)
@@ -598,56 +598,56 @@ function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
 	WaitThread(1004)
 	WaitThread(1005)
 
-	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 344.523f , -732.006f , 8.232f , 190 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE , 1.730f , 190 )				// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , -0.574f , 190 )				// пїЅпїЅ{пїЅВЉp
-	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE ,246.026f , 190 )				// пїЅpпїЅx
-//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE ,-22.1f , 190 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 344.523f , -732.006f , 8.232f , 190 )	// ’ЌЋ‹“_
+	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE , 1.730f , 190 )				// Љо–{‹——Ј
+	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , -0.574f , 190 )				// Љо–{‹ВЉp
+	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE ,246.026f , 190 )				// Љp“x
+//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE ,-22.1f , 190 )				// ѓЌЃ[ѓ‹‰с“]
 
-	//MoveCameraAt( 0 , 344.523f , -732.006f , 8.232f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	//ChangeCameraDistance( 0 , 1.730f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	//ChangeCameraElevation( 0 , -0.574f , 0 )	// пїЅпїЅ{пїЅВЉp
-	//RotateCamera( 0 , 246.026f , 0 )				// пїЅpпїЅx
-	//ChangeCameraPers( 0 , 37.400f , 0 )			// пїЅпїЅпїЅпїЅp
+	//MoveCameraAt( 0 , 344.523f , -732.006f , 8.232f , 0 )	// ’ЌЋ‹“_
+	//ChangeCameraDistance( 0 , 1.730f , 0 )		// Љо–{‹——Ј
+	//ChangeCameraElevation( 0 , -0.574f , 0 )	// Љо–{‹ВЉp
+	//RotateCamera( 0 , 246.026f , 0 )				// Љp“x
+	//ChangeCameraPers( 0 , 37.400f , 0 )			// Ћ‹–мЉp
 	//SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	//RollCamera( 0 , 0.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
-	//// ResetCameraZPlane()	// пїЅCпїЅxпїЅпїЅпїЅgпїЅIпїЅпїЅпїЅпїЅпїЅЙЊД‚СЏoпїЅпїЅпїЅД‰пїЅпїЅпїЅпїЅпїЅпїЅBпїЅ}пїЅbпїЅvпїЅпїЅпїЅМђЭ’пїЅЙ–Я‚пїЅпїЅЬ‚пїЅпїЅB
+	//RollCamera( 0 , 0.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
+	//// ResetCameraZPlane()	// ѓCѓxѓ“ѓgЏI—№Ћћ‚ЙЊД‚СЏo‚µ‚Д‰є‚і‚ўЃBѓ}ѓbѓv‘¤‚МђЭ’и‚Й–Я‚µ‚Ь‚·ЃB
 
 	LookChr("LAXIA" ,"SAHAD")
 
-	TalkMes("SAHAD","#1621V#000mпїЅпїЅпїЅМ“пїЅпїЅН•sпїЅпїЅпїЅИ‚пїЅпїЅЖ‚пїЅпїЅз‚ЇпїЅпїЅ",
-		"пїЅgпїЅпїЅпїЅAпїЅ\пїЅRпїЅпїЅпїЅkпїЅЭЏг‚ЄпїЅпїЅпїЅпїЅпїЅЬ‚пїЅпїЅс‚ѕ‚пїЅпїЅcпїЅc","")
+	TalkMes("SAHAD","#1621V#000m‚±‚М“‡‚Н•s€А‚И‚±‚Ж‚ѕ‚з‚Ї‚Е",
+		"ђg‚аѓAѓ\ѓR‚аЏk‚ЭЏг‚Є‚Б‚ї‚Ь‚¤‚с‚ѕ‚ЄЃcЃc","")
 	WaitPrompt()
-	TalkMes("SAHAD","#1622V#012e#000mпїЅО‚пїЅпїЅпїЅпїЅД‚пїЅпїЅпїЅЖ—пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅЖ‚пїЅпїЅпїЅпїЅпїЅпїЅA",
-		"пїЅпїЅпїЅSпїЅЕ‚пїЅпїЅпїЅЖ‚пїЅпїЅпїЅпїЅпїЅпїЅcпїЅc","")
+	TalkMes("SAHAD","#1622V#012e#000m‰О‚рЊ©‚Д‚ў‚й‚Ж—Ћ‚ї’…‚­‚Ж‚ў‚¤‚©ЃA",
+		"€АђS‚Е‚«‚й‚Ж‚ў‚¤‚©ЃcЃc","")
 	WaitPrompt()
 	WaitCloseWindow()
 	ResetStopFlag(STOPFLAG_CINEMA)
 
 	Wait(5)
 
-	//пїЅIпїЅпїЅпїЅпїЅ
+	//‘I‘рЋ€
 	SetFlag(TF_MENU_SELECT,0)
 	MenuReset()
 	MenuType(MENUTYPE_POPUP)
-	MenuAdd(1,"пїЅlпїЅМ–{пїЅ\пїЅпїЅпїЅпїЅпїЅпїЅпїЅ")
-	MenuAdd(2,"пїЅCпїЅМ‚пїЅпїЅпїЅпїЅпїЅпїЅпїЅИ‚пїЅпїЅпїЅпїЅпїЅ")
+	MenuAdd(1,"ђl‚М–{”\‚ѕ‚©‚з‚Л")
+	MenuAdd(2,"‹C‚М‚№‚ў‚¶‚б‚И‚ў‚©‚И")
 	MenuOpen( TF_MENU_SELECT , -1 , ADOLMENU_PPOSY , -2 , -2 , 10 , 0)	WaitMenu(0)
 	MenuClose(10,0)
 
-	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-	//	пїЅЛђlпїЅМ–{пїЅ\пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ
+	//	ЃЛђl‚М–{”\‚ѕ‚©‚з‚Л
 	if (FLAG[TF_MENU_SELECT] == 1){
 
-		PlayVoice(Y8V_0164,"ADOL",100)	//пїЅпїЅпїЅпїЅпїЅcпїЅiпїЅпїЅпїЅЖЃj
+		PlayVoice(Y8V_0164,"ADOL",100)	//‚ ‚ ЃcЃi‘Љ’ЖЃj
 		HeadYes("ADOL" , 1 , 25 )
 		Wait(40)
 		ChangeSubAnimation("ADOL",SUBMOT_EYE,ANI_E_CLOSE_E,1)
 
 	}
-	//	пїЅЛ‹CпїЅМ‚пїЅпїЅпїЅпїЅпїЅпїЅпїЅИ‚пїЅпїЅпїЅпїЅпїЅ
+	//	ЃЛ‹C‚М‚№‚ў‚¶‚б‚И‚ў‚©‚И
 	else {
-		PlayVoice(Y8V_0166,"ADOL",100)	//пїЅпїЅпїЅпїЅcпїЅiпїЅЫ’пїЅj
+		PlayVoice(Y8V_0166,"ADOL",100)	//‚ў‚вЃcЃi”Ы’иЃj
 		HeadNo("ADOL" ,1 , 35)
 		Wait(45)
 
@@ -663,59 +663,59 @@ function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
 	StopThread(1004)
 	StopThread(1005)
 
-	MoveCameraAt( 0 , 345.055f , -731.241f , 8.306f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 2.630f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , 7.598f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , 183.947f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 34.400f , 0 )			// пїЅпїЅпїЅпїЅp
+	MoveCameraAt( 0 , 345.055f , -731.241f , 8.306f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 2.630f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , 7.598f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , 183.947f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 34.400f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , 4.6f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	RollCamera( 0 , 4.6f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 
-	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 345.249f , -731.227f , 8.306f, 380 )	// пїЅпїЅпїЅпїЅпїЅ_
-//	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE , 2.099f , 380 )				// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-//	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , 85.896f , 400 )				// пїЅпїЅ{пїЅВЉp
-//	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE ,65.788f, 400 )				// пїЅpпїЅx
-//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE ,-22.1f , 400 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 345.249f , -731.227f , 8.306f, 380 )	// ’ЌЋ‹“_
+//	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE , 2.099f , 380 )				// Љо–{‹——Ј
+//	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , 85.896f , 400 )				// Љо–{‹ВЉp
+//	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE ,65.788f, 400 )				// Љp“x
+//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE ,-22.1f , 400 )				// ѓЌЃ[ѓ‹‰с“]
 
-	//MoveCameraAt( 0 , 345.249f , -731.227f , 8.306f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	//ChangeCameraDistance( 0 , 2.630f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	//ChangeCameraElevation( 0 , 7.598f , 0 )	// пїЅпїЅ{пїЅВЉp
-	//RotateCamera( 0 , 183.947f , 0 )				// пїЅpпїЅx
-	//ChangeCameraPers( 0 , 34.400f , 0 )			// пїЅпїЅпїЅпїЅp
+	//MoveCameraAt( 0 , 345.249f , -731.227f , 8.306f , 0 )	// ’ЌЋ‹“_
+	//ChangeCameraDistance( 0 , 2.630f , 0 )		// Љо–{‹——Ј
+	//ChangeCameraElevation( 0 , 7.598f , 0 )	// Љо–{‹ВЉp
+	//RotateCamera( 0 , 183.947f , 0 )				// Љp“x
+	//ChangeCameraPers( 0 , 34.400f , 0 )			// Ћ‹–мЉp
 	//SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	//RollCamera( 0 , 4.6f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	//RollCamera( 0 , 4.6f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 
 	Wait(FADE_CROSS)
 	SetStopFlag(STOPFLAG_CINEMA)
 	Wait(10)
 
-	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-	//	пїЅЛђlпїЅМ–{пїЅ\пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ
+	//	ЃЛђl‚М–{”\‚ѕ‚©‚з‚Л
 	if (FLAG[TF_MENU_SELECT] == 1){
 		HeadYes("LAXIA", 1, 25)
-		TalkMes("LAXIA","#0669V#000mпїЅпїЅпїЅпїЅпїЅAпїЅlпїЅН‘пїЅМ‚пїЅпїЅпїЅ",
-			"пїЅО‚Ж‹пїЅпїЅЙЌЭ‚пїЅпїЅпїЅпїЅЖ‚пїЅпїЅпїЅпїЅЬ‚пїЅпїЅB","")
+		TalkMes("LAXIA","#0669V#000m‚¦‚¦ЃAђl‚Н‘еђМ‚©‚з",
+			"‰О‚Ж‹¤‚ЙЌЭ‚Б‚Ѕ‚Ж‚ў‚ў‚Ь‚·ЃB","")
 		WaitPrompt()
 
 		LookSpd("SAHAD",0.08f,0.08f,0.08f)
 		LookChr("SAHAD" , "LAXIA")
 
-		TalkMes("LAXIA","#0670V#000mпїЅпїЅпїЅЖ‚пїЅпїЅД‰О‚НЌР‚пїЅпїЅЙ‚пїЅпїЅИ‚пїЅЬ‚пїЅпїЅпїЅпїЅA",
-			"пїЅпїЅпїЅпїЅAпїЅgпїЅпїЅпїЅпїЅпїЅAпїЅпїЅпїЅз‚¬пїЅпїЅпїЅпїЅпїЅпїЅпїЅз‚µпїЅД‚пїЅпїЅк‚ЅпїЅcпїЅc","")
+		TalkMes("LAXIA","#0670V#000mЋћ‚Ж‚µ‚Д‰О‚НЌР‚ў‚Й‚а‚И‚и‚Ь‚·‚ЄЃA",
+			"“”‚иЃA’g‚©‚іЃA€А‚з‚¬‚р‚а‚Ѕ‚з‚µ‚Д‚­‚к‚ЅЃcЃc","")
 		WaitPrompt()
-		TalkMes("LAXIA","#0671V#000mпїЅпїЅпїЅпїЅИ‹LпїЅпїЅпїЅпїЅпїЅн‚ЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅlпїЅФ‚пїЅ",
-			"пїЅпїЅпїЅЙЌпїЅпїЅЬ‚пїЅД‚пїЅпїЅпїЅМ‚пїЅпїЅпїЅпїЅпїЅпїЅпїЅЬ‚пїЅпїЅпїЅB","")
+		TalkMes("LAXIA","#0671V#000m‚»‚с‚И‹L‰Ї‚Є‚н‚Ѕ‚­‚µ‚Ѕ‚їђlЉФ‚М",
+			"Ќ°‚ЙЌЏ‚Ь‚к‚Д‚ў‚й‚М‚©‚а‚µ‚к‚Ь‚№‚сЃB","")
 		WaitPrompt()
 		WaitCloseWindow()
 
 		ChangeAnimation( "SAHAD" , "ANI_EV_SG_UDEGUMI_S", -1 , 1 )
 
 		//	"SAHAD"
-		TalkMes("SAHAD","#1623V#011e#000mпїЅЦЃ[пїЅAпїЅИ‚пїЅЩ‚З‚И‚пїЅпїЅcпїЅc","","")
+		TalkMes("SAHAD","#1623V#011e#000m‚ЦЃ[ЃA‚И‚й‚Щ‚З‚И‚џЃcЃc","","")
 		WaitPrompt()
 		WaitCloseWindow()
 	}
-	//	пїЅЛ‹CпїЅМ‚пїЅпїЅпїЅпїЅпїЅпїЅпїЅИ‚пїЅпїЅпїЅпїЅпїЅ
+	//	ЃЛ‹C‚М‚№‚ў‚¶‚б‚И‚ў‚©‚И
 	else {
 
 		LookSpd("SAHAD",0.08f,0.08f,0.08f)
@@ -723,22 +723,22 @@ function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
 		ChangeAnimation( "SAHAD" , "ANI_EV_SG_UDEGUMI_S", -1 , 1 )
 
 
-		TalkMes("SAHAD","#1624V#061e#000mпїЅпїЅпїЅAпїЅпїЅпїЅпїЅпїЅпїЅпїЅcпїЅc","","")
+		TalkMes("SAHAD","#1624V#061e#000m‚»ЃA‚»‚¤‚©ЃcЃc","","")
 		WaitPrompt()
-		TalkMes("SAHAD","#1625V#062e#080mпїЅЕ‚пїЅпїЅAпїЅЬ‚пїЅпїЅCпїЅМ‚пїЅпїЅпїЅпїЅЕ‚пїЅ",
-			"пїЅЖ‚Й‚пїЅпїЅпїЅпїЅlпїЅSпїЅnпїЅВ‚пїЅпїЅпїЅпїЅCпїЅпїЅпїЅпїЅпїЅпїЅпїЅB","")
+		TalkMes("SAHAD","#1625V#062e#080m‚Е‚аЃA‚Ь‚ ‹C‚М‚№‚ў‚Е‚а",
+			"‚Ж‚Й‚©‚­ђlђS’n‚В‚ў‚Ѕ‹C•Є‚ѕ‚єЃB","")
 		WaitPrompt()
 
 		LookReset("SAHAD")
-		TalkMes("SAHAD","#1626V#091e#080mпїЅЬ‚пїЅпїЅAпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅKпїЅпїЅпїЅoпїЅпїЅЛЃ[пїЅЖ‚ИЃB",
-		"пїЅпїЅпїЅпїЅ2пїЅsпїЅпїЅ","")
+		TalkMes("SAHAD","#1626V#091e#080m‚Ь‚ЅЃA–ѕ“ъ‚©‚зѓKѓ“ѓo‚з‚ЛЃ[‚Ж‚ИЃB",
+		"–ѕ“ъ2Ќs–Ъ","")
 		WaitPrompt()
 		WaitCloseWindow()
 		ResetStopFlag(STOPFLAG_CINEMA)
 	}
-	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ
 
-	//пїЅпїЅпїЅJпїЅbпїЅgпїЅпїЅпїЅпїЅ
+	//ЋџѓJѓbѓgЏЂ”х
 	ChangeSubAnimation("LAXIA",SUBMOT_EYE,ANI_E_FUMAN_S,1)
 
 	Wait(10)
@@ -750,13 +750,13 @@ function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
 	StopThread(1004)
 	StopThread(1005)
 
-	MoveCameraAt( 0 , 344.609f , -730.725f , 8.331f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 1.259f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , 1.310f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , 306.134f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 29.400f , 0 )			// пїЅпїЅпїЅпїЅp
+	MoveCameraAt( 0 , 344.609f , -730.725f , 8.331f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 1.259f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , 1.310f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , 306.134f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 29.400f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , 5.7f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	RollCamera( 0 , 5.7f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 
 	ChangeSubAnimation("SAHAD",SUBMOT_EYE,ANI_E_WAIT,1)
 	ChangeSubAnimation("SAHAD",SUBMOT_MOUTH,ANI_M_WAIT,1)
@@ -770,45 +770,45 @@ function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
 	SetStopFlag(STOPFLAG_CINEMA)
 	Wait(10)
 
-	TalkMes("LAXIA","#0672V#000mпїЅcпїЅcпїЅпїЅпїЅпїЅЙ‚пїЅпїЅД‚пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-		"пїЅпїЅпїЅМ•пїЅпїЅН‰пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅМ‚Е‚пїЅпїЅе‚¤пїЅH","")
+	TalkMes("LAXIA","#0672V#000mЃcЃc‚»‚к‚Й‚µ‚Д‚аЌЎ“ъ‰п‚Б‚Ѕ",
+		"‚ ‚М•ы‚Н‰Ѕ‚ѕ‚Б‚Ѕ‚М‚Е‚µ‚е‚¤ЃH","")
 	WaitPrompt()
 
-	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 344.664f , -730.801f , 8.406f, 190 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE ,  1.529f , 190 )				// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , 1.310f , 190 )				// пїЅпїЅ{пїЅВЉp
-	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE , 230.268f, 190 )				// пїЅpпїЅx
-	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE , -7.1f , 190 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 344.664f , -730.801f , 8.406f, 190 )	// ’ЌЋ‹“_
+	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE ,  1.529f , 190 )				// Љо–{‹——Ј
+	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , 1.310f , 190 )				// Љо–{‹ВЉp
+	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE , 230.268f, 190 )				// Љp“x
+	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE , -7.1f , 190 )				// ѓЌЃ[ѓ‹‰с“]
 
-	//MoveCameraAt( 0 , 344.664f , -730.801f , 8.406f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	//ChangeCameraDistance( 0 , 1.529f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	//ChangeCameraElevation( 0 , 1.310f , 0 )	// пїЅпїЅ{пїЅВЉp
-	//RotateCamera( 0 , 230.268f , 0 )				// пїЅpпїЅx
-	//ChangeCameraPers( 0 , 29.400f , 0 )			// пїЅпїЅпїЅпїЅp
+	//MoveCameraAt( 0 , 344.664f , -730.801f , 8.406f , 0 )	// ’ЌЋ‹“_
+	//ChangeCameraDistance( 0 , 1.529f , 0 )		// Љо–{‹——Ј
+	//ChangeCameraElevation( 0 , 1.310f , 0 )	// Љо–{‹ВЉp
+	//RotateCamera( 0 , 230.268f , 0 )				// Љp“x
+	//ChangeCameraPers( 0 , 29.400f , 0 )			// Ћ‹–мЉp
 	//SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	//RollCamera( 0 , -7.1f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
-	//// ResetCameraZPlane()	// пїЅCпїЅxпїЅпїЅпїЅgпїЅIпїЅпїЅпїЅпїЅпїЅЙЊД‚СЏoпїЅпїЅпїЅД‰пїЅпїЅпїЅпїЅпїЅпїЅBпїЅ}пїЅbпїЅvпїЅпїЅпїЅМђЭ’пїЅЙ–Я‚пїЅпїЅЬ‚пїЅпїЅB
+	//RollCamera( 0 , -7.1f , 0 )				// ѓЌЃ[ѓ‹‰с“]
+	//// ResetCameraZPlane()	// ѓCѓxѓ“ѓgЏI—№Ћћ‚ЙЊД‚СЏo‚µ‚Д‰є‚і‚ўЃBѓ}ѓbѓv‘¤‚МђЭ’и‚Й–Я‚µ‚Ь‚·ЃB
 
 
-	TalkMes("LAXIA","#0673V#141e#000mпїЅн‚ЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅbпїЅпїЅпїЅпїЅпїЅпїЅпїЅД‚пїЅпїЅпїЅМ‚пїЅ",
-		"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅИ‚ЗЋпїЅпїЅпїЅЙ‚пїЅпїЅЩ‚З‚пїЅпїЅпїЅпїЅпїЅЬ‚пїЅпїЅB","")
+	TalkMes("LAXIA","#0673V#141e#000m‚н‚Ѕ‚­‚µ‚Єb‚µ‚©‚Ї‚Д‚ў‚й‚М‚Й",
+		"–іЋ‹‚·‚й‚И‚ЗЋё—з‚Й‚а‚Щ‚З‚Є‚ ‚и‚Ь‚·ЃB","")
 	WaitPrompt()
 	WaitCloseWindow()
 
 	//	"SAHAD"
-	TalkMes("SAHAD","#1627V#011e#000mпїЅqпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅcпїЅcпїЅЖ‚пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅB","","")
+	TalkMes("SAHAD","#1627V#011e#000mѓqѓ…ѓ“ѓЃѓ‹ЃcЃc‚Ж‚©Њѕ‚Б‚Ѕ‚©ЃB","","")
 	WaitPrompt()
 
-	TalkMes("SAHAD","#1628V#012e#000mпїЅпїЅпїЅVпїЅЙ‚Н–пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅЖ‚пїЅпїЅпїЅпїЅпїЅпїЅA",
-		"пїЅпїЅпїЅпїЅпїЅЪ“IпїЅпїЅпїЅпїЅпїЅпїЅж‚¤пїЅЙЊпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅИ‚пїЅпїЅB","")
+	TalkMes("SAHAD","#1628V#012e#000mѓЏѓV‚Й‚Н–іЋ‹‚µ‚Ѕ‚Ж‚ў‚¤‚ж‚иЃA",
+		"‰Ѕ‚©–Ъ“I‚Є‚ ‚й‚ж‚¤‚ЙЊ©‚¦‚Ѕ‚Є‚И‚ ЃB","")
 	WaitPrompt()
 	WaitCloseWindow()
 
 	HeadNo("LAXIA" , 1 ,35 )
 
 	//	"LAXIA"
-	TalkMes("LAXIA","#0674V#142e#000mпїЅYпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅЙ–Ъ“IпїЅЕ‚пїЅпїЅпїЅпїЅH",
-		"пїЅпїЅпїЅпїЅИ‚Н‚пїЅпїЅпїЅпїЅcпїЅc","")
+	TalkMes("LAXIA","#0674V#142e#000m•Y’…‚µ‚Ѕ“‡‚Й–Ъ“I‚Е‚·‚©ЃH",
+		"‚»‚с‚И‚Н‚ё‚ЄЃcЃc","")
 	WaitPrompt()
 	WaitCloseWindow()
 	ResetStopFlag(STOPFLAG_CINEMA)
@@ -822,49 +822,49 @@ function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
 	StopThread(1004)
 	StopThread(1005)
 
-	MoveCameraAt( 0 , 345.905f , -732.664f , 8.381f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 2.558f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , 4.605f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , 347.331f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 40.000f , 0 )			// пїЅпїЅпїЅпїЅp
+	MoveCameraAt( 0 , 345.905f , -732.664f , 8.381f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 2.558f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , 4.605f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , 347.331f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 40.000f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , -6.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	RollCamera( 0 , -6.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 
 	Wait(FADE_CROSS)
 	SetStopFlag(STOPFLAG_CINEMA)
 	Wait(10)
 
 	//	"SAHAD"
-	TalkMes("SAHAD","#1629V#080e#080mпїЅJпїЅ[пїЅпїЅпїЅпїЅпїЅМѓIпїЅbпїЅTпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅA",
-		"пїЅИ‚пїЅпїЅИ‚пїЅпїЅК”пїЅпїЅпїЅпїЅпїЅпїЅcпїЅз‚ЄпїЅWпїЅЬ‚пїЅпїЅпїЅпїЅпїЅИЃB","")
+	TalkMes("SAHAD","#1629V#080e#080mѓJЃ[ѓ‰ѓ“‚МѓIѓbѓTѓ“‚а‚»‚¤‚ѕ‚ЄЃA",
+		"‚И‚©‚И‚©–К”’‚ўѓ„ѓc‚з‚ЄЏW‚Ь‚Б‚Ѕ‚ж‚ИЃB","")
 	WaitPrompt()
 
-	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 345.503f , -732.574f , 8.381f , 250 )	// пїЅпїЅпїЅпїЅпїЅ_
-//	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE , 2.509f , 250 )				// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-//	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , 12.446f , 250 )				// пїЅпїЅ{пїЅВЉp
-//	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE , 302.075f , 250 )				// пїЅpпїЅx
-//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE ,-22.1f , 250 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 345.503f , -732.574f , 8.381f , 250 )	// ’ЌЋ‹“_
+//	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE , 2.509f , 250 )				// Љо–{‹——Ј
+//	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , 12.446f , 250 )				// Љо–{‹ВЉp
+//	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE , 302.075f , 250 )				// Љp“x
+//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE ,-22.1f , 250 )				// ѓЌЃ[ѓ‹‰с“]
 
-	//MoveCameraAt( 0 , 345.503f , -732.574f , 8.381f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	//ChangeCameraDistance( 0 , 2.558f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	//ChangeCameraElevation( 0 , 4.605f , 0 )	// пїЅпїЅ{пїЅВЉp
-	//RotateCamera( 0 , 347.331f , 0 )				// пїЅpпїЅx
-	//ChangeCameraPers( 0 , 40.000f , 0 )			// пїЅпїЅпїЅпїЅp
+	//MoveCameraAt( 0 , 345.503f , -732.574f , 8.381f , 0 )	// ’ЌЋ‹“_
+	//ChangeCameraDistance( 0 , 2.558f , 0 )		// Љо–{‹——Ј
+	//ChangeCameraElevation( 0 , 4.605f , 0 )	// Љо–{‹ВЉp
+	//RotateCamera( 0 , 347.331f , 0 )				// Љp“x
+	//ChangeCameraPers( 0 , 40.000f , 0 )			// Ћ‹–мЉp
 	//SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	//RollCamera( 0 , -6.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
-	// ResetCameraZPlane()	// пїЅCпїЅxпїЅпїЅпїЅgпїЅIпїЅпїЅпїЅпїЅпїЅЙЊД‚СЏoпїЅпїЅпїЅД‰пїЅпїЅпїЅпїЅпїЅпїЅBпїЅ}пїЅbпїЅvпїЅпїЅпїЅМђЭ’пїЅЙ–Я‚пїЅпїЅЬ‚пїЅпїЅB
+	//RollCamera( 0 , -6.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
+	// ResetCameraZPlane()	// ѓCѓxѓ“ѓgЏI—№Ћћ‚ЙЊД‚СЏo‚µ‚Д‰є‚і‚ўЃBѓ}ѓbѓv‘¤‚МђЭ’и‚Й–Я‚µ‚Ь‚·ЃB
 
 
-	TalkMes("SAHAD","#1630V#091e#080mпїЅпїЅпїЅЬ‚пїЅпїЅЬ“пїЅпїЅпїЅпїЅDпїЅЙЏпїЅиЌ‡пїЅн‚№пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-		"пїЅпїЅпїЅЬ‚пїЅпїЅпїЅgпїЅпїЅпїЅпїЅпїЅoпїЅпїЅпїЅoпїЅпїЅпїЅМAпїЅпїЅпїЅпїЅпїЅB","")
+	TalkMes("SAHAD","#1630V#091e#080m‚Ѕ‚Ь‚Ѕ‚Ь“Ї‚¶‘D‚ЙЏж‚иЌ‡‚н‚№‚Ѕ‚ѕ‚Ї‚Е",
+		"ђ¶‚Ь‚к‚ађg•Є‚аѓoѓ‰ѓoѓ‰‚МA’†‚ѕЃB","")
 	WaitPrompt()
-	TalkMes("SAHAD","#1631V#092e#080mпїЅFпїЅXпїЅИђlпїЅФ‚пїЅпїЅпїЅпїЅпїЅМ‚Н“пїЅпїЅRпїЅпїЅпїЅпїЅЛЃ[пїЅпїЅпїЅB","","")
+	TalkMes("SAHAD","#1631V#092e#080mђFЃX‚ИђlЉФ‚Є‚ў‚й‚М‚Н“–‘R‚¶‚б‚ЛЃ[‚©ЃB","","")
 	WaitPrompt()
 	WaitCloseWindow()
 
 	LookReset("LAXIA")
 	//	"LAXIA"
-	TalkMes("LAXIA","#0675V#042e#020l#000mпїЅпїЅпїЅAпїЅпїЅпїЅпїЅИ‚пїЅпїЅЖ‚Н•пїЅпїЅпїЅпїЅпїЅпїЅД‚пїЅпїЅЬ‚пїЅпїЅI","","")
+	TalkMes("LAXIA","#0675V#042e#020l#000m‚»ЃA‚»‚с‚И‚±‚Ж‚Н•Є‚©‚Б‚Д‚ў‚Ь‚·ЃI","","")
 	WaitPrompt()
 	WaitCloseWindow()
 
@@ -877,48 +877,48 @@ function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
 	StopThread(1004)
 	StopThread(1005)
 
-	MoveCameraAt( 0 , 345.747f , -732.168f , 8.356f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 3.779f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , -2.505f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , 49.324f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 26.400f , 0 )			// пїЅпїЅпїЅпїЅp
+	MoveCameraAt( 0 , 345.747f , -732.168f , 8.356f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 3.779f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , -2.505f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , 49.324f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 26.400f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , 3.6f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	RollCamera( 0 , 3.6f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 
-	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 345.747f , -732.168f , 8.604f, 240 )	// пїЅпїЅпїЅпїЅпїЅ_
-//	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE ,  1.529f , 300 )				// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-//	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , 1.310f , 300 )				// пїЅпїЅ{пїЅВЉp
-//	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE , 230.268f, 300 )				// пїЅpпїЅx
-//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE , -7.1f , 300 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 345.747f , -732.168f , 8.604f, 240 )	// ’ЌЋ‹“_
+//	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE ,  1.529f , 300 )				// Љо–{‹——Ј
+//	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , 1.310f , 300 )				// Љо–{‹ВЉp
+//	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE , 230.268f, 300 )				// Љp“x
+//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE , -7.1f , 300 )				// ѓЌЃ[ѓ‹‰с“]
 
-	//MoveCameraAt( 0 , 345.747f , -732.168f , 8.604f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	//ChangeCameraDistance( 0 , 3.779f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	//ChangeCameraElevation( 0 , -2.505f , 0 )	// пїЅпїЅ{пїЅВЉp
-	//RotateCamera( 0 , 49.324f , 0 )				// пїЅpпїЅx
-	//ChangeCameraPers( 0 , 26.400f , 0 )			// пїЅпїЅпїЅпїЅp
+	//MoveCameraAt( 0 , 345.747f , -732.168f , 8.604f , 0 )	// ’ЌЋ‹“_
+	//ChangeCameraDistance( 0 , 3.779f , 0 )		// Љо–{‹——Ј
+	//ChangeCameraElevation( 0 , -2.505f , 0 )	// Љо–{‹ВЉp
+	//RotateCamera( 0 , 49.324f , 0 )				// Љp“x
+	//ChangeCameraPers( 0 , 26.400f , 0 )			// Ћ‹–мЉp
 	//SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	//RollCamera( 0 , 3.6f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	//RollCamera( 0 , 3.6f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 
 	Wait(FADE_CROSS)
 	Wait(10)
 
 	ChangeAnimation( "SAHAD" , "ANI_EV_SG_UDEGUMI_E", -1 , 1 )
 	//	"SAHAD"
-	TalkMes("SAHAD","#1632V#020e#080mпїЅKпїЅnпїЅnпїЅAпїЅпїЅпїЅ[пїЅД–пїЅпїЅпїЅпїЅЙ”пїЅпїЅпїЅпїЅпїЅ",
-		"пїЅпїЅпїЅл‚»пїЅпїЅQпїЅпїЅЖ‚пїЅпїЅж‚¤пїЅпїЅB","")
+	TalkMes("SAHAD","#1632V#020e#080mѓKѓnѓnЃA‚іЃ[‚Д–ѕ“ъ‚Й”х‚¦‚Д",
+		"‚»‚л‚»‚лђQ‚й‚Ж‚µ‚ж‚¤‚вЃB","")
 	WaitPrompt()
 
 	WaitAnimation2( "SAHAD" , -1, 1, "ANI_EV_SG_UDEGUMI_E",  0)
 	ChangeAnimation( "SAHAD" , "ANI_EV_SG_AKUBI", -1 , 1 )
 	LookReset("SAHAD")
 
-	TalkMes("SAHAD","#1633V#011e#200mпїЅУ‚н‚џпїЅпїЅпїЅпїЅпїЅпїЅпїЅcпїЅc","","")
+	TalkMes("SAHAD","#1633V#011e#200m‚У‚н‚џ‚џ‚џ‚џЃcЃc","","")
 	WaitPrompt()
 	WaitCloseWindow()
 
 	Look("LAXIA" , -20 ,  0 )
 	//	"LAXIA"
-	TalkMes("LAXIA","#0676V#020l#062e#000mпїЅпїЅпїЅпїЅпїЅcпїЅc","","")
+	TalkMes("LAXIA","#0676V#020l#062e#000m‚а‚¤ЃcЃc","","")
 	WaitPrompt()
 	WaitCloseWindow()
 	ResetStopFlag(STOPFLAG_CINEMA)
@@ -932,41 +932,41 @@ function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
 	StopThread(1004)
 	StopThread(1005)
 
-	//пїЅ@пїЅ@пїЅпїЅК€пїЅUпїЅtпїЅFпїЅ[пїЅhпїЅAпїЅEпїЅgпїЅB
-	//пїЅ@пїЅ@пїЅtпїЅFпїЅ[пїЅhпїЅCпїЅпїЅпїЅпїЅпїЅД•пїЅпїЅО‚пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅcпїЅnпїЅпїЅпїЅУ‚пїЅпїЅfпїЅпїЅпїЅB
-	//пїЅ@пїЅ@пїЅпїЅпїЅМђпїЅпїЅЖЉeпїЅLпїЅпїЅпїЅпїЅпїЅМђQпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅД€Г“]пїЅB
+	//Ѓ@Ѓ@‰ж–К€к’UѓtѓFЃ[ѓhѓAѓEѓgЃB
+	//Ѓ@Ѓ@ѓtѓFЃ[ѓhѓCѓ“‚µ‚Д•°‰О‚ЄЏБ‚¦‚Ѕ–м‰c’nЋь•У‚р‰f‚·ЃB
+	//Ѓ@Ѓ@’Ћ‚Мђє‚ЖЉeѓLѓѓѓ‰‚МђQЊѕ‚Є•·‚±‚¦‚Д€Г“]ЃB
 	FadeOut(FADE_BLACK, FADE_SLOW)
 	WaitFade()
-	MapHide("camp_fire1", 0)		//пїЅОЏпїЅпїЅпїЅ
-	MapHide("camp_fire2", 0)		//пїЅОЏпїЅпїЅпїЅ
-	MapHide("camp_smoke1", 0)		//пїЅпїЅпїЅпїЅпїЅпїЅ
+	MapHide("camp_fire1", 0)		//‰ОЏБ‚µ
+	MapHide("camp_fire2", 0)		//‰ОЏБ‚µ
+	MapHide("camp_smoke1", 0)		//‰ЊЏБ‚µ
 	SetEnvSEPlayState(1121004, 0)
 
 	CallFunc("system:party_remove")
 
-	//пїЅJпїЅпїЅпїЅпїЅпїЅЭ’пїЅ
-	MoveCameraAt( 0 , 352.939f , -740.478f , 11.979f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 7.560f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , -19.461f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , 189.866f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 60.000f , 0 )			// пїЅпїЅпїЅпїЅp
+	//ѓJѓЃѓ‰ђЭ’и
+	MoveCameraAt( 0 , 352.939f , -740.478f , 11.979f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 7.560f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , -19.461f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , 189.866f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 60.000f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , 0.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	RollCamera( 0 , 0.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 
-	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 357.993f , -735.187f , 11.979f, 500 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE , 7.560f , 500 )				// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , -19.461f , 500 )				// пїЅпїЅ{пїЅВЉp
-	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE , 264.536f , 500 )				// пїЅpпїЅx
-//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE ,-22.1f , 500 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	ExecuteCmd( 1001,MoveCameraAt, INTERPOLATE_SPHERE , 357.993f , -735.187f , 11.979f, 500 )	// ’ЌЋ‹“_
+	ExecuteCmd( 1002,ChangeCameraDistance, INTERPOLATE_SPHERE , 7.560f , 500 )				// Љо–{‹——Ј
+	ExecuteCmd( 1003,ChangeCameraElevation, INTERPOLATE_SPHERE , -19.461f , 500 )				// Љо–{‹ВЉp
+	ExecuteCmd( 1004,RotateCamera, INTERPOLATE_SPHERE , 264.536f , 500 )				// Љp“x
+//	ExecuteCmd( 1005,RollCamera, INTERPOLATE_SPHERE ,-22.1f , 500 )				// ѓЌЃ[ѓ‹‰с“]
 
-	//MoveCameraAt( 0 , 357.993f , -735.187f , 11.979f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	//ChangeCameraDistance( 0 , 7.560f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
+	//MoveCameraAt( 0 , 357.993f , -735.187f , 11.979f , 0 )	// ’ЌЋ‹“_
+	//ChangeCameraDistance( 0 , 7.560f , 0 )		// Љо–{‹——Ј
 
-	//ChangeCameraElevation( 0 , -19.461f , 0 )	// пїЅпїЅ{пїЅВЉp
-	//RotateCamera( 0 , 264.536f , 0 )				// пїЅpпїЅx
-	//ChangeCameraPers( 0 , 60.000f , 0 )			// пїЅпїЅпїЅпїЅp
+	//ChangeCameraElevation( 0 , -19.461f , 0 )	// Љо–{‹ВЉp
+	//RotateCamera( 0 , 264.536f , 0 )				// Љp“x
+	//ChangeCameraPers( 0 , 60.000f , 0 )			// Ћ‹–мЉp
 	//SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	//RollCamera( 0 , 0.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	//RollCamera( 0 , 0.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 
 	FadeIn(FADE_BLACK, FADE_SLOW)
 	WaitFade()
@@ -976,7 +976,7 @@ function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
 	CallFunc("system:TentVoice_Sleep")
 
 	Wait(20)
-	PlaySE( SE_HOTEL_JINGLE , 100 , 0,  0, 0, 1.0f, 0)	//пїЅWпїЅпїЅпїЅOпїЅпїЅ
+	PlaySE( SE_HOTEL_JINGLE , 100 , 0,  0, 0, 1.0f, 0)	//ѓWѓ“ѓOѓ‹
 	SetEnvSEPlayState(-1, 0)
 	Wait(70)
 
@@ -990,72 +990,72 @@ function "EV_M02S271"	//mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
 
 	Wait(40)
 
-//пїЅIпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ----------------------------------------------------
+//ЏI—№Џ€—ќ‚±‚±‚©‚з----------------------------------------------------
 
 	CallFunc("mp1121:EV_M02S271_ED")
 }
 
-function "EV_M02S271_ED"											//пїЅCпїЅxпїЅпїЅпїЅgпїЅXпїЅLпїЅbпїЅvпїЅpпїЅЙЏIпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅК‚пїЅfunctionпїЅЖ‚пїЅпїЅД—pпїЅУ‚пїЅпїЅЬ‚пїЅпїЅB
+function "EV_M02S271_ED"											//ѓCѓxѓ“ѓgѓXѓLѓbѓv—p‚ЙЏI—№Џ€—ќ‚р•К‚Мfunction‚Ж‚µ‚Д—p€У‚µ‚Ь‚·ЃB
 {
-	SetSkipScript("")												//пїЅIпїЅпїЅпїЅпїЅпїЅпїЅпїЅНѓXпїЅLпїЅbпїЅvпїЅЦЋ~
+	SetSkipScript("")												//ЏI—№Џ€—ќ‚НѓXѓLѓbѓv‹ЦЋ~
 
-	//пїЅCпїЅxпїЅпїЅпїЅgпїЅOпїЅМѓLпїЅпїЅпїЅпїЅпїЅпїЅпїЅр•њ‹A
+	//ѓCѓxѓ“ѓg‘O‚МѓLѓѓѓ‰Џо•с‚р•њ‹A
 	RestoreEventState()
 
-	//пїЅLпїЅпїЅпїЅпїЅпїЅNпїЅ^пїЅ[пїЅпїЅпїЅпїЅпїЅпїЅ
+	//ѓLѓѓѓ‰ѓNѓ^Ѓ[Џ‰Љъ‰»
 	CallFunc("system:reset_chrmot_ADOL")
 	CallFunc("system:reset_chrmot_LAXIA")
 	CallFunc("system:reset_chrmot_SAHAD")
 
-	//пїЅ}пїЅbпїЅvпїЅpпїЅпїЅпїЅпїЅпїЅ[пїЅ^пїЅ[пїЅпїЅпїЅZпїЅbпїЅg
+	//ѓ}ѓbѓvѓpѓ‰ѓЃЃ[ѓ^Ѓ[ѓЉѓZѓbѓg
 	ResetMapParam( -1 )
 
-	// пїЅКЏпїЅ
+	// ’КЏн
 	if ( !FLAG[SF_GALLERY_EVENT] )
 	{
-		SetFlag( TF_LOADING_TIPS_OFF, 1 )	//NowLoading пїЅпїЅпїЅпїЅ Tips пїЅ\пїЅпїЅпїЅпїЅпїЅJпїЅbпїЅg
+		SetFlag( TF_LOADING_TIPS_OFF, 1 )	//NowLoading Ћћ‚М Tips •\Ћ¦‚рѓJѓbѓg
 
 		LoadArg("map/mp9999/mp9999.arg")
 		EventCue("mp9999:EV_M02S280")
 
 		ResetStopFlag(STOPFLAG_EVENTIMPOSE)
 	}
-	// пїЅCпїЅxпїЅпїЅпїЅgпїЅMпїЅпїЅпїЅпїЅпїЅпїЅпїЅ[пїЅпїЅ
+	// ѓCѓxѓ“ѓgѓMѓѓѓ‰ѓЉЃ[’†
 	else
 	{
 		FadeBGM(100,15)
 		SoundEfx( SEFX_DEFAULT, 15 )
-		SetEnvSEPlayState(-1, 0)	//пїЅВ‹пїЅSEпїЅSпїЅпїЅ~
-		GalleryEvEnd(0)		// пїЅCпїЅxпїЅпїЅпїЅgпїЅMпїЅпїЅпїЅпїЅпїЅпїЅпїЅ[пїЅIпїЅпїЅпїЅiпїЅXпїЅNпїЅпїЅпїЅvпїЅgпїЅпїЅпїЅз‹­пїЅпїЅпїЅIпїЅЙ”пїЅпїЅпїЅпїЅД‚пїЅпїЅл‚ўпїЅлЏ€пїЅпїЅпїЅпїЅпїЅД‚пїЅпїЅпїЅпїЅj
+		SetEnvSEPlayState(-1, 0)	//ЉВ‹«SE‘S’вЋ~
+		GalleryEvEnd(0)		// ѓCѓxѓ“ѓgѓMѓѓѓ‰ѓЉЃ[ЏI—№ЃiѓXѓNѓЉѓvѓg‚©‚з‹­ђ§“I‚Й”І‚Ї‚Д‚ў‚л‚ў‚лЏ€—ќ‚µ‚Д‚­‚к‚йЃj
 		ResetStopFlag(STOPFLAG_EVENTIMPOSE)
 	}
 
-	//пїЅIпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅЬ‚пїЅ----------------------------------------------------
+	//ЏI—№Џ€—ќ‚±‚±‚Ь‚Е----------------------------------------------------
 }
 
-//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-//пїЅпїЅпїЅпїЅВ–Ъ‚М–пїЅcпїЅnпїЅпїЅпїЅoпїЅпїЅпїЅпїЅпїЅпїЅ(mp1121)
-//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-function "EV_M02S290"		// пїЅпїЅcпїЅnпїЅпїЅпїЅoпїЅпїЅпїЅпїЅпїЅпїЅ
+//„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ
+//ЃҐ“с‚В–Ъ‚М–м‰c’n‚рЏo”­‚·‚й(mp1121)
+//„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ
+function "EV_M02S290"		// –м‰c’n‚рЏo”­‚·‚й
 {
-	//пїЅJпїЅnпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ----------------------------------------------------
+	//ЉJЋnЏ€—ќ‚±‚±‚©‚з----------------------------------------------------
 
 	SetStopFlag(STOPFLAG_EVENT)
 	FadeOut(FADE_BLACK, 0)
 	WaitFade()
 
-	//пїЅCпїЅxпїЅпїЅпїЅgпїЅJпїЅnпїЅOпїЅпїЅпїЅМ•Ы‘пїЅ
+	//ѓCѓxѓ“ѓgЉJЋn‘OЏо•с‚М•Ы‘¶
 	SaveEventState()
 	SaveCamera()
 
-	//пїЅpпїЅ[пїЅeпїЅBпїЅпїЅФ‚МѓпїЅпїЅZпїЅbпїЅg
+	//ѓpЃ[ѓeѓBЏу‘Ф‚МѓЉѓZѓbѓg
 	CallFunc("system:party_reset")
 
-	//пїЅВ‹пїЅпїЅМЏпїЅпїЅпїЅпїЅпїЅпїЅEпїЅsпїЅvпїЅИ‚пїЅпїЅМ‚пїЅпїЅBпїЅпїЅ
+	//ЉВ‹«‚МЏ‰Љъ‰»ЃE•s—v‚И‚а‚М‚р‰B‚·
 	ClearDebris()
 	ResetChrPos((CHRTYPE_MONS | REMOVE_POS))
 
-	//пїЅLпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅФ‚МђЭ’пїЅ				
+	//ѓLѓѓѓ‰Џ‰ЉъЏу‘Ф‚МђЭ’и				
 	SetChrWork("ADOL", CWK_DEFAULT_SKIPNODE_OFF, 1)
 	SetChrWork("SAHAD", CWK_DEFAULT_SKIPNODE_OFF, 1)
 	SetChrWork("LAXIA", CWK_DEFAULT_SKIPNODE_OFF, 1)
@@ -1089,47 +1089,47 @@ function "EV_M02S290"		// пїЅпїЅcпїЅnпїЅпїЅпїЅoпїЅпїЅпїЅпїЅпїЅпїЅ
 
 	StopBGM(0)
 
-	//пїЅJпїЅпїЅпїЅпїЅпїЅЭ’пїЅ
-	MoveCameraAt( 0 , 363.096f , -761.115f , 9.080f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 7.001f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , -11.946f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , 331.890f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 60.000f , 0 )			// пїЅпїЅпїЅпїЅp
+	//ѓJѓЃѓ‰ђЭ’и
+	MoveCameraAt( 0 , 363.096f , -761.115f , 9.080f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 7.001f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , -11.946f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , 331.890f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 60.000f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , 0.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	RollCamera( 0 , 0.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 
-	// пїЅпїЅКЉEпїЅ[пїЅxпїЅМђЭ’пїЅ
+	// ”нЋКЉEђ[“x‚МђЭ’и
 	SetDoF(0, LERP_LINEAR, 5.000, 170.000 ,0.000 ,0.150 ,0.700)
 
-	// пїЅOпїЅпїЅпїЅAпїЅМђЭ’пїЅ
+	// ѓOѓЊѓA‚МђЭ’и
 	SetGlare(0, LERP_LINEAR, 0.700, 1.300, 1.000, 1.000, 0.600, 0.000, 1.000)
 
-	//пїЅXпїЅLпїЅbпїЅvпїЅпїЅпїЅпїЅ
+	//ѓXѓLѓbѓv‹–‰В
 	SetSkipScript("mp1121:EV_M02S290_ED")
 
-	//пїЅJпїЅnпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅЬ‚пїЅ-----------------------------------------------
+	//ЉJЋnЏ€—ќ‚±‚±‚Ь‚Е-----------------------------------------------
 
 	Wait(10)
-	//пїЅ@пїЅ@пїЅпїЅК€Г“]пїЅМ‚Ь‚Ь’пїЅпїЅМљпїЅпїЅи‚ЄпїЅпїЅпїЅпїЅпїЅпїЅпїЅД‚пїЅпїЅпїЅB
-	PlaySE("SE_SUZUME", 100, 0,  0, 0, 1.0f, 0)		//пїЅпїЅпїЅпїЅпїЅМ‚пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//Ѓ@Ѓ@‰ж–К€Г“]‚М‚Ь‚Ь’№‚Мљ“‚и‚Є•·‚±‚¦‚Д‚­‚йЃB
+	PlaySE("SE_SUZUME", 100, 0,  0, 0, 1.0f, 0)		//Ѓџ’№‚М‚і‚¦‚ё‚и
 	SetEnvSEPlayState(1121004, 1)
 	Wait(30)
 
-//	//пїЅ@пїЅ@пїЅtпїЅFпїЅ[пїЅhпїЅCпїЅпїЅпїЅпїЅпїЅпїЅЖ’пїЅпїЅ}пїЅbпїЅvпїЅЙ‚И‚пїЅпїЅД‚пїЅпїЅДЃA
-//	//пїЅ@пїЅ@пїЅVпїЅпїЅпїЅМ‘OпїЅЙ‚RпїЅlпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅД‚пїЅпїЅпїЅB
+//	//Ѓ@Ѓ@ѓtѓFЃ[ѓhѓCѓ“‚·‚й‚Ж’©ѓ}ѓbѓv‚Й‚И‚Б‚Д‚ў‚ДЃA
+//	//Ѓ@Ѓ@“V–‹‚М‘O‚Й‚Rђl‚ЄЊь‚«Ќ‡‚Б‚Д‚ў‚йЃB
 //	ExecuteCmd(1000, MoveCameraAt, INTERPOLATE_SPHERE , 363.096f , -761.115f , 9.080f , 100 )
 //	ExecuteCmd(1001, ChangeCameraDistance, INTERPOLATE_SPHERE , 7.001f , 100)
 //	ExecuteCmd(1002, ChangeCameraElevation, INTERPOLATE_SPHERE , -11.946f , 100 )
 //	ExecuteCmd(1003, RotateCamera, INTERPOLATE_SPHERE ,313.598f , 100 )
 //
-//	//MoveCameraAt( 0 , 363.096f , -761.115f , 9.080f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-//	//ChangeCameraDistance( 0 , 7.001f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-//	//ChangeCameraElevation( 0 , -11.946f , 0 )	// пїЅпїЅ{пїЅВЉp
-//	//RotateCamera( 0 , 313.598f , 0 )				// пїЅpпїЅx
-//	//ChangeCameraPers( 0 , 60.000f , 0 )			// пїЅпїЅпїЅпїЅp
+//	//MoveCameraAt( 0 , 363.096f , -761.115f , 9.080f , 0 )	// ’ЌЋ‹“_
+//	//ChangeCameraDistance( 0 , 7.001f , 0 )		// Љо–{‹——Ј
+//	//ChangeCameraElevation( 0 , -11.946f , 0 )	// Љо–{‹ВЉp
+//	//RotateCamera( 0 , 313.598f , 0 )				// Љp“x
+//	//ChangeCameraPers( 0 , 60.000f , 0 )			// Ћ‹–мЉp
 //	//SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-//	//RollCamera( 0 , 0.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
-//	// ResetCameraZPlane()	// пїЅCпїЅxпїЅпїЅпїЅgпїЅIпїЅпїЅпїЅпїЅпїЅЙЊД‚СЏoпїЅпїЅпїЅД‰пїЅпїЅпїЅпїЅпїЅпїЅBпїЅ}пїЅbпїЅvпїЅпїЅпїЅМђЭ’пїЅЙ–Я‚пїЅпїЅЬ‚пїЅпїЅB
+//	//RollCamera( 0 , 0.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
+//	// ResetCameraZPlane()	// ѓCѓxѓ“ѓgЏI—№Ћћ‚ЙЊД‚СЏo‚µ‚Д‰є‚і‚ўЃBѓ}ѓbѓv‘¤‚МђЭ’и‚Й–Я‚µ‚Ь‚·ЃB
 //
 //
 //	FadeIn(FADE_BLACK, FADE_NORMAL)
@@ -1140,7 +1140,7 @@ function "EV_M02S290"		// пїЅпїЅcпїЅnпїЅпїЅпїЅoпїЅпїЅпїЅпїЅпїЅпїЅ
 //	WaitThread(1000)
 //	Wait(15)
 //
-//	// пїЅJпїЅbпїЅgX ------------------------------------------------------------------------------------------
+//	// ѓJѓbѓgX ------------------------------------------------------------------------------------------
 //
 
 	SetEnvSEPlayState(1121004, 0)
@@ -1150,19 +1150,19 @@ function "EV_M02S290"		// пїЅпїЅcпїЅnпїЅпїЅпїЅoпїЅпїЅпїЅпїЅпїЅпїЅ
 	SetChrPos("SAHAD", 349.54f, -735.62f, 7.72f)
 	Turn("SAHAD", 135.73f, 360.0f)
 
-	MoveCameraAt(0, 349.245f, -735.567f, 8.979f, 0)	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance(0, 1.888f, 0)		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation(0, 0.477f, 0)	// пїЅпїЅ{пїЅВЉp
-	RotateCamera(0, 263.163f, 0)				// пїЅpпїЅx
-	ChangeCameraPers(0, 39.000f, 0)			// пїЅпїЅпїЅпїЅp
+	MoveCameraAt(0, 349.245f, -735.567f, 8.979f, 0)	// ’ЌЋ‹“_
+	ChangeCameraDistance(0, 1.888f, 0)		// Љо–{‹——Ј
+	ChangeCameraElevation(0, 0.477f, 0)	// Љо–{‹ВЉp
+	RotateCamera(0, 263.163f, 0)				// Љp“x
+	ChangeCameraPers(0, 39.000f, 0)			// Ћ‹–мЉp
 	SetCameraZPlane(0.100f, 300.000f)			// ZPlane
-	RollCamera(0, 0.0f, 0)				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	RollCamera(0, 0.0f, 0)				// ѓЌЃ[ѓ‹‰с“]
 
-	// пїЅOпїЅпїЅпїЅAпїЅМђЭ’пїЅ
+	// ѓOѓЊѓA‚МђЭ’и
 	SetGlare(0, LERP_LINEAR, 0.700, 1.300, 1.000, 1.000, 0.600, 0.000, 1.000)
 
-	ExecuteCmd(1000, MoveCameraAt, INTERPOLATE_SPHERE, 349.340f , -735.475f , 9.417f, 60)		// пїЅпїЅпїЅпїЅпїЅ_
-	ExecuteCmd(1001, RotateCamera, INTERPOLATE_SPHERE, 244.935f, 60)		// пїЅpпїЅx
+	ExecuteCmd(1000, MoveCameraAt, INTERPOLATE_SPHERE, 349.340f , -735.475f , 9.417f, 60)		// ’ЌЋ‹“_
+	ExecuteCmd(1001, RotateCamera, INTERPOLATE_SPHERE, 244.935f, 60)		// Љp“x
 
 	FadeIn(FADE_BLACK, FADE_NORMAL)
 //	WaitFade()
@@ -1176,33 +1176,33 @@ function "EV_M02S290"		// пїЅпїЅcпїЅnпїЅпїЅпїЅoпїЅпїЅпїЅпїЅпїЅпїЅ
 	WaitThread(1001)
 
 	TalkPopup("SAHAD", 0, 2, 0, 0, 0) {
-		"#020e#000mпїЅУ‚н‚џпїЅ`пїЅ`пїЅпїЅпїЅAпїЅж‚­пїЅQпїЅпїЅпїЅпїЅпїЅB"
-		"пїЅж‚­пїЅQпїЅпїЅ2пїЅsпїЅпїЅ"
+		"#020e#000m‚У‚н‚џЃ`Ѓ`‚БЃA‚ж‚­ђQ‚Ѕ‚єЃB"
+		"‚ж‚­ђQ‚Ѕ2Ќs–Ъ"
 	}
 	WaitPrompt()
 	WaitCloseWindow()
 
 	WaitAnimation2("SAHAD", -1, 1, "ANI_EV_AKUBI", 0)
 
-	// пїЅJпїЅbпїЅgX ------------------------------------------------------------------------------------------
+	// ѓJѓbѓgX ------------------------------------------------------------------------------------------
 
 	CrossFade(FADE_FAST)
 
-	MoveCameraAt( 0 , 349.513f , -734.899f , 9.355f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 2.368f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , 3.608f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , 69.591f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 35.000f , 0 )			// пїЅпїЅпїЅпїЅp
+	MoveCameraAt( 0 , 349.513f , -734.899f , 9.355f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 2.368f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , 3.608f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , 69.591f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 35.000f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , 1.4f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
-	// ResetCameraZPlane()	// пїЅCпїЅxпїЅпїЅпїЅgпїЅIпїЅпїЅпїЅпїЅпїЅЙЊД‚СЏoпїЅпїЅпїЅД‰пїЅпїЅпїЅпїЅпїЅпїЅBпїЅ}пїЅbпїЅvпїЅпїЅпїЅМђЭ’пїЅЙ–Я‚пїЅпїЅЬ‚пїЅпїЅB
+	RollCamera( 0 , 1.4f , 0 )				// ѓЌЃ[ѓ‹‰с“]
+	// ResetCameraZPlane()	// ѓCѓxѓ“ѓgЏI—№Ћћ‚ЙЊД‚СЏo‚µ‚Д‰є‚і‚ўЃBѓ}ѓbѓv‘¤‚МђЭ’и‚Й–Я‚µ‚Ь‚·ЃB
 
 	ChangeSubAnimation("SAHAD", SUBMOT_MOUTH, ANI_M_WAIT, 1)
 
 	Wait(FADE_FAST)
 	
 	ChangeSubAnimation("LAXIA",SUBMOT_EYE,ANI_E_FUMAN_CLOSE_S,1)
-	PlayVoice(Y8V_0375,"LAXIA",100)	//пїЅУ‚пїЅпїЅcпїЅiпїЅпїЅпїЅпїЅпїЅj
+	PlayVoice(Y8V_0375,"LAXIA",100)	//‚У‚¤ЃcЃi—­‘§Ѓj
 	ChangeAnimation("LAXIA", "ANI_EV_UDEGUMI_S", -1, 1)
 	Wait(30)
 	
@@ -1210,20 +1210,20 @@ function "EV_M02S290"		// пїЅпїЅcпїЅnпїЅпїЅпїЅoпїЅпїЅпїЅпїЅпїЅпїЅ
 	ChangeSubAnimation("SAHAD", SUBMOT_EYE, ANI_E_SUP_S, 1)
 	TalkPopup("LAXIA", 0, 2, 0, 0, 0)
 	{
-		"#000mпїЅпїЅпїЅXпїЅЖ‚НЋvпїЅпїЅпїЅЬ‚пїЅпїЅпїЅпїЅcпїЅc"
-		"пїЅlпїЅOпїЅЕ“пїЅпїЅXпїЅЖЊпїЅпїЅLпїЅпїЅпїЅпїЅМ‚Н‚пїЅпїЅпїЅЯ‚И‚пїЅпїЅпїЅпїЅB"
+		"#000mЌЎЌX‚Ж‚НЋv‚ў‚Ь‚·‚ЄЃcЃc"
+		"ђl‘O‚Е“°ЃX‚ЖЊ‡ђL‚·‚й‚М‚Н‚Ё‚в‚Я‚И‚і‚ўЃB"
 	}
 	WaitPrompt()
 		WaitCloseWindow()
 
 	LookChr("SAHAD", "LAXIA")
-	ChangeAnimation( "SAHAD", "ANI_EV_RYOTEKOSI_S", -1, 1 )	// пїЅпїЅпїЅиЌ
+	ChangeAnimation( "SAHAD", "ANI_EV_RYOTEKOSI_S", -1, 1 )	// —јЋиЌ
 
 	//	"SAHAD"
 		TalkPopup("SAHAD", 0, 1, 80, 180, 0)
 	{
-		"#000e#000mпїЅУ‚пїЅпїЅH"
-		"пїЅMпїЅпїЅпїЅпїЅпїЅД‚М‚Н‚пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅИ‚М‚пїЅпїЅH"
+		"#000e#000m‚У‚¦ЃH"
+		"‹M‘°‚Б‚Д‚М‚Н‚»‚¤‚ў‚¤ѓ‚ѓ“‚И‚М‚©ЃH"
 	}
 	WaitPrompt()
 	WaitCloseWindow()
@@ -1233,8 +1233,8 @@ function "EV_M02S290"		// пїЅпїЅcпїЅnпїЅпїЅпїЅoпїЅпїЅпїЅпїЅпїЅпїЅ
 
 	TalkPopup("LAXIA", 0, 2, 0, 0, 0)
 	{
-		"#042e#000mпїЅMпїЅпїЅпїЅЕ‚И‚пїЅпїЅЖ‚пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅМ‚Е‚пїЅпїЅI"
-		"пїЅMпїЅпїЅ2пїЅsпїЅпїЅ"
+		"#042e#000m‹M‘°‚Е‚И‚­‚Ж‚а‚»‚¤‚ў‚¤‚а‚М‚Е‚·ЃI"
+		"‹M‘°2Ќs–Ъ"
 	}
 	WaitPrompt()
 	WaitCloseWindow()
@@ -1242,14 +1242,14 @@ function "EV_M02S290"		// пїЅпїЅcпїЅnпїЅпїЅпїЅoпїЅпїЅпїЅпїЅпїЅпїЅ
 	Wait(10)
 
 	CrossFade(FADE_CROSS)
-	MoveCameraAt( 0 , 347.843f , -732.967f , 9.109f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 2.890f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , 9.073f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , 3.946f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 35.000f , 0 )			// пїЅпїЅпїЅпїЅp
+	MoveCameraAt( 0 , 347.843f , -732.967f , 9.109f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 2.890f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , 9.073f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , 3.946f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 35.000f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , -1.5f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
-	// ResetCameraZPlane()	// пїЅCпїЅxпїЅпїЅпїЅgпїЅIпїЅпїЅпїЅпїЅпїЅЙЊД‚СЏoпїЅпїЅпїЅД‰пїЅпїЅпїЅпїЅпїЅпїЅBпїЅ}пїЅbпїЅvпїЅпїЅпїЅМђЭ’пїЅЙ–Я‚пїЅпїЅЬ‚пїЅпїЅB
+	RollCamera( 0 , -1.5f , 0 )				// ѓЌЃ[ѓ‹‰с“]
+	// ResetCameraZPlane()	// ѓCѓxѓ“ѓgЏI—№Ћћ‚ЙЊД‚СЏo‚µ‚Д‰є‚і‚ўЃBѓ}ѓbѓv‘¤‚МђЭ’и‚Й–Я‚µ‚Ь‚·ЃB
 
 	Wait(FADE_CROSS)
 
@@ -1259,36 +1259,36 @@ function "EV_M02S290"		// пїЅпїЅcпїЅnпїЅпїЅпїЅoпїЅпїЅпїЅпїЅпїЅпїЅ
 	LookChr("LAXIA", "ADOL")
 	TalkPopup("LAXIA", 0, 2, 0, 0, 0)
 	{
-		"#050e#000mпїЅcпїЅcпїЅЖЋvпїЅпїЅпїЅМ‚Е‚пїЅпїЅпїЅпїЅA"
-		"пїЅЗЃAпїЅЗ‚пїЅпїЅИ‚М‚Е‚пїЅпїЅе‚¤пїЅH"
+		"#050e#000mЃcЃc‚ЖЋv‚¤‚М‚Е‚·‚ЄЃA"
+		"‚ЗЃA‚З‚¤‚И‚М‚Е‚µ‚е‚¤ЃH"
 	}
 	WaitPrompt()
 	WaitCloseWindow()
 
-	//пїЅ@пїЅ@пїЅпїЅпїЅMпїЅИ‚пїЅпїЅпїЅпїЅпїЅпїЅЙѓAпїЅhпїЅпїЅпїЅМ‚Щ‚пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅNпїЅVпїЅпїЅпїЅB
-//	ExecuteCmd(1000, MoveCameraAt, INTERPOLATE_SPHERE, 348.068f, -734.128f, 9.352f, 60)		// пїЅпїЅпїЅпїЅпїЅ_
-//	ExecuteCmd(1001, ChangeCameraElevation, INTERPOLATE_SPHERE, 6.293f, 60)		// пїЅпїЅ{пїЅВЉp
-//	ExecuteCmd(1002, RotateCamera, INTERPOLATE_SPHERE, 59.092f, 60)		// пїЅpпїЅx
+	//Ѓ@Ѓ@Ћ©ђM‚И‚і‚»‚¤‚ЙѓAѓhѓ‹‚М‚Щ‚¤‚рЊь‚­ѓ‰ѓNѓVѓѓЃB
+//	ExecuteCmd(1000, MoveCameraAt, INTERPOLATE_SPHERE, 348.068f, -734.128f, 9.352f, 60)		// ’ЌЋ‹“_
+//	ExecuteCmd(1001, ChangeCameraElevation, INTERPOLATE_SPHERE, 6.293f, 60)		// Љо–{‹ВЉp
+//	ExecuteCmd(1002, RotateCamera, INTERPOLATE_SPHERE, 59.092f, 60)		// Љp“x
 
 	LookSpd("ADOL",0.1f,0.1f,0.1f)
 	LookChr("ADOL", "LAXIA")
 	Wait(5)
 
-	//пїЅIпїЅпїЅпїЅпїЅпїЅ@
+	//‘I‘рЋ€Ѓ@
 	SetFlag(TF_MENU_SELECT, 0)
 	MenuReset()
 	MenuType(MENUTYPE_POPUP)
-	MenuAdd(1, "пїЅпїЅпїЅLпїЅНѓ_пїЅпїЅпїЅпїЅпїЅпїЅ")
-	MenuAdd(2, "пїЅК‚Й‚пїЅпїЅпїЅпїЅс‚¶‚пїЅИ‚пїЅпїЅпїЅпїЅпїЅ")
+	MenuAdd(1, "Њ‡ђL‚Нѓ_ѓЃ‚ѕ‚И")
+	MenuAdd(2, "•К‚Й‚ў‚ў‚с‚¶‚б‚И‚ў‚©‚И")
 	MenuOpen( TF_MENU_SELECT , -1 , ADOLMENU_PPOSY , -2 , -2 , 10 , 0)
 	WaitMenu(0)
 	MenuClose(10, 0)
 
-	// пїЅпїЅUпїЅпїЅZпїЅbпїЅg
+	// ЋиђU‚иѓZѓbѓg
 	ChangeAnimation( "ADOL", "ANI_EV_WAIT2_S", -1, 1 )
 
 	HeadYes("ADOL" , 1 , 25 )
-	SetChrWork("ADOL", CWK_FORCELIPSYNC, 1)	// пїЅпїЅпїЅпїЅпїЅNпїЅ`пїЅpпїЅN
+	SetChrWork("ADOL", CWK_FORCELIPSYNC, 1)	// ‹­ђ§ѓNѓ`ѓpѓN
 	ChangeSubAnimation("ADOL",SUBMOT_EYE,ANI_E_CLOSE_S,1)
 	Wait(30)
 	SetChrWork("ADOL", CWK_FORCELIPSYNC, 0)
@@ -1296,39 +1296,39 @@ function "EV_M02S290"		// пїЅпїЅcпїЅnпїЅпїЅпїЅoпїЅпїЅпїЅпїЅпїЅпїЅ
 	Wait(20)
 
 
-	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-	//	пїЅЛЊпїЅпїЅLпїЅНѓ_пїЅпїЅпїЅпїЅпїЅпїЅ
+	//„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ
+	//	ЃЛЊ‡ђL‚Нѓ_ѓЃ‚ѕ‚И
 	if (FLAG[TF_MENU_SELECT] == 1){
 
 		HeadYes("LAXIA", 1, 20)
 
 		TalkPopup("LAXIA", 0, 2, 0, 0, 0)
 		{
-			"#061e#080mпїЅпїЅAпїЅпїЅН‚и‚»пїЅпїЅпїЅЕ‚пїЅпїЅпїЅЛЃB"
+			"#061e#080m‚вЃA‚в‚Н‚и‚»‚¤‚Е‚·‚ж‚ЛЃB"
 		}
 		WaitPrompt()
 		WaitCloseWindow()
 
 	}
-	//	пїЅЛ•К‚Й‚пїЅпїЅпїЅпїЅс‚¶‚пїЅИ‚пїЅпїЅпїЅпїЅпїЅ
+	//	ЃЛ•К‚Й‚ў‚ў‚с‚¶‚б‚И‚ў‚©‚И
 	if (FLAG[TF_MENU_SELECT] == 2){
 
 		TalkPopup("LAXIA", 0, 2, 0, 0, 0)
 		{
-			"#070e#000mпїЅпїЅпїЅAпїЅпїЅпїЅпїЅпїЅИ‚М‚Е‚пїЅпїЅпїЅпїЅH"
+			"#070e#000m‚»ЃA‚»‚¤‚И‚М‚Е‚·‚©ЃH"
 		}
 		WaitPrompt()
 		WaitCloseWindow()
 	}
-	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ„џ
 
 	LookReset("LAXIA")
-	ChangeAnimation( "LAXIA", "ANI_EV_TEMUNE_S", -1, 1 )	// пїЅи‹№пїЅпїЅпїЅпїЅ
+	ChangeAnimation( "LAXIA", "ANI_EV_TEMUNE_S", -1, 1 )	// Ћи‹№“–‚Д
 
 	TalkPopup("LAXIA", 0, 2, 0, 0, 0)
 	{
-		"#050e#000mпїЅпїЅпїЅИ‚пїЅпїЅпїЅпїЅЖ‰Я‚пїЅпїЅпїЅпїЅД‚пїЅпїЅпїЅЖ‚З‚пїЅпїЅпїЅ"
-		"пїЅн‚ЅпїЅпїЅпїЅпїЅпїЅМЏнЋЇпїЅпїЅпїЅпїЅпїЅу‚µ‚Д‚пїЅпїЅпїЅпїЅCпїЅпїЅпїЅcпїЅc"
+		"#050e#000m‚ ‚И‚Ѕ•ы‚Ж‰Я‚І‚µ‚Д‚ў‚й‚Ж‚З‚¤‚а"
+		"‚н‚Ѕ‚­‚µ‚МЏнЋЇ‚Є•ц‰у‚µ‚Д‚ў‚­‹C‚ЄЃcЃc"
 	}
 	WaitPrompt()
 	WaitCloseWindow()
@@ -1342,25 +1342,25 @@ function "EV_M02S290"		// пїЅпїЅcпїЅnпїЅпїЅпїЅoпїЅпїЅпїЅпїЅпїЅпїЅ
 	Wait(10)
 
 	CrossFade(FADE_CROSS)
-	ChangeSubAnimation("LAXIA",SUBMOT_EXT2,ANI_C_RED_E,1)		//пїЅjпїЅFпїЅпїЅ
+	ChangeSubAnimation("LAXIA",SUBMOT_EXT2,ANI_C_RED_E,1)		//–jЃFђФ
 
-	MoveCameraAt( 0 , 348.163f , -733.907f , 9.233f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 2.800f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , -2.238f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , 220.410f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 33.000f , 0 )			// пїЅпїЅпїЅпїЅp
+	MoveCameraAt( 0 , 348.163f , -733.907f , 9.233f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 2.800f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , -2.238f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , 220.410f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 33.000f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , -1.5f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	RollCamera( 0 , -1.5f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 
 	Wait(FADE_CROSS)
 
-	ChangeAnimation( "SAHAD", "ANI_EV_RYOTEKOSI_E", -1, 1 )	// пїЅпїЅпїЅиЌ
+	ChangeAnimation( "SAHAD", "ANI_EV_RYOTEKOSI_E", -1, 1 )	// —јЋиЌ
 	
 		//	"SAHAD"
 		TalkPopup("SAHAD", 0, 2, 0, 0, 0)
 	{
-		"#020e#080mпїЅKпїЅnпїЅnпїЅAпїЅMпїЅпїЅпїЅМ‚пїЅпїЅм‚іпїЅпїЅпїЅпїЅД‚М‚пїЅ"
-			"пїЅИ‚пїЅпїЅИ‚пїЅпїЅпїЅП‚пїЅпїЅИЃB"
+		"#020e#080mѓKѓnѓnЃA‹M‘°‚М‚ЁЏм‚і‚с‚Б‚Д‚М‚а"
+			"‚И‚©‚И‚©‘е•П‚ѕ‚ИЃB"
 	}
 	WaitPrompt()
 	WaitCloseWindow()
@@ -1371,58 +1371,58 @@ function "EV_M02S290"		// пїЅпїЅcпїЅnпїЅпїЅпїЅoпїЅпїЅпїЅпїЅпїЅпїЅ
 	WaitFade()
 //	StopThread(1000)
 
-//-- пїЅпїЅпїЅУ‚М’nпїЅ}пїЅoпїЅ^пїЅVпїЅXпїЅeпїЅпїЅпїЅпїЅпїЅbпїЅZпїЅ[пїЅW --------------------------------
+//-- Ћь•У‚М’nђ}“o^ѓVѓXѓeѓЂѓЃѓbѓZЃ[ѓW --------------------------------
 
-	PlaySE(SE_EV_POINT, 100, 0, 0, 0, 1.0f, 0)	//пїЅCпїЅxпїЅпїЅпїЅgпїЅ|пїЅCпїЅпїЅпїЅgпїЅoпїЅ^
-	Message("#4CпїЅпїЅпїЅУ‚МѓCпїЅxпїЅпїЅпїЅgпїЅ|пїЅCпїЅпїЅпїЅgпїЅпїЅпїЅnпїЅ}пїЅЙ‹LпїЅпїЅпїЅк‚ЅпїЅB")
+	PlaySE(SE_EV_POINT, 100, 0, 0, 0, 1.0f, 0)	//ѓCѓxѓ“ѓgѓ|ѓCѓ“ѓg“o^
+	Message("#4CЋь•У‚МѓCѓxѓ“ѓgѓ|ѓCѓ“ѓg‚Є’nђ}‚Й‹L‚і‚к‚ЅЃB")
 	WaitPrompt()
 	WaitCloseWindow()
 
-	//пїЅIпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ----------------------------------------------------
+	//ЏI—№Џ€—ќ‚±‚±‚©‚з----------------------------------------------------
 	CallFunc("mp1121:EV_M02S290_ED")
 }
-function "EV_M02S290_ED"											//пїЅCпїЅxпїЅпїЅпїЅgпїЅXпїЅLпїЅbпїЅvпїЅpпїЅЙЏIпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅК‚пїЅfunctionпїЅЖ‚пїЅпїЅД—pпїЅУ‚пїЅпїЅЬ‚пїЅпїЅB
+function "EV_M02S290_ED"											//ѓCѓxѓ“ѓgѓXѓLѓbѓv—p‚ЙЏI—№Џ€—ќ‚р•К‚Мfunction‚Ж‚µ‚Д—p€У‚µ‚Ь‚·ЃB
 {
-	SetSkipScript("")												//пїЅIпїЅпїЅпїЅпїЅпїЅпїЅпїЅНѓXпїЅLпїЅbпїЅvпїЅЦЋ~
+	SetSkipScript("")												//ЏI—№Џ€—ќ‚НѓXѓLѓbѓv‹ЦЋ~
 	
-	//пїЅCпїЅxпїЅпїЅпїЅgпїЅOпїЅМѓLпїЅпїЅпїЅпїЅпїЅпїЅпїЅр•њ‹A
+	//ѓCѓxѓ“ѓg‘O‚МѓLѓѓѓ‰Џо•с‚р•њ‹A
 	RestoreEventState()
 
-	//пїЅпїЅпїЅпїЅпїЅXпїЅ^пїЅ[пїЅр•њ‹A
+	//ѓ‚ѓ“ѓXѓ^Ѓ[‚р•њ‹A
 	ResetChrPos((CHRTYPE_MONS | RESET_POS | RESET_AISTATE))
 
-	//пїЅLпїЅпїЅпїЅпїЅпїЅNпїЅ^пїЅ[пїЅпїЅпїЅпїЅпїЅпїЅ
+	//ѓLѓѓѓ‰ѓNѓ^Ѓ[Џ‰Љъ‰»
 	CallFunc("system:reset_chrmot_ADOL")
 	CallFunc("system:reset_chrmot_LAXIA")
 	CallFunc("system:reset_chrmot_SAHAD")
 
-	//пїЅpпїЅ[пїЅeпїЅBпїЅLпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	//ѓpЃ[ѓeѓBѓLѓѓѓ‰‚р‰р•ъ
 	ReleaseEventPartyChr()
 
-	//пїЅ}пїЅbпїЅvпїЅpпїЅпїЅпїЅпїЅпїЅ[пїЅ^пїЅ[пїЅпїЅпїЅZпїЅbпїЅg
+	//ѓ}ѓbѓvѓpѓ‰ѓЃЃ[ѓ^Ѓ[ѓЉѓZѓbѓg
 	ResetMapParam( -1 )
 
-	//пїЅtпїЅпїЅпїЅOпїЅпїЅпїЅпїЅ
-	SetFlag( GF_02MP1121_MAKE_CAMP , 1 )			// пїЅпїЅcпїЅnпїЅпїЅzпїЅпїЅпїЅпїЅ
-	SetFlag(SF_SETRAMSAVE,1)		//пїЅпїЅпїЅgпїЅпїЅпїЅCпїЅZпїЅ[пїЅu
+	//ѓtѓ‰ѓOЏ€—ќ
+	SetFlag( GF_02MP1121_MAKE_CAMP , 1 )			// –м‰c’n‚р’z‚ў‚Ѕ
+	SetFlag(SF_SETRAMSAVE,1)		//ѓЉѓgѓ‰ѓCѓZЃ[ѓu
 
-	SetFlag(GF_GALL_EV_02_03,1)			// M02S271:mp1121пїЅЕ–пїЅcпїЅпїЅпїЅпїЅQ
+	SetFlag(GF_GALL_EV_02_03,1)			// M02S271:mp1121‚Е–м‰c‚·‚й‚Q
 
-	//пїЅ}пїЅbпїЅvпїЅ}пїЅ[пїЅJпїЅ[
+	//ѓ}ѓbѓvѓ}Ѓ[ѓJЃ[
 	DelMapMarker( SMI_SYMBOL,PAGE_F002,MARKER_EV_M02S270, 0, 0)
-	SetMapMarker( SMI_SYMBOL ,PAGE_F003, MARKER_EV_M02S330, 487.96f,-38.09f,96.64f,487.96f,-38.09f,MARKER_EV_M02S330, MN_F_MP4102,0)	//пїЅNпїЅIпїЅJпїЅOпїЅпїЅcпїЅn
-	SetMapMarker( SMI_SYMBOL ,PAGE_F003, MARKER_EV_M02S380, 764.33f,-362.64f,26.58f,764.33f,-362.64f,MARKER_EV_M02S380, MN_F_MP2103,0)	//пїЅпїЅпїЅС‘OпїЅпїЅcпїЅn
+	SetMapMarker( SMI_SYMBOL ,PAGE_F003, MARKER_EV_M02S330, 487.96f,-38.09f,96.64f,487.96f,-38.09f,MARKER_EV_M02S330, MN_F_MP4102,0)	//ђNђI’J‘O–м‰c’n
+	SetMapMarker( SMI_SYMBOL ,PAGE_F003, MARKER_EV_M02S380, 764.33f,-362.64f,26.58f,764.33f,-362.64f,MARKER_EV_M02S380, MN_F_MP2103,0)	//–§—С‘O–м‰c’n
 
-	SetMapMarker( SMI_SUBEVENT, PAGE_F002, REMOVE_OBJ_1120, 408.91f,-664.52f,11.30f, 408.91f,-664.52f, REMOVE_OBJ_1120, MN_F_MP1120,1)			//пїЅпїЅпїЅНЃ@пїЅFпїЅпїЅН—пїЅпїЅпїЅAпїЅу” ‚пїЅ
-	//SetMapMarker( SMI_SUBEVENT ,PAGE_F002, MARKER_EV_LC_MP3104, 296.16f,-641.87f,93.75f, 296.16f,-641.87f,MARKER_EV_LC_MP3104,MN_F_MP3104,0)	//пїЅпїЅпїЅPпїЅ@пїЅFпїЅпїЅпїЅЛЉпїЅ
+	SetMapMarker( SMI_SUBEVENT, PAGE_F002, REMOVE_OBJ_1120, 408.91f,-664.52f,11.30f, 408.91f,-664.52f, REMOVE_OBJ_1120, MN_F_MP1120,1)			//‹¦—НЃ@ЃF‘е‰Н—¬€жЃA•у” ‚Ц
+	//SetMapMarker( SMI_SUBEVENT ,PAGE_F002, MARKER_EV_LC_MP3104, 296.16f,-641.87f,93.75f, 296.16f,-641.87f,MARKER_EV_LC_MP3104,MN_F_MP3104,0)	//ѓЌѓPЃ@ЃF‰Њ“ЛЉв
 
-	//пїЅ`пїЅFпїЅbпїЅNпїЅ|пїЅCпїЅпїЅпїЅgпїЅJпїЅпїЅ
+	//ѓ`ѓFѓbѓNѓ|ѓCѓ“ѓgЉJ•ъ
 	SetCheckPoint(CP_MP1121)
 	DelMapMarker( SMI_WARPPT,PAGE_F002  , -1,347 ,-722)
 	SetMapMarker(SMI_CHECKED_WARPPT, PAGE_F002, -1, 347 ,-722 ,7.75, 347 ,-722 , CP_MP1121, MN_F_MP1121,-1)
 	ChangeAnimation( "chkpt" , "ANI_STOP", -1 , 1 )
 
-	//пїЅeпїЅпїЅпїЅgпїЅс•њЏпїЅпїЅпїЅпїЅEпїЅпїЅпїЅgпїЅпїЅпїЅCпїЅZпїЅ[пїЅu
+	//ѓeѓ“ѓg‰с•њЏ€—ќЃEѓЉѓgѓ‰ѓCѓZЃ[ѓu
 	CallFunc("system:camp_rest")
 
 	CallFunc( "mp1121:init" )
@@ -1431,27 +1431,27 @@ function "EV_M02S290_ED"											//пїЅCпїЅxпїЅпїЅпїЅgпїЅXпїЅLпїЅbпїЅvпїЅpпїЅЙЏ
 	Turn("PLAYER1",-40.27f,360.0f)
 	ResetPartyPos()
 	ResetFollowPoint()
-	//Wait(1) //пїЅпїЅпїЅпїЅпїЅТ‚пїЅпїЅp
+	//Wait(1) //Џ€—ќ‘Т‚ї—p
 
-	//пїЅJпїЅпїЅпїЅпїЅпїЅК’uпїЅпїЅпїЅAorпїЅпїЅпїЅпїЅпїЅК’uпїЅЭ’пїЅ
+	//ѓJѓЃѓ‰€К’u•њ‹AorЏ‰Љъ€К’uђЭ’и
 
-	MoveCameraAt( 0 , 346.733f , -729.748f , 9.612f , 0 )	// пїЅпїЅпїЅпїЅпїЅ_
-	ChangeCameraDistance( 0 , 7.000f , 0 )		// пїЅпїЅ{пїЅпїЅпїЅпїЅ
-	ChangeCameraElevation( 0 , 14.000f , 0 )	// пїЅпїЅ{пїЅВЉp
-	RotateCamera( 0 , -139.734f , 0 )				// пїЅpпїЅx
-	ChangeCameraPers( 0 , 60.000f , 0 )			// пїЅпїЅпїЅпїЅp
+	MoveCameraAt( 0 , 346.733f , -729.748f , 9.612f , 0 )	// ’ЌЋ‹“_
+	ChangeCameraDistance( 0 , 7.000f , 0 )		// Љо–{‹——Ј
+	ChangeCameraElevation( 0 , 14.000f , 0 )	// Љо–{‹ВЉp
+	RotateCamera( 0 , -139.734f , 0 )				// Љp“x
+	ChangeCameraPers( 0 , 60.000f , 0 )			// Ћ‹–мЉp
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , 0.0f , 0 )				// пїЅпїЅпїЅ[пїЅпїЅпїЅпїЅ]
+	RollCamera( 0 , 0.0f , 0 )				// ѓЌЃ[ѓ‹‰с“]
 	CallFunc("system:camera_reset")
 
-	//пїЅпїЅпїЅgпїЅпїЅпїЅEпїЅpпїЅпїЅпїЅМѓ{пїЅCпїЅX
-	CallFunc("system:SetMarkerParoVoice")		//пїЅпїЅпїЅgпїЅпїЅпїЅpпїЅпїЅпїЅМѓ}пїЅ[пїЅJпїЅ[пїЅoпїЅ^пїЅ{пїЅCпїЅX
+	//ѓЉѓgѓ‹ЃEѓpѓЌ‚Мѓ{ѓCѓX
+	CallFunc("system:SetMarkerParoVoice")		//ѓЉѓgѓ‹ѓpѓЌ‚Мѓ}Ѓ[ѓJЃ[“o^ѓ{ѓCѓX
 
 	ResetStopFlag(STOPFLAG_EVENT)
 
 	FadeIn(FADE_BLACK,FADE_FAST)
 	//WaitFade()
 
-//пїЅIпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅЬ‚пїЅ----------------------------------------------------
+//ЏI—№Џ€—ќ‚±‚±‚Ь‚Е----------------------------------------------------
 
 }

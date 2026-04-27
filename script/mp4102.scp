@@ -9,42 +9,42 @@
 #include "inc/vo.h"
 
 //-------------------------------------------
-// 4102ï¿½F
+// 4102F
 //-------------------------------------------
-// initï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½g
+// initƒXƒNƒŠƒvƒg
 function "init"
 {
 	EventCue("rng:dungeonEntrances")
 	
-	//ï¿½ï¿½ï¿½iï¿½sï¿½Kï¿½vï¿½mï¿½[ï¿½hï¿½íœï¿½ï¿½ï¿½}ï¿½bï¿½vï¿½ï¿½ÆÒ—p
+	//‰“Œi•s•K—vƒm[ƒhíœŸƒ}ƒbƒvì‹ÆÒ—p
 	MapHide( "@BG2_mp4102" , 0 )
 	MapHide( "@BG2_mp1108" , 0 )
 	MapHide( "@BG2_mp1109" , 0 )
-	MapHide( "BG2_groundfog_main" , 0 )	//ï¿½ï¿½ï¿½iï¿½Ì”Âƒtï¿½Hï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	MapHide( "BG2_groundfog_S1" , 0 )	//ï¿½ï¿½ï¿½iï¿½Ì”Âƒtï¿½Hï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	MapHide( "BG2_groundfog_SW1" , 0 )	//ï¿½ï¿½ï¿½iï¿½Ì”Âƒtï¿½Hï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	MapHide( "BG2_groundfog_SW2" , 0 )	//ï¿½ï¿½ï¿½iï¿½Ì”Âƒtï¿½Hï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	MapHide( "BG2_groundfog_SE1" , 0 )	//ï¿½ï¿½ï¿½iï¿½Ì”Âƒtï¿½Hï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	MapHide( "BG2_groundfog_SE2" , 0 )	//ï¿½ï¿½ï¿½iï¿½Ì”Âƒtï¿½Hï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	MapHide( "BG2_groundfog_main" , 0 )	//‰“Œi‚Ì”ÂƒtƒHƒO‚ğÁ‚·
+	MapHide( "BG2_groundfog_S1" , 0 )	//‰“Œi‚Ì”ÂƒtƒHƒO‚ğÁ‚·
+	MapHide( "BG2_groundfog_SW1" , 0 )	//‰“Œi‚Ì”ÂƒtƒHƒO‚ğÁ‚·
+	MapHide( "BG2_groundfog_SW2" , 0 )	//‰“Œi‚Ì”ÂƒtƒHƒO‚ğÁ‚·
+	MapHide( "BG2_groundfog_SE1" , 0 )	//‰“Œi‚Ì”ÂƒtƒHƒO‚ğÁ‚·
+	MapHide( "BG2_groundfog_SE2" , 0 )	//‰“Œi‚Ì”ÂƒtƒHƒO‚ğÁ‚·
 
-	MapHide( "camp_fire1" , 0 )		//ï¿½Îï¿½ï¿½ï¿½
-	MapHide( "camp_fire2" , 0 )		//ï¿½Îï¿½ï¿½ï¿½
-	MapHide( "camp_smoke1" , 0 )		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	MapHide( "camp_fire1" , 0 )		//‰ÎÁ‚µ
+	MapHide( "camp_fire2" , 0 )		//‰ÎÁ‚µ
+	MapHide( "camp_smoke1" , 0 )		//‰ŒÁ‚µ
 
 //	if( FLAG[SF_EVENT_ON] ){
-//	// ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-//		if( !FLAG[GF_02MP4102_MAKE_CAMP] && !FLAG[GF_02MP1201_BEFORE_INTERCEPT2] ){			// mp4102ï¿½Å–ï¿½cï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½Oï¿½Í‰ï¿½
-//			MapAnime( "camp_all" , off )	//ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½İ’u
+//	// ƒCƒxƒ“ƒg”­¶§Œä
+//		if( !FLAG[GF_02MP4102_MAKE_CAMP] && !FLAG[GF_02MP1201_BEFORE_INTERCEPT2] ){			// mp4102‚Å–ì‰c‚µ‚Ä‚¢‚È‚¢		//ŸŠúŒÀƒtƒ‰ƒO‚Í‰¼
+//			MapAnime( "camp_all" , off )	//ƒLƒƒƒ“ƒv–¢İ’u
 //			EventCue("mp4102:EV_M02S330")
 //
 //		}
 //	}
 
-	//ï¿½}ï¿½bï¿½vï¿½ï¿½ï¿½\ï¿½ï¿½
+	//ƒ}ƒbƒv–¼•\¦
 	if(!FLAG[SF_LOADINIT] && !FLAG[GF_MPxxxx_MAP_NAME_NO_DRAW] && !FLAG[TF_MAPNAME_SHOWN]){
 		if( FLAG[SF_LASTENTRY_NO] == 1 || FLAG[SF_LASTENTRY_NO] == 100 ){
-			VisualName("visual/mapname/mn_1108.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//ï¿½bï¿½ï¿½ï¿½ï¿½ï¿½Ì‹u
-			SetFlag( TF_MAPNAME_SHOWN, 1 )				// ï¿½nï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½eï¿½ï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½j
+			VisualName("visual/mapname/mn_1108.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//b‚½‚¿‚Ì‹u
+			SetFlag( TF_MAPNAME_SHOWN, 1 )				// ’n–¼•\¦‚µ‚½iƒeƒ“ƒ|ƒ‰ƒŠj
 		}
 	}
 
@@ -59,12 +59,12 @@ function "LP_tent"
 	StopEmotion( "ALL" )
 	ResetMoveVec("PARTYALL")
 
-	//ï¿½Iï¿½ï¿½ï¿½ï¿½
+	//‘I‘ğˆ
 	SetFlag(TF_MENU_SELECT,0)
 	MenuReset()
 	MenuType(MENUTYPE_POPUP)
-	MenuAdd(1,"ï¿½eï¿½ï¿½ï¿½gï¿½Å‹xï¿½ï¿½")
-	MenuAdd(4,"ï¿½ï¿½ß‚ï¿½")	
+	MenuAdd(1,"ƒeƒ“ƒg‚Å‹x‚Ş")
+	MenuAdd(4,"‚â‚ß‚é")	
 	MenuOpen( TF_MENU_SELECT , -1 , ADOLMENU_PPOSY , -2 , -2 , 10 , -1)
 	WaitMenu(0)
 	MenuClose(10,0)
@@ -77,21 +77,21 @@ function "LP_tent"
 
 		SaveCamera()
 
-		SetEnvSEPlayState(-1, 0)	//ï¿½Â‹ï¿½SEï¿½Sï¿½ï¿½~
-		PlaySE(SE_ENV_FOREST_4, 20, 1, 1000, 0, 1.0f, 0)	//ï¿½ï¿½Ì’ï¿½
+		SetEnvSEPlayState(-1, 0)	//ŠÂ‹«SE‘S’â~
+		PlaySE(SE_ENV_FOREST_4, 20, 1, 1000, 0, 1.0f, 0)	//–é‚Ì’
 		PlaySE(SE_ENV_WATERFALL_4, 20, 1, 1000, 0, 1.0f, 0)
 		PlaySE(SE_ENV_RIVER_1, 20, 1, 1000, 0, 1.0f, 0)
 
 		CallFunc("system:TentVoice_Sleep")
 	
-		PlaySE( SE_HOTEL_JINGLE , 100 , 0,  0, 0, 1.0f, 0)	//ï¿½Wï¿½ï¿½ï¿½Oï¿½ï¿½
-		StopSE(SE_ENV_FOREST_4, 2000)		//ï¿½ï¿½ï¿½Ì‰ï¿½ï¿½~ï¿½ß‚ï¿½
+		PlaySE( SE_HOTEL_JINGLE , 100 , 0,  0, 0, 1.0f, 0)	//ƒWƒ“ƒOƒ‹
+		StopSE(SE_ENV_FOREST_4, 2000)		//’‚Ì‰¹~‚ß‚é
 		StopSE(SE_ENV_WATERFALL_4, 2000)
 		StopSE(SE_ENV_RIVER_1, 2000)
 
 		Wait(120)
 	
-		//ï¿½eï¿½ï¿½ï¿½gï¿½ñ•œï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Cï¿½Zï¿½[ï¿½u
+		//ƒeƒ“ƒg‰ñ•œˆ—EƒŠƒgƒ‰ƒCƒZ[ƒu
 		CallFunc("system:camp_rest")
 
 		PlaySE(SE_HEAL, 100, 0, 0, 0, 1.0f, 0)
@@ -99,7 +99,7 @@ function "LP_tent"
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½Sï¿½ï¿½ï¿½Ì‚gï¿½oï¿½Aï¿½rï¿½oï¿½Æ‚dï¿½wï¿½sï¿½qï¿½`ï¿½Qï¿½[ï¿½Wï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I#10W" 
+			"#-1W#4C‘Sˆõ‚Ì‚g‚oA‚r‚o‚Æ‚d‚w‚s‚q‚`ƒQ[ƒW‚ª‘S‰õ‚µ‚½I#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -113,7 +113,7 @@ function "LP_tent"
 	
 		ResetPartyPos()
 		ResetFollowPoint()
-		//Wait(1) //ï¿½ï¿½ï¿½ï¿½ï¿½Ò‚ï¿½ï¿½p
+		//Wait(1) //ˆ—‘Ò‚¿—p
 	
 		RestoreCamera(0,0)
 		ResetCameraObserver(0)
@@ -121,7 +121,7 @@ function "LP_tent"
 	
 		ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
 
-		SetEnvSEPlayState(-1, 1)	//ï¿½Â‹ï¿½SEï¿½ï¿½ï¿½A
+		SetEnvSEPlayState(-1, 1)	//ŠÂ‹«SE•œ‹A
 
 		SetWork(WK_BGMLIMIT, 0) 	
 		FadeIn(FADE_BLACK,FADE_FAST)
@@ -141,7 +141,7 @@ function "LP_cook"
 	Wait(10)
 
 	CallFunc("system:GetIngredients")
-	ShopOpen( SHOP_ID_COOK, -1 )		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½eï¿½Xï¿½g
+	ShopOpen( SHOP_ID_COOK, -1 )		//Ÿ—¿—ì¬ƒeƒXƒg
 
 	ResetStopFlag(STOPFLAG_TALK)
 
@@ -149,7 +149,7 @@ function "LP_cook"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½Zï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½
+//¡ƒƒCƒ“ƒCƒxƒ“ƒgƒZƒNƒVƒ‡ƒ“
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

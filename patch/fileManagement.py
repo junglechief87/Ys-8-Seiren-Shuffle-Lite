@@ -18,7 +18,11 @@ def copyOriginalGameFiles():
 def downloadFiles():
     for folder in folders:
         os.makedirs(os.path.join(config.executable_directory, folder), exist_ok=True)
-        repo.get(repo.ls(folder), os.path.join(config.executable_directory, folder))
+        
+        for file in repo.ls(folder):
+            with repo.open(file, 'rb') as src:
+                with open(os.path.join(config.executable_directory, folder, file.split('/')[-1]), 'wb') as dst:
+                    dst.write(src.read())
 
 def restoreOriginalGameFiles():
     shutil.copytree(os.path.join(config.executable_directory, 'Original Game Files'), config.executable_directory, dirs_exist_ok=True)

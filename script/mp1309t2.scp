@@ -10,46 +10,46 @@
 #include "inc/vo.h"
 
 //-------------------------------------------
-// 1309t2ï¿½Fï¿½Xï¿½ï¿½ÌXï¿½ï¿½cï¿½n
+// 1309t2FŽXŒè‚ÌX–ì‰c’n
 //-------------------------------------------
-// initï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½g
+// initƒXƒNƒŠƒvƒg
 function "init"
 {
 	
-	//ï¿½ï¿½ï¿½}ï¿½bï¿½vï¿½Gï¿½tï¿½Fï¿½Nï¿½g
-	//ï¿½Eï¿½q
+	//Ÿƒ}ƒbƒvƒGƒtƒFƒNƒg
+	//–EŽq
 	Set3DParticle(PARTICLE_TYPE_SPORE, 0.0f,0.0f,0.0f, 0.05f,0.05f,0.02f, 0.0f,0.0f,0.0f, 0.0f,0.0f,0.0f, 180.0f, 0.0f)
 
-	EventAreaEnable( "NightHunt_Stopper" , 0 )	//ï¿½ï¿½Ô’Tï¿½ï¿½ï¿½pï¿½yï¿½Xï¿½gï¿½bï¿½pï¿½[ï¿½F1105t2ï¿½ï¿½1104ï¿½z
+	EventAreaEnable( "NightHunt_Stopper" , 0 )	//–éŠÔ’Tõ—pyƒXƒgƒbƒp[F1105t2Ë1104z
 
 
 	if( FLAG[SF_EVENT_ON] )
 	{
 	}
 
-	if(FLAG[GF_NIGHTHUNT])		//ï¿½ï¿½Ô’Tï¿½ï¿½ï¿½ï¿½
+	if(FLAG[GF_NIGHTHUNT])		//–éŠÔ’TõŽž
 	{		
-		EntryOn(00,0)	//ï¿½yï¿½Xï¿½gï¿½bï¿½pï¿½[ï¿½F1105t2ï¿½ï¿½1104ï¿½zï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½ÌŠÔ‚ï¿½OFF
+		EntryOn(00,0)	//yƒXƒgƒbƒp[F1105t2Ë1104z‚ª—LŒø‚ÌŠÔ‚ÍOFF
 
-		//ï¿½ï¿½cï¿½nï¿½}ï¿½bï¿½vï¿½ï¿½ï¿½ï¿½
-		MapAnime( "camp_all" , on )	//ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½vï¿½Ý’u
+		//–ì‰c’nƒ}ƒbƒv§Œä
+		MapAnime( "camp_all" , on )	//ƒLƒƒƒ“ƒvÝ’u
 		MapHide( "camp_fire1" , 1)
 		MapHide( "camp_fire2" , 1)
 		MapHide( "camp_smoke" , 1)
 
-		EventAreaEnable( "NightHunt_Stopper" , 1 )	//ï¿½ï¿½Ô’Tï¿½ï¿½ï¿½pï¿½yï¿½Xï¿½gï¿½bï¿½pï¿½[ï¿½F1105t2ï¿½ï¿½1104ï¿½z
+		EventAreaEnable( "NightHunt_Stopper" , 1 )	//–éŠÔ’Tõ—pyƒXƒgƒbƒp[F1105t2Ë1104z
 	}
 
-//	//ï¿½}ï¿½bï¿½vï¿½ï¿½ï¿½\ï¿½ï¿½
+//	//ƒ}ƒbƒv–¼•\Ž¦
 //	if(!FLAG[SF_LOADINIT] && !FLAG[GF_MPxxxx_MAP_NAME_NO_DRAW] && !FLAG[TF_MAPNAME_SHOWN]){
 //		if( FLAG[SF_LASTENTRY_NO] == 1 || FLAG[SF_LASTENTRY_NO] == 100  ){	
-//			//ï¿½_ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½[ï¿½v
-//			VisualName("visual/mapname/mn_1110.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//ï¿½ï¿½ï¿½mï¿½ç‚¸ï¿½Cï¿½ï¿½
-//			SetFlag( TF_MAPNAME_SHOWN, 1 )				// ï¿½nï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½eï¿½ï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½j
+//			//ƒ_ƒ“ƒWƒ‡ƒ“‘¤^ƒ[ƒv
+//			VisualName("visual/mapname/mn_1110.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//–¼’m‚ç‚¸ŠCŠÝ
+//			SetFlag( TF_MAPNAME_SHOWN, 1 )				// ’n–¼•\Ž¦‚µ‚½iƒeƒ“ƒ|ƒ‰ƒŠj
 //		}
 //	}
 	
-	// ï¿½_ï¿½~ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Î‹Nï¿½ï¿½
+	// ƒ_ƒ~[…»Î‹N“®
 	ChangeAnimation("chkpt", "ANI_START", -1, 1)
 }
 
@@ -58,7 +58,7 @@ function "LP_tent"
 
 	SetStopFlag(STOPFLAG_SIMPLEEVENT2)
 
-//	//ï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚Å‘Ò‹@
+//	//ƒ‚[ƒVƒ‡ƒ“‚ªI—¹‚·‚é‚Ü‚Å‘Ò‹@
 //	WaitAnimation2( "PLAYER1" ,-1 ,-1 ,ANI_WAIT ,1 )
 
 	ResetMotion( "PARTYALL" , 0 )
@@ -66,24 +66,24 @@ function "LP_tent"
 //	StopEmotion( "PARTYALL" )
 	ResetMoveVec("PARTYALL")
 
-	//ï¿½Iï¿½ï¿½ï¿½ï¿½
+	//‘I‘ðŽˆ
 	SetFlag(TF_MENU_SELECT,0)
 	MenuReset()
 	MenuType(MENUTYPE_POPUP)
-	MenuAdd(1,"ï¿½eï¿½ï¿½ï¿½gï¿½Å‹xï¿½ï¿½")
+	MenuAdd(1,"ƒeƒ“ƒg‚Å‹x‚Þ")
 
 	if(FLAG[GF_OPEN_CORAL_T2])
 	{
-		if(!FLAG[GF_NIGHTHUNT])		//ï¿½ï¿½Ô’Tï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½
+		if(!FLAG[GF_NIGHTHUNT])		//–éŠÔ’Tõ‚ðŠJŽn‚µ‚Ä‚¢‚È‚¢
 		{
-			MenuAdd(2,"ï¿½ï¿½Ô’Tï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½")
+			MenuAdd(2,"–éŠÔ’Tõ‚ðs‚¤")
 		}
 		else
 		{
-			MenuAdd(3,"ï¿½ï¿½Ô’Tï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")
+			MenuAdd(3,"–éŠÔ’Tõ‚ðI—¹‚·‚é")
 		}
 	}
-	MenuAdd(4,"ï¿½ï¿½ß‚ï¿½")	
+	MenuAdd(4,"‚â‚ß‚é")	
 	MenuOpen( TF_MENU_SELECT , -1 , ADOLMENU_PPOSY , -2 , -2 , 10 , -1)
 	WaitMenu(0)
 	MenuClose(10,0)
@@ -97,17 +97,17 @@ function "LP_tent"
 		SaveCamera()
 
 		SetEnvSEPlayState(1105001, 0)
-		PlaySE(SE_ENV_FOREST_4, 20, 1, 1000, 0, 1.0f, 0)	//ï¿½ï¿½Ì’ï¿½
+		PlaySE(SE_ENV_FOREST_4, 20, 1, 1000, 0, 1.0f, 0)	//–é‚Ì’Ž
 	
-		//ï¿½Qï¿½ï¿½
+		//QŒ¾
 		CallFunc("system:TentVoice_Sleep")
 	
-		SetEnvSEPlayState(-1, 0)	//ï¿½Â‹ï¿½SEï¿½Sï¿½ï¿½~
-		PlaySE( SE_HOTEL_JINGLE , 100 , 0,  0, 0, 1.0f, 0)	//ï¿½Wï¿½ï¿½ï¿½Oï¿½ï¿½
-		StopSE(SE_ENV_FOREST_4, 2000)	//ï¿½ï¿½ï¿½Ì‰ï¿½ï¿½~ï¿½ß‚ï¿½
+		SetEnvSEPlayState(-1, 0)	//ŠÂ‹«SE‘S’âŽ~
+		PlaySE( SE_HOTEL_JINGLE , 100 , 0,  0, 0, 1.0f, 0)	//ƒWƒ“ƒOƒ‹
+		StopSE(SE_ENV_FOREST_4, 2000)	//’Ž‚Ì‰¹Ž~‚ß‚é
 		Wait(120)
 
-		//ï¿½eï¿½ï¿½ï¿½gï¿½ñ•œï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Cï¿½Zï¿½[ï¿½u
+		//ƒeƒ“ƒg‰ñ•œˆ—EƒŠƒgƒ‰ƒCƒZ[ƒu
 		CallFunc("system:camp_rest")
 	
 		PlaySE(SE_HEAL, 100, 0, 0, 0, 1.0f, 0)
@@ -115,7 +115,7 @@ function "LP_tent"
 		TalkPopup(UNDEF,0,5,0,0,0)
 		{
 			"#8S"
-			"#-1W#4Cï¿½Sï¿½ï¿½ï¿½Ì‚gï¿½oï¿½Aï¿½rï¿½oï¿½Æ‚dï¿½wï¿½sï¿½qï¿½`ï¿½Qï¿½[ï¿½Wï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I#10W" 
+			"#-1W#4C‘Sˆõ‚Ì‚g‚oA‚r‚o‚Æ‚d‚w‚s‚q‚`ƒQ[ƒW‚ª‘S‰õ‚µ‚½I#10W" 
 			"#8S"
 		}
 		Wait(10)
@@ -128,14 +128,14 @@ function "LP_tent"
 		Turn("LEADER",167.52f,360.0f)
 		ResetPartyPos()
 		ResetFollowPoint()
-		//Wait(1) //ï¿½ï¿½ï¿½ï¿½ï¿½Ò‚ï¿½ï¿½p
+		//Wait(1) //ˆ—‘Ò‚¿—p
 	
 		RestoreCamera(0,0)
 		CallFunc("system:camera_reset")
 	
 		ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
 
-		SetEnvSEPlayState(-1, 1)	//ï¿½Â‹ï¿½SEï¿½ï¿½ï¿½A
+		SetEnvSEPlayState(-1, 1)	//ŠÂ‹«SE•œ‹A
 
 		SetWork(WK_BGMLIMIT, 0) 	
 		FadeIn(FADE_BLACK,FADE_FAST)
@@ -147,11 +147,11 @@ function "LP_tent"
 		FadeOut(FADE_BLACK,FADE_FAST)
 		WaitFade()
 
-		//ï¿½eï¿½ï¿½ï¿½gï¿½ñ•œï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Cï¿½Zï¿½[ï¿½u
+		//ƒeƒ“ƒg‰ñ•œˆ—EƒŠƒgƒ‰ƒCƒZ[ƒu
 		CallFunc("system:camp_rest")
 		
-		SetFlag(GF_NIGHTHUNT,1)		//ï¿½ï¿½Ô’Tï¿½ï¿½ï¿½Jï¿½n
-		SetFlag( TF_LOADING_TIPS_OFF, 1 )	//NowLoading ï¿½ï¿½ï¿½ï¿½ Tips ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½bï¿½g
+		SetFlag(GF_NIGHTHUNT,1)		//–éŠÔ’TõŠJŽn
+		SetFlag( TF_LOADING_TIPS_OFF, 1 )	//NowLoading Žž‚Ì Tips •\Ž¦‚ðƒJƒbƒg
 
 		LoadArg("map/mp1309t2/mp1309t2.arg")
 		EventCue("mp1309t2:NightHunt_Start")
@@ -164,11 +164,11 @@ function "LP_tent"
 		FadeOut(FADE_BLACK,FADE_FAST)
 		WaitFade()
 
-		//ï¿½eï¿½ï¿½ï¿½gï¿½ñ•œï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Cï¿½Zï¿½[ï¿½u
+		//ƒeƒ“ƒg‰ñ•œˆ—EƒŠƒgƒ‰ƒCƒZ[ƒu
 		CallFunc("system:camp_rest")
 		
-		SetFlag(GF_NIGHTHUNT,0)		//ï¿½ï¿½Ô’Tï¿½ï¿½ï¿½Iï¿½ï¿½
-		SetFlag( TF_LOADING_TIPS_OFF, 1 )	//NowLoading ï¿½ï¿½ï¿½ï¿½ Tips ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½bï¿½g
+		SetFlag(GF_NIGHTHUNT,0)		//–éŠÔ’TõI—¹
+		SetFlag( TF_LOADING_TIPS_OFF, 1 )	//NowLoading Žž‚Ì Tips •\Ž¦‚ðƒJƒbƒg
 
 		LoadArg("map/mp1105/mp1105.arg")
 		EventCue("mp1105:NightHunt_End")
@@ -191,7 +191,7 @@ function "LP_cook"
 	Wait(10)
 
 	CallFunc("system:GetIngredients")
-	ShopOpen( SHOP_ID_COOK, -1 )		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½eï¿½Xï¿½g
+	ShopOpen( SHOP_ID_COOK, -1 )		//Ÿ—¿—ì¬ƒeƒXƒg
 
 	ResetStopFlag(STOPFLAG_TALK)
 
@@ -199,7 +199,7 @@ function "LP_cook"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½Zï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½
+//¡ƒƒCƒ“ƒCƒxƒ“ƒgƒZƒNƒVƒ‡ƒ“
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -208,7 +208,7 @@ function "LP_cook"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//ï¿½ï¿½ï¿½Tï¿½uï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½Zï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½
+//¡ƒTƒuƒCƒxƒ“ƒgƒZƒNƒVƒ‡ƒ“
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -217,21 +217,21 @@ function "LP_cook"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-//ï¿½ï¿½ï¿½Xï¿½gï¿½bï¿½pï¿½[ï¿½Eï¿½kï¿½oï¿½Zï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½
+//¡ƒXƒgƒbƒp[E‚k‚oƒZƒNƒVƒ‡ƒ“
 
 ////////////////////////////////////////////////////////////////////////////////
 
 //	================================================
-//	ï¿½yï¿½Xï¿½gï¿½bï¿½pï¿½[ï¿½F1105t1ï¿½ï¿½1104ï¿½z
+//	yƒXƒgƒbƒp[F1105t1Ë1104z
 //	================================================
 
 //	================================================
 function "NightHunt_Stopper"
 {
 
-//ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½----------------------------------------------------
-	// PLAYER2ï¿½ï¿½PLAYER3ï¿½Ì‚Ç‚ï¿½ï¿½ç‚©ï¿½ï¿½PLAYER1ï¿½ï¿½ï¿½ï¿½ï¿½è‹—ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½
-	// PLAYER1ï¿½Ì‚ï¿½ï¿½Î‚Éƒï¿½ï¿½[ï¿½vï¿½ï¿½ï¿½ï¿½
+//ŠJŽnˆ—‚±‚±‚©‚ç----------------------------------------------------
+	// PLAYER2‚ÆPLAYER3‚Ì‚Ç‚¿‚ç‚©‚ªPLAYER1‚©‚çˆê’è‹——£—£‚ê‚Ä‚¢‚½‚ç
+	// PLAYER1‚Ì‚»‚Î‚Éƒ[ƒv‚·‚é
 	SetFlag( TF_CHECK_DISTANCE, 1 )
 	SetFlag( TF_CHECK_DISTANCE2, 1 )
 	if( WORK[WK_ISEXIST_PLAYER2] )
@@ -268,26 +268,26 @@ function "NightHunt_Stopper"
 	}
 	WaitThread(1)
 	WaitThread(2)
-//ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½-----------------------------------------------
+//ŠJŽnˆ—‚±‚±‚Ü‚Å-----------------------------------------------
 
 	Wait(15)
 
 	SetFlag( TF_MENU_SELECT, 0 )
-	YesNoMenu(TF_MENU_SELECT,"#7Cï¿½ï¿½Ô’Tï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",1)
+	YesNoMenu(TF_MENU_SELECT,"#7C–éŠÔ’Tõ‚ðI—¹‚µ‚Ü‚·‚©H",1)
 
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	//	ï¿½Ë‚Í‚ï¿½
+	//„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
+	//	Ë‚Í‚¢
 	
 	if(FLAG[TF_MENU_SELECT])
 	{			
 		FadeOut(FADE_BLACK,FADE_NORMAL)
 		WaitFade()
 
-		//ï¿½eï¿½ï¿½ï¿½gï¿½ñ•œï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Cï¿½Zï¿½[ï¿½u
+		//ƒeƒ“ƒg‰ñ•œˆ—EƒŠƒgƒ‰ƒCƒZ[ƒu
 		CallFunc("system:camp_rest")
 		
-		SetFlag(GF_NIGHTHUNT,0)		//ï¿½ï¿½Ô’Tï¿½ï¿½ï¿½Iï¿½ï¿½
-		SetFlag( TF_LOADING_TIPS_OFF, 1 )	//NowLoading ï¿½ï¿½ï¿½ï¿½ Tips ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½bï¿½g
+		SetFlag(GF_NIGHTHUNT,0)		//–éŠÔ’TõI—¹
+		SetFlag( TF_LOADING_TIPS_OFF, 1 )	//NowLoading Žž‚Ì Tips •\Ž¦‚ðƒJƒbƒg
 
 		LoadArg("map/mp1105/mp1105.arg")
 		EventCue("mp1105:NightHunt_End")
@@ -296,15 +296,15 @@ function "NightHunt_Stopper"
 	}
 	else
 	{
-		//ï¿½@ï¿½@ï¿½Ã“]ï¿½ï¿½Aï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½SEï¿½É‚ï¿½ï¿½Äï¿½ï¿½ï¿½ï¿½Â‚ï¿½
-		//ï¿½@ï¿½@ï¿½ï¿½ï¿½Ì–ï¿½cï¿½nï¿½ÅˆÃ“]ï¿½ï¿½ï¿½ï¿½ï¿½Ä‘ï¿½ï¿½ì‹–ï¿½ÂB
-		//	ï¿½Ë‚ï¿½ï¿½ï¿½ï¿½ï¿½
+		//@@ˆÃ“]ŒãA’¹‚Ì‚³‚¦‚¸‚èSE‚É‚ðÄ¶‚µ‚Â‚Â
+		//@@’©‚Ì–ì‰c’n‚ÅˆÃ“]–¾‚¯‚Ä‘€ì‹–‰ÂB
+		//	Ë‚¢‚¢‚¦
 
 
-		//ï¿½@ï¿½@ï¿½ï¿½ï¿½Ìï¿½Å‘ï¿½ï¿½ì‹–ï¿½ÂB
-		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//@@‚»‚Ìê‚Å‘€ì‹–‰ÂB
+		//„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ
 
-	//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½----------------------------------------------------
+	//I—¹ˆ—‚±‚±‚©‚ç----------------------------------------------------
 		CrossFade(FADE_CROSS)
 
 		SetChrPos("LEADER",60.78f,-479.46f,32.64f)
@@ -312,7 +312,7 @@ function "NightHunt_Stopper"
 
 		ResetPartyPos()
 		ResetFollowPoint()
-		//Wait(1) //ï¿½ï¿½ï¿½ï¿½ï¿½Ò‚ï¿½ï¿½p
+		//Wait(1) //ˆ—‘Ò‚¿—p
 
 		RestoreCamera(0,0)
 		ResetCameraObserver(0)
@@ -320,7 +320,7 @@ function "NightHunt_Stopper"
 		WaitFade()
 
 		ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
-	//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½----------------------------------------------------
+	//I—¹ˆ—‚±‚±‚Ü‚Å----------------------------------------------------
 	}
 }
 
@@ -335,72 +335,72 @@ function "NightHunt_Start"
 	ResetPartyPos()
 	ResetFollowPoint()
 
-	MoveCameraAt( 0 , 50.790f , -395.793f , 42.592f , 0 )	// ï¿½ï¿½ï¿½ï¿½ï¿½_
-	ChangeCameraDistance( 0 , 7.000f , 0 )		// ï¿½ï¿½{ï¿½ï¿½ï¿½ï¿½
-	ChangeCameraElevation( 0 , 12.338f , 0 )	// ï¿½ï¿½{ï¿½ÂŠp
-	RotateCamera( 0 , 15.211f , 0 )				// ï¿½pï¿½x
-	ChangeCameraPers( 0 , 60.000f , 0 )			// ï¿½ï¿½ï¿½ï¿½p
+	MoveCameraAt( 0 , 50.790f , -395.793f , 42.592f , 0 )	// ’Ž‹“_
+	ChangeCameraDistance( 0 , 7.000f , 0 )		// Šî–{‹——£
+	ChangeCameraElevation( 0 , 12.338f , 0 )	// Šî–{‹ÂŠp
+	RotateCamera( 0 , 15.211f , 0 )				// Šp“x
+	ChangeCameraPers( 0 , 60.000f , 0 )			// Ž‹–ìŠp
 	SetCameraZPlane( 0.100f , 600.000f )			// ZPlane
-	RollCamera( 0 , 0.0f , 0 )				// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½]
+	RollCamera( 0 , 0.0f , 0 )				// ƒ[ƒ‹‰ñ“]
 	CallFunc("system:camera_reset")
 
 
-	if(!FLAG[GF_HELP_A55])	//ï¿½ï¿½Ô’Tï¿½ï¿½
+	if(!FLAG[GF_HELP_A55])	//–éŠÔ’Tõ
 	{
-		// ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ =================================================================================
-		if ( !FLAG[SF_2NDSTART] ) {		// 2ï¿½ï¿½ï¿½Ú”ï¿½ï¿½ï¿½
+		// ƒ`ƒ…[ƒgƒŠƒAƒ‹ =================================================================================
+		if ( !FLAG[SF_2NDSTART] ) {		// 2Žü–Ú”»’è
 
-			// ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½|ï¿½[ï¿½gï¿½ï¿½ï¿½[ï¿½gï¿½Ç‚Ýï¿½ï¿½ï¿½
-			Portrait_Load(0, "system/black.itp" )		//ï¿½[ï¿½ï¿½ï¿½tï¿½Fï¿½[ï¿½hï¿½Aï¿½Eï¿½gï¿½p
+			// ƒ`ƒ…[ƒgƒŠƒAƒ‹ƒ|[ƒgƒŒ[ƒg“Ç‚Ýž‚Ý
+			Portrait_Load(0, "system/black.itp" )		//‹[Ž—ƒtƒF[ƒhƒAƒEƒg—p
 			Portrait_Create(0, 0, 0, 0, 0, 64,64, 0.0f, 0x00ffffff, 0x00000000)
-			Portrait_Load(1, "visual/help/hp_00.itp" )	// ï¿½wï¿½iï¿½p
+			Portrait_Load(1, "visual/help/hp_00.itp" )	// ”wŒi—p
 			Portrait_Create(1, HELP_POS_X, HELP_POS_Y, 0, 0, HELP_SCALE_X, HELP_SCALE_Y, 0.0f, 0x00ffffff, 0x00000000)
-			Portrait_Load(2, "visual/help/hp_a55.itp" )	// help_a55ï¿½Fï¿½ï¿½Ô’Tï¿½ï¿½
+			Portrait_Load(2, "visual/help/hp_a55.itp" )	// help_a55F–éŠÔ’Tõ
 			Portrait_Create(2, HELP_POS_X, HELP_POS_Y, 0, 0, HELP_SCALE_X, HELP_SCALE_Y, 0.0f, 0x00ffffff, 0x00000000)
 
-			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖŽ~
+			//Ž©“®‘—‚è‹ÖŽ~
 			ResetStopFlag(STOPFLAG_AUTOMESSAGE)
 			Wait(10)
 
-			// ï¿½[ï¿½ï¿½ï¿½tï¿½Fï¿½[ï¿½hï¿½Aï¿½Eï¿½gï¿½\ï¿½ï¿½
+			// ‹[Ž—ƒtƒF[ƒhƒAƒEƒg•\Ž¦
 			Portrait_Anime(0 ,PR_ANIME_SCALE, 30.0f, 17.0f, 0, 0, 0)
 			Portrait_Anime(0 ,PR_ANIME_COLOR, 1.0f, 1.0f, 1.0f, 1.0f, 0)
 			FadeIn(FADE_BLACK, 0)
 			WaitFade()
 
-			// ï¿½|ï¿½[ï¿½gï¿½ï¿½ï¿½[ï¿½gï¿½\ï¿½ï¿½
-			PlaySE(SE_TUTORIAL, 100, 0, 0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
-			Portrait_Anime(1, PR_ANIME_COLOR, 1.0f, 1.0f, 1.0f, 1.0f, FADE_NORMAL)	// ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½wï¿½i
+			// ƒ|[ƒgƒŒ[ƒg•\Ž¦
+			PlaySE(SE_TUTORIAL, 100, 0, 0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
+			Portrait_Anime(1, PR_ANIME_COLOR, 1.0f, 1.0f, 1.0f, 1.0f, FADE_NORMAL)	// ƒ`ƒ…[ƒgƒŠƒAƒ‹”wŒi
 			Portrait_Anime(2, PR_ANIME_COLOR, 1.0f, 1.0f, 1.0f, 1.0f, FADE_NORMAL)
 			Wait(FADE_NORMAL)
-			Message2(1, TOPIC_BUTTUN_X, TOPIC_BUTTUN_Y, "", "", "", "", "", "", "", "", "", "")		//ï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½Í‰Â”\ï¿½ï¿½ï¿½
+			Message2(1, TOPIC_BUTTUN_X, TOPIC_BUTTUN_Y, "", "", "", "", "", "", "", "", "", "")		//ƒ{ƒ^ƒ““ü—Í‰Â”\‚ð’ñŽ¦
 			WaitPrompt()
-			Portrait_Anime(1, PR_ANIME_COLOR, 1.0f, 1.0f, 1.0f, 0.0f, FADE_FAST)	// ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½wï¿½i
+			Portrait_Anime(1, PR_ANIME_COLOR, 1.0f, 1.0f, 1.0f, 0.0f, FADE_FAST)	// ƒ`ƒ…[ƒgƒŠƒAƒ‹”wŒi
 			Portrait_Anime(2, PR_ANIME_COLOR, 1.0f, 1.0f, 1.0f, 0.0f, FADE_FAST)
 			Wait(FADE_FAST)
 			Portrait_Close(1)
 			Portrait_Close(2)
 			
-			// ï¿½[ï¿½ï¿½ï¿½tï¿½Fï¿½[ï¿½hï¿½Aï¿½Eï¿½gï¿½íœ
+			// ‹[Ž—ƒtƒF[ƒhƒAƒEƒgíœ
 			FadeOut(FADE_BLACK, 0)
 			WaitFade()
 			Portrait_Close(0)
 
-			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è‹–ï¿½ï¿½
+			//Ž©“®‘—‚è‹–‰Â
 			SetStopFlag(STOPFLAG_AUTOMESSAGE)
 		
 		}
 		// ================================================================================================
 
-		SetFlag(GF_HELP_A55,1)		// help_a55ï¿½Fï¿½ï¿½Ô’Tï¿½ï¿½
+		SetFlag(GF_HELP_A55,1)		// help_a55F–éŠÔ’Tõ
 
-		//PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½
-		////	ï¿½iï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½
+		//PlaySE( SE_TUTORIAL , 100 , 0,  0, 0, 1.0f, 0)		//ƒ`ƒ…[ƒgƒŠƒAƒ‹
+		////	ƒiƒŒ[ƒVƒ‡ƒ“
 		//TalkPopup(UNDEF,0,3,SYSTEM_PPOSX,SYSTEM_PPOSY,0)
 		//{
-		//	"#7Cï¿½ï¿½Ô’Tï¿½ï¿½ï¿½Å‚Í’nï¿½}ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B\p"
-		//	"#7Cï¿½ï¿½Ô’Tï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½Í–ï¿½cï¿½nï¿½Ìƒeï¿½ï¿½ï¿½gï¿½ð’²‚×‚ÄA"
-		//	"#7Cï¿½wï¿½ï¿½Ô’Tï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B"
+		//	"#7C–éŠÔ’Tõ‚Å‚Í’n}‚ðŽg‚Á‚½ˆÚ“®‚ª§ŒÀ‚³‚ê‚Ü‚·B\p"
+		//	"#7C–éŠÔ’Tõ‚ðI—¹‚·‚éê‡‚Í–ì‰c’n‚Ìƒeƒ“ƒg‚ð’²‚×‚ÄA"
+		//	"#7Cw–éŠÔ’Tõ‚ðI—¹‚·‚éx‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B"
 		//}
 		//WaitPrompt()
 		//WaitCloseWindow()
