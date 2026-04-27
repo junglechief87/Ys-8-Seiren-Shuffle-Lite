@@ -76,13 +76,12 @@ def clearBytes(byteArray,startOffset,clearType):
 
 
 #places item in the chest
-def fillChest(location,itemID,quantity):
+def fillChest(location_id,itemID,quantity):
     locations = getLocations()
     itemIDOffset = 9
     quantityOffset = 15
     jingleOffset = 27
-    itemID2 = 0
-    location = locations[location]
+    location = locations[int(location_id)]
     
     #find the chest in the file
     if location.mapCheckID.find('TBOX') != -1:
@@ -105,28 +104,21 @@ def fillChest(location,itemID,quantity):
                 startOfChestArgs = fileBytes.find(location.mapCheckID.encode('utf-8'))
 
             fileBytes = bytearray(fileBytes)
-
+            
             #set Quantity
             fileBytes[startOfChestArgs + quantityOffset] = quantity
 
             #set Jingle sound effect
-            if location.progression:
-                fileBytes[startOfChestArgs + jingleOffset] = 2
-            else:
-                fileBytes[startOfChestArgs + jingleOffset] = 0
+            fileBytes[startOfChestArgs + jingleOffset] = 0
    
-            #make the item ID two values
-            while itemID > 255:
-                itemID -= 256
-                itemID2 += 1
-                
-            #place item
-            fileBytes[startOfChestArgs + itemIDOffset] = itemID
-            fileBytes[startOfChestArgs + itemIDOffset + 1] = itemID2 
+            #place item as 2-byte little-endian int
+            fileBytes[startOfChestArgs + itemIDOffset] = itemID & 0xFF
+            fileBytes[startOfChestArgs + itemIDOffset + 1] = (itemID >> 8) & 0xFF
             buffer.close()
 
         #patch file
         with open(locFile,"wb") as buffer:
             buffer.write(fileBytes)
+            print("location_id:", location_id, "itemID:", fileBytes[startOfChestArgs + itemIDOffset: startOfChestArgs + itemIDOffset + 2])
             buffer.close()
     

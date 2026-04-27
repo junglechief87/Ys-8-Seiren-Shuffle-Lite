@@ -51,10 +51,15 @@ def rngPatcherMain(patch):
     for inc in scpIncludeList:
         patchFile = patchFile + inc + '\n'
     
+    # opening cutscene
+    patchFile = patchFile + buildStartParameters(patch) 
+    patchFile = patchFile + manageEarlyGameParty(patch)
+    patchFile = patchFile + soloStartingCharacterEvent(patch)
+
     duplicateChests = [47,48,49,179]
     for location in patch.item_map:
         loc_data = patch.item_map[location]
-        loc_id = int(location)
+        loc_id = location
         if location not in duplicateChests: #no need to build out functions for the same location twice, these chests share flags with the not dawn version
             #cleanup the placeholders the game had for chests without scripts
             if location in treasureScript.keys():
@@ -62,14 +67,9 @@ def rngPatcherMain(patch):
             else:
                 script = ""
                 
-            # opening cutscene
-            patchFile = patchFile + buildStartParameters(patch) 
-            patchFile = patchFile + manageEarlyGameParty(patch)
-            patchFile = patchFile + soloStartingCharacterEvent(patch)
-
-            if loc_data['itemID'] == 139:#progressive shop rank
+            if loc_data['item_id'] == 139:#progressive shop rank
                 patchFile = patchFile + shopUpgrades(loc_id, loc_data, script)
-            elif loc_data['item_type'] == 'Item':
+            elif loc_data['item_type'] in ['Item', '']: # blank is mostly for offworld items
                 patchFile = patchFile + genericItemMessage(loc_id, patch, script)
             elif loc_data['category'] == 'Crew':
                 patchFile = patchFile + buildCrewLocation(loc_id, patch, script)
@@ -116,7 +116,7 @@ def rngPatcherMain(patch):
 def genericItemMessage(location_id, patch, vanillaScript):
     options = patch.settings
     loc_data = patch.item_map[location_id]
-    itemId = loc_data['item_id']
+    itemId = int(loc_data['item_id'])
     itemQuantity = loc_data['item_quantity']
 
     itemIcon = getIcon(itemId)
@@ -135,7 +135,7 @@ def genericItemMessage(location_id, patch, vanillaScript):
         script = script + sopEvent(options)
         #this solution for unique message on the progressive weapons is a little heavy handed but it should resolves all issues I had with them
         if options['progressive_super_weapons'] == 1:
-            if loc_data.location_type == 'event':   
+            if loc_data['location_type'] == 'event':   
                 getItemFunction =  """
 function "{0}"
 {{
@@ -267,7 +267,7 @@ function "{0}"
 }}
 """
     if script == "" and location_id not in treasureScript.keys() and loc_data['location_type'] == 'chest':
-        return # if there is not script and the location_id doesn't have a script in vanilla then we can just return nothing, no need to write a function that does nothing
+        return """function "{0}" {{ }}""".format(scriptName) # if there is no script and the location_id doesn't have a script in vanilla then we return and small empty script.
     return getItemFunction.format(scriptName,itemIcon,itemQuantity,itemSE,message,script)
 
 # ==========================================================================================================
@@ -384,7 +384,7 @@ def buildLandmarks(location_id, patch, vanillaScript):
     itemID = 148
     itemQuantity = 1
     itemSE = 'ITEMMSG_SE_NORMAL'
-    message = "#2C" + loc_data['location_name'] + "#4C" + landmarkMessage
+    message = "#2C" + loc_data['item_name'] + "#4C" + landmarkMessage
 
     landmarks = {
         'Birdsong Rock':            'GF_LOCATION01',
@@ -413,7 +413,7 @@ def buildLandmarks(location_id, patch, vanillaScript):
         'Milky White Vein':         'GF_LOCATION18'
         }
     
-    if loc_data.location_type == 'event':
+    if loc_data["location_type"] == 'event':
         getLandmarkFunction = """
 function "{0}"
 {{
@@ -440,7 +440,7 @@ function "{0}"
     ResetStopFlag(STOPFLAG_TALK)
 }}
 """   
-    return getLandmarkFunction.format(scriptName,itemIcon,itemQuantity,itemSE,message,landmarks[loc_data['location_name']],vanillaScript)
+    return getLandmarkFunction.format(scriptName,itemIcon,itemQuantity,itemSE,message,landmarks[loc_data['item_name']],vanillaScript)
 
 # ==========================================================================================================
 # Boss Scaling Function
@@ -667,7 +667,7 @@ def buildPsyches(settings):
                "Psyche-Minos Psyches": PsycheBoss('LoadArg("map/mp6306b/mp6306b.arg")', 'EventCue("mp6306b:EV_RetryBoss")', 'MN_D_MP6306b', 'B110'),
                "Psyche-Nestor Psyches": PsycheBoss('LoadArg("map/mp6307b/mp6307b.arg")', 'EventCue("mp6307b:EV_RetryBoss")', 'MN_D_MP6307b', 'B111'),
                "Psyche-Ura Psyches": PsycheBoss('LoadArg("map/mp6308b/mp6308b.arg")', 'EventCue("mp6308b:EV_RetryBoss")', 'MN_D_MP6308b', 'B008'),
-               "Le-Erythros Psyches": PsycheBoss('LoadArg("map/mp6409b/mp6409b.arg")', 'EventCue("mp6409b:EV_RetryBoss")', 'MN_D_MP6409B', 'B012'),
+               "Le-Erythos Psyches": PsycheBoss('LoadArg("map/mp6409b/mp6409b.arg")', 'EventCue("mp6409b:EV_RetryBoss")', 'MN_D_MP6409B', 'B012'),
                "Grazios Psyches": PsycheBoss('LoadArg("map/mp6519m/mp6519m.arg")', 'EventCue("mp6519m:EV_RetryBoss")', 'MN_D_MP6519M','B161'),
                "Nebritia Psyches": PsycheBoss('LoadArg("map/mp6529m/mp6529m.arg")', 'EventCue("mp6529m:EV_RetryBoss")', 'MN_D_MP6529M','B162'),
                "Argura Psyches": PsycheBoss('LoadArg("map/mp6539m/mp6539m.arg")', 'EventCue("mp6539m:EV_RetryBoss")', 'MN_D_MP6539M', 'B163'),
@@ -727,7 +727,7 @@ def buildPsyches(settings):
         {{
             MenuAdd({3}, "{4}: {5}({6})")	
         }}
-    """.format(bossFlagDict["accessBoss"], psycheFlag[rewards[psyche]], 
+    """.format(bossFlagDict[accessBoss], psycheFlag[rewards[psyche]], 
                str(menuAdd), str(menuAdd+1), accessBoss, rewards[psyche], psyche)
         bossLoad = bossLoad + """
         {0}(FLAG[TF_MENU_SELECT2] == {1})
@@ -767,7 +767,7 @@ def buildPsyches(settings):
     """
     bossCheckpoint = bossCheckpoint + bossLoad + """
         ResetStopFlag(STOPFLAG_TALK)
-    }
+    }}
     
     function "wardenScaling"
     {{
@@ -1005,8 +1005,8 @@ function "newTradeHandler"
 
 }}
 """
-    for i in range(461,470):
-        dinasItems[i-461] = ItemInfo(locations[i]['item_name'], locations[i]['item_quantity'])
+    for i in range(461,471):
+        dinasItems[i-461] = ItemInfo(locations[str(i)]['item_name'], locations[str(i)]['item_quantity'])
 
     item1 = dinasItems[0].itemName + ' x ' + str(dinasItems[0].quantity)
     item2 = dinasItems[1].itemName + ' x ' + str(dinasItems[1].quantity)
@@ -1027,7 +1027,7 @@ function "newTradeHandler"
 def talkHints(locations):
 
     def formatHint(location):
-        if location['quantity'] > 1:
+        if location['item_quantity'] > 1:
             return location['item_name'] + ' x ' + str(location['item_quantity'])
         else:
             return location['item_name']
@@ -1039,7 +1039,7 @@ def talkHints(locations):
     mapRewards = [None] * 10
     foodRewards = [None] * 6
 
-    for location in locations:
+    for location in locations.values():
         match location['location_name']:
             # Intercept Rewards ===================================================================
             case "Calm Inlet Intercept Stage 2":
@@ -1356,7 +1356,7 @@ function "foodRewardPreview"
 # ==========================================================================================================
 #setting for when the great tree of origins entrance opens
 def octusGoal(options):
-    if options.final_boss_access == 0: # option_find_crew
+    if options['final_boss_access'] == 0: # option_find_crew
         octusAccess ="""
 function "openTree"
 {{
@@ -1379,7 +1379,7 @@ function "openTree"
 """
         return octusAccess
     
-    elif options.final_boss_access == 2: # option_release_the_psyches
+    elif options['final_boss_access'] == 2: # option_release_the_psyches
         octusAccess ="""
 function "openTree"
 {{
@@ -1397,7 +1397,7 @@ function "openTree"
 # ==========================================================================================================
 #Our goals for entering the selection sphere
 def goal(options):
-    if options.final_boss_access == 0: # option_find_crew
+    if options['final_boss_access'] == 0: # option_find_crew
         selectionSphereAccess ="""
 function "goal"
 {{
@@ -1427,7 +1427,7 @@ function "goal"
 """
         return selectionSphereAccess
         
-    elif options.final_boss_access == 2: # option_release_the_psyches
+    elif options['final_boss_access'] == 2: # option_release_the_psyches
         selectionSphereAccess ="""
 function "goal"
 {{
@@ -1526,7 +1526,7 @@ def endingHandler(options):
     elif options['origin_start_phase'] == 2:
         originPhase = 'SetFlag(GF_MP8323_2NDBATTLE,1)'
 
-    if options['carePackage'] == 2:
+    if options['origin_care_package'] == 2:
         package = """
         GetItem(ICON3D_US_BERRY_S,9)
         GetItem(ICON3D_US_COCONUT_S,9)
@@ -1537,7 +1537,7 @@ def endingHandler(options):
         GetItem(ICON3D_US_RESSURECT_02,9)
         GetItem(ICON3D_US_EXTRA_02,2)
         """
-    elif options['carePackage'] == 1:
+    elif options['origin_care_package'] == 1:
         package = """
         GetItem(ICON3D_US_BERRY_S,5)
         GetItem(ICON3D_US_COCONUT_S,5)
@@ -1547,7 +1547,7 @@ def endingHandler(options):
         GetItem(ICON3D_US_RESSURECT_02,1)
         GetItem(ICON3D_US_EXTRA_02,1)
         """
-    elif options['carePackage'] == 0:
+    elif options['origin_care_package'] == 0:
         package = ""
         
 
@@ -1614,12 +1614,12 @@ def endingHandler(options):
 # this achives the same effect as a global exp multiplier in a far cleaner way than our old method.
 # there is no growth rate anymore because honestly a lot of what it was going for is achieved through boss level scaling better
 def expMult(options):
-    newExpMult(options['exp_multiplier'])
+    newExpMult(options['experience_multiplier'])
 
     if options['scale_exp_items'] == 1:
-        item1 = 100//options['exp_multiplier']
-        item2 = 1000//options['exp_multiplier']
-        item3 = 10000//options['exp_multiplier']
+        item1 = 100//options['experience_multiplier']
+        item2 = 1000//options['experience_multiplier']
+        item3 = 10000//options['experience_multiplier']
     else:
         item1 = 100
         item2 = 1000
@@ -1781,7 +1781,7 @@ def spiritRingEvent(options):
 def shopUpgrades(location_id, loc_data, vanillaScript):
     scriptName = buildLocScripts(location_id,False)
 
-    if loc_data.location_type == 'event':   
+    if loc_data["location_type"] == 'event':   
         getItemFunction =  """
 function "{0}"
 {{

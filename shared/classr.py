@@ -1,24 +1,3 @@
-from shared.functions import * 
-
-class playthrough:
-  def __init__(self):
-    self.locations = []
-    self.locIDList = []
-    self.regions = []
-    self.bosses = []
-
-  def build(self,location,sphere):
-    location.sphere = sphere
-    location.isHinted = False
-    self.locations.append(location)
-    self.locIDList.append(location.locID)
-
-    if location.locRegion not in self.regions:
-      self.regions.append(location.locRegion)
-
-    if 'Defeated' in location.itemName:
-      self.bosses.append(location)
-
 class location:
   def __init__(self,locID,mapID,locRegion,locName,mapCheckID,event,itemID,itemName,quantity,progression,nice,party,crew,item,script,skill,landmark,entrance,exit):
     self.locID = locID
@@ -40,18 +19,6 @@ class location:
     self.landmark = landmark
     self.entrance = entrance
     self.exit = exit
-
-  def printSpoiler(self):
-    print("\t" + self.locRegion + '-' + self.locName + '(' + self.mapCheckID + '): ' + self.itemName + '(' + str(self.itemID) + ')x' + str(self.quantity))
-
-  def writeSpoiler(self,file):
-    if self.skill:
-      skillName = getSkillInfo(self.itemName)
-      file.write("\t" + self.locRegion + '-' + self.locName + '(' + self.mapCheckID + '): ' + skillName[2] + ':' + skillName[1] + '\n')
-    elif self.quantity == 1:
-      file.write("\t" + self.locRegion + '-' + self.locName + '(' + self.mapCheckID + '): ' + self.itemName + '\n')
-    else:
-      file.write("\t" + self.locRegion + '-' + self.locName + '(' + self.mapCheckID + '): ' + self.itemName + ' x ' + str(self.quantity) + '\n')
 
 class shuffledLocation(location):
   def __init__(self,location):

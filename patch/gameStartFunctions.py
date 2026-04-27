@@ -7,7 +7,7 @@ def buildStartParameters(patch):
     gameSettingFlags = ''
     pastDanaFlags = '' #setting the past dana flags after loading castaway village was the only way I found to fix a problem where you spawn at a black map with either barbaros or katheew
     startingLoadout = ''
-    seed = float32(patch.settings.seed) # convert seed to float32 so it fits in the 32 bit flag space, will be stored in GF_TBOX_DUMMY117. It won't be the exact seed number but it'll be close enough for save marking.
+    seed = float32(patch.settings["seed"]) # convert seed to float32 so it fits in the 32 bit flag space, will be stored in GF_TBOX_DUMMY117. It won't be the exact seed number but it'll be close enough for save marking.
     startingCharacter = getCrewFlags(patch.starting_character) 
     # if parameters.charMode == "Past Dana":
     #     gameSettingFlags = gameSettingFlags + """
@@ -49,41 +49,41 @@ def buildStartParameters(patch):
     SetFlag(GF_TBOX_DUMMY117, {0}) //AP Seed stored as a float32 so we lose some precision but it has to fit in 32 bits
     GetItem(ICON3D_502, 1) //AP Packages item used for obtaining some offworld items.
     """.format(seed)       
-    if patch.settings.options.dungeon_entrance_shuffle == 1:
+    if patch.settings["options"]["dungeon_entrance_shuffle"] == 1:
         gameSettingFlags = gameSettingFlags + """
     SetFlag(GF_TBOX_DUMMY114,1)
     """
-    if patch.settings.options.progressive_super_weapons == 1:
+    if patch.settings["options"]["progressive_super_weapons"] == 1:
         gameSettingFlags = gameSettingFlags + """
     SetFlag(GF_TBOX_DUMMY109,1)
     """
-    if patch.settings.options.final_boss_access == 2: # Release the Psyches
+    if patch.settings["options"]["final_boss_access"] == 2: # Release the Psyches
         gameSettingFlags = gameSettingFlags + """
     SetFlag(GF_TBOX_DUMMY112,1)
     SetFlag (GF_06MP6301_RETURN_CENTER,1)
     SetFlag (GF_06MP6301_OPEN_INSECT,1)
     SetFlag (GF_06MP6301_OPEN_HEAVENS,1)
     """  
-    if patch.settings.options.octus_paths_opened == 1:
+    if patch.settings["options"]["octus_paths_opened"] == 1:
         gameSettingFlags = gameSettingFlags + """
     SetFlag(GF_TBOX_DUMMY113,1)
     """
-    if patch.settings.options.recipes_with_ingredients == 1: #The player starts with fish soup so we'll give some ingredients for it here
+    if patch.settings["options"]["recipes_with_ingredients"] == 1: #The player starts with fish soup so we'll give some ingredients for it here
         gameSettingFlags = gameSettingFlags + """
     SetFlag(GF_TBOX_DUMMY115,1)
     """
         
-    if patch.settings.options.north_side_open == 1: #Unlocking the crystal warp point to temple approach - camp
+    if patch.settings["options"]["north_side_open"] == 1: #Unlocking the crystal warp point to temple approach - camp
         gameSettingFlags = gameSettingFlags + """
     SetMapMarker( SMI_CHECKED_WARPPT, PAGE_F039, MARKER_CP_MP4111, -131, 587, 121, -131, 587, CP_MP4111, MN_F_MP4111, 0) 
     """
 
-    if patch.settings.options.infinity_mode == 1:
+    if patch.settings["options"]["infinity_mode"] == 1:
         gameSettingFlags = gameSettingFlags + """
     SetFlag(SF_INFINITY, 1)
     """
     
-    startingLoadout = "\tSetLevel(" + str().upper(patch.starting_character.starting_character) + "," + str(3) + ") \n"
+    startingLoadout = "\tSetLevel(" + patch.starting_character.upper() + "," + str(3) + ") \n"
 
     # if parameters.shopLevel > 0:
     #     if parameters.shopLevel in [1,2,3,4,5,6,7]:
@@ -1021,7 +1021,7 @@ function "startParameters"
     return startParams.format(gameSettingFlags,startingCharacter,startingLoadout,pastDanaFlags)
 
 def manageEarlyGameParty(patch):
-    match patch.starting_character.starting_character:
+    match patch.starting_character:
         case 'Adol':
             party = "(PARTY_ADOL , -1 , -1)"
         case 'Laxia':
@@ -1044,7 +1044,7 @@ function "earlyGameParty"
     return startParams.format(party)
 
 def soloStartingCharacterEvent(patch):
-    match patch.starting_character.starting_character:
+    match patch.starting_character:
         case 'Adol':
             flags = """
     SetFlag(SF_ADOL_JOINOK, 1)
