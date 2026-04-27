@@ -247,13 +247,13 @@ class CommandsFrame(ctk.CTkFrame):
             messagebox.showinfo("Script Files", "Downloading and overwriting script files...")
             downloadFiles()
             messagebox.showinfo("Update Chests", "Script overwrite complete, prepping chests...")
-            #cleanChests()
+            cleanChests()
             messagebox.showinfo("Resource Drops", "Chests complete, making resource drops guaranteed...")
-            #makeResourceDropsGuaranteed()
+            makeResourceDropsGuaranteed()
             messagebox.showinfo("Building FSC Crystal", "Drops complete, adding warp to FSC Crystal...")
-            #AddWarpToFSCCrystal()
+            AddWarpToFSCCrystal()
             messagebox.showinfo("Finalizing", "FSC Crystal complete, finalizing patch...")
-            #miscFixes()
+            miscFixes()
             
                 
             

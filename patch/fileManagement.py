@@ -19,9 +19,12 @@ def downloadFiles():
     for folder in folders:
         os.makedirs(os.path.join(config.executable_directory, folder), exist_ok=True)
         
+        # Determine encoding based on folder
+        encoding = 'shift-jis' if folder in ['script/', 'inc/'] else 'utf-8'
+        
         for file in repo.ls(folder):
-            with repo.open(file, 'rb') as src:
-                with open(os.path.join(config.executable_directory, folder, file.split('/')[-1]), 'wb') as dst:
+            with repo.open(file, 'r', encoding=encoding, errors='surrogateescape') as src:
+                with open(os.path.join(config.executable_directory, folder, file.split('/')[-1]), 'w', encoding=encoding, errors='surrogateescape') as dst:
                     dst.write(src.read())
 
 def restoreOriginalGameFiles():

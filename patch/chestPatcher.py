@@ -81,7 +81,7 @@ def fillChest(location_id,itemID,quantity):
     itemIDOffset = 9
     quantityOffset = 15
     jingleOffset = 27
-    location = locations[int(location_id)]
+    location = locations[int(location_id)+1]
     
     #find the chest in the file
     if location.mapCheckID.find('TBOX') != -1:
@@ -104,7 +104,7 @@ def fillChest(location_id,itemID,quantity):
                 startOfChestArgs = fileBytes.find(location.mapCheckID.encode('utf-8'))
 
             fileBytes = bytearray(fileBytes)
-            
+
             #set Quantity
             fileBytes[startOfChestArgs + quantityOffset] = quantity
 
