@@ -373,6 +373,7 @@ function "EV_M01S180"		//古代種と遭遇
 	WaitFade()
 
 	CallFunc("rng:0404")
+	SetFlag(GF_TBOX_DUMMY118,1) //this exists purely for the client to track this check
 	ResetChrPos((CHRTYPE_MONS | REMOVE_POS))
 	ResetMapParam( -1 )
 	StopEffect(-1,ALL,1)
@@ -420,7 +421,7 @@ function "EV_M01S180_old"		//古代種と遭遇
 	ResetChrPos((CHRTYPE_MONS | REMOVE_POS))
 
 	//▼▼▼▼▼▼　ステータス設定：サハド：初期　▼▼▼▼▼▼
-	CallFunc("rng:0404")
+	//CallFunc("rng:0404")
 	//SetFlag(SF_SAHAD_JOINED,1)	// サハド参加済み
 	//SetFlag(SF_SAHAD_JOINOK,1)	// サハド参加
 	//SetPartyMember(PARTY_ADOL , PARTY_SAHAD , PARTY_LAXIA)

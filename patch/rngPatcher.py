@@ -135,7 +135,7 @@ def genericItemMessage(location_id, patch, vanillaScript):
         script = script + sopEvent(options)
         #this solution for unique message on the progressive weapons is a little heavy handed but it should resolves all issues I had with them
         if options['progressive_super_weapons'] == 1:
-            if loc_data['location_type'] == 'event':   
+            if loc_data['location_type'] in ['event', 'landmark']:   
                 getItemFunction =  """
 function "{0}"
 {{
@@ -162,7 +162,7 @@ function "{0}"
     elif itemId == 13: #Spirit Ring Celesdia
         script = script + spiritRingEvent(options)
         if options['progressive_super_weapons'] == 1:
-            if loc_data.location_type == 'event':   
+            if loc_data.location_type in ['event', 'landmark']:   
                 getItemFunction =  """
 function "{0}"
 {{
@@ -186,7 +186,7 @@ function "{0}"
 """ 
             return getItemFunction.format(scriptName,itemSE,script)
     elif itemId == 149: # AP Item
-        if loc_data['location_type'] == 'event':   
+        if loc_data['location_type'] in ['event', 'landmark']:   
             getItemFunction =  """
 function "{0}"
 {{
@@ -245,7 +245,7 @@ function "{0}"
                 """
     #if the location is not inside an event we want to freeze the player while they receive the item. This prevents some awkwardness, it's strictly for polish.
     #setting the talk flags and then unsetting them during events can break many events though, so we don't want to do it there. Many events already have these flags set at their starts and ends.
-    if loc_data['location_type'] == 'event':   
+    if loc_data['location_type'] in ['event', 'landmark']:   
         getItemFunction =  """
 function "{0}"
 {{
@@ -292,7 +292,7 @@ def buildCrewLocation(location_id, patch, vanillaScript):
 
      #if the location is not inside an event we want to freeze the player while they receive the item. This prevents some awkwardness, it's strictly for polish.
      #setting the talk flags and then unsetting them during events can break many events though, so we don't want to do it there. Many events already have these flags set at their starts and ends.    
-    if loc_data['location_type'] == 'event':
+    if loc_data['location_type'] in ['event', 'landmark']:
         getCrewFunction = """
 function "{0}"
 {{
@@ -345,7 +345,7 @@ function "{0}"
     GetSkill({6},{7},1)
 }}
 """
-    elif loc_data['location_type'] == 'event':
+    elif loc_data['location_type'] in ['event', 'landmark']:
         getSkillFunction = """
 function "{0}"
 {{
@@ -413,7 +413,7 @@ def buildLandmarks(location_id, patch, vanillaScript):
         'Milky White Vein':         'GF_LOCATION18'
         }
     
-    if loc_data["location_type"] == 'event':
+    if loc_data["location_type"] in ['event', 'landmark']:
         getLandmarkFunction = """
 function "{0}"
 {{
@@ -1781,7 +1781,7 @@ def spiritRingEvent(options):
 def shopUpgrades(location_id, loc_data, vanillaScript):
     scriptName = buildLocScripts(location_id,False)
 
-    if loc_data["location_type"] == 'event':   
+    if loc_data["location_type"] in ['event', 'landmark']:   
         getItemFunction =  """
 function "{0}"
 {{

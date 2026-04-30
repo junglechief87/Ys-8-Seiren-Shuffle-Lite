@@ -2433,6 +2433,7 @@ function "gameover"
 	{
 		// 敗北処理が無いときは通常のゲームオーバー処理
 		Wait(30)
+		SetFlag(GF_TBOX_DUMMY119,1)
 		GameOver()
 	}
 }

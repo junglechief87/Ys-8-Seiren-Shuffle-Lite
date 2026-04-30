@@ -9,71 +9,71 @@
 #include "inc/vo.h"
 
 //-------------------------------------------
-// 2306F
+// 2306ï¿½F
 //-------------------------------------------
-// initƒXƒNƒŠƒvƒg
+// initï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½g
 function "init"
 {
 	
-	//Ÿƒ}ƒbƒvƒGƒtƒFƒNƒg
-	//–EŽq
+	//ï¿½ï¿½ï¿½}ï¿½bï¿½vï¿½Gï¿½tï¿½Fï¿½Nï¿½g
+	//ï¿½Eï¿½q
 	Set3DParticle(PARTICLE_TYPE_SPORE, 0.0f,0.0f,0.0f, 0.05f,0.05f,0.02f, 0.0f,0.0f,0.0f, 0.0f,0.0f,0.0f, 180.0f, 0.0f)
 
-	// ƒCƒxƒ“ƒg§Œä
+	// ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½
 	EventAreaEnable( "ev2_EV_LOCATION011" , 0 )
 
 	if( FLAG[SF_EVENT_ON] ){
-		if ( !FLAG[GF_TBOX_DUMMY140] ) {		// ƒƒP[ƒVƒ‡ƒ“011
+		if ( !FLAG[GF_TBOX_DUMMY140] ) {		// ï¿½ï¿½ï¿½Pï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½011
 			EventAreaEnable( "ev2_EV_LOCATION011" , 1 )
 		}
 	}
 
 
 	////////////////////////////////////
-	// ƒNƒmƒX
-		// ƒNƒmƒXƒ}[ƒJ[—pƒCƒxƒ“ƒgƒGƒŠƒA
+	// ï¿½Nï¿½mï¿½X
+		// ï¿½Nï¿½mï¿½Xï¿½}ï¿½[ï¿½Jï¿½[ï¿½pï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½Gï¿½ï¿½ï¿½A
 	if (FLAG[GF_MP2306_FOUNDKNOS])
 	{
-		// ƒ}[ƒJ[Ý’uÏ‚Ý‚È‚ç‚ÎAƒCƒxƒ“ƒgƒGƒŠƒA‚ðÁ‚·
+		// ï¿½}ï¿½[ï¿½Jï¿½[ï¿½Ý’uï¿½Ï‚Ý‚È‚ï¿½ÎAï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½Gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		SetEventParam("evb2_KNOS", -100000.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
 	}
-		// ƒNƒmƒX
+		// ï¿½Nï¿½mï¿½X
 	if (FLAG[GF_MP2306_KNOS])
 	{
-		// ƒNƒmƒX‚ð‚P•C‚Å‚à“|‚µ‚½
-		// •Ç‚Ì‚ ‚½‚è”»’è‚ð“P‹Ž
+		// ï¿½Nï¿½mï¿½Xï¿½ï¿½ï¿½Pï¿½Cï¿½Å‚ï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½
+		// ï¿½Ç‚Ì‚ï¿½ï¿½ï¿½ï¿½è”»ï¿½ï¿½ï¿½Pï¿½ï¿½
 		MapDelProp("wall1", MNP_GROUND)
 
 		if (FLAG[GF_MP2306_KNOS] & 0x01)
 		{
-			// ƒNƒmƒX‚O‚PQ‚P‚ð“|‚µ‚½
+			// ï¿½Nï¿½mï¿½Xï¿½Oï¿½Pï¿½Qï¿½Pï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½
 			SetChrPos("KNOS001_1", -100000.0f, 0.0f, 0.0f)
 		}
 		if (FLAG[GF_MP2306_KNOS] & 0x02)
 		{
-			// ƒNƒmƒX‚O‚PQ‚Q‚ð“|‚µ‚½
+			// ï¿½Nï¿½mï¿½Xï¿½Oï¿½Pï¿½Qï¿½Qï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½
 			SetChrPos("KNOS001_2", -100000.0f, 0.0f, 0.0f)
 		}
 	}
 	////////////////////////////////////
 
-	//ƒ}ƒbƒv–¼•\Ž¦
+	//ï¿½}ï¿½bï¿½vï¿½ï¿½ï¿½\ï¿½ï¿½
 	if(!FLAG[SF_LOADINIT] && !FLAG[GF_MPxxxx_MAP_NAME_NO_DRAW] && !FLAG[TF_MAPNAME_SHOWN]){
 		if( FLAG[SF_LASTENTRY_NO] == 100 ){
-			VisualName("visual/mapname/mn_2301.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//—²‹NŽXŒè‚ÌX
-			SetFlag( TF_MAPNAME_SHOWN, 1 )				// ’n–¼•\Ž¦‚µ‚½iƒeƒ“ƒ|ƒ‰ƒŠj
+			VisualName("visual/mapname/mn_2301.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//ï¿½ï¿½ï¿½Nï¿½Xï¿½ï¿½ÌX
+			SetFlag( TF_MAPNAME_SHOWN, 1 )				// ï¿½nï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½eï¿½ï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½j
 		}
 	}
 }
 
 //////////////////////////////////////////////
-// ƒƒP[ƒVƒ‡ƒ“ƒ|ƒCƒ“ƒg011:–ò‘‚ÌŒQ¶’n
+// ï¿½ï¿½ï¿½Pï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½|ï¿½Cï¿½ï¿½ï¿½g011:ï¿½ò‘‚ÌŒQï¿½ï¿½ï¿½n
 //////////////////////////////////////////////
 function "EV_LOCATION011"
 {
-//ŠJŽnˆ—‚±‚±‚©‚ç----------------------------------------------------
+//ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½----------------------------------------------------
 
-	SetFlag(SF_ALLMUTEKI,1)		//–³“G‚n‚m
+	SetFlag(SF_ALLMUTEKI,1)		//ï¿½ï¿½ï¿½Gï¿½nï¿½m
 	SetStopFlag(STOPFLAG_PC)
 	SetStopFlag(STOPFLAG_EVENT)
 	SaveCamera()
@@ -83,7 +83,7 @@ function "EV_LOCATION011"
 
 	ChangeAnimation( "LEADER" , "ANI_WAIT", -1 , 1 )
 
-	//ƒ‚[ƒVƒ‡ƒ“‚ªI—¹‚·‚é‚Ü‚Å‘Ò‹@
+	//ï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚Å‘Ò‹@
 	WaitAnimation2( "LEADER" ,-1 ,-1 ,ANI_WAIT ,1 )
 
 	ResetMotion( "ALL" , 1 )
@@ -91,42 +91,42 @@ function "EV_LOCATION011"
 	StopEmotion( "ALL" )
 	ResetMoveVec("PARTYALL")
 
-	// ƒƒP[ƒVƒ‡ƒ“—p
+	// ï¿½ï¿½ï¿½Pï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½p
 	Portrait_Load(3, "visual/mapname/lnbase00.itp" )
 	Portrait_Load(4, "visual/mapname/lnmp2305.itp" )
 
 	Portrait_Create(3 , LOCATEFIND_START_POSX , LOCATEFIND_START_POSY , 0 , 0 , LOCATEFIND_START_SIZEX , LOCATEFIND_START_SIZEY , 0.0f , 0x00ffffff , 0x00000000 )
 	Portrait_Create(4 , LOCATENAME_POSX , LOCATENAME_POSY , 0 , 0 , LOCATENAME_SIZEX , LOCATENAME_SIZEY , 0.0f , 0x00ffffff , 0x00000000 )
 
-	// ƒJƒƒ‰
-	MoveCameraAt( 0 , 302.990f , -2.000f , 14.449f , 0 )	// ’Ž‹“_
-	ChangeCameraDistance( 0 , 11.999f , 0 )		// Šî–{‹——£
-	ChangeCameraElevation( 0 , 1.602f , 0 )	// Šî–{‹ÂŠp
-	RotateCamera( 0 , 262.855f , 0 )				// Šp“x
-	ChangeCameraPers( 0 , 60.000f , 0 )			// Ž‹–ìŠp
+	// ï¿½Jï¿½ï¿½ï¿½ï¿½
+	MoveCameraAt( 0 , 302.990f , -2.000f , 14.449f , 0 )	// ï¿½ï¿½ï¿½ï¿½ï¿½_
+	ChangeCameraDistance( 0 , 11.999f , 0 )		// ï¿½ï¿½{ï¿½ï¿½ï¿½ï¿½
+	ChangeCameraElevation( 0 , 1.602f , 0 )	// ï¿½ï¿½{ï¿½ÂŠp
+	RotateCamera( 0 , 262.855f , 0 )				// ï¿½pï¿½x
+	ChangeCameraPers( 0 , 60.000f , 0 )			// ï¿½ï¿½ï¿½ï¿½p
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , 0.0f , 0 )				// ƒ[ƒ‹‰ñ“]
-	// ResetCameraZPlane()	// ƒCƒxƒ“ƒgI—¹Žž‚ÉŒÄ‚Ño‚µ‚Ä‰º‚³‚¢Bƒ}ƒbƒv‘¤‚ÌÝ’è‚É–ß‚µ‚Ü‚·B
+	RollCamera( 0 , 0.0f , 0 )				// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½]
+	// ResetCameraZPlane()	// ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ÉŒÄ‚Ñoï¿½ï¿½ï¿½Ä‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Bï¿½}ï¿½bï¿½vï¿½ï¿½ï¿½ÌÝ’ï¿½É–ß‚ï¿½ï¿½Ü‚ï¿½ï¿½B
 
-	//ƒXƒLƒbƒv‹–‰Â
+	//ï¿½Xï¿½Lï¿½bï¿½vï¿½ï¿½ï¿½ï¿½
 	SetSkipScript("mp2306:EV_LOCATION011_ED")
 
-//ŠJŽnˆ—‚±‚±‚Ü‚Å-----------------------------------------------
+//ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½-----------------------------------------------
 
-	//-- ƒJƒbƒg ----------------------------------------------------------
+	//-- ï¿½Jï¿½bï¿½g ----------------------------------------------------------
 
-	// ƒJƒƒ‰ˆÚ“®
-	ExecuteCmd(1000, MoveCameraAt , INTERPOLATE_SPHERE , 302.990f , -2.000f , 14.449f , 400 )	// ’Ž‹“_
-	ExecuteCmd(1001, ChangeCameraDistance , INTERPOLATE_SPHERE , 19.398f , 400 )		// Šî–{‹——£
-	ExecuteCmd(1002, ChangeCameraElevation , INTERPOLATE_SPHERE , 29.775f , 400 )	// Šî–{‹ÂŠp
-	ExecuteCmd(1003, RotateCamera , INTERPOLATE_SPHERE, 191.178f , 400 )				// Šp“x
+	// ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Ú“ï¿½
+	ExecuteCmd(1000, MoveCameraAt , INTERPOLATE_SPHERE , 302.990f , -2.000f , 14.449f , 400 )	// ï¿½ï¿½ï¿½ï¿½ï¿½_
+	ExecuteCmd(1001, ChangeCameraDistance , INTERPOLATE_SPHERE , 19.398f , 400 )		// ï¿½ï¿½{ï¿½ï¿½ï¿½ï¿½
+	ExecuteCmd(1002, ChangeCameraElevation , INTERPOLATE_SPHERE , 29.775f , 400 )	// ï¿½ï¿½{ï¿½ÂŠp
+	ExecuteCmd(1003, RotateCamera , INTERPOLATE_SPHERE, 191.178f , 400 )				// ï¿½pï¿½x
 
-	// ƒtƒF[ƒhƒCƒ“
+	// ï¿½tï¿½Fï¿½[ï¿½hï¿½Cï¿½ï¿½
 	FadeIn(FADE_BLACK,FADE_NORMAL)
 
 	CallFunc("system:LocateName_Anime")
 
-	// ƒJƒƒ‰‘Ò‚¿
+	// ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Ò‚ï¿½
 	WaitThread(1000)
 	WaitThread(1001)
 	WaitThread(1002)
@@ -135,111 +135,111 @@ function "EV_LOCATION011"
 	FadeOut(FADE_BLACK,FADE_NORMAL)
 	WaitFade()
 
-//I—¹ˆ—‚±‚±‚©‚ç----------------------------------------------------
+//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½----------------------------------------------------
 	CallFunc("mp2306:EV_LOCATION011_ED")
 }
 function "EV_LOCATION011_ED"
 {
-	//I—¹ˆ—‚ÍƒXƒLƒbƒv‹ÖŽ~
+	//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÍƒXï¿½Lï¿½bï¿½vï¿½ÖŽ~
 	SetSkipScript("")
 
 	ResetChrPos((CHRTYPE_MONS | RESET_POS))
 
-	//ƒtƒ‰ƒO
-	//SetFlag(GF_LOCATION11, 1)	//–ò‘‚ÌŒQ¶’n
+	//ï¿½tï¿½ï¿½ï¿½O
+	//SetFlag(GF_LOCATION11, 1)	//ï¿½ò‘‚ÌŒQï¿½ï¿½ï¿½n
 	SetFlag(GF_TBOX_DUMMY140,1)
 	CallFunc("rng:0645")
 
-	//ƒ}ƒbƒvƒ}[ƒJ[
-	DelMapMarker( SMI_SUBEVENT ,PAGE_MP230x, MARKER_EV_LC_MP2306, 0, 0)	//ƒƒP@F–ò‘‚ÌŒQ¶’n
-	//SetMapMarker( SMI_LOCATION ,PAGE_MP230x, MARKER_EV_LC_MP2306, 300.59f,-2.19f,12.86f, 300.59f,-2.19f,LOCATION_MP2306,MN_D_MP2306,0)		//ƒƒP@F–ò‘‚ÌŒQ¶’n
+	//ï¿½}ï¿½bï¿½vï¿½}ï¿½[ï¿½Jï¿½[
+	DelMapMarker( SMI_SUBEVENT ,PAGE_MP230x, MARKER_EV_LC_MP2306, 0, 0)	//ï¿½ï¿½ï¿½Pï¿½@ï¿½Fï¿½ò‘‚ÌŒQï¿½ï¿½ï¿½n
+	//SetMapMarker( SMI_LOCATION ,PAGE_MP230x, MARKER_EV_LC_MP2306, 300.59f,-2.19f,12.86f, 300.59f,-2.19f,LOCATION_MP2306,MN_D_MP2306,0)		//ï¿½ï¿½ï¿½Pï¿½@ï¿½Fï¿½ò‘‚ÌŒQï¿½ï¿½ï¿½n
 
-	//ƒ~ƒjƒ}ƒbƒvŠJ••
+	//ï¿½~ï¿½jï¿½}ï¿½bï¿½vï¿½Jï¿½ï¿½
 	OpenMinimap(PAGE_MP230x,0 ,297.19f, 3.64f ,100 )
 
 	CallFunc("mp2306:init")
 
-	//ƒLƒƒƒ‰Ä”z’u‚ÆAƒ‚ƒ“ƒXƒ^[‰ŠúˆÊ’u‚É–ß‚·AƒJƒƒ‰‚àƒŠƒZƒbƒg
-	MoveCameraAt( 0 , 294.319f , 7.686f , 14.763f , 0 )	// ’Ž‹“_
-	ChangeCameraDistance( 0 , 7.000f , 0 )		// Šî–{‹——£
-	ChangeCameraElevation( 0 , 14.000f , 0 )	// Šî–{‹ÂŠp
-	RotateCamera( 0 , -152.011f , 0 )				// Šp“x
-	ChangeCameraPers( 0 , 60.000f , 0 )			// Ž‹–ìŠp
+	//ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Ä”zï¿½uï¿½ÆAï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½^ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ê’uï¿½É–ß‚ï¿½ï¿½Aï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½g
+	MoveCameraAt( 0 , 294.319f , 7.686f , 14.763f , 0 )	// ï¿½ï¿½ï¿½ï¿½ï¿½_
+	ChangeCameraDistance( 0 , 7.000f , 0 )		// ï¿½ï¿½{ï¿½ï¿½ï¿½ï¿½
+	ChangeCameraElevation( 0 , 14.000f , 0 )	// ï¿½ï¿½{ï¿½ÂŠp
+	RotateCamera( 0 , -152.011f , 0 )				// ï¿½pï¿½x
+	ChangeCameraPers( 0 , 60.000f , 0 )			// ï¿½ï¿½ï¿½ï¿½p
 	SetCameraZPlane( 0.100f , 300.000f )			// ZPlane
-	RollCamera( 0 , 0.0f , 0 )				// ƒ[ƒ‹‰ñ“]
+	RollCamera( 0 , 0.0f , 0 )				// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½]
 
-	ResetCameraZPlane()	// ƒCƒxƒ“ƒgI—¹Žž‚ÉŒÄ‚Ño‚µ‚Ä‰º‚³‚¢Bƒ}ƒbƒv‘¤‚ÌÝ’è‚É–ß‚µ‚Ü‚·B
+	ResetCameraZPlane()	// ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ÉŒÄ‚Ñoï¿½ï¿½ï¿½Ä‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Bï¿½}ï¿½bï¿½vï¿½ï¿½ï¿½ÌÝ’ï¿½É–ß‚ï¿½ï¿½Ü‚ï¿½ï¿½B
 
-	//ƒCƒxƒ“ƒgŒã‚ÌÄ”z’uˆÊ’u
+	//ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½ï¿½ÌÄ”zï¿½uï¿½Ê’u
 	SetChrPos("LEADER", 294.32f, 7.69f, 12.89f )
 	Turn("LEADER" ,-27.99f, 360.0f)
 
 	ResetPartyPos()
 	ResetFollowPoint()
-	//Wait(1) //ˆ—‘Ò‚¿—p
+	//Wait(1) //ï¿½ï¿½ï¿½ï¿½ï¿½Ò‚ï¿½ï¿½p
 
-	// ƒ|[ƒgƒŒ[ƒgƒŠƒŠ[ƒX
+	// ï¿½|ï¿½[ï¿½gï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½X
 	Portrait_Close(-1)
 	Portrait_Unload(-1)
 
-	//ƒJƒƒ‰ˆÊ’u•œ‹Aor‰ŠúˆÊ’uÝ’è
+	//ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Ê’uï¿½ï¿½ï¿½Aorï¿½ï¿½ï¿½ï¿½ï¿½Ê’uï¿½Ý’ï¿½
 	CallFunc("system:camera_reset")
 
 	FadeIn(FADE_BLACK,FADE_FAST)
 	WaitFade()
 
-	SetFlag(SF_ALLMUTEKI,0)		//–³“G‚n‚e‚e
+	SetFlag(SF_ALLMUTEKI,0)		//ï¿½ï¿½ï¿½Gï¿½nï¿½eï¿½e
 	ResetStopFlag(STOPFLAG_PC)
 	ResetStopFlag(STOPFLAG_EVENT)
-//I—¹ˆ—‚±‚±‚Ü‚Å----------------------------------------------------
+//ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½----------------------------------------------------
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//¡ƒƒCƒ“ƒCƒxƒ“ƒgƒZƒNƒVƒ‡ƒ“
+//ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½Zï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//¡ƒTƒuƒCƒxƒ“ƒgƒZƒNƒVƒ‡ƒ“
+//ï¿½ï¿½ï¿½Tï¿½uï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½Zï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ¡ƒNƒmƒX
+// ï¿½ï¿½ï¿½Nï¿½mï¿½X
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// ƒNƒmƒX01_1‚ð“|‚µ‚½
+// ï¿½Nï¿½mï¿½X01_1ï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½
 function "knos01_1"
 {
 	SetFlag(GF_MP2306_KNOS, (FLAG[GF_MP2306_KNOS] | 0x01))
-	// ƒ}[ƒJ[‰ðœ••Ç“P‹Ž
+	// ï¿½}ï¿½[ï¿½Jï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç“Pï¿½ï¿½
 	CallFunc("mp2306:EV_DELKNOS")
 }
 
-// ƒNƒmƒX01_2‚ð“|‚µ‚½
+// ï¿½Nï¿½mï¿½X01_2ï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½
 function "knos01_2"
 {
 	SetFlag(GF_MP2306_KNOS, (FLAG[GF_MP2306_KNOS] | 0x02))
-	// ƒ}[ƒJ[‰ðœ••Ç“P‹Ž
+	// ï¿½}ï¿½[ï¿½Jï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç“Pï¿½ï¿½
 	CallFunc("mp2306:EV_DELKNOS")
 }
 
-// ƒNƒmƒX”­Œ©Ëƒ}[ƒJ[Ý’è
+// ï¿½Nï¿½mï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½Ëƒ}ï¿½[ï¿½Jï¿½[ï¿½Ý’ï¿½
 function "EV_FOUNDKNOS"
 {
-	// ƒ}[ƒJ[Eƒtƒ‰ƒOƒZƒbƒg
+	// ï¿½}ï¿½[ï¿½Jï¿½[ï¿½Eï¿½tï¿½ï¿½ï¿½Oï¿½Zï¿½bï¿½g
 	SetFlag(GF_MP2306_FOUNDKNOS, 1)
 	SetMapMarker(SMI_HIVE, PAGE_MP230x, MARKER_HIVE_2306, 282, 29, 12, 282, 29, MARKER_HIVE_2306, MN_D_MP2306,0)
 
-	// ƒCƒxƒ“ƒgƒ{ƒbƒNƒX“P‹Ž
+	// ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½{ï¿½bï¿½Nï¿½Xï¿½Pï¿½ï¿½
 	SetEventParam("evb2_KNOS", -100000.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
 }
 
-// ƒNƒmƒX01”j‰óË•Ç“P‹Ž•ƒ}[ƒJ[‰ðœ
+// ï¿½Nï¿½mï¿½X01ï¿½jï¿½ï¿½Ë•Ç“Pï¿½ï¿½ï¿½ï¿½ï¿½}ï¿½[ï¿½Jï¿½[ï¿½ï¿½ï¿½ï¿½
 function "EV_DELKNOS"
 {
 	MapDelProp("wall1", MNP_GROUND)

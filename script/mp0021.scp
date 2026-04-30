@@ -1126,6 +1126,8 @@ function "EV_M07S130_ED"
 	StopSE(-1, 200)
 	SetEnvSEPlayState(-1, 0)	//ä¬ã´SEëSí‚é~
 
+	SetFlag(GF_TBOX_DUMMY120, 1) //Goal flag
+	
 	// í èÌ
 	if ( !FLAG[SF_GALLERY_EVENT] )
 	{

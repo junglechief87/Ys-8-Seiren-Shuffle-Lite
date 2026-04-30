@@ -48,6 +48,7 @@ def buildStartParameters(patch):
     gameSettingFlags = gameSettingFlags + """
     SetFlag(GF_TBOX_DUMMY117, {0}) //AP Seed stored as a float32 so we lose some precision but it has to fit in 32 bits
     GetItem(ICON3D_502, 1) //AP Packages item used for obtaining some offworld items.
+    GetItem(ICON3D_143,1) 
     """.format(seed)       
     if patch.settings["options"]["dungeon_entrance_shuffle"] == 1:
         gameSettingFlags = gameSettingFlags + """

@@ -15090,11 +15090,11 @@ function "EV_M02S090_ED"											//ƒCƒxƒ“ƒgƒXƒLƒbƒv—p‚ÉI—¹ˆ—‚ğ•Ê‚Ìfunction‚
 	Portrait_Unload(-1)
 
 	//ƒtƒ‰ƒOˆ—
-	CallFunc("rng:0406")
+	//CallFunc("rng:0406")
 	//SetFlag( GF_02MP1201_JOIN_ALISON , 1 ) // Rescued Alison
     //SetFlag( GF_NPC_2A_03_JOIN_ALISON , 1)
 	//SetFlag( GF_HELP_A26, 1 ) // Tutorial: Rescue the castaways
-	SetFlag(GF_TBOX_DUMMY059,1)
+	//SetFlag(GF_TBOX_DUMMY059,1)
 
 			//ƒAƒŠƒXƒ“‡—¬	–¼º’l+2
 

@@ -233,7 +233,7 @@ function "EV_M01S030_old"		//ラクシャに遭遇する
 
 	ResetChrPos((CHRTYPE_MONS | REMOVE_POS))
 
-	CallFunc("rng:0401") 
+	//CallFunc("rng:0401") 
 	//SetFlag(SF_LAXIA_JOINED,1)	// ラクシャ参加済み
 	//SetFlag(SF_LAXIA_JOINOK,1)	// ラクシャ参加
 	//SetPartyMember(PARTY_ADOL , PARTY_LAXIA , -1)
