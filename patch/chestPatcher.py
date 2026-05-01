@@ -3,18 +3,36 @@ import csv
 from shared.classr import *
 from shared.functions import *
 
+# Cache for locations to avoid rebuilding on every fillChest call
+_locations_cache = None
+
+def set_locations_cache(locations_by_id):
+    """Set the locations cache to avoid repeated CSV parsing."""
+    global _locations_cache
+    _locations_cache = locations_by_id
+
 #Every chest in Ys can take a script parameter that it calls on open, if there is something in it.
 #We write a series of scripts onto that chest paremeter based on the randos locID, we want the scripts to be exactly 8 character lengths as this is the game's min script length for the chests. 
 #This guarantees we don't overwrite important bytes.
 #All other random locations are handled in the game's script .scp files. By reworking the chests like this we can handle all randomization via calls to our own .scp file.
 #This allows for greater flexibility as it lets us use whatever we want from the games myriad of prebuilt functions and scripting tools on our chests themselves.
-def cleanChests():
-    locations = getLocations()
+#we only want to patch chest here, obviously, so we look for the string that's tied to all chests and that the type is item.
+def cleanChests(locations_by_id=None):
+    global _locations_cache
     itemIDOffset = 9
     quatityOffset = 15
     scriptOffset = 107
-
-    for location in locations:
+    
+    # Use provided dict, global cache, or build fresh
+    if locations_by_id is not None:
+        loc_dict = locations_by_id
+    elif _locations_cache is not None:
+        loc_dict = _locations_cache
+    else:
+        locations = getLocations()
+        loc_dict = {loc.locID: loc for loc in locations}
+    
+    for location in loc_dict.values():
         #we only want to patch chest here, obviously, so we look for the string that's tied to all chests and that the type is item.
         if location.item and location.mapCheckID.find('TBOX') != -1:
             locFile = getLocFile(location.mapID,'map')
@@ -76,12 +94,22 @@ def clearBytes(byteArray,startOffset,clearType):
 
 
 #places item in the chest
-def fillChest(location_id,itemID,quantity):
-    locations = getLocations()
+def fillChest(location_id, itemID, quantity, locations_by_id=None):
+    global _locations_cache
     itemIDOffset = 9
     quantityOffset = 15
     jingleOffset = 27
-    location = next((loc for loc in locations if loc.locID == int(location_id)), None)
+    
+    # Use provided dict, global cache, or build fresh
+    if locations_by_id is not None:
+        loc_dict = locations_by_id
+    elif _locations_cache is not None:
+        loc_dict = _locations_cache
+    else:
+        locations = getLocations()
+        loc_dict = {loc.locID: loc for loc in locations}
+    
+    location = loc_dict.get(int(location_id))
     
     #find the chest in the file
     if location.mapCheckID.find('TBOX') != -1:

@@ -14,25 +14,10 @@ def getLocations():
         for row in locRows:
             locID = int(row['locID'])
             mapID = row['mapID']
-            locRegion = row['locRegion']
-            locName = row['locName']
             mapCheckID = row['mapCheckID']
-            event = bool(int(row['event']))
-            itemID = int(row['itemID'])
-            itemName = row['itemName']
-            quantity = int(row['quantity'])
-            progression = bool(int(row['progression']))
-            nice = bool(int(row['nice']))
-            party = bool(int(row['party']))
-            crew = bool(int(row['crew']))
             item = bool(int(row['item']))
-            script = row['script']
-            skill = bool(int(row['skill']))
-            landmark = bool(int(row['landmark']))
-            entrance = bool(int(row['entrance']))
-            exit = bool(int(row['exit']))
      
-            locationObject = location(locID,mapID,locRegion,locName,mapCheckID,event,itemID,itemName,quantity,progression,nice,party,crew,item,script,skill,landmark,entrance,exit)
+            locationObject = location(locID,mapID,mapCheckID,item)
             locations.append(locationObject)
             
     locDB.close()
@@ -119,52 +104,6 @@ def writeStringToBytes(byteArray,offset,bytesToWrite):
         curOffset+=1
 
     return byteArray
-
-def combineShuffledLocAndItem(shuffledLocation,inventory):
-    locID = shuffledLocation.locID
-    mapID = shuffledLocation.mapID
-    locRegion = shuffledLocation.locRegion
-    locName = shuffledLocation.locName
-    mapCheckID = shuffledLocation.mapCheckID
-    event = shuffledLocation.event
-    itemID = inventory.itemID
-    itemName = inventory.itemName
-    quantity = inventory.quantity
-    progression = inventory.progression
-    nice = inventory.nice
-    party = inventory.party
-    crew = inventory.crew
-    item = inventory.item
-    script = shuffledLocation.script
-    skill = inventory.skill
-    landmark = inventory.landmark
-    entrance = inventory.entrance
-    exit = inventory.exit
-
-    return location(locID,mapID,locRegion,locName,mapCheckID,event,itemID,itemName,quantity,progression,nice,party,crew,item,script,skill,landmark,entrance,exit)
-
-def copyLocationToNewLoc(locationToCopy):
-    locID = locationToCopy.locID
-    mapID = locationToCopy.mapID
-    locRegion = locationToCopy.locRegion
-    locName = locationToCopy.locName
-    mapCheckID = locationToCopy.mapCheckID
-    event = locationToCopy.event
-    itemID = locationToCopy.itemID
-    itemName = locationToCopy.itemName
-    quantity = locationToCopy.quantity
-    progression = locationToCopy.progression
-    nice = locationToCopy.nice
-    party = locationToCopy.party
-    crew = locationToCopy.crew
-    item = locationToCopy.item
-    script = locationToCopy.script
-    skill = locationToCopy.skill
-    landmark = locationToCopy.landmark
-    entrance = locationToCopy.entrance
-    exit = locationToCopy.exit
-
-    return location(locID,mapID,locRegion,locName,mapCheckID,event,itemID,itemName,quantity,progression,nice,party,crew,item,script,skill,landmark,entrance,exit)
 
 def getIntRewards():
     with open(os.path.join(config.current_directory, "database/interceptionRewards.csv"), encoding=encode) as rewardDB:

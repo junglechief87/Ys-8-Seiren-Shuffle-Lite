@@ -35,6 +35,11 @@ def rngPatcherMain(patch):
     global patchFile
     patchFile = ''
     rngScriptFile = getLocFile('rng','script')
+    
+    # Build locations cache once to avoid rebuilding for every fillChest call
+    locations = getLocations()
+    locations_by_id = {loc.locID: loc for loc in locations}
+    set_locations_cache(locations_by_id)
 
     # if patch_file == 'Past Dana':
     #     global partyMessage 
@@ -1414,11 +1419,7 @@ function "goal"
         selectionSphereAccess ="""
 function "goal"
 {
-    if(ALLITEMWORK[ICON3D_SHIP_PLAN] && ALLITEMWORK[ICON3D_SEIREN_CHART] && FLAG[GF_TBOX_DUMMY071])
-    {
-        // filler
-    }
-    else 
+    if(!ALLITEMWORK[ICON3D_SHIP_PLAN] || !ALLITEMWORK[ICON3D_SEIREN_CHART] || !FLAG[GF_TBOX_DUMMY071])
     {
         SetChrWork("LP_warpin_mp6310b", CWK_CHECKOFF, 1)
         SetChrPos("b020",-100000.00f,0.00f,0.00f)
@@ -1431,11 +1432,7 @@ function "goal"
         selectionSphereAccess ="""
 function "goal"
 {{
-    if(ALLITEMWORK[ICON3D_831] >= {0}) //ICON3D_831:junk item used for tracking
-    {{
-        // filler
-    }}
-    else 
+    if(ALLITEMWORK[ICON3D_831] < {0}) //ICON3D_831:junk item used for tracking
     {{
         SetChrWork("LP_warpin_mp6310b", CWK_CHECKOFF, 1)
         SetChrPos("b020",-100000.00f,0.00f,0.00f)
@@ -1449,11 +1446,7 @@ function "goal"
         selectionSphereAccess ="""
 function "goal"
 {
-    if(FLAG[GF_SUBEV_UNTOUCHABLE])
-    {
-        // filler
-    }
-    else 
+    if(!FLAG[GF_SUBEV_UNTOUCHABLE])
     {
         SetChrWork("LP_warpin_mp6310b", CWK_CHECKOFF, 1)
         SetChrPos("b020",-100000.00f,0.00f,0.00f)
