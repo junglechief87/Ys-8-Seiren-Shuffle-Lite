@@ -7,7 +7,7 @@ def buildStartParameters(patch):
     gameSettingFlags = ''
     pastDanaFlags = '' #setting the past dana flags after loading castaway village was the only way I found to fix a problem where you spawn at a black map with either barbaros or katheew
     startingLoadout = ''
-    seed = int.from_bytes(float32(patch.settings["seed"]).tobytes(), 'little') # convert seed to float32 so it fits in the 32 bit flag space, will be stored in GF_TBOX_DUMMY117. It won't be the exact seed number but it'll be close enough for save marking.
+    seed = int.from_bytes(float32(int(patch.settings["seed_name"])).tobytes(), 'little') # convert seed to float32 so it fits in the 32 bit flag space, will be stored in GF_TBOX_DUMMY117. It won't be the exact seed number but it'll be close enough for save marking.
     startingCharacter = getCrewFlags(patch.starting_character) 
     # if parameters.charMode == "Past Dana":
     #     gameSettingFlags = gameSettingFlags + """

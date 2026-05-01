@@ -114,7 +114,7 @@ def rngPatcherMain(patch):
 # ==========================================================================================================
 #function used for all non-person item function generation
 def genericItemMessage(location_id, patch, vanillaScript):
-    options = patch.settings
+    options = patch.settings["options"]
     loc_data = patch.item_map[location_id]
     itemId = int(loc_data['item_id'])
     itemQuantity = loc_data['item_quantity']
@@ -162,7 +162,7 @@ function "{0}"
     elif itemId == 13: #Spirit Ring Celesdia
         script = script + spiritRingEvent(options)
         if options['progressive_super_weapons'] == 1:
-            if loc_data.location_type in ['event', 'landmark']:   
+            if loc_data['location_type'] in ['event', 'landmark']:   
                 getItemFunction =  """
 function "{0}"
 {{
@@ -1745,7 +1745,7 @@ def danaPastEvents(pastItem):
 #Sword of Psyches event. Adol gets Mistletein(probably mispelled that)
 #we make sure the weapon is equipped here when it is received, if progressive super weapons we just set the flag for haivng received it so Kathleen will know the upgrade can happen at shop rank max 
 def sopEvent(options):
-    if options.progressive_super_weapons == 1:
+    if options["progressive_super_weapons"] == 1:
         script = """
     SetFlag(GF_TBOX_DUMMY071,1)
     """
@@ -1760,7 +1760,7 @@ def sopEvent(options):
 
 #dana spirit ring
 def spiritRingEvent(options):
-    if options.progressive_super_weapons == 1:
+    if options["progressive_super_weapons"] == 1:
         script = """
     SetFlag(GF_TBOX_DUMMY108,1)
     """
