@@ -147,6 +147,5 @@ def fillChest(location_id, itemID, quantity, locations_by_id=None):
         #patch file
         with open(locFile,"wb") as buffer:
             buffer.write(fileBytes)
-            print("location_id:", location_id, "itemID:", fileBytes[startOfChestArgs + itemIDOffset: startOfChestArgs + itemIDOffset + 2])
             buffer.close()
     

@@ -1,6 +1,6 @@
 import random
 from shared.functions import *  
-from patch.crew import *
+from patch.crew import getCrewFlags
 from patch.gameStartFunctions import *
 from patch.chestPatcher import *
 from patch.miscPatches import randomizeOctoBosses, newExpMult
@@ -11,14 +11,25 @@ from patch.buildEntrances import *
 #We named our script file rng because we need something short, our script calls from the chests are limited to 8 characters so our standard format for script call is rng:(locID where locID is a 4 digit id).
 #Plus rng.scp is a fitting filename for a rando.
 patchFile = ''
-scpIncludeList = ['#include "inc/mons.h"','#include "inc/def.h"','#include "inc/efx.h"','#include "inc/flag.h"','#include "inc/se.h"',
+
+WHITE = "#0C"
+LIGHT_YELLOW = "#1C"
+GOLD = "#2C"
+ORANGE = "#3C"
+GREEN = "#4C"
+PINK = "#5C"
+PURPLE = "#6C"
+BLUE = "#7C"
+DARK_RED = "#8C"
+
+SCP_INCLUDE_LIST = ['#include "inc/mons.h"','#include "inc/def.h"','#include "inc/efx.h"','#include "inc/flag.h"','#include "inc/se.h"',
                   '#include "inc/scr_inc.h"','#include "inc/3dicon.h"','#include "inc/skilldef.h"','#include "inc/vo.h"','#include "inc/temp/rng.h"'] #standard set of header files used in most Ys 8 .scp files
-genericMessage = " Obtained."
-crewMessage = " joined the Village."
-partyMessage = " joined the Party."
-skillMessage = " has learned skill #2C"
-landmarkMessage = ' discovered.'
-treasureScript = {
+GENERIC_ITEM_MESSAGE = " Obtained."
+CREW_MESSAGE = " joined the Village."
+PARTY_MESSAGE = " joined the Party."
+SKILL_MESSAGE = " has learned skill " + GOLD
+LANDMARK_MESSAGE = ' discovered.'
+TREASURE_SCRIPTS = {
 "372": "mp6561:EvOpenTBox",
 "358": "mp6554:EvOpenTBox",
 "317": "mp6531m:EvOpenTBox",
@@ -42,8 +53,8 @@ def rngPatcherMain(patch):
     set_locations_cache(locations_by_id)
 
     # if patch_file == 'Past Dana':
-    #     global partyMessage 
-    #     partyMessage = " joined the Village."
+    #     global PARTY_MESSAGE 
+    #     PARTY_MESSAGE = " joined the Village."
     #     pastDanaFixes(True)  
     # else:
     #     pastDanaFixes(False)
@@ -53,7 +64,7 @@ def rngPatcherMain(patch):
     #else:
     #    restore_original_bgm()
 
-    for inc in scpIncludeList:
+    for inc in SCP_INCLUDE_LIST:
         patchFile = patchFile + inc + '\n'
     
     # opening cutscene
@@ -67,8 +78,8 @@ def rngPatcherMain(patch):
         loc_id = location
         if location not in duplicateChests: #no need to build out functions for the same location twice, these chests share flags with the not dawn version
             #cleanup the placeholders the game had for chests without scripts
-            if location in treasureScript.keys():
-                script = ('EventCue("' + treasureScript[location] + '")')
+            if location in TREASURE_SCRIPTS.keys():
+                script = ('EventCue("' + TREASURE_SCRIPTS[location] + '")')
             else:
                 script = ""
                 
@@ -104,7 +115,7 @@ def rngPatcherMain(patch):
         randomizeOctoBosses(patch.settings)
     
     patchFile = patchFile + endingHandler(patch.settings['options'])
-    patchFile = patchFile + expMult(patch.settings['options'])
+    expMult(patch.settings['options'])
     
     if patch.settings['options']['dungeon_entrance_shuffle'] == 1:
         patchFile = patchFile + buildEntrances(patch.dungeon_entrance_randomization, patch.settings['options'])
@@ -140,17 +151,18 @@ def genericItemMessage(location_id, patch, vanillaScript):
         script = script + sopEvent(options)
         #this solution for unique message on the progressive weapons is a little heavy handed but it should resolves all issues I had with them
         if options['progressive_super_weapons'] == 1:
-            if loc_data['location_type'] in ['event', 'landmark']:   
+            if loc_data['location_type'] in ['event', 'landmark']:
+                brokenWeaponMessage = GOLD + "Broken Mistilteinn" + WHITE + " Obtained."
                 getItemFunction =  """
 function "{0}"
 {{
     GetItem(ICON3D_WP_ADOL_009,1) //rusty sword is the best representation of broken weapon I can think of
-    GetItemMessageExPlus(-1,1,{1},"#2CBroken Mistilteinn#0C Obtained.",0,0)
+    GetItemMessageExPlus(-1,1,{1},"{3}",0,0)
     WaitPrompt()
     WaitCloseWindow()
     {2}
 }}
-"""  
+"""
             else:
                 fillChest(location_id,146,itemQuantity)
 
@@ -161,23 +173,24 @@ function "{0}"
     {2}
     ResetStopFlag(STOPFLAG_TALK)
 }}
-""" 
-            return getItemFunction.format(scriptName,itemSE,script)
-        
+"""
+                brokenWeaponMessage = ""
+            return getItemFunction.format(scriptName,itemSE,script,brokenWeaponMessage)
     elif itemId == 13: #Spirit Ring Celesdia
         script = script + spiritRingEvent(options)
         if options['progressive_super_weapons'] == 1:
-            if loc_data['location_type'] in ['event', 'landmark']:   
+            if loc_data['location_type'] in ['event', 'landmark']:
+                brokenWeaponMessage = GOLD + "Broken Spirit Ring" + GREEN + " Obtained."
                 getItemFunction =  """
 function "{0}"
 {{
     GetItem(ICON3D_WP_ADOL_009,1) //rusty sword is the best representation of broken weapon I can think of
-    GetItemMessageExPlus(-1,1,{1},"#2CBroken Spirit Ring#4C Obtained.",0,0)
+    GetItemMessageExPlus(-1,1,{1},"{3}",0,0)
     WaitPrompt()
     WaitCloseWindow()
     {2}
 }}
-"""  
+"""
             else:
                 fillChest(location_id,147,itemQuantity)
 
@@ -188,17 +201,26 @@ function "{0}"
     {2}
     ResetStopFlag(STOPFLAG_TALK)
 }}
-""" 
-            return getItemFunction.format(scriptName,itemSE,script)
+"""
+                brokenWeaponMessage = ""
+            return getItemFunction.format(scriptName,itemSE,script,brokenWeaponMessage)
     elif itemId == 149: # AP Item
+        if loc_data["item_classification"] == "PROGRESSION":
+            message = "Sent " + PINK +  loc_data['item_name'] + WHITE +" to " + GOLD + loc_data['player'] + "."
+        elif loc_data["item_classification"] == "USEFUL":
+            message = "Sent " + PURPLE +  loc_data['item_name'] + WHITE +" to " + GOLD + loc_data['player'] + "."
+        elif loc_data["item_classification"] == "TRAP":
+            message = "Sent " + ORANGE +  loc_data['item_name'] + WHITE +" to " + GOLD + loc_data['player'] + "."
+        else:
+            message = "Sent " + BLUE +  loc_data['item_name'] + WHITE +" to " + GOLD + loc_data['player'] + "."
         if loc_data['location_type'] in ['event', 'landmark']:   
             getItemFunction =  """
 function "{0}"
 {{
-    GetItemMessageExPlus(-1,1,{1},"Sent {3} to {4}.",0,0)
+    GetItemMessageExPlus(-1,1,{1},{2},0,0)
     WaitPrompt()
     WaitCloseWindow()
-    {2}
+    {3}
 }}
 """  
         else:
@@ -207,14 +229,14 @@ function "{0}"
 function "{0}"
 {{
     SetStopFlag(STOPFLAG_TALK)
-    GetItemMessageExPlus(-1,1,{1},"Sent {3} to {4}.",0,0)
+    GetItemMessageExPlus(-1,1,{1},{2},0,0)
     WaitPrompt()
     WaitCloseWindow()
-    {2}
+    {3}
     ResetStopFlag(STOPFLAG_TALK)
 }}
 """ 
-        return getItemFunction.format(scriptName,itemSE,script,loc_data['item_name'], loc_data['player'])
+        return getItemFunction.format(scriptName,itemSE,message,script)
     elif itemId == 770: #logbook from east coast cave
         script = script + pirateShipDocks()
     elif itemId in [760,761,762,763]: #T memos
@@ -233,7 +255,7 @@ function "{0}"
     # if itemId in [750,751,752,753,754,755,760,761,762,763] and options['memo_hints']:
     #     script = script + memoHints(itemId)
         
-    message = genericMessage
+    message = GENERIC_ITEM_MESSAGE
     script =  script + vanillaScript #append the original chest scripts to the end of the function
 
     if itemId == 218:
@@ -271,7 +293,7 @@ function "{0}"
     ResetStopFlag(STOPFLAG_TALK)
 }}
 """
-    if script == "" and location_id not in treasureScript.keys() and loc_data['location_type'] == 'chest':
+    if script == "" and location_id not in TREASURE_SCRIPTS.keys() and loc_data['location_type'] == 'chest':
         return """function "{0}" {{ }}""".format(scriptName) # if there is no script and the location_id doesn't have a script in vanilla then we return and small empty script.
     return getItemFunction.format(scriptName,itemIcon,itemQuantity,itemSE,message,script)
 
@@ -289,9 +311,9 @@ def buildCrewLocation(location_id, patch, vanillaScript):
     itemSE = 'ITEMMSG_SE_NORMAL' #Placeholder item jingles in chests
 
     if loc_data["party_flag"]:
-        message = "#2C" + loc_data['item_name'] + "#4C" + partyMessage
+        message = GOLD + loc_data['item_name'] + GREEN + PARTY_MESSAGE
     else:
-        message = "#2C" + loc_data['item_name'] + "#4C" + crewMessage
+        message = GOLD + loc_data['item_name'] + GREEN + CREW_MESSAGE
         
     crewFlags = getCrewFlags(loc_data['item_name'])
 
@@ -341,7 +363,7 @@ def buildSkillLocation(location_id, patch, vanillaScript):
     character = skillInfo[0]
     skillID = skillInfo[1]
     characterName = skillInfo[2]
-    message = "#4C" + characterName + skillMessage + loc_data['item_name'] + "#4C."
+    message = GREEN + characterName + SKILL_MESSAGE + loc_data['item_name'] + GREEN + "."
 
     if "Starting Skill" in loc_data['location_name']: #for starting skills just go ahead and give the skill, don't bombard the player with messages each time they get a character.
         getSkillFunction = """
@@ -389,7 +411,7 @@ def buildLandmarks(location_id, patch, vanillaScript):
     itemID = 148
     itemQuantity = 1
     itemSE = 'ITEMMSG_SE_NORMAL'
-    message = "#2C" + loc_data['item_name'] + "#4C" + landmarkMessage
+    message = GOLD + loc_data['item_name'] + GREEN + LANDMARK_MESSAGE
 
     landmarks = {
         'Birdsong Rock':            'GF_LOCATION01',
@@ -1607,6 +1629,7 @@ def endingHandler(options):
 # this achives the same effect as a global exp multiplier in a far cleaner way than our old method.
 # there is no growth rate anymore because honestly a lot of what it was going for is achieved through boss level scaling better
 def expMult(options):
+    import re
     newExpMult(options['experience_multiplier'])
 
     if options['scale_exp_items'] == 1:
@@ -1617,21 +1640,40 @@ def expMult(options):
         item1 = 100
         item2 = 1000
         item3 = 10000
-    scaledExpItems = """
-function "expup1"
-{{
-    GetExp({0})
-}}
-function "expup2"
-{{
-    GetExp({1})
-}}
-function "expup3"
-{{
-    GetExp({2})
-}}
-""".format(item1, item2, item3)
-    return scaledExpItems
+
+    # Update scaled exp values in item.scp
+    itemScpPath = os.path.join(config.executable_directory, 'script', 'item.scp')
+    
+    with open(itemScpPath, 'r', encoding='Shift-JIS', errors='surrogateescape') as itemFile:
+        content = itemFile.read()
+    
+    # Find and replace GetExp values in each function
+    # it_expup1 gets item1 value - pattern: function it_expup1 ... GetExp(100)
+    content = re.sub(
+        r'(function\s+it_expup1\s*\{.*?GetExp\()(\d+)(\))',
+        r'\g<1>' + str(item1) + r'\g<3>',
+        content,
+        flags=re.DOTALL
+    )
+    
+    # it_expup2 gets item2 value - pattern: function it_expup2 ... GetExp(1000)
+    content = re.sub(
+        r'(function\s+it_expup2\s*\{.*?GetExp\()(\d+)(\))',
+        r'\g<1>' + str(item2) + r'\g<3>',
+        content,
+        flags=re.DOTALL
+    )
+    
+    # it_expup3 gets item3 value - pattern: function it_expup3 ... GetExp(10000)
+    content = re.sub(
+        r'(function\s+it_expup3\s*\{.*?GetExp\()(\d+)(\))',
+        r'\g<1>' + str(item3) + r'\g<3>',
+        content,
+        flags=re.DOTALL
+    )
+    
+    with open(itemScpPath, 'w', encoding='Shift-JIS', errors='surrogateescape') as itemFile:
+        itemFile.write(content)
 
 # ==========================================================================================================
 #  The remaining functions are called from other functions and used to help with item and flag management.
@@ -1878,7 +1920,7 @@ function "newInterceptControl"
                 WaitCloseWindow()
 
                 """
-                    script = script + rewardGet.format(item,itemNum,genericMessage)
+                    script = script + rewardGet.format(item,itemNum,GENERIC_ITEM_MESSAGE)
                     totalReward = 0
 
         if stage.stage == 'INTERCEPT_STAGE02':

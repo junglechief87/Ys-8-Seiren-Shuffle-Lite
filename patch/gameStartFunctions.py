@@ -83,366 +83,6 @@ def buildStartParameters(patch):
         gameSettingFlags = gameSettingFlags + """
     SetFlag(SF_INFINITY, 1)
     """
-    
-    startingLoadout = "\tSetLevel(" + patch.starting_character.upper() + "," + str(3) + ") \n"
-
-    # if parameters.shopLevel > 0:
-    #     if parameters.shopLevel in [1,2,3,4,5,6,7]:
-    #         startingLoadout = startingLoadout + """
-    # SetDiaryFlag( DF_JOIN_KATRIN, 1 ) //Footprint memo: Rescued Katrin.
-    # SetDiaryCharaFlag( DRCHA_KATRIN, DRCHA_FLAG_OPEN, 1 ) //Person memo: Register when joining (Katrin)
-    # SetDiaryCharaFlag( DRCHA_KATRIN, DRCHA_FLAG_INFO1, 1 ) 
-    # SetDiaryCharaFlag( DRCHA_KATRIN, DRCHA_FLAG_INFO2, 1 ) 
-    # SetDiaryCharaFlag( DRCHA_KATRIN, DRCHA_FLAG_INFO3, 1 )
-    # JoinNPC( NPC_KATRIN, JOIN_NPC_JOIN ) // Katrin has joined
-    # SetFlag( GF_02MP1201_JOIN_KATRIN , 1 )
-    
-    # SetFlag(GF_SMITHY_LV,2) //Blacksmith level setting
-    # //SetFlag( GF_CAMP_SHIPYARD_LV, 1 ) // Drifting village development settings: Shipyard LV1
-    # SetFlag( GF_FAME_POINT, (FLAG[GF_FAME_POINT] + 2) )
-    
-    # SetDiaryShopFlag(SHOP_ID_WEAPON_A,0) // "Forge (enhanced)"
-    # SetDiaryShopFlag(SHOP_ID_WEAPON,1) // "Katlin's Weapon Workshop (Enhancement/Evolution)"
-    # SetDiaryShopFlag(SHOP_ID_ARMOR,1) // "Katlin's Weapon Workshop (Purchase Armor)"
-    # """
-    #     if parameters.shopLevel in [2,3,4,5,6,7]:
-    #         startingLoadout = startingLoadout + """
-    # SetFlag(GF_SHOP_RANK_3_02,1)
-    # SetFlag(GF_02MP4309_KILL_SPIDER,1)
-    # SetFlag(GF_QS201_SHOP_ADD,1)
-    # SetFlag(GF_TBOX_DUMMY081,1)
-    # """
-    #     if parameters.shopLevel in [3,4,5,6,7]:
-    #         startingLoadout = startingLoadout + """
-    # SetFlag(GF_SHOP_RANK_3_05,1)
-    # SetFlag(GF_SHOP_RANK_4_01,1)
-    # //The flag here is the trigger for speaking with Kathleen about the orichalcum and having new weapons made.
-    # //That event then trips the flag for being able to kill enemies flagged as Saurians.
-    # SetFlag(GF_03MP7401_GET_MATERIAL, 1)
-    # SetFlag(GF_TBOX_DUMMY082,1)
-    # """
-    #     if parameters.shopLevel in [4,5,6,7]:
-    #         startingLoadout = startingLoadout + """
-    # SetFlag(GF_SHOP_RANK_5_02,1)
-    # SetFlag(GF_TBOX_DUMMY083,1)
-    # """
-    #     if parameters.shopLevel in [5,6,7]:
-    #         startingLoadout = startingLoadout + """
-    # SetFlag(GF_SHOP_RANK_5_04,1)
-    # SetFlag(GF_QS222_SHOP_ADD,1)
-    # SetFlag(GF_QS310_GET_ITEM,1)
-    # SetFlag(GF_QS310_GET_ITEM2,1)
-    # SetFlag(GF_QS310_GET_ITEM3,1)
-    # SetFlag(GF_TBOX_DUMMY084,1)
-    # """
-    #     if parameters.shopLevel in [6,7]:
-    #         startingLoadout = startingLoadout + """
-    # SetFlag(GF_SHOP_RANK_5_07,1)
-    # SetFlag(GF_TBOX_DUMMY085,1)
-    # """
-    #     if parameters.shopLevel == 7:
-    #         startingLoadout = startingLoadout + """
-    # SetFlag(GF_SHOP_RANK_6_01,1)
-    # SetFlag(GF_05MP6349_KILL_BOSS,1)
-    # SetFlag(GF_QS600_SHOP_ADD,1)
-    # SetFlag(GF_TBOX_DUMMY086,1)
-    # SetFlag(GF_NPC_6_03_AFTER_INTERCEPT12,1)
-    # SetFlag(GF_06MP1201_GOTO_GEND,1)
-    # """
-
-    # #setup base weapons
-    # startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_WP_ADOL_000,1)
-    # EquipWeapon(ADOL,ICON3D_WP_ADOL_000)
-    # GetItem(ICON3D_WP_LAXIA_000, 1)
-    # EquipWeapon(LAXIA,ICON3D_WP_LAXIA_000)
-    # GetItem(ICON3D_WP_SAHAD_000, 1)
-    # EquipWeapon(SAHAD,ICON3D_WP_SAHAD_000)
-    # GetItem(ICON3D_986, 1)
-    # EquipWeapon(DANA,ICON3D_986)
-    # GetItem(ICON3D_990, 1)
-    # EquipWeapon(RICOTTA,ICON3D_990)
-    # GetItem(ICON3D_992, 1)
-    # EquipWeapon(HUMMEL,ICON3D_992)
-    # """
-
-    # if parameters.weaponLevel > 0:
-    #     if parameters.weaponLevel in [1,2,3,4,5,6,7]:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_WP_ADOL_001,1)
-    # GetItem(ICON3D_WP_LAXIA_001,1)
-    # GetItem(ICON3D_WP_SAHAD_001,1)
-    # EquipWeapon(ADOL,ICON3D_WP_ADOL_001)
-    # EquipWeapon(LAXIA, ICON3D_WP_LAXIA_001)
-    # EquipWeapon(SAHAD, ICON3D_WP_SAHAD_001)
-    # GetItem(ICON3D_987, 2)
-    # EquipWeapon(DANA,ICON3D_987)
-    # GetItem(ICON3D_991, 2)
-    # EquipWeapon(RICOTTA,ICON3D_991)
-    # GetItem(ICON3D_WP_HUMMEL_000, 2)
-    # EquipWeapon(HUMMEL,ICON3D_WP_HUMMEL_000)
-    # """
-    #     if parameters.weaponLevel in [2,3,4,5,6,7]:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_WP_ADOL_002,1)
-    # GetItem(ICON3D_WP_LAXIA_002,1)
-    # GetItem(ICON3D_WP_SAHAD_002,1)
-    # GetItem(ICON3D_WP_HUMMEL_001,1)
-    # EquipWeapon(ADOL,ICON3D_WP_ADOL_002)
-    # EquipWeapon(LAXIA, ICON3D_WP_LAXIA_002)
-    # EquipWeapon(SAHAD, ICON3D_WP_SAHAD_002)
-    # EquipWeapon(HUMMEL, ICON3D_WP_HUMMEL_001)
-    # GetItem(ICON3D_WP_RICOTTA_000, 2)
-    # EquipWeapon(RICOTTA,ICON3D_WP_RICOTTA_000)
-    # GetItem(ICON3D_988, 2)
-    # EquipWeapon(DANA,ICON3D_988)
-    # """
-    #     if parameters.weaponLevel in [3,4,5,6,7]:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_WP_ADOL_003,1)
-    # GetItem(ICON3D_WP_LAXIA_003,1)
-    # GetItem(ICON3D_WP_SAHAD_003,1)
-    # GetItem(ICON3D_WP_HUMMEL_002,1)
-    # GetItem(ICON3D_WP_RICOTTA_001,1)
-    # EquipWeapon(ADOL,ICON3D_WP_ADOL_003)
-    # EquipWeapon(LAXIA, ICON3D_WP_LAXIA_003)
-    # EquipWeapon(SAHAD, ICON3D_WP_SAHAD_003)
-    # EquipWeapon(HUMMEL, ICON3D_WP_HUMMEL_002)
-    # EquipWeapon(RICOTTA, ICON3D_WP_RICOTTA_001)
-    # GetItem(ICON3D_989, 2)
-    # EquipWeapon(DANA,ICON3D_989)
-    # """
-    #     if parameters.weaponLevel in [4,5,6,7]:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_WP_ADOL_004,1)
-    # GetItem(ICON3D_WP_LAXIA_004,1)
-    # GetItem(ICON3D_WP_SAHAD_004,1)
-    # GetItem(ICON3D_WP_HUMMEL_003,1)
-    # GetItem(ICON3D_WP_RICOTTA_002,1)
-    # GetItem(ICON3D_WP_DANA_000,2)
-    # EquipWeapon(ADOL,ICON3D_WP_ADOL_004)
-    # EquipWeapon(LAXIA, ICON3D_WP_LAXIA_004)
-    # EquipWeapon(SAHAD, ICON3D_WP_SAHAD_004)
-    # EquipWeapon(HUMMEL, ICON3D_WP_HUMMEL_003)
-    # EquipWeapon(RICOTTA, ICON3D_WP_RICOTTA_002)
-    # EquipWeapon(DANA, ICON3D_WP_DANA_000)
-    # """  
-    #     if parameters.weaponLevel in [5,6,7]:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_WP_ADOL_005,1)
-    # GetItem(ICON3D_WP_LAXIA_005,1)
-    # GetItem(ICON3D_WP_SAHAD_005,1)
-    # GetItem(ICON3D_WP_HUMMEL_004,1)
-    # GetItem(ICON3D_WP_RICOTTA_003,1)
-    # GetItem(ICON3D_WP_DANA_001,2)
-    # EquipWeapon(ADOL,ICON3D_WP_ADOL_005)
-    # EquipWeapon(LAXIA, ICON3D_WP_LAXIA_005)
-    # EquipWeapon(SAHAD, ICON3D_WP_SAHAD_005)
-    # EquipWeapon(HUMMEL, ICON3D_WP_HUMMEL_004)
-    # EquipWeapon(RICOTTA, ICON3D_WP_RICOTTA_003)
-    # EquipWeapon(DANA, ICON3D_WP_DANA_001)
-    # """
-    #     if parameters.weaponLevel in [6,7]:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_WP_ADOL_006,1)
-    # GetItem(ICON3D_WP_LAXIA_006,1)
-    # GetItem(ICON3D_WP_SAHAD_006,1)
-    # GetItem(ICON3D_WP_HUMMEL_005,1)
-    # GetItem(ICON3D_WP_RICOTTA_004,1)
-    # GetItem(ICON3D_WP_DANA_002,2)
-    # EquipWeapon(ADOL,ICON3D_WP_ADOL_006)
-    # EquipWeapon(LAXIA, ICON3D_WP_LAXIA_006)
-    # EquipWeapon(SAHAD, ICON3D_WP_SAHAD_006)
-    # EquipWeapon(HUMMEL, ICON3D_WP_HUMMEL_005)
-    # EquipWeapon(RICOTTA, ICON3D_WP_RICOTTA_004)
-    # EquipWeapon(DANA, ICON3D_WP_DANA_002)
-    # """
-    #     if parameters.weaponLevel == 7:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_WP_ADOL_007,1)
-    # GetItem(ICON3D_WP_LAXIA_007,1)
-    # GetItem(ICON3D_WP_SAHAD_007,1)
-    # GetItem(ICON3D_WP_HUMMEL_006,1)
-    # GetItem(ICON3D_WP_RICOTTA_005,1)
-    # GetItem(ICON3D_WP_DANA_003,2)
-    # EquipWeapon(ADOL,ICON3D_WP_ADOL_007)
-    # EquipWeapon(LAXIA, ICON3D_WP_LAXIA_007)
-    # EquipWeapon(SAHAD, ICON3D_WP_SAHAD_007)
-    # EquipWeapon(HUMMEL, ICON3D_WP_HUMMEL_006)
-    # EquipWeapon(RICOTTA, ICON3D_WP_RICOTTA_005)
-    # EquipWeapon(DANA, ICON3D_WP_DANA_003)
-    # """
-            
-    # if parameters.armorLevel > 0:
-    #     if parameters.armorLevel == 1:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_AM_001,6)
-    # GetItem(ICON3D_AM_001S,6)
-    # """
-    #     elif parameters.armorLevel == 2:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_AM_002,6)
-    # GetItem(ICON3D_AM_002S,6)
-    # """
-    #     elif parameters.armorLevel == 3:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_AM_003,6)
-    # GetItem(ICON3D_AM_003S,6)
-    # """
-    #     elif parameters.armorLevel == 4:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_AM_004,6)
-    # GetItem(ICON3D_AM_004S,6)
-    # """
-    #     elif parameters.armorLevel == 5:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_AM_005,6)
-    # GetItem(ICON3D_AM_005S,6)
-    # """
-    #     elif parameters.armorLevel == 6:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_AM_006,6)
-    # GetItem(ICON3D_AM_006S,6)
-    # """
-    #     elif parameters.armorLevel == 7:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_AM_007,6)
-    # GetItem(ICON3D_AM_007S,6)
-    # """
-    #     elif parameters.armorLevel == 8:
-    #         startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_AM_008M,3)
-    # GetItem(ICON3D_AM_008F,3)
-    # """
-    
-    # if parameters.tradeShop:
-    #     startingLoadout = startingLoadout + """
-    # SetFlag( GF_02MP1119_JOIN_DINA , 1 ) // Meet Dina
-    # SetFlag(GF_NPC_2_11_JOIN_DINA,1)
-    # SetDiaryFlag( DF_JOIN_DINA, 1 )  //Footprints memo: Dina was rescued.
-    # SetFlag(GF_TOOLSHOP_LV, 2) //Trade shop level setting
-    # JoinNPC( NPC_DINA, JOIN_NPC_JOIN ) //Rescued Dina
-    # SetDiaryShopFlag(SHOP_ID_TRADE_A,0) // "Warehouse"
-    # SetDiaryShopFlag(SHOP_ID_TRADE,1) // "Dina's Trading Post"
-    # SetDiaryShopFlag(SHOP_ID_TRADE_SELL,1) // "Trade post/pickup"
-    # SetDiaryCharaFlag( DRCHA_DINA, DRCHA_FLAG_INFO1, 1 )
-    # SetDiaryCharaFlag( DRCHA_DINA, DRCHA_FLAG_INFO2, 1 )
-    # SetDiaryCharaFlag( DRCHA_DINA, DRCHA_FLAG_INFO3, 1 )
-    # SetFlag( GF_FAME_POINT, (FLAG[GF_FAME_POINT] + 2) )	
-    # """
-
-    # if parameters.tailorShop:
-    #     startingLoadout = startingLoadout + """
-    # SetDiaryFlag( DF_JOIN_ALISON, 1 ) //Footprint memo: Rescued Alison.
-    # SetDiaryCharaFlag( DRCHA_ALISON, DRCHA_FLAG_OPEN, 1 ) //Person memo: Register when joining (Alison)
-    # SetDiaryCharaFlag( DRCHA_ALISON, DRCHA_FLAG_INFO1, 1 ) 
-    # SetDiaryCharaFlag( DRCHA_ALISON, DRCHA_FLAG_INFO2, 1 ) 
-    # SetDiaryCharaFlag( DRCHA_ALISON, DRCHA_FLAG_INFO3, 1 ) //Person memo: Additional information release 3 (Alison)
-    # SetFlag(GF_02MP1202_OPEN_DRESS,1)
-    # SetFlag( GF_CAMP_TAILOR_LV, 1 )
-    # SetFlag( GF_02MP1201_JOIN_ALISON , 1 ) /// Rescued Alison
-    # SetFlag( GF_NPC_2A_03_JOIN_ALISON , 1)
-    # //SetFlag( GF_HELP_A26, 1 ) // Tutorial: Rescue the castaways
-    # // Participate in interception battle
-    # JoinNPC(NPC_ALISON, JOIN_NPC_JOIN) // Rescued Alison
-    # SetFlag( GF_FAME_POINT, (FLAG[GF_FAME_POINT] + 2) )	
-    # """
-    
-    # if parameters.craftShop:
-    #     startingLoadout = startingLoadout + """
-    # SetFlag( GF_02MP2301_JOIN_AARON , 1 )	
-    # SetDiaryFlag( DF_JOIN_AARON, 1 ) //Footprint memo: Airan has joined the Drifting Village.
-    # SetDiaryCharaFlag( DRCHA_AARON, DRCHA_FLAG_OPEN, 1 ) //Person memo: Register when joining (air run)
-    # SetDiaryCharaFlag( DRCHA_AARON, DRCHA_FLAG_INFO1, 1 ) 
-    # SetDiaryCharaFlag( DRCHA_AARON, DRCHA_FLAG_INFO2, 1 ) 
-    # SetDiaryCharaFlag( DRCHA_AARON, DRCHA_FLAG_INFO3, 1 ) 
-    # JoinNPC( NPC_AARON, JOIN_NPC_JOIN ) //Joined with Airan
-    # SetFlag( GF_FAME_POINT, (FLAG[GF_FAME_POINT] + 2) )	
-    # """
-
-    # if parameters.medicalShop:
-    #     startingLoadout = startingLoadout + """
-    # SetDiaryFlag( DF_JOIN_LICHT, 1 ) //Footprint memo: Rescued Licht.
-    # SetDiaryCharaFlag( DRCHA_LICHT, DRCHA_FLAG_OPEN, 1 ) //Person memo: Register when joining (Licht)
-    # SetDiaryCharaFlag( DRCHA_LICHT, DRCHA_FLAG_INFO1, 1 ) 
-    # SetDiaryCharaFlag( DRCHA_LICHT, DRCHA_FLAG_INFO2, 1 ) 
-    # SetDiaryCharaFlag( DRCHA_LICHT, DRCHA_FLAG_INFO3, 1 )
-    # SetFlag( GF_CAMP_BED_LV, 2 ) // Drifting village development settings: Bed LV2
-    # JoinNPC( NPC_LICHT, JOIN_NPC_JOIN ) // Licht has become a friend
-    # SetFlag( GF_FAME_POINT, (FLAG[GF_FAME_POINT] + 2) )	
-    # """
-    
-    # if parameters.discoveryShop:
-    #     startingLoadout = startingLoadout + """
-    # SetFlag( GF_SUBEV_JOIN_AUSTEN, 1 ) // Joined with Austin
-    # SetDiaryFlag( DF_JOIN_AUSTEN, 1 ) //Footprint memo: Rescued Austin.
-    # JoinNPC( NPC_AUSTEN, JOIN_NPC_JOIN ) // Austin has become a friend
-    # SetDiaryCharaFlag( DRCHA_AUSTEN, DRCHA_FLAG_OPEN, 1 )
-    # SetDiaryCharaFlag( DRCHA_AUSTEN2, DRCHA_FLAG_OPEN, 0 )
-    # SetDiaryCharaFlag( DRCHA_AUSTEN, DRCHA_FLAG_INFO1, 1 ) 
-    # SetDiaryCharaFlag( DRCHA_AUSTEN, DRCHA_FLAG_INFO2, 1 ) 
-    # SetDiaryCharaFlag( DRCHA_AUSTEN, DRCHA_FLAG_INFO3, 1 )
-    # SetFlag( GF_FAME_POINT, (FLAG[GF_FAME_POINT] + 2) )	
-    # """
-    # if parameters.allRecipes:
-    #     startingLoadout = startingLoadout + """
-    # SetFlag( GF_RECIPE_02, 1)
-    # SetFlag( GF_RECIPE_03, 1)
-    # SetFlag( GF_RECIPE_04, 1)
-    # SetFlag( GF_RECIPE_05, 1)
-    # SetFlag( GF_RECIPE_06, 1)
-    # SetFlag( GF_RECIPE_07, 1)
-    # SetFlag( GF_RECIPE_08, 1)
-    # SetFlag( GF_RECIPE_09, 1)
-    # SetFlag( GF_RECIPE_10, 1)
-    # SetFlag( GF_RECIPE_11, 1)
-    # SetFlag( GF_RECIPE_12, 1)
-    # SetFlag( GF_RECIPE_13, 1)
-    # """
-        
-    # if parameters.maxIngredients:
-    #     startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_FD_SEA_SALT,999)
-    # GetItem(ICON3D_FD_LAND_HONEY,999)
-    # GetItem(ICON3D_FD_MEAT_01,999)
-    # GetItem(ICON3D_FD_VG_CABBAGE,999)
-    # GetItem(ICON3D_FD_MUSHROOM,999)
-    # GetItem(ICON3D_FD_MEAT_03,999)
-    # GetItem(ICON3D_FD_VG_CORN,999)
-    # GetItem(ICON3D_FD_WHEAT,999)
-    # GetItem(ICON3D_FD_LAND_EGG,999)
-    # GetItem(ICON3D_FD_MEAT_02,999)
-    # GetItem(ICON3D_FD_VG_TOMATO,999)
-    # GetItem(ICON3D_FD_SEA_SHELLFISH,999)
-    # GetItem(ICON3D_FD_VG_PUMPKIN,999)
-    # GetItem(ICON3D_FD_VG_EGGPLANT,999)
-    # GetItem(ICON3D_FD_VG_PAPRIKA,999)
-    # """
-
-    # startingLoadout = startingLoadout + "SetFlag(SF_ITEMSLOT_NUM," + str(parameters.gearSlots) + ") //Let's adventure books actually increase slots from the start of the game."
-
-    # if parameters.gloves: startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_CLIMBGLOVE,1)"""
-    # if parameters.glowStone: startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_TORCH,1)"""
-    # if parameters.wing: startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_DOUBLEJUMP,1)"""
-    # if parameters.floatShoes: startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_NUMA_BOOTS,1)"""
-    # if parameters.hermitsScale: startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_OXYGEN_BOTTLE,1)"""
-    # if parameters.purifyingBell: startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_SILVERBELL,1)"""
-    # if parameters.galeFeather: startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_DASH_BOOTS,1)"""
-    # if parameters.windyVestment: startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_HEALINGCAPE,1)"""
-    # if parameters.aresSeal: startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_EXSPEEDUP,1)"""
-    # if parameters.aeolusUrn: startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_GATHERITEM,1)"""
-    # if parameters.eagleEyeOrb: startingLoadout = startingLoadout + """
-    # GetItem(ICON3D_MAPOPENUP,1)"""
 
     startParams = """
 function "startParameters"
@@ -451,12 +91,12 @@ function "startParameters"
     SetFlag(SF_ADOL_JOINOK, 0)
     SetFlag(SF_ADOL_JOINED, 0)
     CallFunc("rng:earlyGameParty")
-    SetLevel(ADOL,1)
-    SetLevel(LAXIA,1)
-    SetLevel(SAHAD,1)
-    SetLevel(RICOTTA,1)
-    SetLevel(HUMMEL,1)
-    SetLevel(DANA,1)
+    SetLevel(ADOL,3)
+    SetLevel(LAXIA,3)
+    SetLevel(SAHAD,3)
+    SetLevel(RICOTTA,3)
+    SetLevel(HUMMEL,3)
+    SetLevel(DANA,3)
     GetItem(ICON3D_WP_ADOL_000,1)
     EquipWeapon(ADOL,ICON3D_WP_ADOL_000)
     GetItem(ICON3D_WP_LAXIA_000, 1)
@@ -469,6 +109,7 @@ function "startParameters"
     EquipWeapon(RICOTTA,ICON3D_990)
     GetItem(ICON3D_992, 1)
     EquipWeapon(HUMMEL,ICON3D_992)
+    SetFlag(SF_ITEMSLOT_NUM,1)
     //Let's set the flags for checking a bunch of removeable obstacles so the players don't have to click on them twice
     SetFlag(GF_SUBEV_1111_CHECKED_ROCK,1)
     SetFlag(GF_SUBEV_2101_CHECKED_ROCK,1)
@@ -1024,14 +665,13 @@ function "startParameters"
     EquipCostume(ADOL, -1, EQC_MAIN, EQC_MODE_EVFORCE)
     {0}
     {1}
-    {2}
     LoadArg("map/mp1201/mp1201.arg")
     EventCue("mp1201:EV_M01S070_ED")
-    {3}
+    {2}
     ResetStopFlag(STOPFLAG_EVENT)
 }}
 """
-    return startParams.format(gameSettingFlags,startingCharacter,startingLoadout,pastDanaFlags)
+    return startParams.format(gameSettingFlags,startingCharacter,pastDanaFlags)
 
 def manageEarlyGameParty(patch):
     match patch.starting_character:

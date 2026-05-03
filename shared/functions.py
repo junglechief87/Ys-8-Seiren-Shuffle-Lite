@@ -7,15 +7,17 @@ encode = "utf-8"
 sourceScript = "rng"
 _cache = None  # Global variable for lazy loading
 def getLocations():
-    with open(os.path.join(config.current_directory, "database/location.csv"), encoding=encode) as locDB:
+    with open(os.path.join(config.current_directory, "database/location.csv"), encoding='utf-8-sig') as locDB:
         
         locRows = csv.DictReader(locDB)
         locations = []
         for row in locRows:
-            locID = int(row['locID'])
-            mapID = row['mapID']
-            mapCheckID = row['mapCheckID']
-            item = bool(int(row['item']))
+            # Strip whitespace from keys in case of BOM or encoding issues
+            cleaned_row = {k.strip(): v for k, v in row.items()}
+            locID = int(cleaned_row['locID'])
+            mapID = cleaned_row['mapID']
+            mapCheckID = cleaned_row['mapCheckID']
+            item = bool(int(cleaned_row['item']))
      
             locationObject = location(locID,mapID,mapCheckID,item)
             locations.append(locationObject)

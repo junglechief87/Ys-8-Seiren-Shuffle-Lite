@@ -982,8 +982,7 @@ function it_expup1
 		//ResetMoveVec("PARTYALL")
 	
 		// ‚d‚w‚oƒAƒbƒv
-		CallFunc("rng:expup1")
-		//GetExp(100)
+		GetExp(100)
 	
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 	
@@ -1018,8 +1017,7 @@ function it_expup2
 		//ResetMoveVec("PARTYALL")
 	
 		// ‚d‚w‚oƒAƒbƒv
-		CallFunc("rng:expup2")
-		//GetExp(1000)
+		GetExp(1000)
 	
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 	
@@ -1054,8 +1052,7 @@ function it_expup3
 		//ResetMoveVec("PARTYALL")
 	
 		// ‚d‚w‚oƒAƒbƒv
-		CallFunc("rng:expup3")
-		//GetExp(10000)
+		GetExp(10000)
 	
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 	
@@ -4341,7 +4338,7 @@ function "it_foodstuff15"//	ƒLƒ“ƒOƒpƒ“ƒvƒLƒ“
 function "it_receive_items"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
-	YesNoMenu(TF_MENU_SELECT2,"?¿½@?¿½@?¿½@Receive #2CAP Items#0C that cannot be obtained automatically",1)
+	YesNoMenu(TF_MENU_SELECT2,"Receive #2CAP Items#0C that cannot be obtained automatically",1)
 	
 	if(FLAG[TF_MENU_SELECT2])
 	{
@@ -4355,6 +4352,7 @@ function "it_receive_items"
 				Message("#4CMistilteinn Received")
 				WaitPrompt()
 				WaitCloseWindow()
+				SetFlag(TF_MENU_SELECT2,0)
 			}
 			if(FLAG[GF_TBOX_DUMMY108] && !FLAG[GF_TBOX_DUMMY109] && ALLITEMWORK[ICON3D_WP_DANA_005] < 1)
 			{
@@ -4363,6 +4361,7 @@ function "it_receive_items"
 				Message("#4CSpirit Ring Celesdia Received")
 				WaitPrompt()
 				WaitCloseWindow()
+				SetFlag(TF_MENU_SELECT2,0)
 			}
 			if(FLAG[SF_ADOL_JOINED] && !FLAG[SF_ADOL_JOINOK])
 			{
@@ -4374,6 +4373,7 @@ function "it_receive_items"
 				WaitCloseWindow()
 				CallFunc("rng:0520")
         		CallFunc("rng:0521")
+				SetFlag(TF_MENU_SELECT2,0)
 			}
 			if(FLAG[SF_LAXIA_JOINED] && !FLAG[SF_LAXIA_JOINOK])
 			{
@@ -4386,6 +4386,7 @@ function "it_receive_items"
 				WaitCloseWindow()
 				CallFunc("rng:0522")
         		CallFunc("rng:0523")
+				SetFlag(TF_MENU_SELECT2,0)
 			}
 			if(FLAG[SF_SAHAD_JOINED] && !FLAG[SF_SAHAD_JOINOK])
 			{
@@ -4398,6 +4399,7 @@ function "it_receive_items"
 				WaitCloseWindow()
 				CallFunc("rng:0524")
         		CallFunc("rng:0525")
+				SetFlag(TF_MENU_SELECT2,0)
 			}
 			if(FLAG[SF_HUMMEL_JOINED] && !FLAG[SF_HUMMEL_JOINOK])
 			{
@@ -4410,6 +4412,7 @@ function "it_receive_items"
 				WaitCloseWindow()
 				CallFunc("rng:0526")
         		CallFunc("rng:0527")
+				SetFlag(TF_MENU_SELECT2,0)
 			}
 			if(FLAG[SF_RICOTTA_JOINED] && !FLAG[SF_RICOTTA_JOINOK])
 			{
@@ -4424,6 +4427,7 @@ function "it_receive_items"
 				WaitCloseWindow()
 				CallFunc("rng:0528")
         		CallFunc("rng:0529")
+				SetFlag(TF_MENU_SELECT2,0)
 			}
 			if(FLAG[SF_DANA_JOINED] && !FLAG[SF_DANA_JOINOK])
 			{
@@ -4436,7 +4440,15 @@ function "it_receive_items"
 				WaitCloseWindow()
 				CallFunc("rng:0530")
         		CallFunc("rng:0531")
+				SetFlag(TF_MENU_SELECT2,0)
 			}
+			if(FLAG[TF_MENU_SELECT2])
+			{
+				Message("Nothing to receive right now.")
+				WaitPrompt()
+				WaitCloseWindow()
+			}
+
 		}
 		else
 		{
