@@ -675,16 +675,16 @@ def buildPsyches(settings):
     # region: boss flag for region
     bossFlagDict = {"Silent Tower Second Basement Mephorash Psyches": 'FLAG[GF_SUBEV_06_6413_KILL_BOSS]',
                     #'Octus Overlook': 'FLAG[GF_TBOX_DUMMY161]',
-                    "Valley of Kings Boss Arena Basileus Psyches": 'FLAG[GF_TBOX_DUMMY080]',
-                    "Archeozoic Chasm Boss Arena Oceanus Psyches": 'FLAG[GF_TBOX_DUMMY078]',
-                    "Pirate Ship Eleftheria Deck Pirate Revenant Psyches": 'FLAG[GF_05MP0405_READ_REED]',
-                    "Baja Tower Boss Arena Carveros Psyches": 'FLAG[GF_05MP6329_KILL_BAHABOSS]',
-                    "Temple of the Great Tree Temple Boss Arena Brachion Psyches": 'FLAG[GF_04MP6410_KILL_GUARDIAN]',
-                    "Mont Gendarme Boss Arena Giasburn Psyches": 'FLAG[GF_03MP4341_KILL_ANCIENT]',
-                    "Schlamm Jungle Boss Arena Laspisus Psyches": 'FLAG[GF_02MP2308_KILL_HIPPO]',
-                    "Eroded Valley Boss Arena Gargantula Psyches": 'FLAG[GF_TBOX_DUMMY074]',
-                    "Towering Coral Forest Boss Arena Clareon Psyches": 'FLAG[GF_02MP1308_KILL_CHAMELEON]',
-                    "Former Sanctuary Crypt - Final Floor Boss Arena Melaiduma Psyches": 'FLAG[GF_SUBEV_UNTOUCHABLE]'}
+                    "Valley of Kings Boss Arena Basileus Psyches": {'FLAG': 'FLAG[GF_TBOX_DUMMY080]', 'simpleName': 'Valley of Kings Boss'},
+                    "Archeozoic Chasm Boss Arena Oceanus Psyches": {'FLAG': 'FLAG[GF_TBOX_DUMMY078]', 'simpleName': 'Archeozoic Chasm Boss'},
+                    "Pirate Ship Eleftheria Deck Pirate Revenant Psyches": {'FLAG': 'FLAG[GF_05MP0405_READ_REED]', 'simpleName': 'Pirate Ship Boss'},
+                    "Baja Tower Boss Arena Carveros Psyches": {'FLAG': 'FLAG[GF_05MP6329_KILL_BAHABOSS]', 'simpleName': 'Baja Tower Boss'},
+                    "Temple of the Great Tree Temple Boss Arena Brachion Psyches": {'FLAG': 'FLAG[GF_04MP6410_KILL_GUARDIAN]', 'simpleName': 'Temple of the Great Tree Boss'},
+                    "Mont Gendarme Boss Arena Giasburn Psyches": {'FLAG': 'FLAG[GF_03MP4341_KILL_ANCIENT]', 'simpleName': 'Mont Gendarme Boss'},
+                    "Schlamm Jungle Boss Arena Laspisus Psyches": {'FLAG': 'FLAG[GF_02MP2308_KILL_HIPPO]', 'simpleName': 'Schlamm Jungle Boss'},
+                    "Eroded Valley Boss Arena Gargantula Psyches": {'FLAG': 'FLAG[GF_TBOX_DUMMY074]', 'simpleName': 'Eroded Valley Boss'},
+                    "Towering Coral Forest Boss Arena Clareon Psyches": {'FLAG': 'FLAG[GF_02MP1308_KILL_CHAMELEON]', 'simpleName': 'Towering Coral Forest Boss'},
+                    "Former Sanctuary Crypt - Final Floor Boss Arena Melaiduma Psyches": {'FLAG': 'FLAG[GF_SUBEV_UNTOUCHABLE]', 'simpleName': 'Former Sanctuary Crypt Boss'}}
     psycheFlag = {"Psyches of the Sky Era": "GF_06MP6308_TALK_SARAI", 
                   "Psyches of the Insectoid Era": "GF_06MP6307_TALK_NESTOR",
                   "Psyches of the Ocean Era": "GF_06MP6305_TALK_HYDRA",
@@ -743,19 +743,21 @@ def buildPsyches(settings):
     # inserted into the boss checkpoint function but it makes it much easier to manage since we only need one loop instead of three.
     # this will also allow for any number of psyche bosses or combinations.
     for i, (psyche, accessBoss) in enumerate(settings['psyche_map'].items()):
+        formattedPsyche = bossFlagDict[accessBoss]["simpleName"] + ":" + rewards[psyche] +  "(" + psyche[:psyche.rfind(" ")] + ")"
+        enabledFormattedPsyche = GOLD + bossFlagDict[accessBoss]["simpleName"] + ":" + rewards[psyche] +  "(" + psyche[:psyche.rfind(" ")]  + ")" 
         if i != 0:
             condition = "else if"
         bossCheckpoint = bossCheckpoint + """
         if({0} && !FLAG[{1}])
         {{
-            MenuAdd({2}, "#2C{4}: {5}({6})")	
+            MenuAdd({2}, "{4}")	
         }}
         else if(!{0} || FLAG[{1}])
         {{
-            MenuAdd({3}, "{4}: {5}({6})")	
+            MenuAdd({3}, "{5}")	
         }}
-    """.format(bossFlagDict[accessBoss], psycheFlag[rewards[psyche]], 
-               str(menuAdd), str(menuAdd+1), accessBoss, rewards[psyche], psyche)
+    """.format(bossFlagDict[accessBoss]["FLAG"], psycheFlag[rewards[psyche]], 
+               str(menuAdd), str(menuAdd+1), formattedPsyche, enabledFormattedPsyche)
         bossLoad = bossLoad + """
         {0}(FLAG[TF_MENU_SELECT2] == {1})
         {{
