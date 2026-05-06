@@ -162,3 +162,15 @@ def load_cache():
                     file_path = parts[2].strip()
                     _cache[(map_id, file_type)] = file_path  # Convert "(mapID, fileType)" back to tuple
     return _cache
+
+def getCharacterJoinLv(character):
+    lvScript = ''
+    for lv in range(1,100):
+        if lv == 1:
+            lvScript = lvScript + "\tif(FLAG[GF_TBOX_DUMMY121] == " + str(lv) + "){SetLevel(" + character + "," + str(lv) + ")} \n"
+        elif lv == 99:
+            lvScript = lvScript + "\telse{SetLevel(" + character + "," + str(lv) + ")} \n"
+        else:
+            lvScript = lvScript + "\telse if(FLAG[GF_TBOX_DUMMY121] == " + str(lv) + "){SetLevel(" + character + "," + str(lv) + ")} \n"
+
+    return lvScript

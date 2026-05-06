@@ -2661,7 +2661,7 @@ enum {
 	GF_TBOX_DUMMY119, //I haven't found a straighforward death flag but I can use this to create one as there's a game over script in system.scp, it calls an internal game function but we can do scripting before that call.
 					  //Also worth noting that because this is set during the game over screen it is never saved and therefore doesn't need cleared on load/retry.
 	GF_TBOX_DUMMY120, //Simple ending flag so the client sees the ending earlier
-	GF_TBOX_DUMMY121, 
+	GF_TBOX_DUMMY121, //Average party level
 	GF_TBOX_DUMMY122, 
 	GF_TBOX_DUMMY123, 
 	GF_TBOX_DUMMY124, 

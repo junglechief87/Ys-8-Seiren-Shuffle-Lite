@@ -1,3 +1,5 @@
+from shared.functions import getCharacterJoinLv 
+
 def getCrewFlags(name):
     flag = ''
     match name:
@@ -20,6 +22,7 @@ def getCrewFlags(name):
         CallFunc("rng:0521")
     }
 """         
+            flag = flag + getCharacterJoinLv("ADOL")
 
         case "Laxia": #vanilla function call on mp1101 script rng:0401
             flag = """
@@ -42,6 +45,7 @@ def getCrewFlags(name):
         CallFunc("rng:0523")
     }
 """
+            flag = flag + getCharacterJoinLv("LAXIA")
 
         case "Captain Barbaros": #vanilla function call on mp1201 script rng:0402
             flag = """
@@ -74,6 +78,7 @@ def getCrewFlags(name):
         CallFunc("rng:0525")
     }
 """
+            flag = flag + getCharacterJoinLv("SAHAD")
 
         case "Dogi": #vanilla function call on mp1201 script rng:0405
             flag = """
@@ -175,6 +180,7 @@ def getCrewFlags(name):
     }
 
 """
+            flag = flag + getCharacterJoinLv("RICOTTA")
 
         case "Austin": #vanilla function call on mp3107 script rng:0418
             flag = """ 
@@ -215,6 +221,7 @@ def getCrewFlags(name):
         CallFunc("rng:0527")
     }
 """
+            flag = flag + getCharacterJoinLv("HUMMEL")
 
         case "Silvia": #vanilla function call on mp6116 script rng:0421
             flag = """
@@ -234,6 +241,7 @@ def getCrewFlags(name):
         CallFunc("rng:0531")
     }
 """
+            flag = flag + getCharacterJoinLv("DANA")
 
         case "Katthew": #vanilla function call on mp6104 script rng:0423
             flag = """
