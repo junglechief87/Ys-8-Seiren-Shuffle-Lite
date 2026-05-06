@@ -140,7 +140,7 @@ def genericItemMessage(location_id, patch, vanillaScript):
     scriptName = buildLocScripts(location_id,False)
     #'Maiden Journal','Blue Seal of Whirling Water','Green Seal of Roaring Stone','Golden Seal of Piercing Light','Treasure Chest Key','Frozen Flower','Shrine Maiden Amulate'
     danaPastEventsItems = [698,700,701,702,796,699,727]
-    script = ""
+    script = vanillaScript
 
     #unique item functions that will need additional scripting when the item is recieved
     if itemId == 739: #glow stone
@@ -256,7 +256,6 @@ function "{0}"
     #     script = script + memoHints(itemId)
         
     message = GENERIC_ITEM_MESSAGE
-    script =  script + vanillaScript #append the original chest scripts to the end of the function
 
     if itemId == 218:
         #Adding the other 2 medals to the slash medal check
@@ -712,6 +711,10 @@ def buildPsyches(settings):
         SetChrWork("b012", CWK_MAXHP, (b012.CHRWORK[CWK_MAXHP] * 3.0f))
         SetChrWork("b012", CWK_HP, (b012.CHRWORK[CWK_MAXHP]))
 """
+    if settings['options']['former_sanctuary_crypt'] == 0:
+        wardenScaling = wardenScaling + """
+        SetChrWork(B170, CWK_LV, 65)
+    """
 
     danaWardenIncrease = 5
     danaModerateWardenIncrease = 2
@@ -931,9 +934,8 @@ function "FSC_warp"
 # ==========================================================================================================
 def jewelTrade(locations):
     class ItemInfo:
-        def __init__(self, name, qty):
+        def __init__(self, name):
             self.itemName = name
-            self.quantity = qty
     
     dinasItems = [None] * 10
     
@@ -1037,17 +1039,17 @@ function "newTradeHandler"
     for i in range(461,471):
         dinasItems[i-461] = ItemInfo(locations[str(i)]['item_name'], locations[str(i)]['item_quantity'])
 
-    item1 = dinasItems[0].itemName + ' x ' + str(dinasItems[0].quantity)
-    item2 = dinasItems[1].itemName + ' x ' + str(dinasItems[1].quantity)
-    item3 = dinasItems[2].itemName + ' x ' + str(dinasItems[2].quantity)
-    item4 = dinasItems[3].itemName + ' x ' + str(dinasItems[3].quantity)
-    item5 = dinasItems[4].itemName + ' x ' + str(dinasItems[4].quantity)
-    item6 = dinasItems[5].itemName + ' x ' + str(dinasItems[5].quantity)
-    item7 = dinasItems[6].itemName + ' x ' + str(dinasItems[6].quantity)
-    item8 = dinasItems[7].itemName + ' x ' + str(dinasItems[7].quantity)
-    item9 = dinasItems[8].itemName + ' x ' + str(dinasItems[8].quantity)
-    item10 = dinasItems[9].itemName + ' x ' + str(dinasItems[9].quantity)
-    return script.format(item1,item2,item3,item4,item5,item6,item7,item8,item9,item10)
+    item1 = dinasItems[0].itemName
+    item2 = dinasItems[1].itemName
+    item3 = dinasItems[2].itemName
+    item4 = dinasItems[3].itemName
+    item5 = dinasItems[4].itemName
+    item6 = dinasItems[5].itemName
+    item7 = dinasItems[6].itemName
+    item8 = dinasItems[7].itemName
+    item9 = dinasItems[8].itemName
+    item10 = dinasItems[9].itemName
+    return script.format(item1.itemName,item2.itemName,item3.itemName,item4.itemName,item5.itemName,item6.itemName,item7.itemName,item8.itemName,item9.itemName,item10.itemName)
 
 # ==========================================================================================================
 #  Shop Self Hints: Dogi, Master Kong, Shoebill, Austin, Mishy, and Euron
@@ -1056,10 +1058,7 @@ function "newTradeHandler"
 def talkHints(locations):
 
     def formatHint(location):
-        if location['item_quantity'] > 1:
-            return location['item_name'] + ' x ' + str(location['item_quantity'])
-        else:
-            return location['item_name']
+        return location['item_name']
         
     intReward = [None] * 5
     mkRewards = [None] * 7
@@ -1288,7 +1287,7 @@ function "fishRewardPreview"
     austinHints = """
 function "discoveryRewardPreview1"
 {{
-    TalkPopup(UNDEF,0,3,STOPPER_PPOSX,STOPPER_PPOSY,0)
+    TalkPopup(UNDEF,0,2,0,0,0)
 	{{
         "Hmmmm...." 
         "I could really use some inspiration."
@@ -1298,7 +1297,7 @@ function "discoveryRewardPreview1"
     WaitPrompt()
     WaitCloseWindow()
 
-    TalkPopup(UNDEF,0,3,STOPPER_PPOSX,STOPPER_PPOSY,0)
+    TalkPopup(UNDEF,0,2,0,0,0)
     {{
         "#2C {0}#0C for a little inspiration."
         "#2C {1}#0C for a lot of inspiration."
@@ -1310,15 +1309,15 @@ function "discoveryRewardPreview1"
 
 function "discoveryRewardPreview2"
 {{
-    TalkPopup(UNDEF,0,3,STOPPER_PPOSX,STOPPER_PPOSY,0)
+    TalkPopup(UNDEF,0,2,0,0,0)
 	{{
-        "Spplendid work!" 
+        "Splendid work!" 
         "Keep it up and I'll happily share this with you!"
     }}
     WaitPrompt()
     WaitCloseWindow()
 
-    TalkPopup(UNDEF,0,3,STOPPER_PPOSX,STOPPER_PPOSY,0)
+    TalkPopup(UNDEF,0,2,0,0,0)
     {{
         "#2C {1}#0C for a lot of inspiration."
     }}
@@ -1331,7 +1330,7 @@ function "discoveryRewardPreview2"
     euronHints = """
 function "mapRewardPreview"
 {{
-    TalkPopup(UNDEF,0,3,STOPPER_PPOSX,STOPPER_PPOSY,0)
+    TalkPopup(UNDEF,0,2,0,0,0)
     {{
         "Hey there!" 
         "Show me that map as you explore and I'll offer you some of my collection."
@@ -1340,7 +1339,7 @@ function "mapRewardPreview"
     WaitPrompt()
     WaitCloseWindow()
 
-    TalkPopup(UNDEF,0,3,STOPPER_PPOSX,STOPPER_PPOSY,0)
+    TalkPopup(UNDEF,0,2,0,0,0)
     {{
         This is what I got for you!
         "#2C {0}#0C for 10% map completion."
@@ -1348,6 +1347,12 @@ function "mapRewardPreview"
         "#2C {2}#0C for 30% map completion."
         "#2C {3}#0C for 40% map completion."
         "#2C {4}#0C for 50% map completion."
+    }}
+    WaitPrompt()
+    WaitCloseWindow()
+
+    TalkPopup(UNDEF,0,2,0,0,0)
+    {{
         "#2C {5}#0C for 60% map completion."
         "#2C {6}#0C for 70% map completion."
         "#2C {7}#0C for 80% map completion."
@@ -1369,6 +1374,12 @@ function "foodRewardPreview"
         "(#2C {0}#0C)"
         "(#2C {1}#0C)"
         "(#2C {2}#0C)"
+    }}
+    WaitPrompt()
+    WaitCloseWindow()
+
+    TalkPopup(UNDEF,0,3,STOPPER_PPOSX,STOPPER_PPOSY,0)
+    {{
         "(#2C {3}#0C)"
         "(#2C {4}#0C)"
         "(#2C {5}#0C)"
