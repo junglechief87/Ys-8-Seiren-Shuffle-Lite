@@ -10,9 +10,10 @@ import sys
 import subprocess
 from pathlib import Path
 from patch.chestPatcher import cleanChests
-from patch.fileManagement import copyOriginalGameFiles, downloadFiles, restoreOriginalGameFiles
+from patch.fileManagement import copyOriginalGameFiles, downloadFiles, restoreOriginalGameFiles, countOriginalGameFiles, countDownloadFiles, countChestLocations
 from patch.rngPatcher import rngPatcherMain
 from patch.miscPatches import AddWarpToFSCCrystal, readFileIntoBuffer, miscFixes, makeResourceDropsGuaranteed
+from patch.progressWindow import ProgressWindow
 import shared.config as config
 # Import file management functions
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'patch'))
@@ -182,6 +183,13 @@ class CommandsFrame(ctk.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
         self.grid_columnconfigure((0, 1, 2), weight=1)
+        self.parent_app = master  # Store reference to main app
+        
+        # Initialize patch data attributes
+        self.item_map = {}
+        self.starting_character = {}
+        self.dungeon_entrance_randomization = {}
+        self.settings = {}
 
         # Frame's Title
         self.title = ctk.CTkLabel(self, text="Commands", **FRAME_TITLE_STYLE)
@@ -213,103 +221,128 @@ class CommandsFrame(ctk.CTkFrame):
 
     def restoreFiles(self):
         """Restore original game files from backup"""
+        result = messagebox.askyesno(
+            "Restore Original Files",
+            "This will restore your original game files to their unmodified state.\nContinue?"
+        )
+        if not result:
+            return
+
         try:
-            result = messagebox.askyesno(
-                "Restore Original Files",
-                "This will restore your original game files to their unmodified state.\nContinue?"
-            )
-            if result:
-                restoreOriginalGameFiles()
-                messagebox.showinfo("Success", "Original game files have been restored successfully!")
+            self.parent_app.set_gui_enabled(False)
+
+            backup_dir = os.path.join(config.executable_directory, 'Original Game Files')
+            file_count = len([f for root, dirs, files in os.walk(backup_dir) for f in files]) if os.path.exists(backup_dir) else 100
+
+            def on_complete(error, msg, tb):
+                self.parent_app.set_gui_enabled(True)
+
+            tasks = [(restoreOriginalGameFiles, "Restoring Original Game Files")]
+            ProgressWindow(self.parent_app, tasks, file_count, "Restore Original Files", on_complete, ICON_PATH)
+
         except Exception as e:
+            self.parent_app.set_gui_enabled(True)
             messagebox.showerror("Error", f"Failed to restore files: {str(e)}")
 
     def patchFiles(self):
         """Patch game files with AP patch file"""
-        
+
+        if not config.executable_directory:
+            messagebox.showerror("Error", "Please select the executable directory")
+            return
+
+        if not os.path.exists(config.executable_directory):
+            messagebox.showerror("Error", "Selected files do not exist")
+            return
+
+        try:
+            self.parent_app.set_gui_enabled(False)
+
+            backup_dir = os.path.join(config.executable_directory, 'Original Game Files')
+
+            tasks = []
+            total_files = 0
+
+            if not os.path.exists(backup_dir):
+                total_files += countOriginalGameFiles()
+                tasks.append((copyOriginalGameFiles, "Backing Up Original Game Files"))
+
+            total_files += countDownloadFiles()
+            tasks.append((downloadFiles, "Downloading Patch Files"))
+
+            total_files += countChestLocations()
+            tasks.append((lambda cb: cleanChests(progress_callback=cb), "Patching Chests"))
+
+            total_files += 1
+            tasks.append((makeResourceDropsGuaranteed, "Guaranteeing Resource Drops"))
+
+            total_files += 1
+            tasks.append((AddWarpToFSCCrystal, "Adding FSC Crystal Warp"))
+
+            total_files += 3
+            tasks.append((miscFixes, "Applying Miscellaneous Fixes"))
+
+            def on_complete(error, msg, tb):
+                self.parent_app.set_gui_enabled(True)
+
+            ProgressWindow(self.parent_app, tasks, total_files, "Patching Game Files", on_complete, ICON_PATH)
+
+        except Exception as e:
+            self.parent_app.set_gui_enabled(True)
+            messagebox.showerror("Error", f"Failed to patch files: {str(e)}")
+
+    def generateSeed(self):
+        """Generate a new seed from the AP patch file"""
+
         if not config.executable_directory or not config.patch_file_path:
             messagebox.showerror("Error", "Please select both executable and patch file")
             return
-        
-        if not os.path.exists(config.executable_directory) or not os.path.exists(config.patch_file_path):
-            messagebox.showerror("Error", "Selected files do not exist")
-            return
-        
-        try:
-            # Show progress
-            messagebox.showinfo("Patching", "Starting patch process...\nThis may take a moment.")
-            
-            # Backup original game files if not already backed up
-            backup_dir = os.path.join(os.path.dirname(config.executable_directory), 'Original Game Files')
-            if not os.path.exists(backup_dir):
-                messagebox.showinfo("Backup", "Creating backup of original game files...")
-                copyOriginalGameFiles()
-            messagebox.showinfo("Script Files", "Downloading and overwriting script files...")
-            downloadFiles()
-            messagebox.showinfo("Update Chests", "Script overwrite complete, prepping chests...")
-            cleanChests()
-            messagebox.showinfo("Resource Drops", "Chests complete, making resource drops guaranteed...")
-            makeResourceDropsGuaranteed()
-            messagebox.showinfo("Building FSC Crystal", "Drops complete, adding warp to FSC Crystal...")
-            AddWarpToFSCCrystal()
-            messagebox.showinfo("Finalizing", "FSC Crystal complete, finalizing patch...")
-            miscFixes()
-            
-                
-            
-            # Apply AP patch file
-            # AP patch files typically have instructions embedded or need to be extracted
-            patch_path = Path(config.patch_file_path)
-            
-            # Check if patch file exists and is readable
-            if patch_path.suffix.lower() == '.apdana':
-                # AP patch files are typically archives or contain patch instructions
-                # For now, we'll document that this needs AP-specific patch application
-                messagebox.showinfo(
-                    "Patch Applied",
-                    f"Patch file has been processed."
-                )
-            else:
-                messagebox.showwarning(
-                    "Warning",
-                    "Patch file format may not be recognized.\n"
-                    "Ensure this is a valid AP patch file (.apdana)"
-                )
-                
-        except Exception as e:
-            messagebox.showerror("Error", f"Failed to apply patch: {str(e)}")
 
-    def generateSeed(self):
-        
         try:
+            self.parent_app.set_gui_enabled(False)
+
             explosivePlant = config.executable_directory + "/chr/enemy/m0660/m0660.mtb"
             plantRespawn = readFileIntoBuffer(explosivePlant)
 
-            # this is the last file edited by the patcher
-            # if it's not equal to what the patcher sets it to then the files aren't yet patched 
-            print(plantRespawn[0xE05])
-            if plantRespawn[0xE05] != 0x3C: 
-                raise Exception("Files not yet patched!")
-            
-            with ZipFile(config.patch_file_path) as zf:
-                for name in zf.namelist():
-                    if name == "settings.json":
-                        self.settings = json.loads(zf.read(name))
-                    elif name == "item_location_map.json":
-                        self.item_map = json.loads(zf.read(name))
-                    elif name == "starting_character.json":
-                        self.starting_character = json.loads(zf.read(name))
-                    elif name == "dungeon_entrance_randomization.json":
-                        self.dungeon_entrance_randomization = json.loads(zf.read(name))
+            if plantRespawn[0xE05] != 0x3C:
+                self.parent_app.set_gui_enabled(True)
+                messagebox.showerror("Error", "Files are not yet patched! Please patch files first.")
+                return
 
+            def seed_gen_task(progress_callback=None):
+                self._generate_seed_internal(progress_callback)
 
-            # Execute main patcher and save
-            rngPatcherMain(self)
-            messagebox.showinfo("Seed Generation Complete!", "Seed generation complete!")
-            
+            def on_complete(error, msg, tb):
+                self.parent_app.set_gui_enabled(True)
+
+            tasks = [(seed_gen_task, "Generating Randomized Seed")]
+            ProgressWindow(self.parent_app, tasks, 1, "Generate Seed", on_complete, ICON_PATH)
+
         except Exception as e:
+            self.parent_app.set_gui_enabled(True)
             traceback.print_exc()
             messagebox.showerror("Error", f"Seed generation failed: {str(e)}")
+    
+    def _generate_seed_internal(self, progress_callback=None):
+        """Internal method for the actual seed generation logic"""
+        with ZipFile(config.patch_file_path) as zf:
+            for name in zf.namelist():
+                if name == "settings.json":
+                    self.settings = json.loads(zf.read(name))
+                elif name == "item_location_map.json":
+                    self.item_map = json.loads(zf.read(name))
+                elif name == "starting_character.json":
+                    self.starting_character = json.loads(zf.read(name))
+                elif name == "dungeon_entrance_randomization.json":
+                    self.dungeon_entrance_randomization = json.loads(zf.read(name))
+
+        patch_data_obj = patch_data()
+        patch_data_obj.item_map = self.item_map
+        patch_data_obj.starting_character = self.starting_character
+        patch_data_obj.dungeon_entrance_randomization = self.dungeon_entrance_randomization
+        patch_data_obj.settings = self.settings
+
+        rngPatcherMain(patch_data_obj, progress_callback)
 
     def launchGame(self):
         executable_path = config.executable_path
@@ -352,8 +385,20 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title(f"Seiren Shuffle Lite v{VERSION_NUM}")
-        self.geometry("600x300")
-
+        
+        # Disable DPI scaling on Windows BEFORE creating window
+        try:
+            import ctypes
+            ctypes.windll.shcore.SetProcessDpiAwareness(2)
+        except:
+            pass
+        
+        # Set fixed size and disable all resizing
+        self.geometry("650x300")
+        self.resizable(False, False)
+        self.minsize(650, 300)
+        self.maxsize(650, 300)
+        
         if ICON_PATH:
             try:
                 self.iconbitmap(ICON_PATH)
@@ -378,6 +423,21 @@ class App(ctk.CTk):
 
         # Load settings on startup
         self.loadSettings()
+    
+    def set_gui_enabled(self, enabled):
+        """Enable or disable the main GUI"""
+        
+        # Disable/enable specific buttons
+        if not enabled:
+            self.executable_frame.browse_button.configure(state="disabled")
+            self.patch_file_frame.browse_button.configure(state="disabled")
+            self.commands_frame.restore_button.configure(state="disabled")
+            self.commands_frame.patch_button.configure(state="disabled")
+            self.commands_frame.generate_seed_button.configure(state="disabled")
+            self.commands_frame.play_button.configure(state="disabled")
+        else:
+            # Re-check button states based on current selections
+            self.updateButtonStates()
 
     def saveSettings(self):
         settings = {

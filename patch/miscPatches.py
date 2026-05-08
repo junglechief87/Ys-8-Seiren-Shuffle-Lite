@@ -6,7 +6,7 @@ import shared.config as config
 from shared.functions import *
 
 #right now this is only to get rid of some logically problematic beehives but could do more later
-def miscFixes():
+def miscFixes(progress_callback=None):
     deleteHives = ['mons47','mons48','mons49']
     locFile = getLocFile('mp1302t2','map')
     monsIDOffset = 26
@@ -23,7 +23,9 @@ def miscFixes():
         fileBytes = writeStringToBytes(fileBytes,hiveLoc + monsScriptOffset,'m0225:m0225')
     
     writeBufferIntoFile(locFile,fileBytes)
-    
+    if progress_callback:
+        progress_callback(f"Fixed: {os.path.basename(locFile)}")
+
     #executable patches
     exeBytes = readFileIntoBuffer(config.executable_path)
 
@@ -41,13 +43,17 @@ def miscFixes():
     # removing until I understand these formulas better.
     """
     writeBufferIntoFile(config.executable_path,exeBytes)
-    
+    if progress_callback:
+        progress_callback(f"Patched: {os.path.basename(config.executable_path)}")
+
     # speeds up respawn time of exploding plants to reduce downtime in Oceanus fight
     explosivePlant = os.path.join(config.executable_directory, "chr/enemy/m0660/m0660.mtb")
     plantRespawn = readFileIntoBuffer(explosivePlant)
     plantRespawn[0xE05:0xE07] = [0x3C,0x00] #Sets respawn timer on explosive plants in Archeozic Chasme to 1 second instead of 8
 
     writeBufferIntoFile(explosivePlant,plantRespawn)
+    if progress_callback:
+        progress_callback(f"Patched: m0660.mtb")
 
 def randomizeOctoBosses(settings):
     random.seed(settings['seed'])
@@ -222,7 +228,7 @@ def pastDanaFixes(enable):
 
     writeBufferIntoFile(theos, disableBind)
 
-def makeResourceDropsGuaranteed():
+def makeResourceDropsGuaranteed(progress_callback=None):
     resourcePointDropTable = os.path.join(config.executable_directory, "text/itempt.tbb")
     makeDropsGuaranteed = readFileIntoBuffer(resourcePointDropTable)
     resourceStrings = ['ICON3D_MT_N1_STONE','ICON3D_MT_N1_WOOD','ICON3D_MT_N1_FLOWER', 'ICON3D_US_MANGO','ICON3D_US_BERRY','ICON3D_US_DRAGONFRUIT']
@@ -266,6 +272,8 @@ def makeResourceDropsGuaranteed():
                 makeDropsGuaranteed[higherTierResourceIndex:higherTierResourceIndex+stringSize] = rareResourceValue
                 
     writeBufferIntoFile(resourcePointDropTable,makeDropsGuaranteed)
+    if progress_callback:
+        progress_callback(f"Updated: {os.path.basename(resourcePointDropTable)}")
 
 def newExpMult(exp_multiplier):
     statusFileLoc = os.path.join(config.executable_directory, "text/en/status.csv")
@@ -312,7 +320,7 @@ def newExpMult(exp_multiplier):
             writer.writerows(newStatusFile)
             csvFile.close()
     
-def AddWarpToFSCCrystal():
+def AddWarpToFSCCrystal(progress_callback=None):
     '''
       if you ever want to undo this byte modifications we can just replace the same byte sequence for 2D (2D = "-") as the length of the sequence was never modified.
     '''
@@ -347,8 +355,8 @@ def AddWarpToFSCCrystal():
         # Write the modified data back to the file
         with open(fscFile, 'wb') as f:
             f.write(data)
-
-        print("\nAdded warp to FSC crystal successfully!")
+        if progress_callback:
+            progress_callback(f"Patched: {os.path.basename(fscFile)}")
 
     except Exception as e:
         print(f"Error: {e}")

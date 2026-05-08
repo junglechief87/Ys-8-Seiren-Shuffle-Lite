@@ -42,7 +42,7 @@ TREASURE_SCRIPTS = {
 "9": "mp0403:EV_M05S151_ED"
 }
 
-def rngPatcherMain(patch):
+def rngPatcherMain(patch, progress_callback=None):
     global patchFile
     patchFile = ''
     rngScriptFile = getLocFile('rng','script')
@@ -122,6 +122,8 @@ def rngPatcherMain(patch):
     with open(rngScriptFile, 'w', encoding = 'Shift-JIS') as fileToPatch: #build the entire rng file from one big string
         fileToPatch.write(patchFile)
         fileToPatch.close()
+    if progress_callback:
+        progress_callback("Generated: rng.scp")
 
 # ==========================================================================================================
 # Functions appear in order called  

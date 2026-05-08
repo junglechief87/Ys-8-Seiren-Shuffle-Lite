@@ -17,7 +17,7 @@ def set_locations_cache(locations_by_id):
 #All other random locations are handled in the game's script .scp files. By reworking the chests like this we can handle all randomization via calls to our own .scp file.
 #This allows for greater flexibility as it lets us use whatever we want from the games myriad of prebuilt functions and scripting tools on our chests themselves.
 #we only want to patch chest here, obviously, so we look for the string that's tied to all chests and that the type is item.
-def cleanChests(locations_by_id=None):
+def cleanChests(locations_by_id=None, progress_callback=None):
     global _locations_cache
     itemIDOffset = 9
     quatityOffset = 15
@@ -71,6 +71,9 @@ def cleanChests(locations_by_id=None):
             with open(locFile,"wb") as buffer:
                 buffer.write(fileBytes)
                 buffer.close()
+
+            if progress_callback:
+                progress_callback(f"Patched {location.mapCheckID} in {location.mapID}")
                     
 #clears out existing chest contents and scripts, this is to help error proof our overwritting of the chest data.
 def clearBytes(byteArray,startOffset,clearType):
