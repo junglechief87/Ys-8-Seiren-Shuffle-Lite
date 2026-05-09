@@ -27,7 +27,7 @@ function "init"
 
 	if (FLAG[SF_EVENT_ON]){
 		// イベント発生制御
-		if (FLAG[GF_06MP6301_RETURN_CENTER]		// ▼第六部 [M06S150][オクトゥス中央の間に戻る]
+		if ((FLAG[GF_06MP6301_RETURN_CENTER] || FLAG[GF_TBOX_DUMMY113])		// ▼第六部 [M06S150][オクトゥス中央の間に戻る]
 		&& !FLAG[GF_06MP6306_TALK_MINOS]  && !FLAG[GF_TBOX_DUMMY112]){		// ▽第六部 [M06S163][ミノスと話す]
 			EventAreaEnable("evb2_M06S160", 1)
 		}

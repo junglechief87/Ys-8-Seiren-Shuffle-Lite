@@ -27,7 +27,7 @@ function "init"
 
 	 if (FLAG[SF_EVENT_ON]){
 		// イベント発生制御
-		if (FLAG[GF_06MP6301_OPEN_INSECT]		// ▼第六部 [M06S170][蟲の回廊へ進めるようになる]
+		if ((FLAG[GF_06MP6301_OPEN_INSECT] || FLAG[GF_TBOX_DUMMY113])		// ▼第六部 [M06S170][蟲の回廊へ進めるようになる]
 		&& !FLAG[GF_06MP6307_TALK_NESTOR]  && !FLAG[GF_TBOX_DUMMY112]) {	// ▽第六部 [M06S183][ネストールと話す]
 			EventAreaEnable("evb2_M06S180", 1)
 		}

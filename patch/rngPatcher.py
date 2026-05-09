@@ -1507,8 +1507,8 @@ def octoBosses(settings):
     #octus bosses exp and HP go up based on bosses leading into the end game. This is to help prep for the final boss.
     #the HP mod is just a percentage of a rough approcimation of the highest level the final boss could get to if unlucky.
     HPmod = 0.75
-    EXPMod = 3
-    script = '\tfunction "setOctoBossLevels"\n\t{\n'
+    EXPMod = 5.0
+    script = 'function "setOctoBossLevels"\n\t{\n'
     for boss in octoBossAliases:
         bossLevel = random.randrange(65,75)
         script = script + '\t\tSetLevel(' + boss + ', ' + str(bossLevel) + ')\n'

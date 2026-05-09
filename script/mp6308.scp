@@ -27,7 +27,7 @@ function "init"
 
 	if (FLAG[SF_EVENT_ON]){
 		// イベント発生制御
-		if (FLAG[GF_06MP6301_OPEN_HEAVENS]		// ▼第六部 [M06S190][天の回廊へ進めるようになる]
+		if ((FLAG[GF_06MP6301_OPEN_HEAVENS] || FLAG[GF_TBOX_DUMMY113])		// ▼第六部 [M06S190][天の回廊へ進めるようになる]
 		&& !FLAG[GF_06MP6308_TALK_SARAI]  && !FLAG[GF_TBOX_DUMMY112]) {		// ▽第六部 [M06S203][サライが想念を取り戻す]
 			EventAreaEnable("evb2_M06S200", 1)
 		}
