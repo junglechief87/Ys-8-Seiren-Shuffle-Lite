@@ -286,15 +286,15 @@ def newExpMult(exp_multiplier):
                         'DANA2':{'EXPMIN':102, 'EXPMAX':520000},
                         'DANA3':{'EXPMIN':102, 'EXPMAX':520000},}
     
-    monsterNestExpValues = {'G0001':{'EXPMIN':150, 'EXPMAX':150},
-                        'G0002':{'EXPMIN':160, 'EXPMAX':160},
-                        'G0003':{'EXPMIN':170, 'EXPMAX':170},
-                        'G0004':{'EXPMIN':180, 'EXPMAX':180},
-                        'G0005':{'EXPMIN':190, 'EXPMAX':190},
-                        'G0006':{'EXPMIN':200, 'EXPMAX':200},
-                        'G0007':{'EXPMIN':210, 'EXPMAX':210},
-                        'G0008':{'EXPMIN':220, 'EXPMAX':220},
-                        'G0009':{'EXPMIN':230, 'EXPMAX':230},}
+    monsterNestExpValues = {'G0001':{'EXPMIN':80, 'EXPMAX':80},
+                            'G0002':{'EXPMIN':100, 'EXPMAX':100},
+                            'G0003':{'EXPMIN':120, 'EXPMAX':120},
+                            'G0004':{'EXPMIN':140, 'EXPMAX':140},
+                            'G0005':{'EXPMIN':160, 'EXPMAX':160},
+                            'G0006':{'EXPMIN':180, 'EXPMAX':180},
+                            'G0007':{'EXPMIN':210, 'EXPMAX':210},
+                            'G0008':{'EXPMIN':230, 'EXPMAX':230},
+                            'G0009':{'EXPMIN':250, 'EXPMAX':250},}
 
     with open (statusFileLoc, 'r', encoding='utf-8') as csvFile:
         statusFile = csv.DictReader(csvFile,delimiter='\t',lineterminator='\n',strict=True)
