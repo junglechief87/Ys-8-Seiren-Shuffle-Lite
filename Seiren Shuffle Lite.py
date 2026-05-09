@@ -64,7 +64,6 @@ ICON_PATH = find_icon_path()
 class patch_data:
     def __init__(self):
         self.item_map = {}
-        self.starting_character = {}
         self.dungeon_entrance_randomization = {}
         self.settings = {}
         
@@ -187,7 +186,6 @@ class CommandsFrame(ctk.CTkFrame):
         
         # Initialize patch data attributes
         self.item_map = {}
-        self.starting_character = {}
         self.dungeon_entrance_randomization = {}
         self.settings = {}
 
@@ -335,14 +333,11 @@ class CommandsFrame(ctk.CTkFrame):
                     self.settings = json.loads(zf.read(name))
                 elif name == "item_location_map.json":
                     self.item_map = json.loads(zf.read(name))
-                elif name == "starting_character.json":
-                    self.starting_character = json.loads(zf.read(name))
                 elif name == "dungeon_entrance_randomization.json":
                     self.dungeon_entrance_randomization = json.loads(zf.read(name))
 
         patch_data_obj = patch_data()
         patch_data_obj.item_map = self.item_map
-        patch_data_obj.starting_character = self.starting_character
         patch_data_obj.dungeon_entrance_randomization = self.dungeon_entrance_randomization
         patch_data_obj.settings = self.settings
 

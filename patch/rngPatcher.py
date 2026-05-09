@@ -384,14 +384,7 @@ def buildSkillLocation(location_id, patch, vanillaScript):
     characterName = skillInfo[2]
     message = GREEN + characterName + SKILL_MESSAGE + loc_data['item_name'] + GREEN + "."
 
-    if "Starting Skill" in loc_data['location_name']: #for starting skills just go ahead and give the skill, don't bombard the player with messages each time they get a character.
-        getSkillFunction = """
-function "{0}"
-{{
-    GetSkill({6},{7},1)
-}}
-"""
-    elif loc_data['location_type'] in ['event', 'landmark']:
+    if loc_data['location_type'] in ['event', 'landmark']:
         getSkillFunction = """
 function "{0}"
 {{

@@ -16,11 +16,6 @@ def getCrewFlags(name):
         JoinParty(PARTY_ADOL)
     }
 
-    if(FLAG[GF_TBOX_DUMMY111]) //if skill shuffle is on
-    {
-        CallFunc("rng:0520")
-        CallFunc("rng:0521")
-    }
 """         
             flag = flag + getCharacterJoinLv("ADOL")
 
@@ -39,11 +34,6 @@ def getCrewFlags(name):
  
     SetDiaryFlag( DF_JOIN_LAXIA, 1 )	
 
-    if(FLAG[GF_TBOX_DUMMY111]) //if skill shuffle is on
-    {
-        CallFunc("rng:0522")
-        CallFunc("rng:0523")
-    }
 """
             flag = flag + getCharacterJoinLv("LAXIA")
 
@@ -72,11 +62,6 @@ def getCrewFlags(name):
  
     SetDiaryFlag( DF_JOIN_SAHAD, 1 )		
 
-    if(FLAG[GF_TBOX_DUMMY111]) //if skill shuffle is on
-    {
-        CallFunc("rng:0524")
-        CallFunc("rng:0525")
-    }
 """
             flag = flag + getCharacterJoinLv("SAHAD")
 
@@ -173,12 +158,6 @@ def getCrewFlags(name):
     SetFlag( GF_QUEST_400, QUEST_START )
     SetDiaryFlag( DF_QS400_START, 1 )
 
-    if(FLAG[GF_TBOX_DUMMY111]) //if skill shuffle is on
-    {
-        CallFunc("rng:0528")
-        CallFunc("rng:0529")
-    }
-
 """
             flag = flag + getCharacterJoinLv("RICOTTA")
 
@@ -215,11 +194,6 @@ def getCrewFlags(name):
 
     SetDiaryFlag( DF_JOIN_HUMMEL, 1 )
 
-    if(FLAG[GF_TBOX_DUMMY111]) //if skill shuffle is on
-    {
-        CallFunc("rng:0526")
-        CallFunc("rng:0527")
-    }
 """
             flag = flag + getCharacterJoinLv("HUMMEL")
 
@@ -235,11 +209,6 @@ def getCrewFlags(name):
     SetDiaryFlag( DF_JOIN_DANA, 1 )
     JoinParty(PARTY_DANA)
     
-    if(FLAG[GF_TBOX_DUMMY111]) //if skill shuffle is on
-    {
-        CallFunc("rng:0530")
-        CallFunc("rng:0531")
-    }
 """
             flag = flag + getCharacterJoinLv("DANA")
 

@@ -4370,8 +4370,6 @@ function "it_receive_items"
 				Message("#4CAdol Received")
 				WaitPrompt()
 				WaitCloseWindow()
-				CallFunc("rng:0520")
-        		CallFunc("rng:0521")
 				if(FLAG[GF_TBOX_DUMMY121] == 1){SetLevel(ADOL,1)} 
 				else if(FLAG[GF_TBOX_DUMMY121] == 2){SetLevel(ADOL,2)} 
 				else if(FLAG[GF_TBOX_DUMMY121] == 3){SetLevel(ADOL,3)} 
@@ -4481,8 +4479,6 @@ function "it_receive_items"
 				Message("#4CLaxia Received")
 				WaitPrompt()
 				WaitCloseWindow()
-				CallFunc("rng:0522")
-        		CallFunc("rng:0523")
 				if(FLAG[GF_TBOX_DUMMY121] == 1){SetLevel(LAXIA,1)} 
 				else if(FLAG[GF_TBOX_DUMMY121] == 2){SetLevel(LAXIA,2)} 
 				else if(FLAG[GF_TBOX_DUMMY121] == 3){SetLevel(LAXIA,3)} 
@@ -4592,8 +4588,6 @@ function "it_receive_items"
 				Message("#4CSahad Received")
 				WaitPrompt()
 				WaitCloseWindow()
-				CallFunc("rng:0524")
-        		CallFunc("rng:0525")
 				if(FLAG[GF_TBOX_DUMMY121] == 1){SetLevel(SAHAD,1)} 
 				else if(FLAG[GF_TBOX_DUMMY121] == 2){SetLevel(SAHAD,2)} 
 				else if(FLAG[GF_TBOX_DUMMY121] == 3){SetLevel(SAHAD,3)} 
@@ -4703,8 +4697,6 @@ function "it_receive_items"
 				Message("#4CHummel Received")
 				WaitPrompt()
 				WaitCloseWindow()
-				CallFunc("rng:0526")
-        		CallFunc("rng:0527")
 				if(FLAG[GF_TBOX_DUMMY121] == 1){SetLevel(HUMMEL,1)} 
 				else if(FLAG[GF_TBOX_DUMMY121] == 2){SetLevel(HUMMEL,2)} 
 				else if(FLAG[GF_TBOX_DUMMY121] == 3){SetLevel(HUMMEL,3)} 
@@ -4816,8 +4808,6 @@ function "it_receive_items"
 				Message("#4CRicotta Received")
 				WaitPrompt()
 				WaitCloseWindow()
-				CallFunc("rng:0528")
-        		CallFunc("rng:0529")
 				if(FLAG[GF_TBOX_DUMMY121] == 1){SetLevel(RICOTTA,1)} 
 				else if(FLAG[GF_TBOX_DUMMY121] == 2){SetLevel(RICOTTA,2)} 
 				else if(FLAG[GF_TBOX_DUMMY121] == 3){SetLevel(RICOTTA,3)} 
@@ -4927,8 +4917,6 @@ function "it_receive_items"
 				Message("#4CDana Received")
 				WaitPrompt()
 				WaitCloseWindow()
-				CallFunc("rng:0530")
-        		CallFunc("rng:0531")
 				if(FLAG[GF_TBOX_DUMMY121] == 1){SetLevel(DANA,1)} 
 				else if(FLAG[GF_TBOX_DUMMY121] == 2){SetLevel(DANA,2)} 
 				else if(FLAG[GF_TBOX_DUMMY121] == 3){SetLevel(DANA,3)} 
