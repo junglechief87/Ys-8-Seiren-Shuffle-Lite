@@ -4365,7 +4365,6 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_ADOL_JOINED] && !FLAG[SF_ADOL_JOINOK])
 			{
-				GetItem(ICON3D_143,1) 
 				SetFlag(SF_ADOL_JOINOK, 1)
         		JoinParty(PARTY_ADOL)
 				Message("#4CAdol Received")
@@ -4476,7 +4475,6 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_LAXIA_JOINED] && !FLAG[SF_LAXIA_JOINOK])
 			{
-				GetItem(ICON3D_143,1) 
 				SetFlag(SF_LAXIA_JOINOK, 1)
         		JoinParty(PARTY_LAXIA)
 				SetDiaryFlag( DF_JOIN_LAXIA, 1 )
@@ -4588,7 +4586,6 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_SAHAD_JOINED] && !FLAG[SF_SAHAD_JOINOK])
 			{
-				GetItem(ICON3D_143,1) 
 				etFlag(SF_SAHAD_JOINOK, 1)
         		JoinParty(PARTY_SAHAD)
 				SetDiaryFlag( DF_JOIN_SAHAD, 1 )
@@ -4700,7 +4697,6 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_HUMMEL_JOINED] && !FLAG[SF_HUMMEL_JOINOK])
 			{
-				GetItem(ICON3D_143,1) 
 				SetFlag(SF_HUMMEL_JOINOK, 1)
         		JoinParty(PARTY_HUMMEL)
 				SetDiaryFlag( DF_JOIN_HUMMEL, 1 )
@@ -4812,7 +4808,6 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_RICOTTA_JOINED] && !FLAG[SF_RICOTTA_JOINOK])
 			{
-				GetItem(ICON3D_143,1) 
 				SetFlag(SF_RICOTTA_JOINOK, 1)
         		JoinParty(PARTY_RICOTTA)
 				SetDiaryFlag( DF_JOIN_RICOTTA, 1 )
@@ -4926,7 +4921,6 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_DANA_JOINED] && !FLAG[SF_DANA_JOINOK])
 			{
-				GetItem(ICON3D_143,1) 
 				SetFlag(SF_DANA_JOINOK, 1)
     			SetDiaryFlag( DF_JOIN_DANA, 1 )
     			JoinParty(PARTY_DANA)

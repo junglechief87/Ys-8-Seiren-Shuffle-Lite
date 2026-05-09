@@ -219,7 +219,7 @@ function "{0}"
             getItemFunction =  """
 function "{0}"
 {{
-    GetItemMessageExPlus(-1,1,{1},{2},0,0)
+    GetItemMessageExPlus(-1,1,{1},"{2}",0,0)
     WaitPrompt()
     WaitCloseWindow()
     {3}
@@ -231,7 +231,7 @@ function "{0}"
 function "{0}"
 {{
     SetStopFlag(STOPFLAG_TALK)
-    GetItemMessageExPlus(-1,1,{1},{2},0,0)
+    GetItemMessageExPlus(-1,1,{1},"{2}",0,0)
     WaitPrompt()
     WaitCloseWindow()
     {3}
@@ -1039,19 +1039,11 @@ function "newTradeHandler"
 }}
 """
     for i in range(461,471):
-        dinasItems[i-461] = ItemInfo(locations[str(i)]['item_name'], locations[str(i)]['item_quantity'])
+        dinasItems[i-461] = ItemInfo(locations[str(i)]['item_name'])
 
-    item1 = dinasItems[0].itemName
-    item2 = dinasItems[1].itemName
-    item3 = dinasItems[2].itemName
-    item4 = dinasItems[3].itemName
-    item5 = dinasItems[4].itemName
-    item6 = dinasItems[5].itemName
-    item7 = dinasItems[6].itemName
-    item8 = dinasItems[7].itemName
-    item9 = dinasItems[8].itemName
-    item10 = dinasItems[9].itemName
-    return script.format(item1.itemName,item2.itemName,item3.itemName,item4.itemName,item5.itemName,item6.itemName,item7.itemName,item8.itemName,item9.itemName,item10.itemName)
+    return script.format(dinasItems[0].itemName,dinasItems[1].itemName,dinasItems[2].itemName,dinasItems[3].itemName,
+                         dinasItems[4].itemName,dinasItems[5].itemName,dinasItems[6].itemName,dinasItems[7].itemName,
+                         dinasItems[8].itemName,dinasItems[9].itemName)
 
 # ==========================================================================================================
 #  Shop Self Hints: Dogi, Master Kong, Shoebill, Austin, Mishy, and Euron
@@ -1293,7 +1285,8 @@ function "discoveryRewardPreview1"
 	{{
         "Hmmmm...." 
         "I could really use some inspiration."
-        "If you find something interesting, maybe you could share it with me?"
+        "If you find something interesting, "
+        "maybe you could share it with me?"
         "I'd be happy to offer the following in return."
     }}
     WaitPrompt()
@@ -1335,7 +1328,8 @@ function "mapRewardPreview"
     TalkPopup(UNDEF,0,2,0,0,0)
     {{
         "Hey there!" 
-        "Show me that map as you explore and I'll offer you some of my collection."
+        "Show me that map as you explore and "
+        "I'll offer you some of my collection."
         "Let's see here....."
     }}
     WaitPrompt()
@@ -1343,7 +1337,7 @@ function "mapRewardPreview"
 
     TalkPopup(UNDEF,0,2,0,0,0)
     {{
-        This is what I got for you!
+        "This is what I got for you!"
         "#2C {0}#0C for 10% map completion."
         "#2C {1}#0C for 20% map completion."
         "#2C {2}#0C for 30% map completion."
@@ -1373,15 +1367,16 @@ function "foodRewardPreview"
     {{
         "(Mishy shows you his stash, maybe he'll share" 
         "some of it if you keep bringing him food?)"
-        "(#2C {0}#0C)"
-        "(#2C {1}#0C)"
-        "(#2C {2}#0C)"
+            ""
     }}
     WaitPrompt()
     WaitCloseWindow()
 
     TalkPopup(UNDEF,0,3,STOPPER_PPOSX,STOPPER_PPOSY,0)
     {{
+        "(#2C {0}#0C)"
+        "(#2C {1}#0C)"
+        "(#2C {2}#0C)"
         "(#2C {3}#0C)"
         "(#2C {4}#0C)"
         "(#2C {5}#0C)"
@@ -1608,12 +1603,14 @@ def endingHandler(options):
     {
         LoadArg("map/mp0021/mp0021.arg")
         EventCue("mp0021:EV_M07S130")
+        SetFlag(GF_TBOX_DUMMY120,1)
     }
     
     function "ending2"
     {
         LoadArg("map/mp0021/mp0021.arg")
         EventCue("mp0021:EV_M07S130")
+        SetFlag(GF_TBOX_DUMMY120,1)
     }
     """
     elif options['final_boss'] == 2: #Both
@@ -1630,6 +1627,7 @@ def endingHandler(options):
     {{
         LoadArg("map/mp0021/mp0021.arg")
         EventCue("mp0021:EV_M07S130")
+        SetFlag(GF_TBOX_DUMMY120,1)
     }}
     """
         ending1 = ending1.format(originPhase,package)

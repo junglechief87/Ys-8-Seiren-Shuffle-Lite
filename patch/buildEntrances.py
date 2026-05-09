@@ -377,6 +377,31 @@ def buildEntrances(entranceList, options):
 		""".format(entranceEvent[entranceList["FSC Entrance"]]["load"], entranceEvent[entranceList["FSC Entrance"]]["entry_event"])
 
 	entranceScript = entranceScript + """
+	function "outsideSilentTowerDebris"
+	{{
+		if(WORK[WK_NPCNUM] >= 24 )
+		{{
+			EventCue("mp2104:SubEV_Sien16")
+		}}
+		else 
+		{{
+			SetStopFlag(STOPFLAG_SIMPLEEVENT2)
+			TalkPopup("UNDEF",0,3,STOPPER_PPOSX,STOPPER_PPOSY,0)
+			{{
+				"#7C A towering pile of earth and debris"
+				"#7C is blocking the exit."
+			}}
+			WaitPrompt()
+			WaitCloseWindow()
+			ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
+			LoadArg("{0}")
+			EventCue("{1}",1)
+
+		}}
+	}}	
+	""".format(entranceEvent[entranceList["ST Entrance"]]["load"], entranceEvent[entranceList["ST Entrance"]]["entry_event"])
+
+	entranceScript = entranceScript + """
 
 	function "Entry_warpout_mp6409_replace" //entrance from Temple of the Great Tree - Octus Entrance
 	{{
@@ -939,26 +964,7 @@ def buildEntrances(entranceList, options):
 	{
 		if (!FLAG[GF_SUBEV_2104_REMOVE_SAND])
 		{
-			
-			if(WORK[WK_NPCNUM] >= 24 )
-			{
-				EventCue("mp2104:SubEV_Sien16")
-			}
-			else 
-			{
-				SetStopFlag(STOPFLAG_SIMPLEEVENT2)
-				TalkPopup("UNDEF",0,3,STOPPER_PPOSX,STOPPER_PPOSY,0)
-				{
-					"#7C A towering pile of earth and debris"
-					"#7C is blocking the exit."
-				}
-				WaitPrompt()
-				WaitCloseWindow()
-				ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
-				LoadArg("map/mp6321/mp6321.arg")
-				EventCue("rng:6321_entry",1)
-
-			}	
+			CallFunc("rng:outsideSilentTowerDebris")
 		}
 		else
 		{

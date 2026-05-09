@@ -249,7 +249,7 @@ function "node_ctrl" 	//分割先のマップでも呼び出します
 	}
 
 	//-- 中ボス対応 ------------------------------------------------------
-	if (FLAG[GF_06MP6301_OPEN_STAIRS]) {	//卵へ続く階段が現れる
+	if (FLAG[GF_06MP6301_OPEN_STAIRS] || FLAG[GF_TBOX_DUMMY113]) {	//卵へ続く階段が現れる
 		// オベリスク消灯
 		MapAnime("emblem_m4" , "off" )
 	
@@ -265,7 +265,7 @@ function "node_ctrl" 	//分割先のマップでも呼び出します
 		MapAnime("stop2_m4"  , "on" )
 		MapAnime("mark_m4"   , "off" )
 	}
-	if (FLAG[GF_06MP6301_OPEN_HEAVENS]) {	//天の回廊へ進めるようになる
+	if (FLAG[GF_06MP6301_OPEN_HEAVENS] || FLAG[GF_TBOX_DUMMY113]) {	//天の回廊へ進めるようになる
 		// オベリスク消灯
 		MapAnime("emblem_m3" , "off" )
 	
@@ -281,7 +281,7 @@ function "node_ctrl" 	//分割先のマップでも呼び出します
 		MapAnime("stop2_m3"  , "on" )
 		MapAnime("mark_m3"   , "off" )
 	}
-	if (FLAG[GF_06MP6301_OPEN_INSECT]) {	//蟲の回廊へ進めるようになる
+	if (FLAG[GF_06MP6301_OPEN_INSECT] || FLAG[GF_TBOX_DUMMY113]) {	//蟲の回廊へ進めるようになる
 
 		// オベリスク消灯
 		MapAnime("emblem_m2" , "off" )
@@ -298,7 +298,7 @@ function "node_ctrl" 	//分割先のマップでも呼び出します
 		MapAnime("stop2_m2"  , "on" )
 		MapAnime("mark_m2"   , "off" )
 	}
-	if (FLAG[GF_06MP6301_RETURN_CENTER]) {	//オクトゥス中央の間に戻る 
+	if (FLAG[GF_06MP6301_RETURN_CENTER] || FLAG[GF_TBOX_DUMMY113]) {	//オクトゥス中央の間に戻る 
 
 		//オベリスク消灯
 		MapAnime("emblem_m1" , "off" )
