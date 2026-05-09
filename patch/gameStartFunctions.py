@@ -674,7 +674,7 @@ function "startParameters"
     return startParams.format(gameSettingFlags,startingCharacter,pastDanaFlags)
 
 def manageEarlyGameParty(patch):
-    match patch.patch.settings["starting_character"]:
+    match patch.settings["starting_character"]:
         case 'Adol':
             party = "(PARTY_ADOL , -1 , -1)"
         case 'Laxia':
@@ -697,7 +697,7 @@ function "earlyGameParty"
     return startParams.format(party)
 
 def soloStartingCharacterEvent(patch):
-    match patch.patch.settings["starting_character"]:
+    match patch.settings["starting_character"]:
         case 'Adol':
             flags = """
     SetFlag(SF_ADOL_JOINOK, 1)
