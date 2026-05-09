@@ -93,7 +93,10 @@ def rngPatcherMain(patch, progress_callback=None):
                 patchFile = patchFile + buildSkillLocation(loc_id, patch, script)
             elif loc_data['category'] == 'Landmark':
                 patchFile = patchFile + buildLandmarks(loc_id, patch, script)
+        if progress_callback:
+            progress_callback(f"Building location from item map: {location}")
 
+    # Handling Options
     bossScalingScript = bossScaling()
     patchFile = patchFile + bossScalingScript
 
@@ -101,29 +104,44 @@ def rngPatcherMain(patch, progress_callback=None):
         patchFile = patchFile + buildPsyches(patch.settings)
     if patch.settings['options']['former_sanctuary_crypt'] == 1:
         patchFile = patchFile + buildFSCWarp()
-
-    patchFile = patchFile + interceptionHandler(patch.settings['options'])
-    patchFile = patchFile + jewelTrade(patch.item_map)
-    patchFile = patchFile + talkHints(patch.item_map)
-    patchFile = patchFile + octusGoal(patch.settings['options'])
-    patchFile = patchFile + goal(patch.settings['options'])
-
+    if patch.settings['options']['dungeon_entrance_shuffle'] == 1:
+        patchFile = patchFile + buildEntrances(patch.dungeon_entrance_randomization, patch.settings['options'])
     if patch.settings['options']['octus_paths_opened'] == 1:
         patchFile = patchFile + octoBosses(patch.settings)
     else:
         #this is to restore the original values
         randomizeOctoBosses(patch.settings)
-    
+    if progress_callback:
+        progress_callback("Handling options")
+
+    patchFile = patchFile + interceptionHandler(patch.settings['options'])
+    if progress_callback:
+        progress_callback("Setting up interceptions")
+
+    patchFile = patchFile + jewelTrade(patch.item_map)
+    if progress_callback:
+        progress_callback("Setting up Dina's shop")
+
+    patchFile = patchFile + talkHints(patch.item_map)
+    if progress_callback:
+        progress_callback("Setting up NPC item hints")
+
+    patchFile = patchFile + octusGoal(patch.settings['options'])
+    if progress_callback:
+        progress_callback("Setting up goal")
+
+    patchFile = patchFile + goal(patch.settings['options'])
+    if progress_callback:
+        progress_callback("Setting up final boss")
+
     patchFile = patchFile + endingHandler(patch.settings['options'])
     expMult(patch.settings['options'])
-    
-    if patch.settings['options']['dungeon_entrance_shuffle'] == 1:
-        patchFile = patchFile + buildEntrances(patch.dungeon_entrance_randomization, patch.settings['options'])
+    if progress_callback:
+        progress_callback("Setting up ending")
+
     with open(rngScriptFile, 'w', encoding = 'Shift-JIS') as fileToPatch: #build the entire rng file from one big string
         fileToPatch.write(patchFile)
         fileToPatch.close()
-    if progress_callback:
-        progress_callback("Generated: rng.scp")
 
 # ==========================================================================================================
 # Functions appear in order called  

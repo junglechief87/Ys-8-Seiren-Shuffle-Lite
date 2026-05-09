@@ -315,8 +315,12 @@ class CommandsFrame(ctk.CTkFrame):
             def on_complete(error, msg, tb):
                 self.parent_app.set_gui_enabled(True)
 
+            with ZipFile(config.patch_file_path) as zf:
+                item_map_preview = json.loads(zf.read("item_location_map.json"))
+            total_steps = len(item_map_preview) + 7  # locations + 7 named pipeline steps
+
             tasks = [(seed_gen_task, "Generating Randomized Seed")]
-            ProgressWindow(self.parent_app, tasks, 1, "Generate Seed", on_complete, ICON_PATH)
+            ProgressWindow(self.parent_app, tasks, total_steps, "Generate Seed", on_complete, ICON_PATH)
 
         except Exception as e:
             self.parent_app.set_gui_enabled(True)
