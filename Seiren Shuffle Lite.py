@@ -435,7 +435,10 @@ class App(ctk.CTk):
             self.commands_frame.generate_seed_button.configure(state="disabled")
             self.commands_frame.play_button.configure(state="disabled")
         else:
-            # Re-check button states based on current selections
+            # Re-enable browse buttons and re-check command button states
+            self.executable_frame.browse_button.configure(state="normal")
+            if self.executable_frame.get_path() is not None:
+                self.patch_file_frame.enable_button()
             self.updateButtonStates()
 
     def saveSettings(self):
