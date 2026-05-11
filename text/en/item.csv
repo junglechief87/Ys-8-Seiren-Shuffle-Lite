@@ -796,17 +796,17 @@
 757	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 758	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 759	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-760	T's Note 1	Piece of Paper	A note written by "T".$nRead it in the Journal.	0	ITEM_TYPE_INVENTORY	320	36	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-761	T's Note 2	Piece of Paper	A note written by "T".$nRead it in the Journal.	0	ITEM_TYPE_INVENTORY	320	37	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-762	T's Note 3	Piece of Paper	A note written by "T".$nRead it in the Journal.	0	ITEM_TYPE_INVENTORY	320	38	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-763	T's Note 4	Piece of Paper	A note written by "T".$nRead it in the Journal.	0	ITEM_TYPE_INVENTORY	320	39	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+760	T's Note 1	Piece of Paper	A note written by "T".$nUnlocks intercepts in the village.	0	ITEM_TYPE_INVENTORY	320	36	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+761	T's Note 2	Piece of Paper	A note written by "T".$nUnlocks intercepts in the village.	0	ITEM_TYPE_INVENTORY	320	37	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+762	T's Note 3	Piece of Paper	A note written by "T".$nUnlocks intercepts in the village.	0	ITEM_TYPE_INVENTORY	320	38	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+763	T's Note 4	Piece of Paper	A note written by "T".$nUnlocks intercepts in the village.	0	ITEM_TYPE_INVENTORY	320	39	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 764	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 765	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 766	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 767	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 768	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 769	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-770	Ship's Log 1	Piece of Paper	Captain Reed's log.$nRead it in the Journal.	0	ITEM_TYPE_INVENTORY	321	40	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+770	Ship's Log 1	Piece of Paper	Captain Reed's log.$nDrops the gangway to the Pirate Ship.	0	ITEM_TYPE_INVENTORY	321	40	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 771	Ship's Log 2	Piece of Paper	Captain Reed's log.$nRead it in the Journal.	0	ITEM_TYPE_INVENTORY	321	41	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 772	Ship's Log 3	Piece of Paper	Captain Reed's log.$nRead it in the Journal.	0	ITEM_TYPE_INVENTORY	321	42	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 773	Ship's Log 4	Piece of Paper	Captain Reed's log.$nRead it in the Journal.	0	ITEM_TYPE_INVENTORY	321	43	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
