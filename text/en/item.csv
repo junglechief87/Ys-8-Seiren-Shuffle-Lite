@@ -153,7 +153,7 @@
 136	Speed Gunner	Apparel (Hummel)	Give Hummel a refreshing$nappearance with this outfit.	0	EQ_MC_HUMMEL_ONLY	330	0	3	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 137	Cutesy Girl	Apparel (Ricotta)	Ricotta looks a lot more$ncalm in this outfit.	0	EQ_MC_RICOTTA_ONLY	330	0	3	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 138	Noble Shaman	Apparel (Dana)	Give Dana a stylish look$nwith this outfit.	0	EQ_MC_DANA_ONLY	330	0	3	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-139	Progressive Shop Rank	Current Rank	A count of shop levels found.	0	ITEM_TYPE_INVENTORY	325	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+139	Progressive Shop Rank	Current Rank	Upgrades the forge and what's available$nat various shops.	0	ITEM_TYPE_INVENTORY	325	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 140	Ricotta Style	Attachment (Adol)	This attachment allows Adol$nto don Ricotta's necklace.	0	EQ_SC_ADOL_ONLY	331	0	4	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 141	Elegant Glasses	Attachment (Laxia)	This attachment places$nelegant glasses on Laxia.	SUBCOSTUME_TARGET_GLASSES	EQ_SC_LAXIA_ONLY	331	0	4	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 // <衣装：アクセサリ>	名前	効果説明文	アイテム説明文	部位ｶﾃｺﾞﾘ(0以外で有効。同じｶﾃｺﾞﾘ値のものは重複装備できない)	種類	アイコン番号	ソート番号	ランク	レア	トロフィー	DLCラベル(N+4桁)	解体	--------	攻撃力	防御力	属性１	属性１値	属性２	属性２値	属性３	属性３値	属性４	属性４値	属性５	属性５値	属性６	属性６値	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------
@@ -731,11 +731,11 @@
 695	Power Formula	Apothecary Formula	The formula for brewing a Power Elixir.$nA doctor will know how to use this.	0	ITEM_TYPE_INVENTORY	262	18	5	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 696	Defense Formula	Apothecary Formula	The formula for brewing a Defense Elixir.$nA doctor will know how to use this.	0	ITEM_TYPE_INVENTORY	262	19	5	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 697	Dynasty Formula	Apothecary Formula	The formula for brewing Dynastic Water.$nA doctor will know how to use this.	0	ITEM_TYPE_INVENTORY	262	20	5	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-698	Maiden Journal	View Dana's Notess	Dana's journal.$nContains various information.	0	ITEM_TYPE_INVENTORY	397	0	5	1	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-699	Frosted Flower		A frozen Tyrennian blossom.$nThe only one amid all the debris.	0	ITEM_TYPE_INVENTORY	398	0	5	1	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-700	Blue Seal of Whirling Water	Improves the Iclucian Style	The power of Eld, Spirit of the River.$nImproves Dana's Iclucian Style.	0	ITEM_TYPE_INVENTORY	405	0	5	1	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-701	Green Seal of Roaring Stone	Improves the Gratika Style	The power of Orvis, Spirit of the Midnight Sun.$nImproves Dana's Gratika Style.	0	ITEM_TYPE_INVENTORY	406	0	5	1	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-702	Golden Seal of Piercing Light	Improves the Luminous Style	The power of Selene, Spirit of Covenants.$nImproves Dana's Luminous Style.	0	ITEM_TYPE_INVENTORY	407	0	5	1	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+698	Maiden Journal	View Dana's Notess	Dana's journal.$nUnlocks the prayer tree to Pimordial Passage.	0	ITEM_TYPE_INVENTORY	397	0	5	1	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+699	Frosted Flower		A frozen Tyrennian blossom.$nOpens the path to the Palace and Monastary.	0	ITEM_TYPE_INVENTORY	398	0	5	1	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+700	Blue Seal of Whirling Water	Improves the Iclucian Style	The power of Eld, Spirit of the River.$nSpawns prayer tree from Pangai Plains.	0	ITEM_TYPE_INVENTORY	405	0	5	1	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+701	Green Seal of Roaring Stone	Improves the Gratika Style	The power of Orvis, Spirit of the Midnight Sun.$nSpawns prayer tree to Temple.	0	ITEM_TYPE_INVENTORY	406	0	5	1	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+702	Golden Seal of Piercing Light	Improves the Luminous Style	The power of Selene, Spirit of Covenants.$nSpawns prayer tree to Baja Tower.	0	ITEM_TYPE_INVENTORY	407	0	5	1	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 703	Essence Key Stone		An ancient stone that absorbs Essence.$nIt can nullify Essence barriers.	0	ITEM_TYPE_INVENTORY	408	2	5	1	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 704	---		---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 705	---		---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
@@ -761,7 +761,7 @@
 724	Saurian God Talisman	Resist Bleed	Protective talisman of the Saurian god.$nSlows the accumulation of Bleeding.	4	EQ_COMMON_ACCESSORY	379	89	2	0	0	0	0		0	0	ZOKU_BLOODLOSS	50	0	0	0	0	0	0	0	0	0	0																								
 725	Dervish Hairpin	STR +50, DEF -50, Crit Rate +10%	A hairpin owned by a sword-dancing princess.$nIt sparkles with every step.	15	EQ_COMMON_ACCESSORY	380	84	3	0	0	0	0		50	-50	ZOKU_ABILITY_CRITICAL	10	0	0	0	0	0	0	0	0	0	0																								
 726	Spirit Cape	Evade Rate +10%	This robe will increase mobility, like$na spirit swiftly darting through the air.	16	EQ_COMMON_ACCESSORY	381	83	3	0	0	0	0		0	0	ZOKU_ABILITY_AVOID	10	0	0	0	0	0	0	0	0	0	0																								
-727	Maiden Amulet	STR/DEF +15, SP Cost 3/4	Believed to be the last will of a girl who was$nchosen to be the Maiden of the Great Tree.	18	EQ_COMMON_ACCESSORY	384	86	4	0	0	0	0		15	15	ZOKU_ABILITY_SPREDUCE	25	0	0	0	0	0	0	0	0	0	0																								
+727	Maiden Amulet	STR/DEF +15, SP Cost 3/4	Opens the way to Eternal Hill.	18	EQ_COMMON_ACCESSORY	384	86	4	0	0	0	0		15	15	ZOKU_ABILITY_SPREDUCE	25	0	0	0	0	0	0	0	0	0	0																								
 728	Spirit Necklace	Full Recovery Upon Death	A necklace blessed with spiritual protection.$nIt will revive Dana once if she falls in battle.	32	EQ_COMMON_ACCESSORY	385	91	4	1	0	0	0		0	0	ZOKU_ABILITY_RESURECT	100	0	0	0	0	0	0	0	0	0	0																								
 729	Essence Crown	Stand Still to Heal	A splendid crown adorned with$nbeautiful Essence stones.	43	EQ_COMMON_ACCESSORY	386	92	3	0	0	0	0		0	0	ZOKU_HEALRING	10	0	0	0	0	0	0	0	0	0	0																								
 730	Blue Wind Staff	DEF +10, SP Cost 1/2	This old staff emits soothing Essence. It seems$nready to fly away at a moment's notice.	18	EQ_COMMON_ACCESSORY	387	87	4	1	0	0	0		0	10	ZOKU_ABILITY_SPREDUCE	50	0	0	0	0	0	0	0	0	0	0																								
@@ -832,7 +832,7 @@
 793	---	★ボツアイテム	---	0	0	329	79	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 794	Money Bag		Dina provided this very heavy bag$nof 100,000 Denir.	0	ITEM_TYPE_INVENTORY	344	80	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 795	Seiren Area Map		A detailed Isle of Seiren map$ngiven by Captain Reed.	0	ITEM_TYPE_INVENTORY	336	58	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-796	Treasure Chest Key		Dana received this from a craftsman$nof Essence Equipment.	0	ITEM_TYPE_INVENTORY	345	81	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+796	Treasure Chest Key		Leads through Lodinia Marsh.$nAlso does it's namesake.	0	ITEM_TYPE_INVENTORY	345	81	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 797	---		---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 798	---		---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 799	---		---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								

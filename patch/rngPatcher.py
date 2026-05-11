@@ -176,7 +176,7 @@ def genericItemMessage(location_id, patch, vanillaScript):
                 getItemFunction =  """
 function "{0}"
 {{
-    GetItem(ICON3D_WP_ADOL_009,1) //rusty sword is the best representation of broken weapon I can think of
+    GetItem(ICON3D_146,1) //rusty sword is the best representation of broken weapon I can think of
     GetItemMessageExPlus(-1,1,{1},"{3}",0,0)
     WaitPrompt()
     WaitCloseWindow()
@@ -204,7 +204,7 @@ function "{0}"
                 getItemFunction =  """
 function "{0}"
 {{
-    GetItem(ICON3D_WP_ADOL_009,1) //rusty sword is the best representation of broken weapon I can think of
+    GetItem(ICON3D_147,1) //rusty sword is the best representation of broken weapon I can think of
     GetItemMessageExPlus(-1,1,{1},"{3}",0,0)
     WaitPrompt()
     WaitCloseWindow()
@@ -685,7 +685,7 @@ def buildPsyches(settings):
             self.mapID = mapID
             self.characterID = characterID
     # region: boss flag for region
-    bossFlagDict = {"Silent Tower Second Basement Mephorash Psyches": 'FLAG[GF_SUBEV_06_6413_KILL_BOSS]',
+    bossFlagDict = {"Silent Tower Second Basement Mephorash Psyches": {'FLAG': 'FLAG[GF_SUBEV_06_6413_KILL_BOSS]', 'simpleName': 'Silent Tower Boss'},
                     #'Octus Overlook': 'FLAG[GF_TBOX_DUMMY161]',
                     "Valley of Kings Boss Arena Basileus Psyches": {'FLAG': 'FLAG[GF_TBOX_DUMMY080]', 'simpleName': 'Valley of Kings Boss'},
                     "Archeozoic Chasm Boss Arena Oceanus Psyches": {'FLAG': 'FLAG[GF_TBOX_DUMMY078]', 'simpleName': 'Archeozoic Chasm Boss'},
@@ -773,7 +773,7 @@ def buildPsyches(settings):
             MenuAdd({3}, "{5}")	
         }}
     """.format(bossFlagDict[accessBoss]["FLAG"], psycheFlag[rewards[psyche]], 
-               str(menuAdd), str(menuAdd+1), formattedPsyche, enabledFormattedPsyche)
+               str(menuAdd), str(menuAdd+1), enabledFormattedPsyche, formattedPsyche)
         bossLoad = bossLoad + """
         {0}(FLAG[TF_MENU_SELECT2] == {1})
         {{
@@ -1292,7 +1292,7 @@ function "fishRewardPreview"
     austinHints = """
 function "discoveryRewardPreview1"
 {{
-    TalkPopup(UNDEF,0,2,0,0,0)
+    TalkPopup("Austin",0,2,0,0,0)
 	{{
         "Hmmmm...." 
         "I could really use some inspiration."
@@ -1303,7 +1303,7 @@ function "discoveryRewardPreview1"
     WaitPrompt()
     WaitCloseWindow()
 
-    TalkPopup(UNDEF,0,2,0,0,0)
+    TalkPopup("Austin",0,2,0,0,0)
     {{
         "#2C {0}#0C for a little inspiration."
         "#2C {1}#0C for a lot of inspiration."
@@ -1315,7 +1315,7 @@ function "discoveryRewardPreview1"
 
 function "discoveryRewardPreview2"
 {{
-    TalkPopup(UNDEF,0,2,0,0,0)
+    TalkPopup("Austin",0,2,0,0,0)
 	{{
         "Splendid work!" 
         "Keep it up and I'll happily share this with you!"
@@ -1323,7 +1323,7 @@ function "discoveryRewardPreview2"
     WaitPrompt()
     WaitCloseWindow()
 
-    TalkPopup(UNDEF,0,2,0,0,0)
+    TalkPopup("Austin",0,2,0,0,0)
     {{
         "#2C {1}#0C for a lot of inspiration."
     }}
@@ -1336,7 +1336,7 @@ function "discoveryRewardPreview2"
     euronHints = """
 function "mapRewardPreview"
 {{
-    TalkPopup(UNDEF,0,2,0,0,0)
+    TalkPopup("Euron",0,2,0,0,0)
     {{
         "Hey there!" 
         "Show me that map as you explore and "
@@ -1346,7 +1346,7 @@ function "mapRewardPreview"
     WaitPrompt()
     WaitCloseWindow()
 
-    TalkPopup(UNDEF,0,2,0,0,0)
+    TalkPopup("Euron",0,2,0,0,0)
     {{
         "This is what I got for you!"
         "#2C {0}#0C for 10% map completion."
@@ -1507,7 +1507,7 @@ def octoBosses(settings):
     #octus bosses exp and HP go up based on bosses leading into the end game. This is to help prep for the final boss.
     #the HP mod is just a percentage of a rough approcimation of the highest level the final boss could get to if unlucky.
     HPmod = 0.75
-    EXPMod = 5.0
+    EXPMod = 8.0
     script = 'function "setOctoBossLevels"\n\t{\n'
     for boss in octoBossAliases:
         bossLevel = random.randrange(65,75)

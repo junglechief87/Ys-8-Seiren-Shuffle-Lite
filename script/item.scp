@@ -4582,7 +4582,7 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_SAHAD_JOINED] && !FLAG[SF_SAHAD_JOINOK])
 			{
-				etFlag(SF_SAHAD_JOINOK, 1)
+				SetFlag(SF_SAHAD_JOINOK, 1)
         		JoinParty(PARTY_SAHAD)
 				SetDiaryFlag( DF_JOIN_SAHAD, 1 )
 				Message("#4CSahad Received")

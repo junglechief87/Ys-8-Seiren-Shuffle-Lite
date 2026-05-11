@@ -244,7 +244,7 @@ def getCrewFlags(name):
         case "Master Kong": #vanilla function call on mp1201 script rng:0428
             flag = """
     JoinNPC( NPC_SKILLMONKY, JOIN_NPC_JOIN ) // Master Kong has become a friend
-    SetFlag( SF_RESERVE16_JOINOKBK, 1 )
+    SetFlag( SF_RESERVE16_JOINOK, 1 )
 
 """  
     return flag

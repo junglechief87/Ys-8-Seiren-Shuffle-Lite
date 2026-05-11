@@ -27417,7 +27417,7 @@ function "Talk_Katrin"
 			SetFlag(GF_ADOLWEAPON_BACKUP,(ADOL.CHRWORK[CWK_WEAPON]))
 			EquipWeapon(ADOL,ICON3D_WP_ADOL_008)
 			GetItem(ICON3D_WP_ADOL_008,1)
-			DeleteItem(ICON3D_WP_ADOL_009,1)
+			DeleteItem(ICON3D_146,1)
 			FadeIn(FADE_BLACK,FADE_NORMAL)
 			WaitFade()
 			ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
@@ -27466,7 +27466,7 @@ function "Talk_Katrin"
 		{
 			EquipWeapon(DANA,ICON3D_WP_DANA_005)
 			GetItem(ICON3D_WP_DANA_005,1)
-			DeleteItem(ICON3D_WP_ADOL_009,1)
+			DeleteItem(ICON3D_147,1)
 			FadeIn(FADE_BLACK,FADE_NORMAL)
 			WaitFade()
 			ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
