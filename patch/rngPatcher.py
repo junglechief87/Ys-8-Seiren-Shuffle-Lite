@@ -184,7 +184,7 @@ def genericItemMessage(location_id, patch, vanillaScript):
                 getItemFunction =  """
 function "{0}"
 {{
-    GetItem(ICON3D_146,1) //rusty sword is the best representation of broken weapon I can think of
+    GetItem(ICON3D_146,1)
     GetItemMessageExPlus(-1,1,{1},"{3}",0,0)
     WaitPrompt()
     WaitCloseWindow()
@@ -212,7 +212,7 @@ function "{0}"
                 getItemFunction =  """
 function "{0}"
 {{
-    GetItem(ICON3D_147,1) //rusty sword is the best representation of broken weapon I can think of
+    GetItem(ICON3D_147,1)
     GetItemMessageExPlus(-1,1,{1},"{3}",0,0)
     WaitPrompt()
     WaitCloseWindow()
@@ -233,14 +233,15 @@ function "{0}"
                 brokenWeaponMessage = ""
             return getItemFunction.format(scriptName,itemSE,script,brokenWeaponMessage)
     elif itemId == 149: # AP Item
+        itemName = makeFileSafeItemName(loc_data['item_name'])
         if loc_data["item_classification"] == "PROGRESSION":
-            message = "Sent " + PINK +  loc_data['item_name'] + WHITE +" to " + GOLD + loc_data['player'] + "."
+            message = "Sent " + PINK +  itemName + WHITE +" to " + GOLD + loc_data['player'] + "."
         elif loc_data["item_classification"] == "USEFUL":
-            message = "Sent " + PURPLE +  loc_data['item_name'] + WHITE +" to " + GOLD + loc_data['player'] + "."
+            message = "Sent " + PURPLE +  itemName + WHITE +" to " + GOLD + loc_data['player'] + "."
         elif loc_data["item_classification"] == "TRAP":
-            message = "Sent " + ORANGE +  loc_data['item_name'] + WHITE +" to " + GOLD + loc_data['player'] + "."
+            message = "Sent " + ORANGE +  itemName + WHITE +" to " + GOLD + loc_data['player'] + "."
         else:
-            message = "Sent " + BLUE +  loc_data['item_name'] + WHITE +" to " + GOLD + loc_data['player'] + "."
+            message = "Sent " + BLUE +  itemName + WHITE +" to " + GOLD + loc_data['player'] + "."
         if loc_data['location_type'] in ['event', 'landmark']:   
             getItemFunction =  """
 function "{0}"
@@ -2017,8 +2018,15 @@ def interceptUnlock():
 """
     return script
 
-
-
+# ==========================================================================================================
+# Helper functions
+# ==========================================================================================================
+def makeFileSafeItemName(itemName):
+    itemName = itemName.replace("#", " ")
+    itemName = itemName.replace("\\", "_")
+    itemName = itemName.replace("/", "_")
+    itemName = itemName.replace("\"", "'")
+    return itemName
 
 
 
