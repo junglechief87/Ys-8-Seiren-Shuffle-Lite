@@ -24,3 +24,4 @@ executable/build/Seiren Shuffle/xref-Seiren Shuffle.html
 executable/dist/Seiren Shuffle.exe
 /build/
 /dist/
+seirenShuffleSettings.json

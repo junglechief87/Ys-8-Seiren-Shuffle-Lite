@@ -1,9 +1,30 @@
 import os.path
 import csv
+import unicodedata
+import codecs
 from shared.classr import *
 import shared.config as config
 
 encode = "utf-8"
+
+def strip_accents_handler(exception):
+    """Custom error handler for Shift-JIS encoding: strips accents, falls back to '?' if unable"""
+    if isinstance(exception, UnicodeEncodeError):
+        char = exception.object[exception.start:exception.end]
+        # Strip accents from character using NFD normalization
+        normalized = ''.join(c for c in unicodedata.normalize('NFD', char)
+                           if unicodedata.category(c) != 'Mn')
+        # Try encoding the stripped version in Shift-JIS
+        try:
+            normalized.encode('Shift-JIS')
+            return (normalized, exception.end)
+        except:
+            # Fall back to '?' if normalization didn't work
+            return ('?', exception.end)
+    raise exception
+
+# Register the custom error handler
+codecs.register_error('strip_accents', strip_accents_handler)
 sourceScript = "rng"
 _cache = None  # Global variable for lazy loading
 def getLocations():

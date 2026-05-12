@@ -147,7 +147,7 @@ def rngPatcherMain(patch, progress_callback=None):
     if progress_callback:
         progress_callback("Setting up ending")
 
-    with open(rngScriptFile, 'w', encoding = 'Shift-JIS') as fileToPatch: #build the entire rng file from one big string
+    with open(rngScriptFile, 'w', encoding='Shift-JIS', errors='strip_accents') as fileToPatch: #build the entire rng file from one big string
         fileToPatch.write(patchFile)
         fileToPatch.close()
 
