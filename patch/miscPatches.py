@@ -5,6 +5,29 @@ import random
 import shared.config as config
 from shared.functions import *
 
+def updateINI(progress_callback=None):
+    languageSet = False
+    playerSettings = config.executable_directory + "/settings.ini"
+    with open(playerSettings, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+
+        for line in lines:
+            if line.startswith("DisplayLanguage="):
+                lineIndex = lines.index(line)
+                lines[lineIndex] = "DisplayLanguage=EN\n"
+                languageSet = True
+                break
+        
+        if not languageSet:
+            lines.append("DisplayLanguage=EN\n")
+
+    with open(playerSettings, 'w', encoding='utf-8') as file:
+        file.writelines(lines)
+
+    if progress_callback:
+        progress_callback(f"Patched: settings.ini")
+    
+
 #right now this is only to get rid of some logically problematic beehives but could do more later
 def miscFixes(progress_callback=None):
     deleteHives = ['mons47','mons48','mons49']

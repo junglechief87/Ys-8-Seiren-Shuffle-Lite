@@ -12,7 +12,7 @@ from pathlib import Path
 from patch.chestPatcher import cleanChests
 from patch.fileManagement import copyOriginalGameFiles, downloadFiles, restoreOriginalGameFiles, countOriginalGameFiles, countDownloadFiles, countChestLocations
 from patch.rngPatcher import rngPatcherMain
-from patch.miscPatches import AddWarpToFSCCrystal, readFileIntoBuffer, miscFixes, makeResourceDropsGuaranteed
+from patch.miscPatches import AddWarpToFSCCrystal, readFileIntoBuffer, miscFixes, makeResourceDropsGuaranteed, updateINI
 from patch.progressWindow import ProgressWindow
 import shared.config as config
 # Import file management functions
@@ -276,6 +276,9 @@ class CommandsFrame(ctk.CTkFrame):
 
             total_files += 1
             tasks.append((AddWarpToFSCCrystal, "Adding FSC Crystal Warp"))
+
+            total_files += 1
+            tasks.append((updateINI, "Updating Language Setting"))
 
             total_files += 3
             tasks.append((miscFixes, "Applying Miscellaneous Fixes"))

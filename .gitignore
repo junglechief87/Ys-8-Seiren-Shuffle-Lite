@@ -6,7 +6,7 @@ __pycache__/
 ys8.exe
 script/rng.scp
 .vscode/settings.json
-seirenShuffleSettings.json
+seirenShuffleLiteSettings.json
 Ys_8_*.txt
 notes.txt
 executable/build/Seiren Shuffle/Analysis-00.toc
@@ -24,4 +24,3 @@ executable/build/Seiren Shuffle/xref-Seiren Shuffle.html
 executable/dist/Seiren Shuffle.exe
 /build/
 /dist/
-seirenShuffleSettings.json
