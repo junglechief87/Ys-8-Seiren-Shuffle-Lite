@@ -5,17 +5,18 @@ import struct
 #I also included the stuff for the starting character functions because they seemed logical to group together
 def buildStartParameters(patch):
     gameSettingFlags = ''
+    APScript = ''
     pastDanaFlags = '' #setting the past dana flags after loading castaway village was the only way I found to fix a problem where you spawn at a black map with either barbaros or katheew
     seed = struct.unpack('<I', struct.pack('<f', float(int(patch.settings["seed_name"]))))[0] # convert seed to float32 so it fits in the 32 bit flag space, will be stored in GF_TBOX_DUMMY117. It won't be the exact seed number but it'll be close enough for save marking.
     startingCharacter = getCrewFlags(patch.settings["starting_character"]) 
 
-    gameSettingFlags = gameSettingFlags + """
+    APScript = """
     function "setSeed"
     {{
         SetFlag(GF_TBOX_DUMMY117, {0}) //AP Seed stored as a float32 so we lose some precision but it has to fit in 32 bits
         GetItem(ICON3D_502, 1) //AP Packages item used for obtaining some offworld items.
     }}
-    
+
     """.format(seed)  
 
     # if parameters.charMode == "Past Dana":
@@ -677,7 +678,7 @@ function "startParameters"
     ResetStopFlag(STOPFLAG_EVENT)
 }}
 """
-    return startParams.format(gameSettingFlags,startingCharacter,pastDanaFlags)
+    return APScript + startParams.format(gameSettingFlags,startingCharacter,pastDanaFlags)
 
 def manageEarlyGameParty(patch):
     match patch.settings["starting_character"]:
