@@ -759,6 +759,8 @@ function "LastBossMae"
 // NewGame時に呼ばれるスクリプト
 function "gamestart"
 {
+	CallFunc("rng:setSeed") //calling here for better and consistent verification without false positives.
+	
 	SetStopFlag(STOPFLAG_EVENT)
 
 	FadeOut(FADE_BLACK,0)

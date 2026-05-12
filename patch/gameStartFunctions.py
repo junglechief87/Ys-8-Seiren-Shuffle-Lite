@@ -8,6 +8,16 @@ def buildStartParameters(patch):
     pastDanaFlags = '' #setting the past dana flags after loading castaway village was the only way I found to fix a problem where you spawn at a black map with either barbaros or katheew
     seed = struct.unpack('<I', struct.pack('<f', float(int(patch.settings["seed_name"]))))[0] # convert seed to float32 so it fits in the 32 bit flag space, will be stored in GF_TBOX_DUMMY117. It won't be the exact seed number but it'll be close enough for save marking.
     startingCharacter = getCrewFlags(patch.settings["starting_character"]) 
+
+    gameSettingFlags = gameSettingFlags + """
+    function "setSeed"
+    {{
+        SetFlag(GF_TBOX_DUMMY117, {0}) //AP Seed stored as a float32 so we lose some precision but it has to fit in 32 bits
+        GetItem(ICON3D_502, 1) //AP Packages item used for obtaining some offworld items.
+    }}
+    
+    """.format(seed)  
+
     # if parameters.charMode == "Past Dana":
     #     gameSettingFlags = gameSettingFlags + """
     #     SetFlag(SF_DANA_JOINED, 1)
@@ -44,10 +54,7 @@ def buildStartParameters(patch):
     #     SetSkillShortCut(PARTY_DANA,	ATKSKILL_SQUARE,	SKILL_DANA_SP_A2)	//蒼輪舞踏
     #     SetSkillShortCut(PARTY_DANA,	ATKSKILL_TRIANGLE,	SKILL_DANA_SP_C4)	//竜気
     # """
-    gameSettingFlags = gameSettingFlags + """
-    SetFlag(GF_TBOX_DUMMY117, {0}) //AP Seed stored as a float32 so we lose some precision but it has to fit in 32 bits
-    GetItem(ICON3D_502, 1) //AP Packages item used for obtaining some offworld items.
-    """.format(seed)       
+
     if patch.settings["options"]["dungeon_entrance_shuffle"] == 1:
         gameSettingFlags = gameSettingFlags + """
     SetFlag(GF_TBOX_DUMMY114,1)
@@ -758,3 +765,4 @@ function "soloEvent"
 }}
 """
     return partyFlags.format(flags)
+

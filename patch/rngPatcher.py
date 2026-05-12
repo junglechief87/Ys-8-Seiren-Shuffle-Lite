@@ -1,10 +1,12 @@
 import random
+import os
 from shared.functions import *  
 from patch.crew import getCrewFlags
 from patch.gameStartFunctions import *
 from patch.chestPatcher import *
 from patch.miscPatches import randomizeOctoBosses, newExpMult
 from patch.buildEntrances import *
+import shared.config as config
 
 #This is essentially the BnB for how this rando works. This script writes a big .scp file, the game's native scripting files, that we call for all randomized locations (as well as some other important functions for a rando)
 #This takes in the game's shuffled list of loctions and then builds the scripts.
@@ -46,6 +48,12 @@ def rngPatcherMain(patch, progress_callback=None):
     global patchFile
     patchFile = ''
     rngScriptFile = getLocFile('rng','script')
+    
+    # If rng.scp file not found, construct path manually in script directory and ensure it exists
+    if rngScriptFile is None:
+        rng_script_dir = os.path.join(config.executable_directory, "script")
+        os.makedirs(rng_script_dir, exist_ok=True)  # Create directory if it doesn't exist
+        rngScriptFile = os.path.join(rng_script_dir, "rng.scp")
     
     # Build locations cache once to avoid rebuilding for every fillChest call
     locations = getLocations()
