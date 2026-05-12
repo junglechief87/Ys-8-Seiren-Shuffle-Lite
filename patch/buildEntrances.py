@@ -370,8 +370,8 @@ def buildEntrances(entranceList, options):
 				WaitPrompt()
 				WaitCloseWindow()
 				ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
-				LoadArg("{4}")
-				EventCue("{5}",1)
+				LoadArg("{0}")
+				EventCue("{1}",1)
 			}}
 		}}
 		""".format(entranceEvent[entranceList["FSC Entrance"]]["load"], entranceEvent[entranceList["FSC Entrance"]]["entry_event"])

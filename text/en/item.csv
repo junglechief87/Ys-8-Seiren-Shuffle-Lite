@@ -774,7 +774,7 @@
 736	Windy Vestment	Heal More HP by Standing Still	A blessed outfit that$ncalms the mind and soul.	0	ITEM_TYPE_EQUIP	309	11	5	1	1	0	0		0	0	0	0	ZOKU_MAGICITEM	736	0	0	0	0	0	0	0	0																								
 737	Grip Gloves	Climb Ivy	These gloves are old, but their$ngrip is still good.	0	ITEM_TYPE_EQUIP	310	0	5	1	1	0	0		0	0	0	0	ZOKU_MAGICITEM	737	0	0	0	0	0	0	0	0																								
 738	Hermit's Scale	Breathe Underwater	Grants one the power to$nmake fresh air underwater.	0	ITEM_TYPE_EQUIP	311	4	5	1	1	0	0		0	0	0	0	ZOKU_MAGICITEM	738	0	0	0	0	0	0	0	0																								
-739	Glow Stone	Illuminate Surroundings	Emits light created by$nan insect trapped within.	0	ITEM_TYPE_EQUIP	312	1	5	1	1	0	0		0	0	0	0	ZOKU_MAGICITEM	739	0	0	0	0	0	0	0	0																								
+739	Glow Stone	Illuminate Surroundings	Emits light created by$nan insect trapped within. Opens Night Exploration.	0	ITEM_TYPE_EQUIP	312	1	5	1	1	0	0		0	0	0	0	ZOKU_MAGICITEM	739	0	0	0	0	0	0	0	0																								
 740	Floating Shoes	Walk on Swampy Water	Shoes with floating rings attached.$nPirates apparently created them.	0	ITEM_TYPE_EQUIP	313	2	5	1	1	0	0		0	0	0	0	ZOKU_MAGICITEM	740	0	0	0	0	0	0	0	0																								
 741	Archaeopteryx Wing	Double Jump	An ancient bird's wings$nthat lets one jump twice.	0	ITEM_TYPE_EQUIP	314	3	5	1	1	0	0		0	0	0	0	ZOKU_MAGICITEM	741	0	0	0	0	0	0	0	0																								
 742	Purifying Bell	Slay Undead	An artifact used during the Requiem Ritual.$nIt emits a soul-soothing chime.	0	ITEM_TYPE_EQUIP	315	5	5	1	1	0	0		0	0	0	0	ZOKU_MAGICITEM	742	0	0	0	0	0	0	0	0																								
