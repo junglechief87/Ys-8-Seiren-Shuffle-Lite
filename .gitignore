@@ -22,3 +22,5 @@ executable/build/Seiren Shuffle/Tree-02.toc
 executable/build/Seiren Shuffle/warn-Seiren Shuffle.txt
 executable/build/Seiren Shuffle/xref-Seiren Shuffle.html
 executable/dist/Seiren Shuffle.exe
+/build/
+/dist/
