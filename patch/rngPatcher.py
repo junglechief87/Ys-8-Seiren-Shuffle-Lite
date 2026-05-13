@@ -24,6 +24,10 @@ PURPLE = "#6C"
 BLUE = "#7C"
 DARK_RED = "#8C"
 AP_ITEM = 149
+LANDMARK_ITEM = 148
+CASTAWAY_ITEM = 144
+SKILL_ITEM = 143
+PROGRESSIVE_SHOP_RANK_ITEM = 139
 
 SCP_INCLUDE_LIST = ['#include "inc/mons.h"','#include "inc/def.h"','#include "inc/efx.h"','#include "inc/flag.h"','#include "inc/se.h"',
                   '#include "inc/scr_inc.h"','#include "inc/3dicon.h"','#include "inc/skilldef.h"','#include "inc/vo.h"','#include "inc/temp/rng.h"'] #standard set of header files used in most Ys 8 .scp files
@@ -34,7 +38,13 @@ SCRIPT_STOP_FLAG = 'STOPFLAG_SIMPLEEVENT2'
 OBTAINED_ITEM_MESSAGE = " Obtained."
 CREW_MESSAGE = " joined the Village."
 PARTY_MESSAGE = " joined the Party."
-SKILL_MESSAGE = " has learned skill " + GOLD
+SKILL_MESSAGE = f" has learned skill {GOLD}"
+
+ITEM_TYPE_CONFIG = {
+    'landmark': {'icon': -1, 'id': 148, 'needs_skill_info': False},
+    'castaway': {'icon': -1, 'id': 143, 'needs_skill_info': False},
+    'skill': {'icon': -1, 'id': 144, 'needs_skill_info': True},
+}
 
 LANDMARK_MESSAGE = ' discovered.'
 LANDMARKS = {
@@ -65,16 +75,16 @@ LANDMARKS = {
         }
 
 TREASURE_SCRIPTS = {
-"372": "mp6561:EvOpenTBox",
-"358": "mp6554:EvOpenTBox",
-"317": "mp6531m:EvOpenTBox",
-"291": "mp6519:EvOpenTBox",
-"288": "mp6513:EvOpenTBox",
-"239": "mp6345:SubEV_05_Get_Bell_ED",
-"19": "mp0408:EV_M05S152_ED",
-"18": "mp0405:EV_M05S170_ED",
-"13": "mp0404:EV_M05S150_ED",
-"9": "mp0403:EV_M05S151_ED"
+"372":  "mp6561:EvOpenTBox",
+"358":  "mp6554:EvOpenTBox",
+"317":  "mp6531m:EvOpenTBox",
+"291":  "mp6519:EvOpenTBox",
+"288":  "mp6513:EvOpenTBox",
+"239":  "mp6345:SubEV_05_Get_Bell_ED",
+"19":   "mp0408:EV_M05S152_ED",
+"18":   "mp0405:EV_M05S170_ED",
+"13":   "mp0404:EV_M05S150_ED",
+"9":    "mp0403:EV_M05S151_ED"
 }
 
 def rngPatcherMain(patch, progress_callback=None):
@@ -120,13 +130,11 @@ def rngPatcherMain(patch, progress_callback=None):
         if location not in duplicateChests: #no need to build out functions for the same location twice, these chests share flags with the not dawn version
             #cleanup the placeholders the game had for chests without scripts
             if location in TREASURE_SCRIPTS.keys():
-                script = ('EventCue("' + TREASURE_SCRIPTS[location] + '")')
+                script = ('\tEventCue("' + TREASURE_SCRIPTS[location] + '")\n')
             else:
                 script = ""
                 
-            if loc_data['item_id'] == 139:#progressive shop rank
-                patchFile = patchFile + shopUpgrades(loc_id, loc_data, script)
-            elif loc_data['item_type'] in ['Item', '']: # blank is mostly for offworld items
+            if loc_data['item_type'] in ['Item', '']: # blank is mostly for offworld items
                 patchFile = patchFile + genericItemMessage(loc_id, patch, script)
             elif loc_data['category'] == 'Crew':
                 patchFile = patchFile + buildCrewLocation(loc_id, patch, script)
@@ -201,42 +209,32 @@ def genericItemMessage(location_id, patch, vanillaScript):
 
     #unique item functions that will need additional scripting when the item is recieved
     if itemId == 739: # glow stone
-        eventScripts = eventScripts + makeGlowStoneUseful()
+        eventScripts += makeGlowStoneUseful()
     elif itemId in danaPastEventsItems:
-        eventScripts = eventScripts + danaPastEvents(itemId)
-    elif itemId == 9: # mistilteinn
-        eventScripts = eventScripts + sopEvent(options)
-        formatGetItemScript(location_id,loc_data,eventScripts)
-    elif itemId == 13: # spirit ring
-        eventScripts = eventScripts + spiritRingEvent(options)
-        formatGetItemScript(location_id,loc_data,eventScripts)
+        eventScripts += danaPastEvents(itemId)
+    elif itemId in [9,146]: # mistilteinn
+        eventScripts += sopEvent(options)
+    elif itemId in [13,147]: # spirit ring
+        eventScripts += spiritRingEvent(options)
     elif itemId == 770: #logbook from east coast cave
-        eventScripts = eventScripts + pirateShipDocks()
+        eventScripts += f"\tSetFlag(GF_05MP7411_READ_NOTE1, 1)\n"
     elif itemId in [760,761,762,763]: #T memos
-        eventScripts = eventScripts + interceptUnlock()
+        eventScripts += interceptUnlock()
     elif itemId == 629: #fishing rod
-        startingBait = (
-            f"\tGetItem(ICON3D_FISHBAIT_WORM,30)\n"
-        )
-        eventScripts = eventScripts + startingBait
+        eventScripts += f"\tGetItem(ICON3D_FISHBAIT_WORM,30)\n"
     elif itemId == 779: #ship blueprints
-        buildBoat = (
-            f"\tSetFlag(GF_SUBEV_06_1111_LOOK_BOAT,1)\n"
-        )
-        eventScripts = eventScripts + buildBoat
-    
+        eventScripts += f"\tSetFlag(GF_SUBEV_06_1111_LOOK_BOAT,1)\n"
     # if itemId in [750,751,752,753,754,755,760,761,762,763] and options['memo_hints']:
     #     script = script + memoHints(itemId)
-    
     elif itemId == 218:
         #Adding the other 2 medals to the slash medal check
-        eventScripts =  eventScripts + (
+        eventScripts += (
             f"\tGetItem(ICON3D_AC_068,1)\n"
             f"\tGetItem(ICON3D_AC_069,1)\n"
         )
     elif itemId == 206: #Jade pendant
         if options['former_sanctuary_crypt'] == 1:
-            eventScripts = eventScripts + (
+            eventScripts += (
                 f"\tSetFlag(SF_SYS_CLEARED, 1)\n"
                 f"\tSetFlag(GF_SUBEV_PAST_07_CLEAR, 1)\n"
             )
@@ -271,7 +269,7 @@ def buildSkillLocation(location_id, patch, vanillaScript):
 def buildLandmarks(location_id, patch, vanillaScript):
     loc_data = patch.item_map[location_id]
     
-    landmarkFlag = "\tSetFlag(" + LANDMARKS.get(loc_data['item_name']) + ",1)"
+    landmarkFlag = "\tSetFlag(" + LANDMARKS.get(loc_data['item_name']) + ",1)\n"
     eventScripts = vanillaScript + landmarkFlag
 
     return formatGetItemScript(location_id, loc_data, eventScripts, message_type='landmark')
@@ -472,159 +470,200 @@ def bossScaling():
 #New version of this script hacks the checkpoint in Castaway Village and uses the boss flags for activation of the custom shop
 #The boss menu is essentially a custom shop, it uses Dina's jewel trade menu as a base, there are two version of it depending on game mode
 def buildPsyches(settings):
-    class PsycheBoss:
-        def __init__(self, mapLoad, eventCue, mapID, characterID):
-            self.mapLoad = mapLoad
-            self.eventCue = eventCue
-            self.mapID = mapID
-            self.characterID = characterID
-    # region: boss flag for region
-    bossFlagDict = {"Silent Tower Second Basement Mephorash Psyches": {'FLAG': 'FLAG[GF_SUBEV_06_6413_KILL_BOSS]', 'simpleName': 'Silent Tower Boss'},
-                    #'Octus Overlook': 'FLAG[GF_TBOX_DUMMY161]',
-                    "Valley of Kings Boss Arena Basileus Psyches": {'FLAG': 'FLAG[GF_TBOX_DUMMY080]', 'simpleName': 'Valley of Kings Boss'},
-                    "Archeozoic Chasm Boss Arena Oceanus Psyches": {'FLAG': 'FLAG[GF_TBOX_DUMMY078]', 'simpleName': 'Archeozoic Chasm Boss'},
-                    "Pirate Ship Eleftheria Deck Pirate Revenant Psyches": {'FLAG': 'FLAG[GF_05MP0405_READ_REED]', 'simpleName': 'Pirate Ship Boss'},
-                    "Baja Tower Boss Arena Carveros Psyches": {'FLAG': 'FLAG[GF_05MP6329_KILL_BAHABOSS]', 'simpleName': 'Baja Tower Boss'},
-                    "Temple of the Great Tree Temple Boss Arena Brachion Psyches": {'FLAG': 'FLAG[GF_04MP6410_KILL_GUARDIAN]', 'simpleName': 'Temple of the Great Tree Boss'},
-                    "Mont Gendarme Boss Arena Giasburn Psyches": {'FLAG': 'FLAG[GF_03MP4341_KILL_ANCIENT]', 'simpleName': 'Mont Gendarme Boss'},
-                    "Schlamm Jungle Boss Arena Laspisus Psyches": {'FLAG': 'FLAG[GF_02MP2308_KILL_HIPPO]', 'simpleName': 'Schlamm Jungle Boss'},
-                    "Eroded Valley Boss Arena Gargantula Psyches": {'FLAG': 'FLAG[GF_TBOX_DUMMY074]', 'simpleName': 'Eroded Valley Boss'},
-                    "Towering Coral Forest Boss Arena Clareon Psyches": {'FLAG': 'FLAG[GF_02MP1308_KILL_CHAMELEON]', 'simpleName': 'Towering Coral Forest Boss'},
-                    "Former Sanctuary Crypt - Final Floor Boss Arena Melaiduma Psyches": {'FLAG': 'FLAG[GF_SUBEV_UNTOUCHABLE]', 'simpleName': 'Former Sanctuary Crypt Boss'}}
-    psycheFlag = {"Psyches of the Sky Era": "GF_06MP6308_TALK_SARAI", 
-                  "Psyches of the Insectoid Era": "GF_06MP6307_TALK_NESTOR",
-                  "Psyches of the Ocean Era": "GF_06MP6305_TALK_HYDRA",
-                  "Psyches of the Frozen Era": "GF_06MP6306_TALK_MINOS"}
-    #Boss name: load boss map script, boss event, boss map id, boss character id
-    bossCue = {"Psyche-Hydra Psyches": PsycheBoss('LoadArg("map/mp6305b/mp6305b.arg")', 'EventCue("mp6305b:EV_RetryBoss")', 'MN_D_MP6305b', 'B112'),
-               "Psyche-Minos Psyches": PsycheBoss('LoadArg("map/mp6306b/mp6306b.arg")', 'EventCue("mp6306b:EV_RetryBoss")', 'MN_D_MP6306b', 'B110'),
-               "Psyche-Nestor Psyches": PsycheBoss('LoadArg("map/mp6307b/mp6307b.arg")', 'EventCue("mp6307b:EV_RetryBoss")', 'MN_D_MP6307b', 'B111'),
-               "Psyche-Ura Psyches": PsycheBoss('LoadArg("map/mp6308b/mp6308b.arg")', 'EventCue("mp6308b:EV_RetryBoss")', 'MN_D_MP6308b', 'B008'),
-               "Le-Erythos Psyches": PsycheBoss('LoadArg("map/mp6409b/mp6409b.arg")', 'EventCue("mp6409b:EV_RetryBoss")', 'MN_D_MP6409B', 'B012'),
-               "Grazios Psyches": PsycheBoss('LoadArg("map/mp6519m/mp6519m.arg")', 'EventCue("mp6519m:EV_RetryBoss")', 'MN_D_MP6519M','B161'),
-               "Nebritia Psyches": PsycheBoss('LoadArg("map/mp6529m/mp6529m.arg")', 'EventCue("mp6529m:EV_RetryBoss")', 'MN_D_MP6529M','B162'),
-               "Argura Psyches": PsycheBoss('LoadArg("map/mp6539m/mp6539m.arg")', 'EventCue("mp6539m:EV_RetryBoss")', 'MN_D_MP6539M', 'B163'),
-               "Crusos Psyches": PsycheBoss('LoadArg("map/mp6549m/mp6549m.arg")', 'EventCue("mp6549m:EV_RetryBoss")', 'MN_D_MP6549M', 'B011'),
-               "Blasphima Psyches": PsycheBoss('LoadArg("map/mp6559m/mp6559m.arg")', 'EventCue("mp6559m:EV_RetryBoss")', 'MN_D_MP6559M', 'B164'),
-               "Le-Kyanos Psyches": PsycheBoss('LoadArg("map/mp6204m/mp6204m.arg")', 'EventCue("mp6204m:EV_Boss_Jump")', 'MN_F_MP6204M', 'B165'),
-               "Melaiduma Psyches": PsycheBoss('LoadArg("map/mp6569/mp6569.arg")', 'EventCue("mp6569:EV_RetryBoss")', 'MN_D_MP6569', 'B170')
-            }
+    bossCue = {
+        "Psyche-Hydra Psyches": {
+            'mapLoad': 'LoadArg("map/mp6305b/mp6305b.arg")',
+            'eventCue': 'EventCue("mp6305b:EV_RetryBoss")',
+            'mapID': 'MN_D_MP6305b',
+            'characterID': 'B112'
+        },
+        "Psyche-Minos Psyches": {
+            'mapLoad': 'LoadArg("map/mp6306b/mp6306b.arg")',
+            'eventCue': 'EventCue("mp6306b:EV_RetryBoss")',
+            'mapID': 'MN_D_MP6306b',
+            'characterID': 'B110'
+        },
+        "Psyche-Nestor Psyches": {
+            'mapLoad': 'LoadArg("map/mp6307b/mp6307b.arg")',
+            'eventCue': 'EventCue("mp6307b:EV_RetryBoss")',
+            'mapID': 'MN_D_MP6307b',
+            'characterID': 'B111'
+        },
+        "Psyche-Ura Psyches": {
+            'mapLoad': 'LoadArg("map/mp6308b/mp6308b.arg")',
+            'eventCue': 'EventCue("mp6308b:EV_RetryBoss")',
+            'mapID': 'MN_D_MP6308b',
+            'characterID': 'B008'
+        },
+        "Le-Erythos Psyches": {
+            'mapLoad': 'LoadArg("map/mp6409b/mp6409b.arg")',
+            'eventCue': 'EventCue("mp6409b:EV_RetryBoss")',
+            'mapID': 'MN_D_MP6409B',
+            'characterID': 'B012'
+        },
+        "Grazios Psyches": {
+            'mapLoad': 'LoadArg("map/mp6519m/mp6519m.arg")',
+            'eventCue': 'EventCue("mp6519m:EV_RetryBoss")',
+            'mapID': 'MN_D_MP6519M',
+            'characterID': 'B161'
+        },
+        "Nebritia Psyches": {
+            'mapLoad': 'LoadArg("map/mp6529m/mp6529m.arg")',
+            'eventCue': 'EventCue("mp6529m:EV_RetryBoss")',
+            'mapID': 'MN_D_MP6529M',
+            'characterID': 'B162'
+        },
+        "Argura Psyches": {
+            'mapLoad': 'LoadArg("map/mp6539m/mp6539m.arg")',
+            'eventCue': 'EventCue("mp6539m:EV_RetryBoss")',
+            'mapID': 'MN_D_MP6539M',
+            'characterID': 'B163'
+        },
+        "Crusos Psyches": {
+            'mapLoad': 'LoadArg("map/mp6549m/mp6549m.arg")',
+            'eventCue': 'EventCue("mp6549m:EV_RetryBoss")',
+            'mapID': 'MN_D_MP6549M',
+            'characterID': 'B011'
+        },
+        "Blasphima Psyches": {
+            'mapLoad': 'LoadArg("map/mp6559m/mp6559m.arg")',
+            'eventCue': 'EventCue("mp6559m:EV_RetryBoss")',
+            'mapID': 'MN_D_MP6559M',
+            'characterID': 'B164'
+        },
+        "Le-Kyanos Psyches": {
+            'mapLoad': 'LoadArg("map/mp6204m/mp6204m.arg")',
+            'eventCue': 'EventCue("mp6204m:EV_Boss_Jump")',
+            'mapID': 'MN_F_MP6204M',
+            'characterID': 'B165'
+        },
+        "Melaiduma Psyches": {
+            'mapLoad': 'LoadArg("map/mp6569/mp6569.arg")',
+            'eventCue': 'EventCue("mp6569:EV_RetryBoss")',
+            'mapID': 'MN_D_MP6569',
+            'characterID': 'B170'
+        }
+    }
     
-    # if options.charMode == 'Past Dana':
-    #     bossPool = ['Grazios','Nebritia','Argura','Crusos','Blasphima','Le-Kyanos']
-    # else:
-    #     bossPool = ['Hydra','Minos','Nestor','Ura','Le-Erythros']
-    wardenScaling = """
-        SetChrWork("b012", CWK_MAXHP, (b012.CHRWORK[CWK_MAXHP] * 3.0f))
-        SetChrWork("b012", CWK_HP, (b012.CHRWORK[CWK_MAXHP]))
-"""
+    bossFlagDict = {
+        "Silent Tower Second Basement Mephorash Psyches": {'FLAG': 'FLAG[GF_SUBEV_06_6413_KILL_BOSS]', 'simpleName': 'Silent Tower Boss'},
+        "Valley of Kings Boss Arena Basileus Psyches": {'FLAG': 'FLAG[GF_TBOX_DUMMY080]', 'simpleName': 'Valley of Kings Boss'},
+        "Archeozoic Chasm Boss Arena Oceanus Psyches": {'FLAG': 'FLAG[GF_TBOX_DUMMY078]', 'simpleName': 'Archeozoic Chasm Boss'},
+        "Pirate Ship Eleftheria Deck Pirate Revenant Psyches": {'FLAG': 'FLAG[GF_05MP0405_READ_REED]', 'simpleName': 'Pirate Ship Boss'},
+        "Baja Tower Boss Arena Carveros Psyches": {'FLAG': 'FLAG[GF_05MP6329_KILL_BAHABOSS]', 'simpleName': 'Baja Tower Boss'},
+        "Temple of the Great Tree Temple Boss Arena Brachion Psyches": {'FLAG': 'FLAG[GF_04MP6410_KILL_GUARDIAN]', 'simpleName': 'Temple of the Great Tree Boss'},
+        "Mont Gendarme Boss Arena Giasburn Psyches": {'FLAG': 'FLAG[GF_03MP4341_KILL_ANCIENT]', 'simpleName': 'Mont Gendarme Boss'},
+        "Schlamm Jungle Boss Arena Laspisus Psyches": {'FLAG': 'FLAG[GF_02MP2308_KILL_HIPPO]', 'simpleName': 'Schlamm Jungle Boss'},
+        "Eroded Valley Boss Arena Gargantula Psyches": {'FLAG': 'FLAG[GF_TBOX_DUMMY074]', 'simpleName': 'Eroded Valley Boss'},
+        "Towering Coral Forest Boss Arena Clareon Psyches": {'FLAG': 'FLAG[GF_02MP1308_KILL_CHAMELEON]', 'simpleName': 'Towering Coral Forest Boss'},
+        "Former Sanctuary Crypt - Final Floor Boss Arena Melaiduma Psyches": {'FLAG': 'FLAG[GF_SUBEV_UNTOUCHABLE]', 'simpleName': 'Former Sanctuary Crypt Boss'}
+    }
+    
+    psycheFlag = {
+        "Psyches of the Sky Era": "GF_06MP6308_TALK_SARAI",
+        "Psyches of the Insectoid Era": "GF_06MP6307_TALK_NESTOR",
+        "Psyches of the Ocean Era": "GF_06MP6305_TALK_HYDRA",
+        "Psyches of the Frozen Era": "GF_06MP6306_TALK_MINOS"
+    }
+    
+    # Build warden scaling once
+    wardenScaling = 'SetChrWork("b012", CWK_MAXHP, (b012.CHRWORK[CWK_MAXHP] * 3.0f))\nSetChrWork("b012", CWK_HP, (b012.CHRWORK[CWK_MAXHP]))\n'
     if settings['options']['former_sanctuary_crypt'] == 0:
-        wardenScaling = wardenScaling + """
-        SetChrWork(B170, CWK_LV, 65)
-    """
-
-    danaWardenIncrease = 5
-    danaModerateWardenIncrease = 2
-    normalWardenIncrease = 10
-    moderateWardenIncrease = 5
+        wardenScaling += 'SetChrWork(B170, CWK_LV, 65)\n'
     
-    #### We're going to merge all this together in AP in an attempt to make this more modular and able to expand if we want more bosses in the future.
-
-    bossCheckpoint = """
-    function "bossCheckpoint"
-    {
-        SetStopFlag(STOPFLAG_TALK)
-        
-        SetFlag(TF_MENU_SELECT2, 0)
-        MenuReset()
-        MenuType(MENUTYPE_POPUP)
-        
-        //--------------------------------------------------------------------------------------
-    """
-    rewards = settings['psyche_rewards']
-    menuAdd = 10
-    menuAddList = []
-    menuEnableList = []
+    bossCheckpoint = (
+        'function "bossCheckpoint"\n'
+        '{\n'
+        '\tSetStopFlag(STOPFLAG_TALK)\n'
+        '\tSetFlag(TF_MENU_SELECT2, 0)\n'
+        '\tMenuReset()\n'
+        '\tMenuType(MENUTYPE_POPUP)\n'
+        '\t//--------------------------------------------------------------------------------------\n'
+    )
     bossLoad = ""
     bossReturn = ""
-    condition = "if"
-    # main loop to build the menu, load, and return scripts for each psyche boss
-    # this hurts readability a little since these are out of order from when they're
-    # inserted into the boss checkpoint function but it makes it much easier to manage since we only need one loop instead of three.
-    # this will also allow for any number of psyche bosses or combinations.
-    for i, (psyche, accessBoss) in enumerate(settings['psyche_map'].items()):
-        formattedPsyche = bossFlagDict[accessBoss]["simpleName"] + ":" + rewards[psyche] +  "(" + psyche[:psyche.rfind(" ")] + ")"
-        enabledFormattedPsyche = GOLD + bossFlagDict[accessBoss]["simpleName"] + ":" + rewards[psyche] +  "(" + psyche[:psyche.rfind(" ")]  + ")" 
-        if i != 0:
-            condition = "else if"
-        bossCheckpoint = bossCheckpoint + """
-        if({0} && !FLAG[{1}])
-        {{
-            MenuAdd({2}, "{4}")	
-        }}
-        else if(!{0} || FLAG[{1}])
-        {{
-            MenuAdd({3}, "{5}")	
-        }}
-    """.format(bossFlagDict[accessBoss]["FLAG"], psycheFlag[rewards[psyche]], 
-               str(menuAdd), str(menuAdd+1), enabledFormattedPsyche, formattedPsyche)
-        bossLoad = bossLoad + """
-        {0}(FLAG[TF_MENU_SELECT2] == {1})
-        {{
-            MenuClose(10, 0)
-            SetFlag(GF_TBOX_DUMMY127,1)
-            GetItem(ICON3D_831,1)
-            {2}
-            {3}
-            WaitFade()
-        }}
-    """.format(condition, str(menuAdd), bossCue[psyche].mapLoad, bossCue[psyche].eventCue)
-        bossReturn = bossReturn + """
-        {0}(WORK[WK_MAPNAMENO] == {1})
-        {{
-            SetFlag({2},1)
-        }}""".format(condition, bossCue[psyche].mapID, psycheFlag[rewards[psyche]])
-
-        menuAddList.append(str(menuAdd))
-        menuEnableList.append(str(menuAdd+1))
-        menuAdd += 10
-    bossCheckpoint = bossCheckpoint + """
-    //--------------------------------------------------------------------------------------
-        
-    """
-
-    for add in menuEnableList:
-        bossCheckpoint = bossCheckpoint + """
-            MenuEnable({0}, 0)""".format(add)
-        
-    bossCheckpoint = bossCheckpoint + """
-        MenuOpen( TF_MENU_SELECT2 , 283 , ADOLMENU_PPOSY , -2 , -2 , 10 , 1)
-        WaitMenu(0)
-        CloseMessage(6,0)
-        WaitCloseMessage(6)
-        MenuClose(10, 0)
-    """
-    bossCheckpoint = bossCheckpoint + bossLoad + """
-        ResetStopFlag(STOPFLAG_TALK)
-    }}
+    menuEnableList = []
     
-    function "wardenScaling"
-    {{
-        {0} 
-    }}
-    """.format(wardenScaling)
-
-    bossCheckpoint = bossCheckpoint + """
-    function "bossReturn"
-    {
-        SetFlag( SF_BOSS_BATTLE, 0 )
-    """
-
-    bossCheckpoint = bossCheckpoint + bossReturn + """
-        LoadArg("map/mp1201/mp1201.arg")
-        EventCue("mp1201:EV_M01S080_ED")
-    }
-    """
+    rewards = settings['psyche_rewards']
+    
+    # Single pass: build all three script sections together
+    for i, (psyche, accessBoss) in enumerate(settings['psyche_map'].items()):
+        menuId = 10 + (i * 10)
+        menuIdDisabled = menuId + 1
+        condition = "if" if i == 0 else "else if"
+        
+        flagKey = psycheFlag[rewards[psyche]]
+        simpleName = bossFlagDict[accessBoss]["simpleName"]
+        bossName = psyche[:psyche.rfind(" ")]
+        
+        formattedPsyche = f"{simpleName}:{rewards[psyche]}({bossName})"
+        enabledFormattedPsyche = f"{GOLD}{formattedPsyche}"
+        
+        # Build all three together
+        bossCheckpoint += (
+            f"\n"
+            f"\tif({bossFlagDict[accessBoss]['FLAG']} && !FLAG[{flagKey}])\n"
+            f"\t{{\n"
+            f"\t\tMenuAdd({menuId}, \"{enabledFormattedPsyche}\")\n"
+            f"\t}}\n"
+            f"\telse if(!{bossFlagDict[accessBoss]['FLAG']} || FLAG[{flagKey}])\n"
+            f"\t{{\n"
+            f"\t\tMenuAdd({menuIdDisabled}, \"{formattedPsyche}\")\n"
+            f"\t}}"
+        )
+        
+        bossLoad += (
+            f"\n"
+            f"\t{condition}(FLAG[TF_MENU_SELECT2] == {menuId})\n"
+            f"\t{{\n"
+            f"\t\tMenuClose(10, 0)\n"
+            f"\t\tSetFlag(GF_TBOX_DUMMY127,1)\n\t\tGetItem(ICON3D_831,1)\n"
+            f"\t\t{bossCue[psyche]['mapLoad']}\n"
+            f"\t\t{bossCue[psyche]['eventCue']}\n\t\tWaitFade()\n"
+            f"\t}}"
+        )
+        
+        bossReturn += (
+            f"\n"
+            f"\t{condition}(WORK[WK_MAPNAMENO] == {bossCue[psyche]['mapID']})\n"
+            f"\t{{\n"
+            f"\t\tSetFlag({flagKey},1)\n"
+            f"\t}}"
+        )
+        
+        menuEnableList.append(menuIdDisabled)
+    
+    # Finish building the full script
+    bossCheckpoint += '\n\t//--------------------------------------------------------------------------------------\n'
+    for menuId in menuEnableList:
+        bossCheckpoint += f'\n\t\tMenuEnable({menuId}, 0)'
+    
+    bossCheckpoint += (
+        '\n'
+        '\n'
+        '\t\tMenuOpen(TF_MENU_SELECT2, 283, ADOLMENU_PPOSY, -2, -2, 10, 1)\n'
+        '\t\tWaitMenu(0)\n'
+        '\t\tCloseMessage(6,0)\n'
+        '\t\tWaitCloseMessage(6)\n'
+        '\t\tMenuClose(10, 0)\n'
+        '\t}\n'
+        + bossLoad + '\n'
+        '\t\tResetStopFlag(STOPFLAG_TALK)\n\t}\n'
+        '\n'
+        '\tfunction "wardenScaling"\n'
+        '\t{\n'
+        f'\t\t{wardenScaling}\n'
+        '\t}\n'
+        '\n'
+        '\tfunction "bossReturn"\n'
+        '\t{\n'
+        '\t\tSetFlag(SF_BOSS_BATTLE, 0)\n'
+        + bossReturn + '\n'
+        '\t\tLoadArg("map/mp1201/mp1201.arg")\n'
+        '\t\tEventCue("mp1201:EV_M01S080_ED")\n'
+        '\t}\n'
+    )
+    
     return bossCheckpoint
 
 # ==========================================================================================================
@@ -648,7 +687,6 @@ function "FSC_warp"
     {
         MenuAdd(11, "1F - Chamber of Braziers, Ent")	
     }
-
 
     if(FLAG[GF_TBOX_DUMMY157])
     {
@@ -740,12 +778,6 @@ function "FSC_warp"
 #  Dina's Shop Function (Jewel Trade)
 # ==========================================================================================================
 def jewelTrade(locations):
-    class ItemInfo:
-        def __init__(self, name):
-            self.itemName = name
-    
-    dinasItems = [None] * 10
-    
     script = """
 function "newTradeHandler"
 {{
@@ -759,194 +791,163 @@ function "newTradeHandler"
         MenuAdd(11, "Prismatic Jewel x 1 for {0}.")
     }}
     if(ALLITEMWORK[ICON3D_MT_R4_GOLD] > 0 && !FLAG[GF_TBOX_DUMMY096])
-	{{
+    {{
         MenuAdd(20, "#2C Prismatic Jewel x 1 #0C for #2C {1}#0C .")
-	}}
-	else
-	{{
+    }}
+    else
+    {{
         MenuAdd(21, "Prismatic Jewel x 1 for {1}.")
-	}}
+    }}
 
-	if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 2 && !FLAG[GF_TBOX_DUMMY097])
-	{{
-		MenuAdd(110, "#2C Prismatic Jewel x 2 #0C for #2C {2}#0C .")
-	}}
-	else
-	{{
-		MenuAdd(111, "Prismatic Jewel x 2 for {2}.")
-	}}
-	
-	if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 10 && !FLAG[GF_TBOX_DUMMY098])
-	{{
-		MenuAdd(30, "#2C Prismatic Jewel x 10 #0C for #2C {3}#0C .")
-	}}
-	else
-	{{
-		MenuAdd(31, "Prismatic Jewel x 10 for {3}.")
-	}}
-	
-	if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 25 && !FLAG[GF_TBOX_DUMMY099])
+    if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 2 && !FLAG[GF_TBOX_DUMMY097])
     {{
-		MenuAdd(40, "#2C Prismatic Jewel x 25 #0C for #2C {4}#0C .")
-	}}
-	else
-	{{
-		MenuAdd(41, "Prismatic Jewel x 25 for {4}.")
-	}}
+        MenuAdd(110, "#2C Prismatic Jewel x 2 #0C for #2C {2}#0C .")
+    }}
+    else
+    {{
+        MenuAdd(111, "Prismatic Jewel x 2 for {2}.")
+    }}
+    
+    if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 10 && !FLAG[GF_TBOX_DUMMY098])
+    {{
+        MenuAdd(30, "#2C Prismatic Jewel x 10 #0C for #2C {3}#0C .")
+    }}
+    else
+    {{
+        MenuAdd(31, "Prismatic Jewel x 10 for {3}.")
+    }}
+    
+    if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 25 && !FLAG[GF_TBOX_DUMMY099])
+    {{
+        MenuAdd(40, "#2C Prismatic Jewel x 25 #0C for #2C {4}#0C .")
+    }}
+    else
+    {{
+        MenuAdd(41, "Prismatic Jewel x 25 for {4}.")
+    }}
 
-	//--------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------
 
-	if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 1 && !FLAG[GF_OLDITEM_TRADE_01])	
+    if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 1 && !FLAG[GF_OLDITEM_TRADE_01])	
     {{
-		MenuAdd(50, "#2C Prismatic Jewel x 1 #0C for #2C {5}#0C .")
-	}}
-	else
-	{{
-		MenuAdd(51, "Prismatic Jewel x 1 for {5}.")
-	}}
+        MenuAdd(50, "#2C Prismatic Jewel x 1 #0C for #2C {5}#0C .")
+    }}
+    else
+    {{
+        MenuAdd(51, "Prismatic Jewel x 1 for {5}.")
+    }}
 
-	if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 1 && !FLAG[GF_OLDITEM_TRADE_02])	
+    if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 1 && !FLAG[GF_OLDITEM_TRADE_02])	
     {{
-		MenuAdd(60, "#2C Prismatic Jewel x 1 #0C for #2C {6}#0C .")
-	}}
-	else
-	{{
-		MenuAdd(61, "Prismatic Jewel x 1 for {6}.")
-	}}
-	
-	if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 2 && !FLAG[GF_OLDITEM_TRADE_03])	
+        MenuAdd(60, "#2C Prismatic Jewel x 1 #0C for #2C {6}#0C .")
+    }}
+    else
     {{
-		MenuAdd(70, "#2C Prismatic Jewel x 2 #0C for #2C {7}#0C .")
-	}}
-	else
-	{{
-		MenuAdd(71, "Prismatic Jewel x 2 for {7}.")
-	}}
+        MenuAdd(61, "Prismatic Jewel x 1 for {6}.")
+    }}
+    
+    if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 2 && !FLAG[GF_OLDITEM_TRADE_03])	
+    {{
+        MenuAdd(70, "#2C Prismatic Jewel x 2 #0C for #2C {7}#0C .")
+    }}
+    else
+    {{
+        MenuAdd(71, "Prismatic Jewel x 2 for {7}.")
+    }}
 
-	if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 2 && !FLAG[GF_OLDITEM_TRADE_04])	
+    if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 2 && !FLAG[GF_OLDITEM_TRADE_04])	
     {{
-		MenuAdd(80, "#2C Prismatic Jewel x 2 #0C for #2C {8}#0C .")
-	}}
-	else
-	{{
-		MenuAdd(81, "Prismatic Jewel x 2 for {8}.")
-	}}		
+        MenuAdd(80, "#2C Prismatic Jewel x 2 #0C for #2C {8}#0C .")
+    }}
+    else
+    {{
+        MenuAdd(81, "Prismatic Jewel x 2 for {8}.")
+    }}		
 
-	if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 3 && !FLAG[GF_OLDITEM_TRADE_05])	
+    if(ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 3 && !FLAG[GF_OLDITEM_TRADE_05])	
     {{
-		MenuAdd(90, "#2C Prismatic Jewel x 3 #0C for #2C {9}#0C .")
-	}}
-	else
-	{{
-		MenuAdd(91, "Prismatic Jewel x 3 for {9}.")
-	}}
+        MenuAdd(90, "#2C Prismatic Jewel x 3 #0C for #2C {9}#0C .")
+    }}
+    else
+    {{
+        MenuAdd(91, "Prismatic Jewel x 3 for {9}.")
+    }}
 
 }}
 """
-    for i in range(461,471):
-        dinasItems[i-461] = ItemInfo(locations[str(i)]['item_name'])
-
-    return script.format(dinasItems[0].itemName,dinasItems[1].itemName,dinasItems[2].itemName,dinasItems[3].itemName,
-                         dinasItems[4].itemName,dinasItems[5].itemName,dinasItems[6].itemName,dinasItems[7].itemName,
-                         dinasItems[8].itemName,dinasItems[9].itemName)
+    item_names = [locations[str(i)]['item_name'] for i in range(461, 471)]
+    return script.format(*item_names)
 
 # ==========================================================================================================
 #  Shop Self Hints: Dogi, Master Kong, Shoebill, Austin, Mishy, and Euron
 # ==========================================================================================================
 #function to give hints for long checks, NPCs will tell you once the check is unlocked what is behind it
 def talkHints(locations):
-
-    def formatHint(location):
-        return location['item_name']
-        
-    intReward = [None] * 5
-    mkRewards = [None] * 7
-    fishRewards = [None] * 6
-    discoveryRewards = [None] * 2
-    mapRewards = [None] * 10
-    foodRewards = [None] * 6
-
+    # Map location names to (array_index, item_index) for cleaner population
+    location_map = {
+        # Intercept Rewards
+        "Calm Inlet Intercept Stage 2": (0, 0),
+        "Calm Inlet Intercept Stage 3": (0, 1),
+        "Calm Inlet Intercept Stage 5": (0, 2),
+        "Calm Inlet Intercept Stage 7": (0, 3),
+        "Calm Inlet Intercept Stage 9": (0, 4),
+        # Master Kong Rewards
+        "Roaring Seashore Parasequoia Master Kong Skill Ricotta": (1, 0),
+        "Sunrise Beach Sunrise Beach Master Kong Skill Sahad": (1, 1),
+        "Odd Rock Coast Odd Rock Coast Master Kong Skill Dana": (1, 2),
+        "Mont Gendarme Mid-Boss Arena Master Kong Skill Laxia": (1, 3),
+        "Pangaia Plains Ancient Tree Master Kong Skill Hummel": (1, 4),
+        "Vista Ridge Vista Ridge Lower Master Kong Skill Adol": (1, 5),
+        "Vista Ridge Vista Ridge Lower Master Kong Join": (1, 6),
+        # Fish Rewards
+        "Calm Inlet Fish Trade Fish 4": (2, 0),
+        "Calm Inlet Fish Trade Fish 8": (2, 1),
+        "Calm Inlet Fish Trade Fish 12": (2, 2),
+        "Calm Inlet Fish Trade Fish 16": (2, 3),
+        "Calm Inlet Fish Trade Fish 20": (2, 4),
+        "Calm Inlet Fish Trade Fish 24": (2, 5),
+        # Discovery Rewards
+        "Calm Inlet Discovery Rewards Half": (3, 0),
+        "Calm Inlet Discovery Rewards All": (3, 1),
+        # Map Rewards
+        "Calm Inlet Map Completion Percent 10": (4, 0),
+        "Calm Inlet Map Completion Percent 20": (4, 1),
+        "Calm Inlet Map Completion Percent 30": (4, 2),
+        "Calm Inlet Map Completion Percent 40": (4, 3),
+        "Calm Inlet Map Completion Percent 50": (4, 4),
+        "Calm Inlet Map Completion Percent 60": (4, 5),
+        "Calm Inlet Map Completion Percent 70": (4, 6),
+        "Calm Inlet Map Completion Percent 80": (4, 7),
+        "Calm Inlet Map Completion Percent 90": (4, 8),
+        "Calm Inlet Map Completion Percent 100": (4, 9),
+        # Food Rewards
+        "Mont Gendarme Mishy Rewards Food 2": (5, 0),
+        "Mont Gendarme Mishy Rewards Food 4": (5, 1),
+        "Mont Gendarme Mishy Rewards Food 6": (5, 2),
+        "Mont Gendarme Mishy Rewards Food 8": (5, 3),
+        "Mont Gendarme Mishy Rewards Food 10": (5, 4),
+        "Mont Gendarme Mishy Rewards Food 12": (5, 5),
+    }
+    
+    # Create all reward arrays
+    rewards = [
+        [None] * 5,   # intReward
+        [None] * 7,   # mkRewards
+        [None] * 6,   # fishRewards
+        [None] * 2,   # discoveryRewards
+        [None] * 10,  # mapRewards
+        [None] * 6,   # foodRewards
+    ]
+    
+    # Populate from locations using the map
     for location in locations.values():
-        match location['location_name']:
-            # Intercept Rewards ===================================================================
-            case "Calm Inlet Intercept Stage 2":
-                intReward[0] = formatHint(location)
-            case "Calm Inlet Intercept Stage 3":
-                intReward[1] = formatHint(location)
-            case "Calm Inlet Intercept Stage 5":
-                intReward[2] = formatHint(location)
-            case "Calm Inlet Intercept Stage 7":
-                intReward[3] = formatHint(location)
-            case "Calm Inlet Intercept Stage 9":
-                intReward[4] = formatHint(location)
-            # Master Kong Rewards =================================================================
-            case "Roaring Seashore Parasequoia Master Kong Skill Ricotta":
-                mkRewards[0] = formatHint(location)
-            case "Sunrise Beach Sunrise Beach Master Kong Skill Sahad":
-                mkRewards[1] = formatHint(location)
-            case "Odd Rock Coast Odd Rock Coast Master Kong Skill Dana":
-                mkRewards[2] = formatHint(location)
-            case "Mont Gendarme Mid-Boss Arena Master Kong Skill Laxia":
-                mkRewards[3] = formatHint(location)
-            case "Pangaia Plains Ancient Tree Master Kong Skill Hummel":
-                mkRewards[4] = formatHint(location)
-            case "Vista Ridge Vista Ridge Lower Master Kong Skill Adol":
-                mkRewards[5] = formatHint(location)
-            case "Vista Ridge Vista Ridge Lower Master Kong Join":
-                mkRewards[6] = formatHint(location)
-            # Fish Rewards ========================================================================
-            case "Calm Inlet Fish Trade Fish 4":
-                fishRewards[0] = formatHint(location)
-            case "Calm Inlet Fish Trade Fish 8":
-                fishRewards[1] = formatHint(location)
-            case "Calm Inlet Fish Trade Fish 12":
-                fishRewards[2] = formatHint(location)
-            case "Calm Inlet Fish Trade Fish 16":
-                fishRewards[3] = formatHint(location)
-            case "Calm Inlet Fish Trade Fish 20":
-                fishRewards[4] = formatHint(location)
-            case "Calm Inlet Fish Trade Fish 24":
-                fishRewards[5] = formatHint(location)
-            # Discovery Rewards ========================================================================
-            case "Calm Inlet Discovery Rewards Half":
-                discoveryRewards[0] = formatHint(location)
-            case "Calm Inlet Discovery Rewards All":
-                discoveryRewards[1] = formatHint(location)
-            # Map Rewards ==============================================================================
-            case "Calm Inlet Map Completion Percent 10":
-                mapRewards[0] = formatHint(location)
-            case "Calm Inlet Map Completion Percent 20":
-                mapRewards[1] = formatHint(location)
-            case "Calm Inlet Map Completion Percent 30":
-                mapRewards[2] = formatHint(location)
-            case "Calm Inlet Map Completion Percent 40":
-                mapRewards[3] = formatHint(location)
-            case "Calm Inlet Map Completion Percent 50":
-                mapRewards[4] = formatHint(location)
-            case "Calm Inlet Map Completion Percent 60":
-                mapRewards[5] = formatHint(location)
-            case "Calm Inlet Map Completion Percent 70":
-                mapRewards[6] = formatHint(location)
-            case "Calm Inlet Map Completion Percent 80":
-                mapRewards[7] = formatHint(location)
-            case "Calm Inlet Map Completion Percent 90":
-                mapRewards[8] = formatHint(location)
-            case "Calm Inlet Map Completion Percent 100":
-                mapRewards[9] = formatHint(location)
-            # Food Rewards =============================================================================
-            case "Mont Gendarme Mishy Rewards Food 2":
-                foodRewards[0] = formatHint(location)
-            case "Mont Gendarme Mishy Rewards Food 4":
-                foodRewards[1] = formatHint(location)
-            case "Mont Gendarme Mishy Rewards Food 6":
-                foodRewards[2] = formatHint(location)
-            case "Mont Gendarme Mishy Rewards Food 8":
-                foodRewards[3] = formatHint(location)
-            case "Mont Gendarme Mishy Rewards Food 10":
-                foodRewards[4] = formatHint(location)
-            case "Mont Gendarme Mishy Rewards Food 12":
-                foodRewards[5] = formatHint(location)
-
+        if location['location_name'] in location_map:
+            array_idx, item_idx = location_map[location['location_name']]
+            rewards[array_idx][item_idx] = location['item_name']
+    
+    intReward, mkRewards, fishRewards, discoveryRewards, mapRewards, foodRewards = rewards
+    
+    # Rest of the function (dogiHints, ricottaHints, etc.) remains the same...
     dogiHints = """
 function "interceptRewardPreview"
 {{
@@ -982,8 +983,8 @@ function "interceptRewardPreview"
         Wait(5)
     }}
 }}
-    """.format(intReward[0],intReward[1],intReward[2],intReward[3],intReward[4])
-
+    """.format(*intReward)
+    
     ricottaHints = """
 function "mkRewardsPreview"
 {{
@@ -1050,15 +1051,14 @@ function "mkRewardsPreview"
         WaitCloseWindow()
     }}
     Wait(5)
-    
 }}
-    """.format(mkRewards[0],mkRewards[1],mkRewards[2],mkRewards[3],mkRewards[4],mkRewards[5],mkRewards[6])
-
+    """.format(*mkRewards)
+    
     shoebillHints = """
 function "fishRewardPreview"
 {{
     TalkPopup(UNDEF,0,3,STOPPER_PPOSX,STOPPER_PPOSY,0)
-	{{
+    {{
         "Skwaaaa!" 
         "(The Shoebill gestures broadly in a pantomime."
         "It seems to be signaling about the fishing rewards.)"
@@ -1081,13 +1081,13 @@ function "fishRewardPreview"
     WaitPrompt()
     WaitCloseWindow()
 }}
-    """.format(fishRewards[0],fishRewards[1],fishRewards[2],fishRewards[3],fishRewards[4],fishRewards[5])
+    """.format(*fishRewards)
 
     austinHints = """
 function "discoveryRewardPreview1"
 {{
     TalkPopup("Austin",0,2,0,0,0)
-	{{
+    {{
         "Hmmmm...." 
         "I could really use some inspiration."
         "If you find something interesting, "
@@ -1110,7 +1110,7 @@ function "discoveryRewardPreview1"
 function "discoveryRewardPreview2"
 {{
     TalkPopup("Austin",0,2,0,0,0)
-	{{
+    {{
         "Splendid work!" 
         "Keep it up and I'll happily share this with you!"
     }}
@@ -1125,7 +1125,7 @@ function "discoveryRewardPreview2"
     WaitPrompt()
     WaitCloseWindow()
 }}
-    """.format(discoveryRewards[0],discoveryRewards[1])
+    """.format(*discoveryRewards)
 
     euronHints = """
 function "mapRewardPreview"
@@ -1163,7 +1163,7 @@ function "mapRewardPreview"
     WaitPrompt()
     WaitCloseWindow()
 }}
-    """.format(mapRewards[0],mapRewards[1],mapRewards[2],mapRewards[3],mapRewards[4],mapRewards[5],mapRewards[6],mapRewards[7],mapRewards[8],mapRewards[9])
+    """.format(*mapRewards)
 
     mishyHints = """
 function "foodRewardPreview"
@@ -1189,7 +1189,7 @@ function "foodRewardPreview"
     WaitPrompt()
     WaitCloseWindow()
 }}
-    """.format(foodRewards[0],foodRewards[1],foodRewards[2],foodRewards[3],foodRewards[4],foodRewards[5])
+    """.format(*foodRewards)
 
     return dogiHints + '\n' + ricottaHints + '\n' + shoebillHints + '\n' + austinHints + '\n' + euronHints + '\n' + mishyHints
 
@@ -1198,99 +1198,80 @@ function "foodRewardPreview"
 # ==========================================================================================================
 #setting for when the great tree of origins entrance opens
 def octusGoal(options):
-    if options['final_boss_access'] == 0: # option_find_crew
-        octusAccess ="""
-function "openTree"
-{{
-    if(WORK[WK_NPCNUM] >= {0} && !FLAG[GF_06MP6409_OPEN_GATE])
-    {{
-        SetFlag(GF_06MP6409_OPEN_GATE, 1)
-        CallFunc("mp6409:init")
-    }}
-}}
-"""
-        return octusAccess.format(str(options['octus_count_crew_mode']))
+    # Map mode to (template, param_key)
+    scripts = {
+        0: (
+            '\n'
+            'function "openTree"\n'
+            '{\n'
+            f'\tif(WORK[WK_NPCNUM] >= {str(options["octus_count_crew_mode"])} && !FLAG[GF_06MP6409_OPEN_GATE])\n'
+            '\t{\n'
+            '\t\tSetFlag(GF_06MP6409_OPEN_GATE, 1)\n'
+            '\t\tCallFunc("mp6409:init")\n'
+            '\t}\n'
+            '}\n'
+        ),
+        1: (
+            '\n'
+            'function "openTree"\n'
+            '{\n'
+            '\tSetFlag(GF_06MP6409_OPEN_GATE, 1)\n'
+            '\tCallFunc("mp6409:init")\n'
+            '}\n'
+        ),
+        2: (
+            '\n'
+            'function "openTree"\n'
+            '{\n'
+            f'\tif(ALLITEMWORK[ICON3D_831] >= {str(options["octus_count_psyches_mode"])} && !FLAG[GF_06MP6409_OPEN_GATE])\n'
+            '\t{\n'
+            '\t\tSetFlag(GF_06MP6409_OPEN_GATE, 1)\n'
+            '\t\tCallFunc("mp6409:init")\n'
+            '\t}\n'
+            '}\n'
+        ),
+        3: (
+            '\n'
+            'function "openTree"\n'
+            '{\n'
+            '\tSetFlag(GF_06MP6409_OPEN_GATE, 1)\n'
+            '\tCallFunc("mp6409:init")\n'
+            '}\n'
+        ),
+    }
 
-    elif options['final_boss_access'] in [1,3]: # option_seiren_escape and option_untouchable
-        octusAccess ="""
-function "openTree"
-{
-    SetFlag(GF_06MP6409_OPEN_GATE, 1)
-    CallFunc("mp6409:init")
-}
-"""
-        return octusAccess
-    
-    elif options['final_boss_access'] == 2: # option_release_the_psyches
-        octusAccess ="""
-function "openTree"
-{{
-    if(ALLITEMWORK[ICON3D_831] >= {0} && !FLAG[GF_06MP6409_OPEN_GATE]) //ICON3D_831:junk item used for tracking
-    {{
-        SetFlag(GF_06MP6409_OPEN_GATE, 1)
-        CallFunc("mp6409:init")
-    }}
-}}
-"""
-    return octusAccess.format(str(options['octus_count_psyches_mode']))
+    return scripts[options['final_boss_access']]
 
 # ==========================================================================================================
 #  Conditions for accessing the warp to the final boss from the Selection Sphere
 # ==========================================================================================================
 #Our goals for entering the selection sphere
 def goal(options):
-    if options['final_boss_access'] == 0: # option_find_crew
-        selectionSphereAccess ="""
-function "goal"
-{{
-    if(WORK[WK_NPCNUM] < {0})
-    {{
-        SetChrWork("LP_warpin_mp6310b", CWK_CHECKOFF, 1)
-        SetChrPos("b020",-100000.00f,0.00f,0.00f)
-    }}
-}}
-"""
-        return selectionSphereAccess.format(str(options['goal_count_crew_final_boss']))
-
-    elif options['final_boss_access'] == 1: # option_seiren_escape
-        selectionSphereAccess ="""
-function "goal"
-{
-    if(!ALLITEMWORK[ICON3D_SHIP_PLAN] || !ALLITEMWORK[ICON3D_SEIREN_CHART] || !FLAG[GF_TBOX_DUMMY071])
-    {
-        SetChrWork("LP_warpin_mp6310b", CWK_CHECKOFF, 1)
-        SetChrPos("b020",-100000.00f,0.00f,0.00f)
-    }
-}
-"""
-        return selectionSphereAccess
-        
-    elif options['final_boss_access'] == 2: # option_release_the_psyches
-        selectionSphereAccess ="""
-function "goal"
-{{
-    if(ALLITEMWORK[ICON3D_831] < {0}) //ICON3D_831:junk item used for tracking
-    {{
-        SetChrWork("LP_warpin_mp6310b", CWK_CHECKOFF, 1)
-        SetChrPos("b020",-100000.00f,0.00f,0.00f)
-    }}
-}}
-"""
+    goal_mode = options['final_boss_access']
     
-        return selectionSphereAccess.format(str(options['goal_count_psyches_final_boss']))
-
-    elif options['final_boss_access'] == 3: # option_untouchable
-        selectionSphereAccess ="""
-function "goal"
-{
-    if(!FLAG[GF_SUBEV_UNTOUCHABLE])
-    {
-        SetChrWork("LP_warpin_mp6310b", CWK_CHECKOFF, 1)
-        SetChrPos("b020",-100000.00f,0.00f,0.00f)
+    # Map mode to (condition, parameter_if_needed)
+    scripts = {
+        0: ('WORK[WK_NPCNUM] < ' + str(options['goal_count_crew_final_boss'])),
+        1: ('!ALLITEMWORK[ICON3D_SHIP_PLAN] || !ALLITEMWORK[ICON3D_SEIREN_CHART] || !FLAG[GF_TBOX_DUMMY071]'),
+        2: ('ALLITEMWORK[ICON3D_831] < ' + str(options['goal_count_psyches_final_boss'])),
+        3: ('!FLAG[GF_SUBEV_UNTOUCHABLE]'),
     }
-}
-"""
-    return selectionSphereAccess
+    
+    condition = scripts[goal_mode]
+    
+    script = (
+        '\n'
+        'function "goal"\n'
+        '{\n'
+        f'\tif({condition})\n'
+        '\t{\n'
+        '\t\tSetChrWork("LP_warpin_mp6310b", CWK_CHECKOFF, 1)\n'
+        '\t\tSetChrPos("b020",-100000.00f,0.00f,0.00f)\n'
+        '\t}\n'
+        '}\n'
+    )
+    
+    return script
 
 # ==========================================================================================================
 #  Randomize Octus Bosses and levels, also make them more rewarding.
@@ -1305,11 +1286,13 @@ def octoBosses(settings):
     script = 'function "setOctoBossLevels"\n\t{\n'
     for boss in octoBossAliases:
         bossLevel = random.randrange(65,75)
-        script = script + '\t\tSetLevel(' + boss + ', ' + str(bossLevel) + ')\n'
-        script = script + '\t\tSetChrWork(' + boss + ', CWK_MAXHP, (' + boss.replace('"','') + '.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
-        script = script + '\t\tSetChrWork(' + boss + ', CWK_HP, (' + boss.replace('"','') + '.CHRWORK[CWK_MAXHP]))\n'
-        script = script + '\t\tSetChrWorkGroup(' + boss + ', CWK_EXPMUL, ' + str(EXPMod) + 'f)\n'
-    script = script + '\t}\n'
+        script += (
+            f'\t\tSetLevel({boss}, {bossLevel})\n'
+            f'\t\tSetChrWork({boss}, CWK_MAXHP, ({boss}.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
+            f'\t\tSetChrWork({boss}, CWK_HP, ({boss}.CHRWORK[CWK_MAXHP]))\n'
+            f'\t\tSetChrWorkGroup({boss}, CWK_EXPMUL, {EXPMod}f)\n'
+        )
+    script += '\t}\n'
 
     randomizeOctoBosses(settings)
 
@@ -1325,15 +1308,6 @@ def octoBosses(settings):
 #if we're only doing origin then the theos start script calls the origin boss fight.
 #for Past Dana we only load the Io fight
 def endingHandler(options):
-
-    # leaving here in case we add something later and so we don't need to update the script for the selection sphere.
-    finalBossLevelScript = """
-    function "finalBossLevel"
-    {
-       
-    }
-    """
-
     # if options.charMode == 'Past Dana':
     #     ioFightLoad = """
     # function "finalBoss"
@@ -1343,101 +1317,141 @@ def endingHandler(options):
     # }
     # """
     #     return ioFightLoad + finalBossLevelScript
-    
-    if options['theos_start_phase'] == 1:
-        theosPhase = ''
-    elif options['theos_start_phase'] == 2:
-        theosPhase = 'SetFlag(GF_MP6310B_ENDROGRAM_STEP,1)'
-    elif options['theos_start_phase'] == 3:
-        theosPhase = 'SetFlag(GF_MP6310B_ENDROGRAM_STEP,2)'
-    
-    if options['origin_start_phase'] == 1:
-        originPhase = ''
-    elif options['origin_start_phase'] == 2:
-        originPhase = 'SetFlag(GF_MP8323_2NDBATTLE,1)'
+    # leaving here in case we add something later and so we don't need to update the script for the selection sphere.
 
-    if options['origin_care_package'] == 2:
-        package = """
-        GetItem(ICON3D_US_BERRY_S,9)
-        GetItem(ICON3D_US_COCONUT_S,9)
-        GetItem(ICON3D_US_MANGO_S,9)
-        GetItem(ICON3D_US_DRAGONFRUIT_S,9)
-        GetItem(ICON3D_USFD_FOOD15,9)
-        GetItem(ICON3D_USFD_FOOD03,9)
-        GetItem(ICON3D_US_RESSURECT_02,9)
-        GetItem(ICON3D_US_EXTRA_02,2)
-        """
-    elif options['origin_care_package'] == 1:
-        package = """
-        GetItem(ICON3D_US_BERRY_S,5)
-        GetItem(ICON3D_US_COCONUT_S,5)
-        GetItem(ICON3D_US_MANGO_S,5)
-        GetItem(ICON3D_US_DRAGONFRUIT_S,5)
-        GetItem(ICON3D_USFD_FOOD15,1)
-        GetItem(ICON3D_US_RESSURECT_02,1)
-        GetItem(ICON3D_US_EXTRA_02,1)
-        """
-    elif options['origin_care_package'] == 0:
-        package = ""
-        
-
-    if options['final_boss'] == 0 or options['final_boss'] == 2: #Theos de Endogram only or Both
-        theosStartScript = """
-    function "finalBoss"
-    {{
-        {0}
-        LoadArg("map/mp6310b/mp6310b.arg")
-	    EventCue("mp6310b:EV_M06S240")
-    }}
-    """
-        theosStartScript = theosStartScript.format(theosPhase)
-    elif options['final_boss'] == 1: #Origin of Life
-        theosStartScript = """
-    function "finalBoss"
-    {{
-        {0}
-        LoadArg("map/mp8323/mp8323.arg")
-		EventCue("mp8323:init")
-    }}
-    """
-        theosStartScript = theosStartScript.format(originPhase)
-
-    if options['final_boss'] == 0 or options['final_boss'] == 1:
-        ending1 = """
-    function "ending"
-    {
-        LoadArg("map/mp0021/mp0021.arg")
-        EventCue("mp0021:EV_M07S130")
-        SetFlag(GF_TBOX_DUMMY120,1)
+    # Phase mappings
+    theos_phases = {
+        1: '',
+        2: 'SetFlag(GF_MP6310B_ENDROGRAM_STEP,1)',
+        3: 'SetFlag(GF_MP6310B_ENDROGRAM_STEP,2)'
     }
     
-    function "ending2"
-    {
-        LoadArg("map/mp0021/mp0021.arg")
-        EventCue("mp0021:EV_M07S130")
-        SetFlag(GF_TBOX_DUMMY120,1)
+    origin_phases = {
+        1: '',
+        2: 'SetFlag(GF_MP8323_2NDBATTLE,1)'
     }
-    """
-    elif options['final_boss'] == 2: #Both
-        ending1 = """
-    function "ending"
-    {{
-        {0}
-        {1}
-        LoadArg("map/mp8323/mp8323.arg")
-		EventCue("mp8323:init")
-    }}
-
-    function "ending2"
-    {{
-        LoadArg("map/mp0021/mp0021.arg")
-        EventCue("mp0021:EV_M07S130")
-        SetFlag(GF_TBOX_DUMMY120,1)
-    }}
-    """
-        ending1 = ending1.format(originPhase,package)
-
-    return theosStartScript + ending1 + finalBossLevelScript
+    
+    # Care package mappings
+    packages = {
+        0: "",
+        1: (
+            "GetItem(ICON3D_US_BERRY_S,5)\n"
+            "GetItem(ICON3D_US_COCONUT_S,5)\n"
+            "GetItem(ICON3D_US_MANGO_S,5)\n"
+            "GetItem(ICON3D_US_DRAGONFRUIT_S,5)\n"
+            "GetItem(ICON3D_USFD_FOOD15,1)\n"
+            "GetItem(ICON3D_US_RESSURECT_02,1)\n"
+            "GetItem(ICON3D_US_EXTRA_02,1)"
+        ),
+        2: (
+            "GetItem(ICON3D_US_BERRY_S,9)\n"
+            "GetItem(ICON3D_US_COCONUT_S,9)\n"
+            "GetItem(ICON3D_US_MANGO_S,9)\n"
+            "GetItem(ICON3D_US_DRAGONFRUIT_S,9)\n"
+            "GetItem(ICON3D_USFD_FOOD15,9)\n"
+            "GetItem(ICON3D_USFD_FOOD03,9)\n"
+            "GetItem(ICON3D_US_RESSURECT_02,9)\n"
+            "GetItem(ICON3D_US_EXTRA_02,2)"
+        )
+    }
+    
+    theos_phase = theos_phases[options['theos_start_phase']]
+    origin_phase = origin_phases[options['origin_start_phase']]
+    package = packages[options['origin_care_package']]
+    
+    # Final boss scripts
+    boss_scripts = {
+        0: (  # Theos only
+            (
+                '\n'
+                'function "finalBoss"\n'
+                '{\n'
+                f'\t{theos_phase}\n'
+                '\tLoadArg("map/mp6310b/mp6310b.arg")\n'
+                '\tEventCue("mp6310b:EV_M06S240")\n'
+                '}\n'
+            ),
+            (
+                '\n'
+                'function "ending"\n'
+                '{\n'
+                '\tLoadArg("map/mp0021/mp0021.arg")\n'
+                '\tEventCue("mp0021:EV_M07S130")\n'
+                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
+                '}\n'
+                'function "ending2"\n'
+                '{\n'
+                '\tLoadArg("map/mp0021/mp0021.arg")\n'
+                '\tEventCue("mp0021:EV_M07S130")\n'
+                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
+                '}\n'
+            )
+        ),
+        1: (  # Origin only
+            (
+                '\n'
+                'function "finalBoss"\n'
+                '{\n'
+                f'\t{origin_phase}\n'
+                '\tLoadArg("map/mp8323/mp8323.arg")\n'
+                '\tEventCue("mp8323:init")\n'
+                '}\n'
+            ),
+            (
+                '\n'
+                'function "ending"\n'
+                '{\n'
+                '\tLoadArg("map/mp0021/mp0021.arg")\n'
+                '\tEventCue("mp0021:EV_M07S130")\n'
+                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
+                '}\n'
+                'function "ending2"\n'
+                '{\n'
+                '\tLoadArg("map/mp0021/mp0021.arg")\n'
+                '\tEventCue("mp0021:EV_M07S130")\n'
+                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
+                '}\n'
+            )
+        ),
+        2: (  # Both (Theos -> Origin)
+            (
+                '\n'
+                'function "finalBoss"\n'
+                '{\n'
+                f'\t{theos_phase}\n'
+                '\tLoadArg("map/mp6310b/mp6310b.arg")\n'
+                '\tEventCue("mp6310b:EV_M06S240")\n'
+                '}\n'
+            ),
+            (
+                '\n'
+                'function "ending"\n'
+                '{\n'
+                f'\t{origin_phase}\n'
+                f'\t{package}\n'
+                '\tLoadArg("map/mp8323/mp8323.arg")\n'
+                '\tEventCue("mp8323:init")\n'
+                '}\n'
+                'function "ending2"\n'
+                '{\n'
+                '\tLoadArg("map/mp0021/mp0021.arg")\n'
+                '\tEventCue("mp0021:EV_M07S130")\n'
+                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
+                '}\n'
+            )
+        )
+    }
+    
+    theos_script, ending_script = boss_scripts[options['final_boss']]
+    
+    finalBossLevelScript = (
+        '\n'
+        'function "finalBossLevel"\n'
+        '{\n'
+        '}\n'
+    )
+    
+    return theos_script + ending_script + finalBossLevelScript
 
 # ==========================================================================================================
 #  Exp Muiltiplier handling and scaled exp items.
@@ -1519,176 +1533,105 @@ def makeGlowStoneUseful():
 #So we're instead taking items from her past, most of them key items, and making them items that will auto complete all specific Dana past events that affect the present. 
 #There are 7 Dana past events where she is able to do things that affect the present, so there are 7 key items here.
 def danaPastEvents(pastItem):
-    if pastItem == 698: #'Maiden Journal'
-        script = """
-    if(!FLAG[GF_03MP1101_LEAVE_CAMP] ) //primordial passage access
-    {
-        SetFlag(GF_TBOX_DUMMY131, 1) // activate load zone to pinnacle from temple approach, moved to primordial passage post entrance shuffle
-        SetFlag(GF_03MP1101_LEAVE_CAMP,1)
+    scripts = {
+        698: (  # 'Maiden Journal'
+            'if(!FLAG[GF_03MP1101_LEAVE_CAMP] ) //primordial passage access\n'
+            '{\n'
+            '\tSetFlag(GF_TBOX_DUMMY131, 1) // activate load zone to pinnacle from temple approach\n'
+            '\tSetFlag(GF_03MP1101_LEAVE_CAMP,1)\n'
+            '}\n'
+        ),
+        700: (  # 'Blue Seal of Whirling Water'
+            'if(!FLAG[GF_04MP5101_OUT_CAMP]) //ruins of eternia access\n'
+            '{\n'
+            '\tSetFlag( GF_04MP5101_OUT_CAMP, 1 )\n'
+            '\tSetFlag(GF_04MP6401M_GO_MP6101M,1)\n'
+            '\tSetFlag( GF_04MP6101_MAKE_CAMP, 1 )\n'
+            '\tSetFlag( GF_04MP6101_CRYSTAL_FLASH, 1 )\n'
+            '\tSetFlag(GF_SUBEV_PAST_01_GIMMICK_A,1) // Past Part I: Achieved [Past Gimmick : Waterway Repair]\n'
+            '\tSetFlag(GF_SUBEV_PAST_01_GIMMICK_C,1) // Past episode I: Viewed [Past gimmick: Reflection in modern version]\n'
+            '\tSetFlag(GF_SUBEV_PAST_01_LP_1ST,1) // Past Part I: [LP: Bookshelf in Dana\'s Room] First time\n'
+            '}\n'
+        ),
+        701: (  # 'Green Seal of Roaring Stone'
+            'if(!FLAG[GF_04MP6201_DIS_OBSTACLE]) //temple of the great tree access\n'
+            '{\n'
+            '\tSetFlag(GF_04MP6201_DIS_OBSTACLE,1)\n'
+            '\tSetFlag(GF_SUBEV_PAST_02_GIMMICK_A, 1) // Past Part II: Watched the event [Past Gimmick : Listen to the story of the key]\n'
+            '\tSetFlag(GF_SUBEV_PAST_02_GIMMICK_B, 1)// Past Part II: [Past Gimmick : Listen to the story about the key] Opened the door\n'
+            '\tSetFlag(GF_SUBEV_PAST_02_FIRECNT_A, 1)// Past Part II: [Past Quest E: Examine the light on the statue] Light the three candlesticks\n'
+            '\tSetFlag(GF_SUBEV_PAST_02_FIRECNT_B, 1)// Past Part II: [Past Quest E: Examine the light on the statue] Light the three candlesticks\n'
+            '\tSetFlag(GF_SUBEV_PAST_02_FIRECNT_C, 1)// Past Part II: [Past Quest E: Examine the light on the statue] Light the three candlesticks\n'
+            '}\n'
+        ),
+        702: (  # 'Golden Seal of Piercing Light'
+            'if(!FLAG[GF_05MP6201M_GOTO_BAHA]) //baja tower access\n'
+            '{\n'
+            '\tSetFlag(GF_05MP6201M_GOTO_BAHA,1)\n'
+            '\tSetFlag(GF_SUBEV_PAST_03_GIMMICK_L,1) // Watched Past Edition III: [Past Gimmick : Helping Animals]\n'
+            '\tSetFlag(GF_SUBEV_PAST_03_GIMMICK_A, 2) // Past Edition III: Achieved [Past Gimmick: Helping animals]\n'
+            '\tSetFlag(GF_SUBEV_PAST_03_GIMMICK_B, 1) // Viewed past edition III: [Past gimmick : Reflection in modern edition]\n'
+            '\tSetFlag(GF_GET_GRATICA, 1)\n'
+            '}\n'
+        ),
+        699: (  # 'Frozen Flower'
+            'if(!FLAG[GF_05MP6204_APPEAR_CASTLE]) //chasm access\n'
+            '{\n'
+            '\tSetFlag(GF_05MP6204_APPEAR_CASTLE,1)\n'
+            '\tSetFlag(GF_SUBEV_PAST_04_GIMMICK_L, 1)// Watched Past Chapter IV: [Past Gimmick : Repairing the Great Monastery Door]\n'
+            '\tSetFlag(GF_SUBEV_PAST_04_GIMMICK, 2)// Past Part IV: Achieved [Past Gimmick : Repairing the door of the Great Monastery]\n'
+            '\tSetFlag(GF_OPEN_FLOOR_02,1) //I saw a prediction that the second floor would open.\n'
+            '}\n'
+        ),
+        796: (  # 'Treasure Chest Key'
+            'if(!FLAG[GF_05MP6105_GOTO_VALLAY]) //lodinia marsh back half access\n'
+            '{\n'
+            '\tSetFlag(GF_05MP6105_GOTO_VALLAY,1)\n'
+            '\tSetFlag(GF_OPEN_FLOOR_03,1) //I saw a prediction that the third floor would open.\n'
+            '\tSetFlag(GF_GET_LUMINOUS,1)\n'
+            '}\n'
+        ),
+        727: (  # 'Shrine Maiden Amulate'
+            'if(!FLAG[GF_SUBEV_PAST_06_GIMMICK_A]) //hill of eternity\n'
+            '{\n'
+            '\tSetFlag(GF_SUBEV_PAST_06_GIMMICK_A,1) // Watched Past Edition VI: [Past Gimmick : Discovered Poisonous Swamp]\n'
+            '\tSetFlag(GF_SUBEV_PAST_06_GIMMICK_B,1)// Past Chapter VI: Moved the meteor fragment with [Past Gimmick : Purification of Poisonous Swamp]\n'
+            '\tSetFlag(GF_SUBEV_PAST_06_GIMMICK_C,1) // Watched past edition VI: [Past gimmick : Reflection in modern edition]\n'
+            '\tSetFlag(GF_OPEN_FLOOR_04, 1) //I saw a prediction that the 4th floor would open.\n'
+            '\tSetFlag(GF_OPEN_FLOOR_05, 1) //I saw a prediction that the 5th floor would open.\n'
+            '}\n'
+        ),
     }
-    """
-    elif pastItem == 700: #'Blue Seal of Whirling Water'
-        script = """
-    if(!FLAG[GF_04MP5101_OUT_CAMP]) //ruins of eternia access
-    {
-        SetFlag( GF_04MP5101_OUT_CAMP, 1 )
-        SetFlag(GF_04MP6401M_GO_MP6101M,1)
-        SetFlag( GF_04MP6101_MAKE_CAMP, 1 )
-        SetFlag( GF_04MP6101_CRYSTAL_FLASH, 1 )
-        SetFlag(GF_SUBEV_PAST_01_GIMMICK_A,1) // Past Part I: Achieved [Past Gimmick : Waterway Repair]
-        SetFlag(GF_SUBEV_PAST_01_GIMMICK_C,1) // Past episode I: Viewed [Past gimmick: Reflection in modern version]
-        SetFlag(GF_SUBEV_PAST_01_LP_1ST,1) // Past Part I: [LP: Bookshelf in Dana's Room] First time
-    }
-    """
-    elif pastItem == 701: #'Green Seal of Roaring Stone'
-        script = """
-    if(!FLAG[GF_04MP6201_DIS_OBSTACLE]) //temple of the great tree access
-    {
-        SetFlag(GF_04MP6201_DIS_OBSTACLE,1)
-        SetFlag(GF_SUBEV_PAST_02_GIMMICK_A, 1) // Past Part II: Watched the event [Past Gimmick : Listen to the story of the key]
-        SetFlag(GF_SUBEV_PAST_02_GIMMICK_B, 1)// Past Part II: [Past Gimmick : Listen to the story about the key] Opened the door
-        SetFlag(GF_SUBEV_PAST_02_FIRECNT_A, 1)// Past Part II: [Past Quest E: Examine the light on the statue] Light the three candlesticks
-        SetFlag(GF_SUBEV_PAST_02_FIRECNT_B, 1)// Past Part II: [Past Quest E: Examine the light on the statue] Light the three candlesticks
-        SetFlag(GF_SUBEV_PAST_02_FIRECNT_C, 1)// Past Part II: [Past Quest E: Examine the light on the statue] Light the three candlesticks
-    }
-    """
-    elif pastItem == 702: #'Golden Seal of Piercing Light'
-        script = """
-    if(!FLAG[GF_05MP6201M_GOTO_BAHA]) //baja tower access
-    {
-        SetFlag(GF_05MP6201M_GOTO_BAHA,1)
-        SetFlag(GF_SUBEV_PAST_03_GIMMICK_L,1) // Watched Past Edition III: [Past Gimmick : Helping Animals]
-        SetFlag(GF_SUBEV_PAST_03_GIMMICK_A, 2) // Past Edition III: Achieved [Past Gimmick: Helping animals] (substitute 2)
-        SetFlag(GF_SUBEV_PAST_03_GIMMICK_B, 1) // Viewed past edition III: [Past gimmick : Reflection in modern edition]
-        SetFlag(GF_GET_GRATICA,	1)
-    }
-    """
-    elif pastItem == 699: #'Frozen Flower'
-        script = """
-    if(!FLAG[GF_05MP6204_APPEAR_CASTLE]) //chasm access
-    {
-        SetFlag(GF_05MP6204_APPEAR_CASTLE,1)
-        SetFlag(GF_SUBEV_PAST_04_GIMMICK_L, 1)// Watched Past Chapter IV: [Past Gimmick : Repairing the Great Monastery Door]
-        SetFlag(GF_SUBEV_PAST_04_GIMMICK, 2)// Past Part IV: Achieved [Past Gimmick : Repairing the door of the Great Monastery] (substitute 2)
-        SetFlag(GF_OPEN_FLOOR_02,1) //I saw a prediction that the second floor would open.
-    }
-    """
-    elif pastItem == 796: #'Treasure Chest Key'
-        script = """
-    if(!FLAG[GF_05MP6105_GOTO_VALLAY]) //lodinia marsh back half access
-    {
-        SetFlag(GF_05MP6105_GOTO_VALLAY,1)
-        SetFlag(GF_OPEN_FLOOR_03,1) //I saw a prediction that the third floor would open.
-        SetFlag(GF_GET_LUMINOUS,1)
-    }
-    """
-    elif pastItem == 727: #'Shrine Maiden Amulate'
-        script = """
-    if(!FLAG[GF_SUBEV_PAST_06_GIMMICK_A]) //hill of eternity
-    {
-        SetFlag(GF_SUBEV_PAST_06_GIMMICK_A,1) // Watched Past Edition VI: [Past Gimmick : Discovered Poisonous Swamp]
-        SetFlag(GF_SUBEV_PAST_06_GIMMICK_B,1)// Past Chapter VI: Moved the meteor fragment with [Past Gimmick : Purification of Poisonous Swamp]
-        SetFlag(GF_SUBEV_PAST_06_GIMMICK_C,1) // Watched past edition VI: [Past gimmick : Reflection in modern edition]
-        SetFlag(GF_OPEN_FLOOR_04, 1) //I saw a prediction that the 4th floor would open.
-        SetFlag(GF_OPEN_FLOOR_05, 1) //I saw a prediction that the 5th floor would open.
-    }  									
-    """
-    return script
+    
+    return scripts.get(pastItem, '')
 
 #Sword of Psyches event. Adol gets Mistletein(probably mispelled that)
 #we make sure the weapon is equipped here when it is received, if progressive super weapons we just set the flag for haivng received it so Kathleen will know the upgrade can happen at shop rank max 
 def sopEvent(options):
     if options["progressive_super_weapons"] == 1:
-        script = """
-    SetFlag(GF_TBOX_DUMMY071,1)
-    """
+        script = "\tSetFlag(GF_TBOX_DUMMY071,1)\n"
     else:
-        script = """
-	SetFlag(GF_ADOLWEAPON_BACKUP,(ADOL.CHRWORK[CWK_WEAPON]))
-	GetItem(ICON3D_WP_ADOL_008,1)
-	EquipWeapon(ADOL,ICON3D_WP_ADOL_008)
-	SetFlag(GF_TBOX_DUMMY071,1)
-	"""
+        script = (
+	        "\tGetItem(ICON3D_WP_ADOL_008,1)\n"
+	        "\tEquipWeapon(ADOL,ICON3D_WP_ADOL_008)\n"
+	        "\tSetFlag(GF_TBOX_DUMMY071,1)\n"
+        )
     return script
 
 #dana spirit ring
 def spiritRingEvent(options):
     if options["progressive_super_weapons"] == 1:
-        script = """
-    SetFlag(GF_TBOX_DUMMY108,1)
-    """
+        script = "\tSetFlag(GF_TBOX_DUMMY108,1)\n"
     else:
-        script = """
-	GetItem(ICON3D_WP_DANA_005,1)
-	EquipWeapon(DANA,ICON3D_WP_DANA_005)
-	SetFlag(GF_TBOX_DUMMY108,1)
-	"""
-    return script
-
-#This makes shop upgrades progressive and is also what makes the flame stones actually do something.
-#In vanilla all they did was act as a signpost for flags that were already set. 
-#Kathleen has also been added the the to the shop upgrade chain as the first step. This is to help with combat balancing. 
-#The idea being that weapons are the most important factor for combat balancing so making sure that Kathleen is found first before the reforge chains are unlocked will help with the game flow.
-#Also to improve character balance in the rando late joining characters now have weapons they get from Kathleen for free we speaking with her at specific shop upgrade ranks.
-#AP moves the shop upgrade checks to the init of castaway village, this allows up to simplify this function but we still need this for shop rank overflow.
-def shopUpgrades(location_id, loc_data, vanillaScript):
-    scriptName = buildLocScripts(location_id,False)
-
-    if loc_data["location_type"] in ['event', 'landmark']:   
-        getItemFunction =  """
-function "{0}"
-{{
-    if (ALLITEMWORK[ICON3D_139] >= 8)
-    {{
-            GetItem(ICON3D_MT_N4_STONE,5)
-            GetItemMessageExPlus(ICON3D_MT_N4_STONE,5,ITEMMSG_SE_NORMAL," Obtained.",0,0)
-            WaitPrompt()
-            WaitCloseWindow()
-    }}
-    else
-    {{
-        GetItem(ICON3D_139,1)
-        GetItemMessageExPlus(ICON3D_139,1,ITEMMSG_SE_NORMAL," Obtained.",0,0)
-        WaitPrompt()
-        WaitCloseWindow()
-        {1}
-    }}
-}}
-"""  
-    else:
-        fillChest(location_id,139,1)
-        getItemFunction =  """
-function "{0}"
-{{
-    SetStopFlag(STOPFLAG_TALK)
-    if (ALLITEMWORK[ICON3D_139] >= 8)
-    {{
-            GetItem(ICON3D_MT_N4_STONE,5)
-            GetItemMessageExPlus(ICON3D_MT_N4_STONE,5,ITEMMSG_SE_NORMAL," Obtained.",0,0)
-            WaitPrompt()
-            WaitCloseWindow()
-    }}
-    else
-    {{
-        {1}
-    }}
-    ResetStopFlag(STOPFLAG_TALK)
-}}
-"""   
-    return getItemFunction.format(scriptName,vanillaScript)
-
-#This flag was original tripped by the chest event from the chest on the Docks of East Coast Cave. Now it has been moved to the note that was originally in that chest.
-def pirateShipDocks():
-    script = """
-
-    SetFlag(GF_05MP7411_READ_NOTE1, 1)
-
-"""
+        script = (
+	        "\tGetItem(ICON3D_WP_DANA_005,1)\n"
+	        "\tEquipWeapon(DANA,ICON3D_WP_DANA_005)\n"
+	        "\tSetFlag(GF_TBOX_DUMMY108,1)\n"
+        )
     return script
 
 #this builds out all our intercept rewards, it's called every time we return from an intercept in castaway village by checking the flags for last stage rank and stage clear
 def interceptionHandler(options):
-    interceptionRewards = getIntRewards()
 
     script = """
 function "newInterceptControl"
@@ -1711,63 +1654,66 @@ function "newInterceptControl"
     {
 
 """
-    for stage in interceptionRewards:
-        stageCheck = """
-        if (FLAG[GF_INTERCEPT_LASTSTAGEID] == {0})
-        {{
-            SetStopFlag(STOPFLAG_TALK)
 
-"""
-        script = script + stageCheck.format(stage.stage)
+    if options['additional_intercept_rewards'] == 1:
+        interceptionRewards = getIntRewards()
+        for stage in interceptionRewards:
+            stageCheck = """
+            if (FLAG[GF_INTERCEPT_LASTSTAGEID] == {0})
+            {{
+                SetStopFlag(STOPFLAG_TALK)
 
-        if options['additional_intercept_rewards'] == 1:
-            totalReward = 0
-            for index,reward in enumerate(stage.rewards):
-                if index % 2 == 0 or index == 0:
-                    item = reward
-                else:
-                    itemNum = reward
+    """
+            script = script + stageCheck.format(stage.stage)
 
-                totalReward+=1
-                if totalReward == 2:
-                    rewardGet = """
+            if options['additional_intercept_rewards'] == 1:
+                totalReward = 0
+                for index,reward in enumerate(stage.rewards):
+                    if index % 2 == 0 or index == 0:
+                        item = reward
+                    else:
+                        itemNum = reward
 
-                GetItem({0},{1})
-                GetItemMessageExPlus({0},{1},ITEMMSG_SE_NORMAL,"{2}",0,0)
-                WaitPrompt()
-                WaitCloseWindow()
+                    totalReward+=1
+                    if totalReward == 2:
+                        rewardGet = """
 
+                    GetItem({0},{1})
+                    GetItemMessageExPlus({0},{1},ITEMMSG_SE_NORMAL,"{2}",0,0)
+                    WaitPrompt()
+                    WaitCloseWindow()
+
+                    """
+                        script = script + rewardGet.format(item,itemNum,OBTAINED_ITEM_MESSAGE)
+                        totalReward = 0
+
+            if stage.stage == 'INTERCEPT_STAGE02':
+                dogiReward = """
+                SetFlag(GF_TBOX_DUMMY089,1)
                 """
-                    script = script + rewardGet.format(item,itemNum,OBTAINED_ITEM_MESSAGE)
-                    totalReward = 0
+            elif stage.stage == 'INTERCEPT_STAGE03':
+                dogiReward = """
+                SetFlag(GF_TBOX_DUMMY090,1)"""
+            elif stage.stage == 'INTERCEPT_STAGE05':
+                dogiReward = """
+                SetFlag(GF_TBOX_DUMMY091,1)
+                """
+            elif stage.stage == 'INTERCEPT_STAGE07':
+                dogiReward = """
+                SetFlag(GF_TBOX_DUMMY092,1)
+                """
+            elif stage.stage == 'INTERCEPT_STAGE09':
+                dogiReward = """
+                SetFlag(GF_TBOX_DUMMY093,1)
+                """
+            else:
+                dogiReward = ''
 
-        if stage.stage == 'INTERCEPT_STAGE02':
-            dogiReward = """
-            SetFlag(GF_TBOX_DUMMY089,1)
-            """
-        elif stage.stage == 'INTERCEPT_STAGE03':
-            dogiReward = """
-            SetFlag(GF_TBOX_DUMMY090,1)"""
-        elif stage.stage == 'INTERCEPT_STAGE05':
-            dogiReward = """
-            SetFlag(GF_TBOX_DUMMY091,1)
-            """
-        elif stage.stage == 'INTERCEPT_STAGE07':
-            dogiReward = """
-            SetFlag(GF_TBOX_DUMMY092,1)
-            """
-        elif stage.stage == 'INTERCEPT_STAGE09':
-            dogiReward = """
-            SetFlag(GF_TBOX_DUMMY093,1)
-            """
-        else:
-            dogiReward = ''
-
-        stageFooter = """
-            ResetStopFlag(STOPFLAG_TALK)
-        }"""  
+            stageFooter = """
+                ResetStopFlag(STOPFLAG_TALK)
+            }"""  
         
-        script = script + dogiReward + stageFooter
+            script = script + dogiReward + stageFooter
 
     scriptFooter = """
         SetFlag(GF_INTERCEPT_LASTRESULT, 0)
@@ -1807,55 +1753,44 @@ def interceptUnlock():
 # Helper functions
 # ==========================================================================================================
 def makeFileSafeItemName(itemName):
-    itemName = itemName.replace("#", " ")
-    itemName = itemName.replace("\\", "_")
-    itemName = itemName.replace("/", "_")
-    itemName = itemName.replace("\"", "'")
+    replacements = {'#': ' ', '\\': '_', '/': '_', '"': "'"}
+    for old, new in replacements.items():
+        itemName = itemName.replace(old, new)
     return itemName
 
-def buildMessage(itemId,itemName,classification,player,message_type=None,isParty=False, characterName=None):
+def buildMessage(itemId, itemName, classification, player, message_type=None, isParty=False, characterName=None):
     itemName = makeFileSafeItemName(itemName)
+    
     if itemId == AP_ITEM:
-        if classification == "PROGRESSION":
-            message = "Sent " + PINK +  itemName + WHITE +" to " + GOLD + player + "."
-        elif classification == "USEFUL":
-            message = "Sent " + PURPLE +  itemName + WHITE +" to " + GOLD + player + "."
-        elif classification == "TRAP":
-            message = "Sent " + ORANGE +  itemName + WHITE +" to " + GOLD + player + "."
-        else:
-            message = "Sent " + BLUE +  itemName + WHITE +" to " + GOLD + player + "."
-    elif message_type == 'landmark':
-        message = GOLD + itemName + GREEN + LANDMARK_MESSAGE
-    elif message_type == 'castaway':
-        if isParty:
-            message = GOLD + itemName + GREEN + PARTY_MESSAGE
-        else:
-            message = GOLD + itemName + GREEN + CREW_MESSAGE
-    elif message_type == 'skill':
-        message = GREEN + characterName + SKILL_MESSAGE + itemName + GREEN + "."
-    else:
-        message = OBTAINED_ITEM_MESSAGE
-    return message
+        # Map classification to color
+        color_map = {
+            'PROGRESSION': PINK,
+            'USEFUL': PURPLE,
+            'TRAP': ORANGE,
+        }
+        color = color_map.get(classification, BLUE)
+        return f"Sent {color}{itemName}{WHITE} to {GOLD}{player}."
+    
+    # Map message_type to message template
+    message_map = {
+        'landmark': f"{GOLD}{itemName}{GREEN}{LANDMARK_MESSAGE}",
+        'castaway': f"{GOLD}{itemName}{GREEN}{'PARTY_MESSAGE' if isParty else CREW_MESSAGE}",
+        'skill': f"{GREEN}{characterName}{SKILL_MESSAGE}{itemName}{GREEN}.",
+    }
+    
+    return message_map.get(message_type, OBTAINED_ITEM_MESSAGE)
 
 def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, isParty=False):
-    if (location_id in ['23']):
-        print(location_id)
     itemName = loc_data['item_name']
     itemQuantity = loc_data['item_quantity']
     
-    if message_type == 'landmark':
-        itemIcon = -1
-        itemId = 148
-    elif message_type == 'castaway':
-        itemIcon = -1
-        itemId = 143
-    elif message_type == 'skill':
-        itemIcon = -1
-        itemId = 144
-        skillInfo = getSkillInfo(itemName) #returns tuple: character,skill ID,character name
-        character = skillInfo[0]
-        skillID = skillInfo[1]
-        characterName = skillInfo[2]
+    if message_type in ITEM_TYPE_CONFIG:
+        config = ITEM_TYPE_CONFIG[message_type]
+        itemIcon = config['icon']
+        itemId = config['id']
+        if config['needs_skill_info']:
+            skillInfo = getSkillInfo(itemName)
+            character, skillID, characterName = skillInfo
     else:
         itemId = int(loc_data['item_id'])
         itemIcon = getIcon(itemId) if itemId != AP_ITEM else -1
@@ -1876,14 +1811,32 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
                            characterName if message_type == 'skill' else None)
 
     if message_type == 'skill':
-        getItem = f"\tGetSkill({character},{skillID},1)"
-    elif itemId == AP_ITEM:
+        getItem = f"\tGetSkill({character},{skillID},1)\n"
+    elif itemId in [AP_ITEM, PROGRESSIVE_SHOP_RANK_ITEM] or not locationIsEvent:
         getItem = ""
     else:
-        getItem = f"\tGetItem({itemIcon},{itemQuantity})"
+        getItem = f"\tGetItem({itemIcon},{itemQuantity})\n"
 
+    #overflow handling for progressive shop ranks.
+    if itemId == PROGRESSIVE_SHOP_RANK_ITEM:
+        GetItemMessage = (
+            f"\tif (ALLITEMWORK[{itemIcon}] >= 8)\n"
+            f"\t{{\n"
+            f"\t\tGetItem({itemIcon},{itemQuantity})\n"
+            f"\t\tGetItemMessageExPlus({itemIcon},{itemQuantity},{ITEM_SOUND},\"{message}\",0,0)\n"
+            f"\t\tWaitPrompt()\n"
+            f"\t\tWaitCloseWindow()\n"
+            f"\t}}\n"
+            f"\telse\n"
+            f"\t{{\n"
+            f"\t\tGetItem(ICON3D_MT_N4_STONE,5)\n"
+            f"\t\tGetItemMessageExPlus(ICON3D_MT_N4_STONE,5,{ITEM_SOUND},\"{message}\",0,0)\n"
+            f"\t\tWaitPrompt()\n"
+            f"\t\tWaitCloseWindow()\n"
+            f"\t}}\n"
+        )
     #if it's an event location or a landmark or castaway reward or skill reward we want the message to be in the event script instead of the chest script
-    if locationIsEvent or itemId in [AP_ITEM, 148, 143, 144]: 
+    elif locationIsEvent or itemId in [AP_ITEM, LANDMARK_ITEM, CASTAWAY_ITEM, SKILL_ITEM]: 
         GetItemMessage = (
             f"\tGetItemMessageExPlus({itemIcon},{itemQuantity},{ITEM_SOUND},\"{message}\",0,0)\n"
             f"\tWaitPrompt()\n"
@@ -1892,22 +1845,23 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
     else: 
         GetItemMessage = ""
 
-    if not locationIsEvent:
-        setStopFlag = f"\tSetStopFlag({SCRIPT_STOP_FLAG})"
-        resetStopFlag = f"\tResetStopFlag({SCRIPT_STOP_FLAG})"
+    if not locationIsEvent and eventScripts != "":
+        setStopFlag = f"\tSetStopFlag({SCRIPT_STOP_FLAG})\n"
+        resetStopFlag = f"\tResetStopFlag({SCRIPT_STOP_FLAG})\n"
     else: 
         setStopFlag = ""
         resetStopFlag = ""
 
     getItemFunction = ( 
         f"\n"
-        f"function \"{scriptName}\"\n{{\n"
-        f"{setStopFlag}\n"
-        f"{getItem}\n"
-        f"{GetItemMessage}\n"
-        f"{eventScripts}\n"
-        f"{resetStopFlag}\n"
-        f"}}"
+        f"function \"{scriptName}\"\n"
+        f"{{\n"
+        f"{setStopFlag}"
+        f"{getItem}"
+        f"{GetItemMessage}"
+        f"{eventScripts}"
+        f"{resetStopFlag}"
+        f"}}\n"
         f"\n"
     )
 
