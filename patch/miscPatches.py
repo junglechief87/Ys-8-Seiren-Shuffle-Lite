@@ -6,23 +6,43 @@ import shared.config as config
 from shared.functions import *
 
 def updateINI(progress_callback=None):
-    languageSet = False
     playerSettings = config.executable_directory + "/settings.ini"
-    with open(playerSettings, 'r', encoding='utf-8') as file:
-        lines = file.readlines()
-
-        for line in lines:
+    
+    # Check if file exists
+    if not os.path.exists(playerSettings):
+        # Create new file with Settings section and DisplayLanguage
+        with open(playerSettings, 'w', encoding='utf-8') as file:
+            file.write("[Settings]\n")
+            file.write("DisplayLanguage=EN\n")
+    else:
+        # File exists, read and modify
+        with open(playerSettings, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+        
+        languageSet = False
+        settingsExist = False
+        
+        # Find if DisplayLanguage exists or where [Settings] is
+        for i, line in enumerate(lines):
             if line.startswith("DisplayLanguage="):
-                lineIndex = lines.index(line)
-                lines[lineIndex] = "DisplayLanguage=EN\n"
+                lines[i] = "DisplayLanguage=EN\n"
                 languageSet = True
                 break
+            if line.startswith("[Settings]"):
+                settingsExist = True
         
+        # If DisplayLanguage not found
         if not languageSet:
-            lines.append("DisplayLanguage=EN\n")
-
-    with open(playerSettings, 'w', encoding='utf-8') as file:
-        file.writelines(lines)
+            if settingsExist:
+                lines.append("DisplayLanguage=EN\n")
+            else:
+                # No [Settings] section, add both
+                lines.append("[Settings]\n")
+                lines.append("DisplayLanguage=EN\n")
+        
+        # Write back
+        with open(playerSettings, 'w', encoding='utf-8') as file:
+            file.writelines(lines)
 
     if progress_callback:
         progress_callback(f"Patched: settings.ini")
