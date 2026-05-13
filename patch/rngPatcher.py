@@ -241,11 +241,7 @@ def genericItemMessage(location_id, patch, vanillaScript):
                 f"\tSetFlag(GF_SUBEV_PAST_07_CLEAR, 1)\n"
             )
 
-    # if there is no script and it's a chest location and isn't an AP Item then we return and small empty script to avoid errors, we want to keep the chest open after all
-    if eventScripts == "" and location_id not in TREASURE_SCRIPTS.keys() and loc_data['location_type'] == 'chest' and itemId != AP_ITEM: 
-        return f"\nfunction \"{buildLocScripts(location_id,False)}\"\n{{\n}}\n" # if there is no script and the location_id doesn't have a script in vanilla then we return and small empty script.
-    else:
-        return formatGetItemScript(location_id, loc_data, eventScripts)
+    return formatGetItemScript(location_id, loc_data, eventScripts)
 
 # ==========================================================================================================
 # Crew Item Function
@@ -1842,6 +1838,8 @@ def buildMessage(itemId,itemName,classification,player,message_type=None,isParty
     return message
 
 def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, isParty=False):
+    if (location_id in ['23']):
+        print(location_id)
     itemName = loc_data['item_name']
     itemQuantity = loc_data['item_quantity']
     
@@ -1860,8 +1858,15 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
         characterName = skillInfo[2]
     else:
         itemId = int(loc_data['item_id'])
-        itemIcon = getIcon(itemId)
-        
+        itemIcon = getIcon(itemId) if itemId != AP_ITEM else -1
+
+    # If there is no script and it's a chest location and isn't an AP Item then we return and small empty script to avoid errors.
+    # Chests always point to a script because of the patcher so we need something and this will create a blank one.
+    # We still need to fill the chest though.
+    if eventScripts == "" and location_id not in TREASURE_SCRIPTS.keys() and loc_data['location_type'] == 'chest' and itemId != AP_ITEM: 
+        fillChest(location_id,itemId,itemQuantity)
+        return f"\nfunction \"{buildLocScripts(location_id,False)}\"\n{{\n}}\n"
+    
     scriptName = buildLocScripts(location_id,False)
     player = loc_data['player'] if loc_data['player'] else ""
     classification = loc_data['item_classification'] if loc_data['item_classification'] else ""
@@ -1871,40 +1876,40 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
                            characterName if message_type == 'skill' else None)
 
     if message_type == 'skill':
-        getItem = f"GetSkill({character},{skillID},1)"
+        getItem = f"\tGetSkill({character},{skillID},1)"
+    elif itemId == AP_ITEM:
+        getItem = ""
     else:
-        getItem = f"GetItem({itemIcon},{itemQuantity})"
+        getItem = f"\tGetItem({itemIcon},{itemQuantity})"
 
-    if locationIsEvent: 
-        getItemFunction = ( 
-            f"\n"
-            f"function \"{scriptName}\"\n{{\n"
-            f"\t{getItem}\n"
+    #if it's an event location or a landmark or castaway reward or skill reward we want the message to be in the event script instead of the chest script
+    if locationIsEvent or itemId in [AP_ITEM, 148, 143, 144]: 
+        GetItemMessage = (
             f"\tGetItemMessageExPlus({itemIcon},{itemQuantity},{ITEM_SOUND},\"{message}\",0,0)\n"
             f"\tWaitPrompt()\n"
             f"\tWaitCloseWindow()\n"
-            f"{eventScripts}\n"
-            f"}}"
-            f"\n"
         )
-    elif eventScripts:
-        getItemFunction = ( 
-            f"\n"
-            f"function \"{scriptName}\"\n{{\n"
-            f"\tSetStopFlag({SCRIPT_STOP_FLAG})\n"
-            f"{eventScripts}\n"
-            f"\tResetStopFlag({SCRIPT_STOP_FLAG})\n"
-            f"}}"
-            f"\n"
-        )
-    else:
-        getItemFunction = ( 
-            f"\n"
-            f"function \"{scriptName}\"\n"
-            f"{{\n"
-            f"}}"
-            f"\n"
-        )
+    else: 
+        GetItemMessage = ""
+
+    if not locationIsEvent:
+        setStopFlag = f"\tSetStopFlag({SCRIPT_STOP_FLAG})"
+        resetStopFlag = f"\tResetStopFlag({SCRIPT_STOP_FLAG})"
+    else: 
+        setStopFlag = ""
+        resetStopFlag = ""
+
+    getItemFunction = ( 
+        f"\n"
+        f"function \"{scriptName}\"\n{{\n"
+        f"{setStopFlag}\n"
+        f"{getItem}\n"
+        f"{GetItemMessage}\n"
+        f"{eventScripts}\n"
+        f"{resetStopFlag}\n"
+        f"}}"
+        f"\n"
+    )
 
     if not locationIsEvent:
         fillChest(location_id,itemId,itemQuantity)

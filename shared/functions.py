@@ -6,7 +6,9 @@ from shared.classr import *
 import shared.config as config
 
 encode = "utf-8"
-
+_cache = None  # Global variable for lazy loading
+skillDict = None
+iconDict = None
 def strip_accents_handler(exception):
     """Custom error handler for Shift-JIS encoding: strips accents, falls back to '?' if unable"""
     if isinstance(exception, UnicodeEncodeError):
@@ -26,7 +28,7 @@ def strip_accents_handler(exception):
 # Register the custom error handler
 codecs.register_error('strip_accents', strip_accents_handler)
 sourceScript = "rng"
-_cache = None  # Global variable for lazy loading
+
 def getLocations():
     with open(os.path.join(config.current_directory, "database/location.csv"), encoding='utf-8-sig') as locDB:
         
@@ -49,36 +51,39 @@ def getLocations():
 #def getItems:
 
 def getIcon(itemID):
-    with open(os.path.join(config.current_directory, "database/itemTable.csv"), encoding=encode) as itemDB:
-        itemRows = csv.DictReader(itemDB) 
-        for itemRow in itemRows:
-            if int(itemRow['ID']) == itemID:
-                icon = itemRow['3DIcon']
-                itemDB.close()
-                return icon
+    global iconDict
+    if iconDict is None:
+        with open(os.path.join(config.current_directory, "database/itemTable.csv"), encoding=encode) as itemDB:
+            itemRows = list(csv.DictReader(itemDB))
+            iconDict = {}
+            for itemRow in itemRows:
+                iconDict[int(itemRow['ID'])] = itemRow['3DIcon']
+    return iconDict.get(itemID)
 
 def getSkillInfo(itemName):
-    with open(os.path.join(config.current_directory, "database/skillTable.csv"), encoding=encode) as skillDB:
-        skillRows = csv.DictReader(skillDB) 
-        for skillRow in skillRows:
-            if skillRow['skillName'] == itemName:
-                character = skillRow['character']
-                skillID = skillRow['skillID']
-                skillDB.close()
-                if character == 'PARTY_ADOL':
-                    characterName = 'Adol'  
-                elif character == 'PARTY_LAXIA':
-                    characterName = 'Laxia'  
-                elif character == 'PARTY_SAHAD':
-                    characterName = 'Sahad'  
-                elif character == 'PARTY_HUMMEL':
-                    characterName = 'Hummel'  
-                elif character == 'PARTY_RICOTTA':
-                    characterName = 'Ricotta'  
-                elif character == 'PARTY_DANA':
-                    characterName = 'Dana'  
+    global skillDict
+    if skillDict is None:
+        with open(os.path.join(config.current_directory, "database/skillTable.csv"), encoding=encode) as skillDB:
+            skillRows = list(csv.DictReader(skillDB))
+            skillDict = {}
+            for skillRow in skillRows:
+                skillDict[skillRow['skillName']] = (skillRow['character'], skillRow['skillID'])
+    if itemName in skillDict:
+        character, skillID = skillDict[itemName]
+        if character == 'PARTY_ADOL':
+            characterName = 'Adol'  
+        elif character == 'PARTY_LAXIA':
+            characterName = 'Laxia'  
+        elif character == 'PARTY_SAHAD':
+            characterName = 'Sahad'  
+        elif character == 'PARTY_HUMMEL':
+            characterName = 'Hummel'  
+        elif character == 'PARTY_RICOTTA':
+            characterName = 'Ricotta'  
+        elif character == 'PARTY_DANA':
+            characterName = 'Dana'  
 
-                return character,skillID,characterName
+    return character,skillID,characterName
             
 def getLocFile(mapID, fileType):
     cache = load_cache()  # Loads cache only on first call
