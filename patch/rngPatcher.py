@@ -23,14 +23,47 @@ PINK = "#5C"
 PURPLE = "#6C"
 BLUE = "#7C"
 DARK_RED = "#8C"
+AP_ITEM = 149
 
 SCP_INCLUDE_LIST = ['#include "inc/mons.h"','#include "inc/def.h"','#include "inc/efx.h"','#include "inc/flag.h"','#include "inc/se.h"',
                   '#include "inc/scr_inc.h"','#include "inc/3dicon.h"','#include "inc/skilldef.h"','#include "inc/vo.h"','#include "inc/temp/rng.h"'] #standard set of header files used in most Ys 8 .scp files
-GENERIC_ITEM_MESSAGE = " Obtained."
+
+ITEM_SOUND = 'ITEMMSG_SE_NORMAL'
+SCRIPT_STOP_FLAG = 'STOPFLAG_SIMPLEEVENT2'
+
+OBTAINED_ITEM_MESSAGE = " Obtained."
 CREW_MESSAGE = " joined the Village."
 PARTY_MESSAGE = " joined the Party."
 SKILL_MESSAGE = " has learned skill " + GOLD
+
 LANDMARK_MESSAGE = ' discovered.'
+LANDMARKS = {
+        'Birdsong Rock':            'GF_LOCATION01',
+        'Cobalt Crag':              'GF_LOCATION02',
+        'Rainbow Falls':            'GF_LOCATION03',
+        'Metavolicalis':            'GF_LOCATION04',
+        'Parasequoia':              'GF_LOCATION05',
+        'Chimney Rock':             'GF_LOCATION08',
+        'Indigo Mineral Vein':      'GF_LOCATION09',
+        'Beached Remains':          'GF_LOCATION10',
+        'Field of Medicinal Herbs': 'GF_LOCATION11',
+        'Airs Cairn':               'GF_LOCATION13',
+        'Zephyr Hill':              'GF_LOCATION16',
+        'Lapis Mineral Vein':       'GF_LOCATION17',
+        'Beehive':                  'GF_LOCATION19',
+        'Ship Graveyard':           'GF_LOCATION21',
+        'Hidden Pirate Storehouse': 'GF_LOCATION22',
+        'Magna Carpa':              'GF_LOCATION23',
+        'Prismatic Mineral Vein':   'GF_LOCATION24',
+        'Unicalamites':             'GF_LOCATION25',
+        'Breath Fountain':          'GF_LOCATION27',
+        'Ancient Tree':             'GF_LOCATION28',
+        'Sky Garden':               'GF_LOCATION32',
+        'Soundless Hall':           'GF_LOCATION33',
+        'Graves of Ancient Heroes': 'GF_LOCATION34',
+        'Milky White Vein':         'GF_LOCATION18'
+        }
+
 TREASURE_SCRIPTS = {
 "372": "mp6561:EvOpenTBox",
 "358": "mp6554:EvOpenTBox",
@@ -161,220 +194,70 @@ def genericItemMessage(location_id, patch, vanillaScript):
     options = patch.settings["options"]
     loc_data = patch.item_map[location_id]
     itemId = int(loc_data['item_id'])
-    itemQuantity = loc_data['item_quantity']
 
-    itemIcon = getIcon(itemId)
-    itemSE = 'ITEMMSG_SE_NORMAL' #Placeholder item jingles in chests
-    scriptName = buildLocScripts(location_id,False)
     #'Maiden Journal','Blue Seal of Whirling Water','Green Seal of Roaring Stone','Golden Seal of Piercing Light','Treasure Chest Key','Frozen Flower','Shrine Maiden Amulate'
     danaPastEventsItems = [698,700,701,702,796,699,727]
-    script = vanillaScript
+    eventScripts = vanillaScript
 
     #unique item functions that will need additional scripting when the item is recieved
-    if itemId == 739: #glow stone
-        script = script + makeGlowStoneUseful()
+    if itemId == 739: # glow stone
+        eventScripts = eventScripts + makeGlowStoneUseful()
     elif itemId in danaPastEventsItems:
-        script = script + danaPastEvents(itemId)
-    elif itemId == 9: #mistilteinn
-        script = script + sopEvent(options)
-        #this solution for unique message on the progressive weapons is a little heavy handed but it should resolves all issues I had with them
-        if options['progressive_super_weapons'] == 1:
-            if loc_data['location_type'] in ['event', 'landmark']:
-                brokenWeaponMessage = GOLD + "Broken Mistilteinn" + WHITE + " Obtained."
-                getItemFunction =  """
-function "{0}"
-{{
-    GetItem(ICON3D_146,1)
-    GetItemMessageExPlus(-1,1,{1},"{3}",0,0)
-    WaitPrompt()
-    WaitCloseWindow()
-    {2}
-}}
-"""
-            else:
-                fillChest(location_id,146,itemQuantity)
-
-                getItemFunction =  """
-function "{0}"
-{{
-    SetStopFlag(STOPFLAG_TALK)
-    {2}
-    ResetStopFlag(STOPFLAG_TALK)
-}}
-"""
-                brokenWeaponMessage = ""
-            return getItemFunction.format(scriptName,itemSE,script,brokenWeaponMessage)
-    elif itemId == 13: #Spirit Ring Celesdia
-        script = script + spiritRingEvent(options)
-        if options['progressive_super_weapons'] == 1:
-            if loc_data['location_type'] in ['event', 'landmark']:
-                brokenWeaponMessage = GOLD + "Broken Spirit Ring" + GREEN + " Obtained."
-                getItemFunction =  """
-function "{0}"
-{{
-    GetItem(ICON3D_147,1)
-    GetItemMessageExPlus(-1,1,{1},"{3}",0,0)
-    WaitPrompt()
-    WaitCloseWindow()
-    {2}
-}}
-"""
-            else:
-                fillChest(location_id,147,itemQuantity)
-
-                getItemFunction =  """
-function "{0}"
-{{
-    SetStopFlag(STOPFLAG_TALK)
-    {2}
-    ResetStopFlag(STOPFLAG_TALK)
-}}
-"""
-                brokenWeaponMessage = ""
-            return getItemFunction.format(scriptName,itemSE,script,brokenWeaponMessage)
-    elif itemId == 149: # AP Item
-        itemName = makeFileSafeItemName(loc_data['item_name'])
-        if loc_data["item_classification"] == "PROGRESSION":
-            message = "Sent " + PINK +  itemName + WHITE +" to " + GOLD + loc_data['player'] + "."
-        elif loc_data["item_classification"] == "USEFUL":
-            message = "Sent " + PURPLE +  itemName + WHITE +" to " + GOLD + loc_data['player'] + "."
-        elif loc_data["item_classification"] == "TRAP":
-            message = "Sent " + ORANGE +  itemName + WHITE +" to " + GOLD + loc_data['player'] + "."
-        else:
-            message = "Sent " + BLUE +  itemName + WHITE +" to " + GOLD + loc_data['player'] + "."
-        if loc_data['location_type'] in ['event', 'landmark']:   
-            getItemFunction =  """
-function "{0}"
-{{
-    GetItemMessageExPlus(-1,1,{1},"{2}",0,0)
-    WaitPrompt()
-    WaitCloseWindow()
-    {3}
-}}
-"""  
-        else:
-            fillChest(location_id,149,itemQuantity)
-            getItemFunction =  """
-function "{0}"
-{{
-    SetStopFlag(STOPFLAG_TALK)
-    GetItemMessageExPlus(-1,1,{1},"{2}",0,0)
-    WaitPrompt()
-    WaitCloseWindow()
-    {3}
-    ResetStopFlag(STOPFLAG_TALK)
-}}
-""" 
-        return getItemFunction.format(scriptName,itemSE,message,script)
+        eventScripts = eventScripts + danaPastEvents(itemId)
+    elif itemId == 9: # mistilteinn
+        eventScripts = eventScripts + sopEvent(options)
+        formatGetItemScript(location_id,loc_data,eventScripts)
+    elif itemId == 13: # spirit ring
+        eventScripts = eventScripts + spiritRingEvent(options)
+        formatGetItemScript(location_id,loc_data,eventScripts)
     elif itemId == 770: #logbook from east coast cave
-        script = script + pirateShipDocks()
+        eventScripts = eventScripts + pirateShipDocks()
     elif itemId in [760,761,762,763]: #T memos
-        script = script + interceptUnlock()
+        eventScripts = eventScripts + interceptUnlock()
     elif itemId == 629: #fishing rod
-        startingBait = """
-    GetItem(ICON3D_FISHBAIT_WORM,30)
-    """
-        script = script + startingBait
+        startingBait = (
+            f"\tGetItem(ICON3D_FISHBAIT_WORM,30)\n"
+        )
+        eventScripts = eventScripts + startingBait
     elif itemId == 779: #ship blueprints
-        buildBoat = """
-    SetFlag(GF_SUBEV_06_1111_LOOK_BOAT,1)
-    """
-        script = script + buildBoat
+        buildBoat = (
+            f"\tSetFlag(GF_SUBEV_06_1111_LOOK_BOAT,1)\n"
+        )
+        eventScripts = eventScripts + buildBoat
     
     # if itemId in [750,751,752,753,754,755,760,761,762,763] and options['memo_hints']:
     #     script = script + memoHints(itemId)
-        
-    message = GENERIC_ITEM_MESSAGE
-
-    if itemId == 218:
+    
+    elif itemId == 218:
         #Adding the other 2 medals to the slash medal check
-        script =  script + """
-    GetItem(ICON3D_AC_068,1)
-    GetItem(ICON3D_AC_069,1)
-            """ 
-    if itemId == 206: #Jade pendant
+        eventScripts =  eventScripts + (
+            f"\tGetItem(ICON3D_AC_068,1)\n"
+            f"\tGetItem(ICON3D_AC_069,1)\n"
+        )
+    elif itemId == 206: #Jade pendant
         if options['former_sanctuary_crypt'] == 1:
-            script = script + """
-    SetFlag(SF_SYS_CLEARED, 1)
-    SetFlag(GF_SUBEV_PAST_07_CLEAR, 1)
-                """
-    #if the location is not inside an event we want to freeze the player while they receive the item. This prevents some awkwardness, it's strictly for polish.
-    #setting the talk flags and then unsetting them during events can break many events though, so we don't want to do it there. Many events already have these flags set at their starts and ends.
-    if loc_data['location_type'] in ['event', 'landmark']:   
-        getItemFunction =  """
-function "{0}"
-{{
-    GetItem({1},{2})
-    GetItemMessageExPlus({1},{2},{3},"{4}",0,0)
-    WaitPrompt()
-    WaitCloseWindow()
-    {5}
-}}
-"""  
+            eventScripts = eventScripts + (
+                f"\tSetFlag(SF_SYS_CLEARED, 1)\n"
+                f"\tSetFlag(GF_SUBEV_PAST_07_CLEAR, 1)\n"
+            )
+
+    # if there is no script and it's a chest location and isn't an AP Item then we return and small empty script to avoid errors, we want to keep the chest open after all
+    if eventScripts == "" and location_id not in TREASURE_SCRIPTS.keys() and loc_data['location_type'] == 'chest' and itemId != AP_ITEM: 
+        return f"\nfunction \"{buildLocScripts(location_id,False)}\"\n{{\n}}\n" # if there is no script and the location_id doesn't have a script in vanilla then we return and small empty script.
     else:
-        fillChest(location_id,itemId,itemQuantity)
-        getItemFunction =  """
-function "{0}"
-{{
-    SetStopFlag(STOPFLAG_TALK)
-    {5}
-    ResetStopFlag(STOPFLAG_TALK)
-}}
-"""
-    if script == "" and location_id not in TREASURE_SCRIPTS.keys() and loc_data['location_type'] == 'chest':
-        return """function "{0}" {{ }}""".format(scriptName) # if there is no script and the location_id doesn't have a script in vanilla then we return and small empty script.
-    return getItemFunction.format(scriptName,itemIcon,itemQuantity,itemSE,message,script)
+        return formatGetItemScript(location_id, loc_data, eventScripts)
 
 # ==========================================================================================================
 # Crew Item Function
 # ==========================================================================================================
 #function used for all people function generations
 def buildCrewLocation(location_id, patch, vanillaScript):
-    options = patch.settings
     loc_data = patch.item_map[location_id]
-    scriptName = buildLocScripts(location_id,False)
-    itemIcon = -1
-    itemID = 143
-    itemQuantity = 1
-    itemSE = 'ITEMMSG_SE_NORMAL' #Placeholder item jingles in chests
 
-    if loc_data["party_flag"]:
-        message = GOLD + loc_data['item_name'] + GREEN + PARTY_MESSAGE
-    else:
-        message = GOLD + loc_data['item_name'] + GREEN + CREW_MESSAGE
-        
     crewFlags = getCrewFlags(loc_data['item_name'])
-
-     #if the location is not inside an event we want to freeze the player while they receive the item. This prevents some awkwardness, it's strictly for polish.
-     #setting the talk flags and then unsetting them during events can break many events though, so we don't want to do it there. Many events already have these flags set at their starts and ends.    
-    if loc_data['location_type'] in ['event', 'landmark']:
-        getCrewFunction = """
-function "{0}"
-{{
-    GetItem(ICON3D_143,1)  
-    GetItemMessageExPlus({1},{2},{3},"{4}",0,0)
-    WaitPrompt()
-    WaitCloseWindow()
-    {5}
-    {6}
-}}
-"""
-    else: 
-        fillChest(location_id,itemID,1)
-        getCrewFunction = """
-function "{0}"
-{{
-    SetStopFlag(STOPFLAG_TALK)
-    
-    GetItemMessageExPlus({1},{2},{3},"{4}",0,0)
-    WaitPrompt()
-    WaitCloseWindow()
-    {5}
-    {6}
-    ResetStopFlag(STOPFLAG_TALK)
-}}
-"""   
-    return getCrewFunction.format(scriptName,itemIcon,itemQuantity,itemSE,message,crewFlags,vanillaScript)
+    eventScripts = vanillaScript + crewFlags
+ 
+    return formatGetItemScript(location_id, loc_data, eventScripts, message_type="castaway", isParty=loc_data['party_flag'])
 
 # ==========================================================================================================
 # Skill Item Function
@@ -382,114 +265,20 @@ function "{0}"
 #now skills are in the rando and they need a third special handler for their locations
 def buildSkillLocation(location_id, patch, vanillaScript):
     loc_data = patch.item_map[location_id]
-    scriptName = buildLocScripts(location_id,False)
-    itemIcon = -1
-    itemID = 144
-    itemQuantity = 1
-    itemSE = 'ITEMMSG_SE_NORMAL'
-    skillInfo = getSkillInfo(loc_data['item_name']) #returns tuple: character,skill ID,character name
-    character = skillInfo[0]
-    skillID = skillInfo[1]
-    characterName = skillInfo[2]
-    message = GREEN + characterName + SKILL_MESSAGE + loc_data['item_name'] + GREEN + "."
+    eventScripts = vanillaScript
 
-    if loc_data['location_type'] in ['event', 'landmark']:
-        getSkillFunction = """
-function "{0}"
-{{
-
-    GetSkill({6},{7},1)
-    GetItemMessageExPlus({1},{2},{3},"{4}",0,0)
-    WaitPrompt()
-    WaitCloseWindow()
-    {5}
-}}
-"""
-    else: 
-         fillChest(location_id,itemID,1)
-         getSkillFunction = """
-function "{0}"
-{{
-    SetStopFlag(STOPFLAG_TALK)
-    
-    GetSkill({6},{7},1)
-    GetItemMessageExPlus({1},{2},{3},"{4}",0,0)
-    WaitPrompt()
-    WaitCloseWindow()  
-    {5}
-    ResetStopFlag(STOPFLAG_TALK)
-}}
-"""  
-    return getSkillFunction.format(scriptName,itemIcon,itemQuantity,itemSE,message,vanillaScript,character,skillID)
+    return formatGetItemScript(location_id, loc_data, eventScripts, message_type='skill')
 
 # ==========================================================================================================
 # Landmark Function
 # ==========================================================================================================
 def buildLandmarks(location_id, patch, vanillaScript):
     loc_data = patch.item_map[location_id]
-    scriptName = buildLocScripts(location_id, False)
-    itemIcon = -1
-    itemID = 148
-    itemQuantity = 1
-    itemSE = 'ITEMMSG_SE_NORMAL'
-    message = GOLD + loc_data['item_name'] + GREEN + LANDMARK_MESSAGE
+    
+    landmarkFlag = "\n\t\tSetFlag(" + LANDMARKS.get(loc_data['item_name']) + ",1)"
+    eventScripts = vanillaScript + landmarkFlag
 
-    landmarks = {
-        'Birdsong Rock':            'GF_LOCATION01',
-        'Cobalt Crag':              'GF_LOCATION02',
-        'Rainbow Falls':            'GF_LOCATION03',
-        'Metavolicalis':            'GF_LOCATION04',
-        'Parasequoia':              'GF_LOCATION05',
-        'Chimney Rock':             'GF_LOCATION08',
-        'Indigo Mineral Vein':      'GF_LOCATION09',
-        'Beached Remains':          'GF_LOCATION10',
-        'Field of Medicinal Herbs': 'GF_LOCATION11',
-        'Airs Cairn':               'GF_LOCATION13',
-        'Zephyr Hill':              'GF_LOCATION16',
-        'Lapis Mineral Vein':       'GF_LOCATION17',
-        'Beehive':                  'GF_LOCATION19',
-        'Ship Graveyard':           'GF_LOCATION21',
-        'Hidden Pirate Storehouse': 'GF_LOCATION22',
-        'Magna Carpa':              'GF_LOCATION23',
-        'Prismatic Mineral Vein':   'GF_LOCATION24',
-        'Unicalamites':             'GF_LOCATION25',
-        'Breath Fountain':          'GF_LOCATION27',
-        'Ancient Tree':             'GF_LOCATION28',
-        'Sky Garden':               'GF_LOCATION32',
-        'Soundless Hall':           'GF_LOCATION33',
-        'Graves of Ancient Heroes': 'GF_LOCATION34',
-        'Milky White Vein':         'GF_LOCATION18'
-        }
-    
-    if loc_data["location_type"] in ['event', 'landmark']:
-        getLandmarkFunction = """
-function "{0}"
-{{
-    
-    GetItemMessageExPlus({1},{2},{3},"{4}",0,0)
-    WaitPrompt()
-    WaitCloseWindow()
-    SetFlag({5},1)
-    {6}
-}}
-"""
-    else: 
-        fillChest(location_id,itemID,1)
-        getLandmarkFunction = """
-function "{0}"
-{{
-    SetStopFlag(STOPFLAG_TALK)
-    
-    GetItemMessageExPlus({1},{2},{3},"{4}",0,0)
-    WaitPrompt()
-    WaitCloseWindow()
-    SetFlag({5},1)
-    {6}
-    ResetStopFlag(STOPFLAG_TALK)
-}}
-"""   
-    return getLandmarkFunction.format(scriptName,itemIcon,itemQuantity,itemSE,message,landmarks[loc_data['item_name']],vanillaScript)
-
+    return formatGetItemScript(location_id, loc_data, eventScripts, message_type='landmark')
 # ==========================================================================================================
 # Boss Scaling Function
 # ==========================================================================================================
@@ -1953,7 +1742,7 @@ function "newInterceptControl"
                 WaitCloseWindow()
 
                 """
-                    script = script + rewardGet.format(item,itemNum,GENERIC_ITEM_MESSAGE)
+                    script = script + rewardGet.format(item,itemNum,OBTAINED_ITEM_MESSAGE)
                     totalReward = 0
 
         if stage.stage == 'INTERCEPT_STAGE02':
@@ -2027,6 +1816,100 @@ def makeFileSafeItemName(itemName):
     itemName = itemName.replace("/", "_")
     itemName = itemName.replace("\"", "'")
     return itemName
+
+def buildMessage(itemId,itemName,classification,player,message_type=None,isParty=False, characterName=None):
+    itemName = makeFileSafeItemName(itemName)
+    if itemId == AP_ITEM:
+        if classification == "PROGRESSION":
+            message = "Sent " + PINK +  itemName + WHITE +" to " + GOLD + player + "."
+        elif classification == "USEFUL":
+            message = "Sent " + PURPLE +  itemName + WHITE +" to " + GOLD + player + "."
+        elif classification == "TRAP":
+            message = "Sent " + ORANGE +  itemName + WHITE +" to " + GOLD + player + "."
+        else:
+            message = "Sent " + BLUE +  itemName + WHITE +" to " + GOLD + player + "."
+    elif message_type == 'landmark':
+        message = GOLD + itemName + GREEN + LANDMARK_MESSAGE
+    elif message_type == 'castaway':
+        if isParty:
+            message = GOLD + itemName + GREEN + PARTY_MESSAGE
+        else:
+            message = GOLD + itemName + GREEN + CREW_MESSAGE
+    elif message_type == 'skill':
+        message = GREEN + characterName + SKILL_MESSAGE + itemName + GREEN + "."
+    else:
+        message = OBTAINED_ITEM_MESSAGE
+    return message
+
+def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, isParty=False):
+    itemName = loc_data['item_name']
+    itemQuantity = loc_data['item_quantity']
+    
+    if message_type == 'landmark':
+        itemIcon = -1
+        itemId = 148
+    elif message_type == 'castaway':
+        itemIcon = -1
+        itemId = 143
+    elif message_type == 'skill':
+        itemIcon = -1
+        itemId = 144
+        skillInfo = getSkillInfo(itemName) #returns tuple: character,skill ID,character name
+        character = skillInfo[0]
+        skillID = skillInfo[1]
+        characterName = skillInfo[2]
+    else:
+        itemId = int(loc_data['item_id'])
+        itemIcon = getIcon(itemId)
+        
+    scriptName = buildLocScripts(location_id,False)
+    player = loc_data['player'] if loc_data['player'] else ""
+    classification = loc_data['item_classification'] if loc_data['item_classification'] else ""
+    locationIsEvent = loc_data['location_type'] in ['event', 'landmark']
+
+    message = buildMessage(itemId,itemName,classification,player,message_type,isParty,
+                           characterName if message_type == 'skill' else None)
+
+    if message_type == 'skill':
+        getItem = f"GetSkill({character},{skillID},1)"
+    else:
+        getItem = f"GetItem({itemIcon},{itemQuantity})"
+
+    if locationIsEvent: 
+        getItemFunction = ( 
+            f"\n"
+            f"function \"{scriptName}\"\n{{\n"
+            f"\t{getItem}\n"
+            f"\tGetItemMessageExPlus({itemIcon},{itemQuantity},{ITEM_SOUND},\"{message}\",0,0)\n"
+            f"\tWaitPrompt()\n"
+            f"\tWaitCloseWindow()\n"
+            f"{eventScripts}\n"
+            f"}}"
+            f"\n"
+        )
+    elif eventScripts:
+        getItemFunction = ( 
+            f"\n"
+            f"function \"{scriptName}\"\n{{\n"
+            f"\tSetStopFlag({SCRIPT_STOP_FLAG})\n"
+            f"{eventScripts}\n"
+            f"\tResetStopFlag({SCRIPT_STOP_FLAG})\n"
+            f"}}"
+            f"\n"
+        )
+    else:
+        getItemFunction = ( 
+            f"\n"
+            f"function \"{scriptName}\"\n"
+            f"{{\n"
+            f"}}"
+            f"\n"
+        )
+
+    if not locationIsEvent:
+        fillChest(location_id,itemId,itemQuantity)
+    
+    return getItemFunction
 
 
 
