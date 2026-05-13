@@ -15,7 +15,6 @@ def getCrewFlags(name):
         SetFlag(SF_ADOL_JOINOK, 1)
         JoinParty(PARTY_ADOL)
     }
-
 """         
             flag = flag + getCharacterJoinLv("ADOL")
 
@@ -32,21 +31,10 @@ def getCrewFlags(name):
         JoinParty(PARTY_LAXIA)
     }
  
-    SetDiaryFlag( DF_JOIN_LAXIA, 1 )	
-
+    SetDiaryFlag( DF_JOIN_LAXIA, 1 )
 """
             flag = flag + getCharacterJoinLv("LAXIA")
 
-        case "Captain Barbaros": #vanilla function call on mp1201 script rng:0402
-            flag = """
-    SetDiaryFlag( DF_JOIN_BARBAROSS, 1 )	//Footprint memo: Reunited with Captain Barbaros.
-    JoinNPC(NPC_BARBAROSS, JOIN_NPC_JOIN) // Captain Barbaros joins the interception battle
-"""
-        case "Little Paro": #vanilla function call on mp1201 script rng:0424
-            flag = """
-    SetFlag(SF_RESERVE15_JOINOK,1)
-    JoinNPC( NPC_PARO, JOIN_NPC_JOIN ) // Little Paro has become a friend
-"""
         case "Sahad": #vanilla function call on mp1103 script rng:0404
             flag = """
     if (FLAG[GF_TBOX_DUMMY129]) //Past Dana Mode
@@ -61,15 +49,68 @@ def getCrewFlags(name):
     }
  
     SetDiaryFlag( DF_JOIN_SAHAD, 1 )		
-
 """
             flag = flag + getCharacterJoinLv("SAHAD")
 
+        case "Ricotta": #vanilla function call on mp4202 script rng:0417
+            flag = """
+    if (FLAG[GF_TBOX_DUMMY129]) //Past Dana Mode
+    {
+        SetFlag(SF_RESERVE14_JOINOK,1)
+    }
+    else
+    {
+        SetFlag(SF_RICOTTA_JOINED, 1)
+        SetFlag(SF_RICOTTA_JOINOK, 1)
+        JoinParty(PARTY_RICOTTA)
+    }
+
+    SetDiaryFlag( DF_JOIN_RICOTTA, 1 )
+    SetFlag( GF_QUEST_400, QUEST_START )
+    SetDiaryFlag( DF_QS400_START, 1 )
+"""
+            flag = flag + getCharacterJoinLv("RICOTTA")
+        
+        case "Hummel": #vanilla function call on mp1108 script rng:0411
+            flag = """
+    if (FLAG[GF_TBOX_DUMMY129]) //Past Dana Mode
+    {
+        SetFlag(SF_RESERVE12_JOINOK,1)
+    }
+    else
+    {
+        SetFlag(SF_HUMMEL_JOINED, 1)
+        SetFlag(SF_HUMMEL_JOINOK, 1)
+        JoinParty(PARTY_HUMMEL)
+    }
+
+    SetDiaryFlag( DF_JOIN_HUMMEL, 1 )
+"""
+            flag = flag + getCharacterJoinLv("HUMMEL")
+        
+        case "Dana": #vanilla function call on mp1210 script rng:0422
+            flag = """
+    SetFlag(SF_DANA_JOINED, 1)
+    SetFlag(SF_DANA_JOINOK, 1)
+    SetDiaryFlag( DF_JOIN_DANA, 1 )
+    JoinParty(PARTY_DANA)
+"""
+            flag = flag + getCharacterJoinLv("DANA")
+
+        case "Captain Barbaros": #vanilla function call on mp1201 script rng:0402
+            flag = """
+    SetDiaryFlag( DF_JOIN_BARBAROSS, 1 )	//Footprint memo: Reunited with Captain Barbaros.
+    JoinNPC(NPC_BARBAROSS, JOIN_NPC_JOIN) // Captain Barbaros joins the interception battle
+"""
+        case "Little Paro": #vanilla function call on mp1201 script rng:0424
+            flag = """
+    SetFlag(SF_RESERVE15_JOINOK,1)
+    JoinNPC( NPC_PARO, JOIN_NPC_JOIN ) // Little Paro has become a friend
+"""
         case "Dogi": #vanilla function call on mp1201 script rng:0405
             flag = """
     SetDiaryFlag( DF_JOIN_DOGI, 1 )	
     JoinNPC(NPC_DOGI, JOIN_NPC_JOIN) // Participate in Dogi interception battle
-
 """
         case "Alison": #vanilla function call on mp1201 script rng:0406
             flag = """
@@ -141,25 +182,6 @@ def getCrewFlags(name):
     SetDiaryFlag( DF_JOIN_KUINA, 1 ) //Footprint memo: Kuina was rescued.
     JoinNPC( NPC_KUINA, JOIN_NPC_JOIN ) //Rescued Kuina.
 """
-        case "Ricotta": #vanilla function call on mp4202 script rng:0417
-            flag = """
-    if (FLAG[GF_TBOX_DUMMY129]) //Past Dana Mode
-    {
-        SetFlag(SF_RESERVE14_JOINOK,1)
-    }
-    else
-    {
-        SetFlag(SF_RICOTTA_JOINED, 1)
-        SetFlag(SF_RICOTTA_JOINOK, 1)
-        JoinParty(PARTY_RICOTTA)
-    }
-
-    SetDiaryFlag( DF_JOIN_RICOTTA, 1 )
-    SetFlag( GF_QUEST_400, QUEST_START )
-    SetDiaryFlag( DF_QS400_START, 1 )
-
-"""
-            flag = flag + getCharacterJoinLv("RICOTTA")
 
         case "Austin": #vanilla function call on mp3107 script rng:0418
             flag = """ 
@@ -179,38 +201,12 @@ def getCrewFlags(name):
     SetDiaryFlag( DF_JOIN_THANATOS, 1 ) //Footprint memo: Thanatos has joined the Drifting Village.
     JoinNPC( NPC_THANATOS, JOIN_NPC_JOIN ) // Thanatos has become a friend
 """
-        case "Hummel": #vanilla function call on mp1108 script rng:0411
-            flag = """
-    if (FLAG[GF_TBOX_DUMMY129]) //Past Dana Mode
-    {
-        SetFlag(SF_RESERVE12_JOINOK,1)
-    }
-    else
-    {
-        SetFlag(SF_HUMMEL_JOINED, 1)
-        SetFlag(SF_HUMMEL_JOINOK, 1)
-        JoinParty(PARTY_HUMMEL)
-    }
-
-    SetDiaryFlag( DF_JOIN_HUMMEL, 1 )
-
-"""
-            flag = flag + getCharacterJoinLv("HUMMEL")
 
         case "Silvia": #vanilla function call on mp6116 script rng:0421
             flag = """
     SetDiaryFlag( DF_JOIN_SILVIA, 1 ) //Footprint memo: Sylvia has joined the Drifting Village.
     JoinNPC( NPC_SILVIA, JOIN_NPC_JOIN ) // Sylvia has become a friend
 """
-        case "Dana": #vanilla function call on mp1210 script rng:0422
-            flag = """
-    SetFlag(SF_DANA_JOINED, 1)
-    SetFlag(SF_DANA_JOINOK, 1)
-    SetDiaryFlag( DF_JOIN_DANA, 1 )
-    JoinParty(PARTY_DANA)
-    
-"""
-            flag = flag + getCharacterJoinLv("DANA")
 
         case "Katthew": #vanilla function call on mp6104 script rng:0423
             flag = """
@@ -245,7 +241,6 @@ def getCrewFlags(name):
             flag = """
     JoinNPC( NPC_SKILLMONKY, JOIN_NPC_JOIN ) // Master Kong has become a friend
     SetFlag( SF_RESERVE16_JOINOK, 1 )
-
 """  
     return flag
     

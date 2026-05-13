@@ -275,7 +275,7 @@ def buildSkillLocation(location_id, patch, vanillaScript):
 def buildLandmarks(location_id, patch, vanillaScript):
     loc_data = patch.item_map[location_id]
     
-    landmarkFlag = "\n\t\tSetFlag(" + LANDMARKS.get(loc_data['item_name']) + ",1)"
+    landmarkFlag = "\tSetFlag(" + LANDMARKS.get(loc_data['item_name']) + ",1)"
     eventScripts = vanillaScript + landmarkFlag
 
     return formatGetItemScript(location_id, loc_data, eventScripts, message_type='landmark')
