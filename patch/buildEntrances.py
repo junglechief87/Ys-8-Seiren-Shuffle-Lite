@@ -358,7 +358,7 @@ def buildEntrances(entranceList, options):
 
 	if options['former_sanctuary_crypt'] == 1:
 		entranceScript = entranceScript + """
-		function "disableRuinsOfEterniaCentralStupa"
+		function "disableCentralStupa"
 		{{
 			if (!FLAG[SF_SYS_CLEARED] || !FLAG[GF_SUBEV_PAST_07_CLEAR])
 			{{
@@ -990,7 +990,7 @@ def buildEntrances(entranceList, options):
 	{
 		if (!FLAG[SF_SYS_CLEARED] || !FLAG[GF_SUBEV_PAST_07_CLEAR])
 		{
-			CallFunc("rng:disableRuinsOfEterniaCentralStupa")
+			CallFunc("rng:disableCentralStupa")
 		}
 		else
 		{
