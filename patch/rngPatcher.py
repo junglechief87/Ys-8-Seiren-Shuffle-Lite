@@ -1798,14 +1798,14 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
     # If there is no script and it's a chest location and isn't an AP Item then we return and small empty script to avoid errors.
     # Chests always point to a script because of the patcher so we need something and this will create a blank one.
     # We still need to fill the chest though.
-    if eventScripts == "" and location_id not in TREASURE_SCRIPTS.keys() and loc_data['location_type'] == 'chest' and itemId != AP_ITEM: 
+    if eventScripts == "" and location_id not in TREASURE_SCRIPTS.keys() and loc_data['location_type'] in ['chest', 'fsc_chest'] and itemId != AP_ITEM: 
         fillChest(location_id,itemId,itemQuantity)
         return f"\nfunction \"{buildLocScripts(location_id,False)}\"\n{{\n}}\n"
     
     scriptName = buildLocScripts(location_id,False)
     player = loc_data['player'] if loc_data['player'] else ""
     classification = loc_data['item_classification'] if loc_data['item_classification'] else ""
-    locationIsEvent = loc_data['location_type'] in ['event', 'landmark']
+    locationIsEvent = loc_data['location_type'] in ['event', 'landmark', 'fsc_event']
 
     message = buildMessage(itemId,itemName,classification,player,message_type,isParty,
                            characterName if message_type == 'skill' else None)

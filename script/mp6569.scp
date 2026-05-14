@@ -602,7 +602,7 @@ function "SubEV_Get_Medal"
 	SetChrPos("LP_TBOX01", -100000.0f , 0.0f , 0.0f )
 
 	SetFlag( GF_MP6569_TBOX01, 1 )	// 宝箱空けた
-	SetFlag( GF_HELP_A54, 1 )	// チュートリアル：行動メンバー数の変更
+	//SetFlag( GF_HELP_A54, 1 )	// チュートリアル：行動メンバー数の変更
 	DelMapMarker( SMI_SUBEVENT, PAGE_MP65xx, MARKER_SUBEV_CRYPT2, 0, 0)		//現代編地下聖堂（宝箱
 	//SetMapMarker( SMI_OPENED_TBOX ,PAGE_MP65xx, MARKER_SUBEV_CRYPT2, -0.09f, -115.66f, -451.00f, -0.09f, -115.66f,MARKER_SUBEV_CRYPT2,MN_D_MP6561,0)
 
