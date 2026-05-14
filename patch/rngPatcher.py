@@ -25,8 +25,8 @@ BLUE = "#7C"
 DARK_RED = "#8C"
 AP_ITEM = 149
 LANDMARK_ITEM = 148
-CASTAWAY_ITEM = 144
-SKILL_ITEM = 143
+CASTAWAY_ITEM = 143
+SKILL_ITEM = 144
 PROGRESSIVE_SHOP_RANK_ITEM = 139
 
 SCP_INCLUDE_LIST = ['#include "inc/mons.h"','#include "inc/def.h"','#include "inc/efx.h"','#include "inc/flag.h"','#include "inc/se.h"',
@@ -41,9 +41,9 @@ PARTY_MESSAGE = " joined the Party."
 SKILL_MESSAGE = f" has learned skill {GOLD}"
 
 ITEM_TYPE_CONFIG = {
-    'landmark': {'icon': -1, 'id': 148, 'needs_skill_info': False},
-    'castaway': {'icon': -1, 'id': 143, 'needs_skill_info': False},
-    'skill': {'icon': -1, 'id': 144, 'needs_skill_info': True},
+    'landmark': {'icon': -1, 'id': LANDMARK_ITEM, 'needs_skill_info': False},
+    'castaway': {'icon': -1, 'id': CASTAWAY_ITEM, 'needs_skill_info': False},
+    'skill': {'icon': -1, 'id': SKILL_ITEM, 'needs_skill_info': True},
 }
 
 LANDMARK_MESSAGE = ' discovered.'
@@ -133,7 +133,7 @@ def rngPatcherMain(patch, progress_callback=None):
                 script = ('\tEventCue("' + TREASURE_SCRIPTS[location] + '")\n')
             else:
                 script = ""
-                
+
             if loc_data['item_type'] in ['Item', '']: # blank is mostly for offworld items
                 patchFile = patchFile + genericItemMessage(loc_id, patch, script)
             elif loc_data['category'] == 'Crew':
@@ -202,10 +202,10 @@ def genericItemMessage(location_id, patch, vanillaScript):
     options = patch.settings["options"]
     loc_data = patch.item_map[location_id]
     itemId = int(loc_data['item_id'])
+    eventScripts = ""
 
     #'Maiden Journal','Blue Seal of Whirling Water','Green Seal of Roaring Stone','Golden Seal of Piercing Light','Treasure Chest Key','Frozen Flower','Shrine Maiden Amulate'
     danaPastEventsItems = [698,700,701,702,796,699,727]
-    eventScripts = vanillaScript
 
     #unique item functions that will need additional scripting when the item is recieved
     if itemId == 739: # glow stone
@@ -239,6 +239,7 @@ def genericItemMessage(location_id, patch, vanillaScript):
                 f"\tSetFlag(GF_SUBEV_PAST_07_CLEAR, 1)\n"
             )
 
+    eventScripts += vanillaScript
     return formatGetItemScript(location_id, loc_data, eventScripts)
 
 # ==========================================================================================================
@@ -249,7 +250,7 @@ def buildCrewLocation(location_id, patch, vanillaScript):
     loc_data = patch.item_map[location_id]
 
     crewFlags = getCrewFlags(loc_data['item_name'])
-    eventScripts = vanillaScript + crewFlags
+    eventScripts = crewFlags + vanillaScript
  
     return formatGetItemScript(location_id, loc_data, eventScripts, message_type="castaway", isParty=loc_data['party_flag'])
 
@@ -270,7 +271,7 @@ def buildLandmarks(location_id, patch, vanillaScript):
     loc_data = patch.item_map[location_id]
     
     landmarkFlag = "\tSetFlag(" + LANDMARKS.get(loc_data['item_name']) + ",1)\n"
-    eventScripts = vanillaScript + landmarkFlag
+    eventScripts = landmarkFlag + vanillaScript
 
     return formatGetItemScript(location_id, loc_data, eventScripts, message_type='landmark')
 # ==========================================================================================================
@@ -572,6 +573,7 @@ def buildPsyches(settings):
         wardenScaling += 'SetChrWork(B170, CWK_LV, 65)\n'
     
     bossCheckpoint = (
+        '\n'
         'function "bossCheckpoint"\n'
         '{\n'
         '\tSetStopFlag(STOPFLAG_TALK)\n'
@@ -641,27 +643,28 @@ def buildPsyches(settings):
     bossCheckpoint += (
         '\n'
         '\n'
-        '\t\tMenuOpen(TF_MENU_SELECT2, 283, ADOLMENU_PPOSY, -2, -2, 10, 1)\n'
-        '\t\tWaitMenu(0)\n'
-        '\t\tCloseMessage(6,0)\n'
-        '\t\tWaitCloseMessage(6)\n'
-        '\t\tMenuClose(10, 0)\n'
-        '\t}\n'
+        '\tMenuOpen(TF_MENU_SELECT2, 283, ADOLMENU_PPOSY, -2, -2, 10, 1)\n'
+        '\tWaitMenu(0)\n'
+        '\tCloseMessage(6,0)\n'
+        '\tWaitCloseMessage(6)\n'
+        '\tMenuClose(10, 0)\n'
+        '\n'
         + bossLoad + '\n'
-        '\t\tResetStopFlag(STOPFLAG_TALK)\n\t}\n'
+        '\tResetStopFlag(STOPFLAG_TALK)\n'
+        '}\n'
         '\n'
-        '\tfunction "wardenScaling"\n'
-        '\t{\n'
-        f'\t\t{wardenScaling}\n'
-        '\t}\n'
+        'function "wardenScaling"\n'
+        '{\n'
+        f'\t{wardenScaling}\n'
+        '}\n'
         '\n'
-        '\tfunction "bossReturn"\n'
-        '\t{\n'
-        '\t\tSetFlag(SF_BOSS_BATTLE, 0)\n'
+        'function "bossReturn"\n'
+        '{\n'
+        '\tSetFlag(SF_BOSS_BATTLE, 0)\n'
         + bossReturn + '\n'
-        '\t\tLoadArg("map/mp1201/mp1201.arg")\n'
-        '\t\tEventCue("mp1201:EV_M01S080_ED")\n'
-        '\t}\n'
+        '\tLoadArg("map/mp1201/mp1201.arg")\n'
+        '\tEventCue("mp1201:EV_M01S080_ED")\n'
+        '}\n'
     )
     
     return bossCheckpoint
@@ -875,7 +878,7 @@ function "newTradeHandler"
 
 }}
 """
-    item_names = [locations[str(i)]['item_name'] for i in range(461, 471)]
+    item_names = [locations[str(i)]['item_name'] + ("(!)" if 'PROGRESSION' in locations[str(i)]['item_classification'] else "") for i in range(461, 471)]
     return script.format(*item_names)
 
 # ==========================================================================================================
@@ -943,7 +946,7 @@ def talkHints(locations):
     for location in locations.values():
         if location['location_name'] in location_map:
             array_idx, item_idx = location_map[location['location_name']]
-            rewards[array_idx][item_idx] = location['item_name']
+            rewards[array_idx][item_idx] = location['item_name'] + ("(!)" if 'PROGRESSION' in location['item_classification'] else "")
     
     intReward, mkRewards, fishRewards, discoveryRewards, mapRewards, foodRewards = rewards
     
@@ -1795,10 +1798,14 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
         itemId = int(loc_data['item_id'])
         itemIcon = getIcon(itemId) if itemId != AP_ITEM else -1
 
+    requiresScript = itemId in [AP_ITEM, LANDMARK_ITEM, CASTAWAY_ITEM, SKILL_ITEM]
+
     # If there is no script and it's a chest location and isn't an AP Item then we return and small empty script to avoid errors.
     # Chests always point to a script because of the patcher so we need something and this will create a blank one.
     # We still need to fill the chest though.
-    if eventScripts == "" and location_id not in TREASURE_SCRIPTS.keys() and loc_data['location_type'] in ['chest', 'fsc_chest'] and itemId != AP_ITEM: 
+    if (eventScripts == "" and location_id not in TREASURE_SCRIPTS.keys() 
+        and loc_data['location_type'] in ['chest', 'fsc_chest'] and 
+        not requiresScript): 
         fillChest(location_id,itemId,itemQuantity)
         return f"\nfunction \"{buildLocScripts(location_id,False)}\"\n{{\n}}\n"
     
@@ -1819,7 +1826,7 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
 
     #overflow handling for progressive shop ranks.
     if itemId == PROGRESSIVE_SHOP_RANK_ITEM:
-        GetItemMessage = (
+        getItemMessage = (
             f"\tif (ALLITEMWORK[{itemIcon}] >= 8)\n"
             f"\t{{\n"
             f"\t\tGetItem({itemIcon},{itemQuantity})\n"
@@ -1836,16 +1843,16 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
             f"\t}}\n"
         )
     #if it's an event location or a landmark or castaway reward or skill reward we want the message to be in the event script instead of the chest script
-    elif locationIsEvent or itemId in [AP_ITEM, LANDMARK_ITEM, CASTAWAY_ITEM, SKILL_ITEM]: 
-        GetItemMessage = (
+    elif locationIsEvent or requiresScript: 
+        getItemMessage = (
             f"\tGetItemMessageExPlus({itemIcon},{itemQuantity},{ITEM_SOUND},\"{message}\",0,0)\n"
             f"\tWaitPrompt()\n"
             f"\tWaitCloseWindow()\n"
         )
     else: 
-        GetItemMessage = ""
+        getItemMessage = ""
 
-    if not locationIsEvent and eventScripts != "":
+    if not locationIsEvent and (eventScripts != "" or getItemMessage != ""):
         setStopFlag = f"\tSetStopFlag({SCRIPT_STOP_FLAG})\n"
         resetStopFlag = f"\tResetStopFlag({SCRIPT_STOP_FLAG})\n"
     else: 
@@ -1858,7 +1865,7 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
         f"{{\n"
         f"{setStopFlag}"
         f"{getItem}"
-        f"{GetItemMessage}"
+        f"{getItemMessage}"
         f"{eventScripts}"
         f"{resetStopFlag}"
         f"}}\n"
