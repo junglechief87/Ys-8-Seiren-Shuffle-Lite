@@ -261,9 +261,9 @@ ID,Name,Progression,3DIcon
 260,Blue Gloves,0,ICON3D_AR_009
 261,Wood Shield,0,ICON3D_AR_010
 262,Bravery Bracelet,0,ICON3D_AR_011
-263,---,0,ICON3D_263
-264,---,0,ICON3D_264
-265,---,0,ICON3D_265
+263,Primordial Knowledge,0,ICON3D_263
+264,The Ultimate Catch,0,ICON3D_264
+265,Wild and Free,0,ICON3D_265
 266,Soft Gloves,0,ICON3D_AR_020
 267,Prickly Band,0,ICON3D_AR_021
 268,Tectite Shield,0,ICON3D_AR_022
@@ -275,8 +275,8 @@ ID,Name,Progression,3DIcon
 274,Bandit Bracelet,0,ICON3D_AR_028
 275,Blue Bracelet,0,ICON3D_AR_029
 276,Barbaric Bracelet,0,ICON3D_AR_030
-277,---,0,ICON3D_AR_031
-278,---,0,ICON3D_278
+277,AP Fury,0,ICON3D_AR_031
+278,One Final Delivery,0,ICON3D_278
 279,---,0,ICON3D_279
 280,---,0,ICON3D_280
 281,Rough Gloves,0,ICON3D_AR_040
@@ -762,7 +762,7 @@ ID,Name,Progression,3DIcon
 761,T's Note 2,0,ICON3D_MEMO_T_002
 762,T's Note 3,0,ICON3D_MEMO_T_003
 763,T's Note 4,0,ICON3D_MEMO_T_004
-764,---,0,ICON3D_764
+764,Progressive Raid List,0,ICON3D_764
 765,---,0,ICON3D_765
 766,---,0,ICON3D_766
 767,---,0,ICON3D_767

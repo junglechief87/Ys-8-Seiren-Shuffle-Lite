@@ -51,7 +51,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)
 			}}""".format(entranceEvent[entranceList["GRV EVF Entrance"]]["load"], entranceEvent[entranceList["GRV EVF Entrance"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_SOUTHWEST_PLANE_MP1105) //entrance from Towering Coral Forest - Exit to Nameless Coast
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -60,7 +60,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)
 			}}""".format(entranceEvent[entranceList["TCF NCN Exit"]]["load"], entranceEvent[entranceList["TCF NCN Exit"]]["entry_event"])
     
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 2 && WORK[WK_MAPNAMENO] == MN_D_MP1301) //entrance from Nameless Coast - Towering Coral Forest Front Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -69,7 +69,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["NCN TCF Entrance"]]["load"], entranceEvent[entranceList["NCN TCF Entrance"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_F_MP1118) //entrance from Schlamm Jungle - Exit to Odd Rock Coast
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -78,7 +78,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["SJAB ORC Exit"]]["load"], entranceEvent[entranceList["SJAB ORC Exit"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_D_MP1308) //entrance from Roaring Seashore - Towering Coral Forest Back Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -87,7 +87,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["Meta TCF Entrance"]]["load"], entranceEvent[entranceList["Meta TCF Entrance"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_F_MP1117) //entrance from Towering Coral Forest - Exit to Roaring Seashore
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -96,7 +96,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["TCFAB Meta Exit"]]["load"], entranceEvent[entranceList["TCFAB Meta Exit"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP2103) //entrance from Schlamm Jungle - Exit to Beast Hills South
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -105,7 +105,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["SJF GRVSC Exit"]]["load"], entranceEvent[entranceList["SJF GRVSC Exit"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP2301) //entrance from Beast Hills - Schlamm Jungle Front Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -114,7 +114,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["GRVSC SJ Entrance"]]["load"], entranceEvent[entranceList["GRVSC SJ Entrance"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_D_MP2308) //entrance from Odd Rock Coast - Schlamm Jungle Back Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -123,7 +123,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["ORC SJ Entrance"]]["load"], entranceEvent[entranceList["ORC SJ Entrance"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 5 && WORK[WK_MAPNAMENO] == MN_T_VILLAGE_MP1201) //entrance from Waterdrop Cave - Exit to Calm Inlet
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -132,7 +132,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["WC Exit"]]["load"], entranceEvent[entranceList["WC Exit"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_CELLAR_MP7301) //entrance from Calm Inlet - Waterdrop Cave Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -141,7 +141,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["WC Entrance"]]["load"], entranceEvent[entranceList["WC Entrance"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP4102) //entrance from Eroded Valley - Exit to Beast Hills North
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -150,7 +150,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["EVF GRV Exit"]]["load"], entranceEvent[entranceList["EVF GRV Exit"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_D_EROSIONVALLEY_MP4309) //entrance from Sunrise Beach - Eroded Valley Back Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -159,7 +159,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["SB EV Entrance"]]["load"], entranceEvent[entranceList["SB EV Entrance"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_F_MP1119) //entrance from Eroded Valley - Exit to Sunrise Beach
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -168,7 +168,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["EVAB SB Exit"]]["load"], entranceEvent[entranceList["EVAB SB Exit"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP7411) //entrance from Nostalgia Cape - East Coast Cave Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -177,7 +177,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["NCA ECCBG Entrance"]]["load"], entranceEvent[entranceList["NCA ECCBG Entrance"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 2 && WORK[WK_MAPNAMENO] == MN_F_MP1116) //entrance from East Coast Cave - Exit to Nostalgia Cape
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -186,7 +186,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["ECCBG NCA Exit"]]["load"], entranceEvent[entranceList["ECCBG NCA Exit"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP3105) //entrance from Mont Gendarme - Exit to Primordial Passage
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -195,7 +195,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["MGF PPGE Exit"]]["load"], entranceEvent[entranceList["MGF PPGE Exit"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP4331) //entrance from The Primordial Passage - Mont Gendarme Front Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -204,7 +204,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["PP MG Entrance"]]["load"], entranceEvent[entranceList["PP MG Entrance"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP4107) //entrance from Mountain Pinnacle Trail - Mont Gendarme Back Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -213,7 +213,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["SNA MGAB Entrance"]]["load"], entranceEvent[entranceList["SNA MGAB Entrance"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_F_MP4103) //entrance from Mont Gendarme - Exit to Mountain Pinnacle Trail
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -222,7 +222,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["MGAB SNA Exit"]]["load"], entranceEvent[entranceList["MGAB SNA Exit"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP6110) //entrance from Baja Tower - Exit to Towal Highway
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -231,7 +231,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["BTLF THBTE Exit"]]["load"], entranceEvent[entranceList["BTLF THBTE Exit"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP6321) //entrance from Towal Highway - Baja Tower Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -240,7 +240,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["BTLF Entrance"]]["load"], entranceEvent[entranceList["BTLF Entrance"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP6204) //entrance from Archeozoic Chasm - Exit to The Ruins of Eternia
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -249,7 +249,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["ACF BTAC Exit"]]["load"], entranceEvent[entranceList["ACF BTAC Exit"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 2 && WORK[WK_MAPNAMENO] == MN_D_MP6361) //entrance from The Ruins of Eternia - Archeozoic Chasm Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -258,7 +258,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["AC Entrance"]]["load"], entranceEvent[entranceList["AC Entrance"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP6108) //entrance from Valley of Kings - Exit to Valley of Kings - Camp
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -267,7 +267,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["VOKBD LMB Exit"]]["load"], entranceEvent[entranceList["VOKBD LMB Exit"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP6341) //entrance from Lodinia Marshland - Valley of Kings Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -276,7 +276,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["LMB VOKBD Entrance"]]["load"], entranceEvent[entranceList["LMB VOKBD Entrance"]]["entry_event"])
     
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_F_MP2104) //entrance from Silent Tower - Exit to Near Silent Tower
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -285,7 +285,7 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["STE OST Exit"]]["load"], entranceEvent[entranceList["STE OST Exit"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP6411) //entrance from Near Silent Tower - Silent Tower Entrance
 			{{
 				SetFlag(SF_LASTENTRY_NO, -2)
@@ -296,7 +296,7 @@ def buildEntrances(entranceList, options):
 	
 
 	if options['former_sanctuary_crypt'] == 1:
-		entranceScript = entranceScript + """
+		entranceScript += """
 				if(FLAG[SF_LASTENTRY_NO] == 2 && WORK[WK_MAPNAMENO] == MN_F_MP6211) //entrance from FSC - Exit to Central Stupa
 				{{
 					SetFlag(SF_LASTENTRY_NO, -2)
@@ -305,7 +305,7 @@ def buildEntrances(entranceList, options):
 					EventCue("{1}",1)	
 				}}""".format(entranceEvent[entranceList["FSCF ROEHP Exit"]]["load"], entranceEvent[entranceList["FSCF ROEHP Exit"]]["entry_event"])
 		
-		entranceScript = entranceScript + """
+		entranceScript += """
 				if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP6511) //entrance from Central Stupa - FSC Entrance
 				{{
 					SetFlag(SF_LASTENTRY_NO, -2)
@@ -314,12 +314,12 @@ def buildEntrances(entranceList, options):
 					EventCue("{1}",1)	
 				}}""".format(entranceEvent[entranceList["FSC Entrance"]]["load"], entranceEvent[entranceList["FSC Entrance"]]["entry_event"])
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 		}
 	}
 	"""
 	
-	entranceScript = entranceScript + """
+	entranceScript += """
 	function "disablePrimordialPassage"
 	{{
 		if (!FLAG[GF_TBOX_DUMMY131])
@@ -357,7 +357,7 @@ def buildEntrances(entranceList, options):
 			entranceEvent[entranceList["AC Entrance"]]["load"], entranceEvent[entranceList["AC Entrance"]]["entry_event"])
 
 	if options['former_sanctuary_crypt'] == 1:
-		entranceScript = entranceScript + """
+		entranceScript += """
 		function "disableCentralStupa"
 		{{
 			if (!FLAG[SF_SYS_CLEARED] || !FLAG[GF_SUBEV_PAST_07_CLEAR])
@@ -376,7 +376,7 @@ def buildEntrances(entranceList, options):
 		}}
 		""".format(entranceEvent[entranceList["FSC Entrance"]]["load"], entranceEvent[entranceList["FSC Entrance"]]["entry_event"])
 
-	entranceScript = entranceScript + """
+	entranceScript += """
 	function "outsideSilentTowerDebris"
 	{{
 		if(WORK[WK_NPCNUM] >= 24 )
@@ -401,7 +401,7 @@ def buildEntrances(entranceList, options):
 	}}	
 	""".format(entranceEvent[entranceList["ST Entrance"]]["load"], entranceEvent[entranceList["ST Entrance"]]["entry_event"])
 
-	entranceScript = entranceScript + """
+	entranceScript += """
 
 	function "Entry_warpout_mp6409_replace" //entrance from Temple of the Great Tree - Octus Entrance
 	{{
@@ -412,7 +412,7 @@ def buildEntrances(entranceList, options):
 		EventCue("{1}",1)
 	}}""".format(entranceEvent[entranceList["TGTG OO Entrance"]]["load"], entranceEvent[entranceList["TGTG OO Entrance"]]["entry_event"])
 
-	entranceScript = entranceScript + """
+	entranceScript += """
 
 	function "Entry_warpout_mp6301_replace" //entrance from Octus Overlook - Exit to Temple of the Great Tree
 	{{
@@ -423,7 +423,7 @@ def buildEntrances(entranceList, options):
 		EventCue("{1}",1)
 	}}""".format(entranceEvent[entranceList["OO TGT Exit"]]["load"], entranceEvent[entranceList["OO TGT Exit"]]["entry_event"])
 
-	entranceScript = entranceScript + """
+	entranceScript += """
 
 	function "4301_entry"
 	{

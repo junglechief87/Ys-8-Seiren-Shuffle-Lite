@@ -153,17 +153,17 @@
 136	Speed Gunner	Apparel (Hummel)	Give Hummel a refreshing$nappearance with this outfit.	0	EQ_MC_HUMMEL_ONLY	330	0	3	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 137	Cutesy Girl	Apparel (Ricotta)	Ricotta looks a lot more$ncalm in this outfit.	0	EQ_MC_RICOTTA_ONLY	330	0	3	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 138	Noble Shaman	Apparel (Dana)	Give Dana a stylish look$nwith this outfit.	0	EQ_MC_DANA_ONLY	330	0	3	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-139	Progressive Shop Rank	Current Rank	Upgrades the forge and what's available$nat various shops.	0	ITEM_TYPE_INVENTORY	325	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+139	Progressive Shop Rank	Current Rank	Upgrades the forge and what's available$nat various shops.	0	ITEM_TYPE_INVENTORY	325	122	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 140	Ricotta Style	Attachment (Adol)	This attachment allows Adol$nto don Ricotta's necklace.	0	EQ_SC_ADOL_ONLY	331	0	4	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 141	Elegant Glasses	Attachment (Laxia)	This attachment places$nelegant glasses on Laxia.	SUBCOSTUME_TARGET_GLASSES	EQ_SC_LAXIA_ONLY	331	0	4	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 // <衣装：アクセサリ>	名前	効果説明文	アイテム説明文	部位ｶﾃｺﾞﾘ(0以外で有効。同じｶﾃｺﾞﾘ値のものは重複装備できない)	種類	アイコン番号	ソート番号	ランク	レア	トロフィー	DLCラベル(N+4桁)	解体	--------	攻撃力	防御力	属性１	属性１値	属性２	属性２値	属性３	属性３値	属性４	属性４値	属性５	属性５値	属性６	属性６値	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------
 142	Clingy Pikkard	Attachment	This cute pikkard attachment$nhugs whoever wears it.	SUBCOSTUME_TARGET_ARM	EQ_COMMON_SUBCOSTUME	331	0	3	1	1	0	1		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-143	Castaway	Crew Saved	A count of those saved from the$nLombardia's destruction.	0	ITEM_TYPE_INVENTORY	335	0	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+143	Castaway	Crew Saved	A count of those saved from the$nLombardia's destruction.	0	ITEM_TYPE_INVENTORY	335	121	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 144	Skill		---	0	0	0	0	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 145	Party Member		---	0	0	326	0	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-146	Broken Mistilteinn	A broken sword	The Sword of Psyches,$nperhaps Kathleen can repair it.	0	ITEM_TYPE_INVENTORY	9	0	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-147	Broken Spirit Ring	A broken duel blade	A ring of pure energy,$nperhaps Kathleen can repair it.	0	ITEM_TYPE_INVENTORY	9	0	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-148	Discovery	Landmarks Found	A count of the many sights of Seiren.	0	ITEM_TYPE_INVENTORY	307	0	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+146	Broken Mistilteinn	A broken sword	The Sword of Psyches,$nperhaps Kathleen can repair it.	0	ITEM_TYPE_INVENTORY	9	126	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+147	Broken Spirit Ring	A broken duel blade	A ring of pure energy,$nperhaps Kathleen can repair it.	0	ITEM_TYPE_INVENTORY	9	127	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+148	Discovery	Landmarks Found	A count of the many sights of Seiren.	0	ITEM_TYPE_INVENTORY	307	123	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 149	AP Item		---	0	0	332	0	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 // <アクセサリ>	名前	効果説明文	アイテム説明文	効果ｶﾃｺﾞﾘ(0以外で有効。同じｶﾃｺﾞﾘ値のものは重複装備できない)	種類	アイコン番号	ソート番号	ランク	レア	トロフィー	DLCラベル(N+4桁)	解体	--------	攻撃力	防御力	属性１	属性１値	属性２	属性２値	属性３	属性３値	属性４	属性４値	属性５	属性５値	属性６	属性６値	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------	--------
 150			■■■■■■■■■■■■■■□■■■■■■■■■■□■■□																																																
@@ -796,11 +796,11 @@
 757	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 758	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 759	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-760	T's Note 1	Piece of Paper	A note written by "T".$nUnlocks intercepts in the village.	0	ITEM_TYPE_INVENTORY	320	36	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-761	T's Note 2	Piece of Paper	A note written by "T".$nUnlocks intercepts in the village.	0	ITEM_TYPE_INVENTORY	320	37	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-762	T's Note 3	Piece of Paper	A note written by "T".$nUnlocks intercepts in the village.	0	ITEM_TYPE_INVENTORY	320	38	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-763	T's Note 4	Piece of Paper	A note written by "T".$nUnlocks intercepts in the village.	0	ITEM_TYPE_INVENTORY	320	39	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-764	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+760	T's Note 1	Piece of Paper	A note written by "T".	0	ITEM_TYPE_INVENTORY	320	36	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+761	T's Note 2	Piece of Paper	A note written by "T".	0	ITEM_TYPE_INVENTORY	320	37	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+762	T's Note 3	Piece of Paper	A note written by "T".	0	ITEM_TYPE_INVENTORY	320	38	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+763	T's Note 4	Piece of Paper	A note written by "T".	0	ITEM_TYPE_INVENTORY	320	39	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+764	Progressive Raid List	Piece of Paper	A new list of raids.$nUnlocks intercepts in the village.	0	ITEM_TYPE_INVENTORY	320	124	0	0	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 765	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 766	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 767	---	---	---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
@@ -867,7 +867,7 @@
 828	Small Ring	Gift Item	A child-size ring, but one$nof quality artistry.	0	ITEM_TYPE_INVENTORY	326	118	4	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 829	Old Stethoscope	Gift Item	Used to listen to$nanother's heartbeat.	0	ITEM_TYPE_INVENTORY	333	119	4	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 830	Bell Collar	Gift Item	When worn, the bell jingles$nas the pet walks around.	0	ITEM_TYPE_INVENTORY	333	120	4	1	1	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-831	Psyches	Psyches of Eras Past	The power to end the Lacrimosa.	0	ITEM_TYPE_INVENTORY	357	0	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+831	Psyches	Psyches of Eras Past	The power to end the Lacrimosa.	0	ITEM_TYPE_INVENTORY	357	125	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 832	---		---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 833	---		---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 834	---		---	0	0	0	0	0	0	0	0	0		0	0	0	0	0	0	0	0	0	0	0	0	0	0																								

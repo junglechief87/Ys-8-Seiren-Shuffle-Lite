@@ -104,39 +104,48 @@ function "init"
 	}
 	
 	// New Intercept checker, makes it easier to manage for AP
-	if(FLAG[GF_TBOX_DUMMY100])
+	if(ALLITEMWORK[ICON3D_764] >= 1)
     {
+		if(!FLAG[DF_JOIN_DOGI])
+		{
+			GetItem(ICON3D_143,1) 
+			SetDiaryFlag( DF_JOIN_DOGI, 1 ) //Footprint memo: Rescued Dogi.
+		}
         Intercept(INTERCEPT_STAGE01,1)
         Intercept(INTERCEPT_STAGE02,1)
         Intercept(INTERCEPT_STAGE03,1)
         Intercept(INTERCEPT_STAGE04,1)
-        Intercept(INTERCEPT_STAGE05,1)
+    }
+    if(ALLITEMWORK[ICON3D_764] >= 2)
+    {
+		SetFlag(GF_QS303_QUESTCLEAR,1)
+		Intercept(INTERCEPT_STAGE05,1)
         Intercept(INTERCEPT_STAGE06,1)
         Intercept(INTERCEPT_STAGE07,1)
-    }
-    if(FLAG[GF_TBOX_DUMMY101])
-    {
         Intercept(INTERCEPT_STAGE31,1)
-        SetFlag(GF_QS303_QUESTCLEAR,1)
-        Intercept(INTERCEPT_STAGE32,1)
-        Intercept(INTERCEPT_STAGE33,1)
-        Intercept(INTERCEPT_STAGE34,1)
-        Intercept(INTERCEPT_STAGE35,1)
-        Intercept(INTERCEPT_STAGE36,1)
-        Intercept(INTERCEPT_STAGE37,1)
+        
     }
-    if(FLAG[GF_TBOX_DUMMY102])
+    if(ALLITEMWORK[ICON3D_764] >= 3)
     {
         Intercept(INTERCEPT_STAGE08,1)
         Intercept(INTERCEPT_STAGE09,1)
-        Intercept(INTERCEPT_STAGE11,1)
-        Intercept(INTERCEPT_STAGE12,1)
-        Intercept(INTERCEPT_STAGE38,1)
-        Intercept(INTERCEPT_STAGE39,1)
+		Intercept(INTERCEPT_STAGE32,1)
+        Intercept(INTERCEPT_STAGE33,1)
         SetFlag(GF_TBOX_DUMMY102,1)
     }
-    if (FLAG[GF_TBOX_DUMMY103])
+    if (ALLITEMWORK[ICON3D_764] >= 4)
     {
+		Intercept(INTERCEPT_STAGE11,1)
+        Intercept(INTERCEPT_STAGE12,1)
+		Intercept(INTERCEPT_STAGE34,1)
+        Intercept(INTERCEPT_STAGE35,1)
+    }
+	if (ALLITEMWORK[ICON3D_764] >= 5)
+    {
+		Intercept(INTERCEPT_STAGE36,1)
+        Intercept(INTERCEPT_STAGE37,1)
+        Intercept(INTERCEPT_STAGE38,1)
+        Intercept(INTERCEPT_STAGE39,1)
 	    Intercept(INTERCEPT_STAGE21,1)
     }
 

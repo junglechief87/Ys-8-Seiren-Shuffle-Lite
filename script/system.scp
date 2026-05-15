@@ -5555,6 +5555,9 @@ function "Load_Dogi"
 {
 	if((Dogi.CHRWORK[CWK_POSX]) > -50000.0f){
 		LoadChr( Dogi )
+		if(!FLAG[DF_JOIN_DOGI]){
+			SetChrPos("Griselda",-100000.0f, 0.00f, 0.00f)
+		}
 	}
 }
 function "Load_Paro"
