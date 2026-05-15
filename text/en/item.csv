@@ -281,9 +281,9 @@
 260	Blue Gloves	DEF+10, Adds Freeze	Frosty cold gloves. Adds Freeze.	0	EQ_ARM_BRACELET	81	29	1	1	1	0	1	it_getsp1	0	10	ZOKU_ABILITY_FREEZE	10	0	0	0	0	0	0	0	0	0	0																								
 261	Wood Shield	DEF+16	Made with oak.$nLight and easy to carry.	0	EQ_ARM_BRACELET	82	7	2	0	1	0	1	it_getsp1	0	16	0	0	0	0	0	0	0	0	0	0	0	0																								
 262	Bravery Bracelet	DEF+50/STR+75, Blinded	Fills the wearer with a strong desire to rush$nblindly into battle. Also, it blinds them.	0	EQ_ARM_BRACELET	326	35	3	1	1	0	1	it_getsp1	75	50	ZOKU_DARK	-1	0	0	0	0	0	0	0	0	0	0																								
-263	Primordial Knowledge	DEF+40/STR+40, Near Infinite Spirit	The accumulated knowledge of the Roswell Family.$nDamage ↑↑ vs. Saurians	18	EQ_AC_LAXIA_ONLY	377	100	5	1	0	0	0	it_getsp1	40	40	ZOKU_ABILITY_SPREDUCE	80	ZOKU_ABILITY_DRAGONSLAYER	20	0	0	0	0	0	0	0	0																								
-264	The Ultimate Catch	DEF+200/STR+25/HP+1500	The greatest catch of all time.$nHP Absorb ↑↑↑↑, Endure with 1HP Once	40	EQ_AC_SAHAD_ONLY	358	101	5	1	0	0	0	it_getsp1	25	200	ZOKU_ABILITY_HPUP	150	ZOKU_ABILITY_ABSORB_HP	250	ZOKU_ABILITY_ENDUREHP1	1	0	0	0	0	0	0																								
-265	Wild and Free	DEF+30/STR+30/HP+500	The Spirit of Seiren. Grants boundless movement.	40	EQ_AC_RICOTTA_ONLY	358	102	5	1	0	0	0	it_getsp1	30	30	ZOKU_ABILITY_HPUP	50	ZOKU_ABILITY_FM_LONG	15	ZOKU_ABILITY_SPEEDUP	35	ZOKU_ABILITY_FMGETEXTRA	10	ZOKU_ABILITY_AVOID	10	0	0																								
+263	Primordial Knowledge	DEF+40/STR+40, Near Infinite Spirit	The accumulated knowledge of the Roswell Family.$nDamage ↑↑ vs. Saurians	18	EQ_AC_LAXIA_ONLY	331	100	5	1	0	0	0	it_getsp1	40	40	ZOKU_ABILITY_SPREDUCE	80	ZOKU_ABILITY_DRAGONSLAYER	20	0	0	0	0	0	0	0	0																								
+264	The Ultimate Catch	DEF+200/STR+25/HP+1500	The greatest catch of all time.$nHP Absorb ↑↑↑↑, Endure with 1HP Once	40	EQ_AC_SAHAD_ONLY	403	101	5	1	0	0	0	it_getsp1	25	200	ZOKU_ABILITY_HPUP	150	ZOKU_ABILITY_ABSORB_HP	100	ZOKU_ABILITY_ENDUREHP1	100	0	0	0	0	0	0																								
+265	Wild and Free	DEF+30/STR+30/HP+500	The Spirit of Seiren. Grants boundless movement.	40	EQ_AC_RICOTTA_ONLY	377	102	5	1	0	0	0	it_getsp1	30	30	ZOKU_ABILITY_HPUP	50	ZOKU_ABILITY_FM_LONG	12	ZOKU_ABILITY_SPEEDUP	40	ZOKU_ABILITY_FMGETEXTRA	20	ZOKU_ABILITY_AVOID	25	0	0																								
 266	Soft Gloves	DEF+30/HP+300	A useful glove made with$nflexible and sturdy leather.	0	EQ_ARM_BRACELET	83	2	3	0	1	0	1	it_getsp1	0	30	ZOKU_ABILITY_HPUP	30	0	0	0	0	0	0	0	0	0	0																								
 267	Prickly Band	DEF+33, Adds Poison	Wristband embedded with poisonous thorns.$nAdds Poison.	0	EQ_ARM_BRACELET	84	5	3	0	1	0	1	it_getsp1	0	33	ZOKU_ABILITY_POISON	25	0	0	0	0	0	0	0	0	0	0																								
 268	Tectite Shield	DEF+40	A heavy shield made with$ntectite materials.	0	EQ_ARM_BRACELET	85	9	4	0	1	0	1	it_getsp1	0	40	0	0	0	0	0	0	0	0	0	0	0	0																								
@@ -295,10 +295,10 @@
 274	Bandit Bracelet	DEF+34, Obtained Items ↑↑	Moderately increases amount$nof dropped/harvested items.	0	EQ_ARM_BRACELET	91	27	2	1	1	0	1	it_getsp1	0	34	ZOKU_ABILITY_DROPUP	60	0	0	0	0	0	0	0	0	0	0																								
 275	Blue Bracelet	DEF+24, Adds Freeze	A blue magical stone is set$nin it. Adds Freeze.	0	EQ_ARM_BRACELET	92	30	3	1	1	0	1	it_getsp1	0	24	ZOKU_ABILITY_FREEZE	25	0	0	0	0	0	0	0	0	0	0																								
 276	Barbaric Bracelet	DEF+26, Adds Random Effect	Adds a random status effect$nwhen attacking.	0	EQ_ARM_BRACELET	93	33	3	1	1	0	1	it_getsp1	0	26	ZOKU_ABILITY_RANDOM	15	0	0	0	0	0	0	0	0	0	0																								
-277	AP Fury	STR+50, Hits All Weaknesses	The fury of all BKs.	0	EQ_ARM_BRACELET	101	45	5	1	0	0	0	it_getsp1	50	0	ZOKU_WEAK_ALL	100	0	0	0	0	0	0	0	0	0	0																								
-278	One Final Delivery	STR+100,HP+400	Professional until the end.$nGrant additional Flash Guard Bonuses.	40	EQ_AC_HUMMEL_ONLY	342	103	5	1	0	0	0	it_getsp1	100	0	ZOKU_ABILITY_FG_HEAL	50	ZOKU_ABILITY_FG_LONG	150	ZOKU_ABILITY_HPUP	40	0	0	0	0	0	0																								
-279	---		---	0	0	0	0	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-280	---		---	0	0	0	0	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+277	AP Fury	STR+50, Hits All Weaknesses	The fury of all BKs.	0	EQ_ARM_BRACELET	101	45	5	1	0	0	0	it_getsp1	50	0	ZOKU_WEAK_CUTTING	100	ZOKU_WEAK_SHOOT	100	ZOKU_WEAK_CRUSH	100	0	0	0	0	0	0																								
+278	One Final Delivery	STR+100,HP+400	Professional until the end.$nGrant additional Flash Guard Bonuses.	40	EQ_AC_HUMMEL_ONLY	342	103	5	1	0	0	0	it_getsp1	100	0	ZOKU_ABILITY_FG_HEAL	50	ZOKU_ABILITY_FG_LONG	180	ZOKU_ABILITY_HPUP	40	0	0	0	0	0	0																								
+279	Broken Glasses	A broken pair of glasses	Maybe Euron can fix them.	0	ITEM_TYPE_INVENTORY	178	128	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+280	Broken Necklass	A broken necklace	Maybe Euron can fix it.	0	ITEM_TYPE_INVENTORY	178	129	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 281	Rough Gloves	DEF+50/HP+500	Comfortable gloves made$nfrom Primordial hide.	0	EQ_ARM_BRACELET	94	3	4	0	1	0	1	it_getsp1	0	50	ZOKU_ABILITY_HPUP	50	0	0	0	0	0	0	0	0	0	0																								
 282	Thorny Wristband	DEF+55, Adds Poison	Wristband lined with deadly thorns.$nAdds Poison.	0	EQ_ARM_BRACELET	95	6	4	0	1	0	1	it_getsp1	0	54	ZOKU_ABILITY_POISON	40	0	0	0	0	0	0	0	0	0	0																								
 283	Essence Shield	DEF+65	A shield made of crystallized Essence.$nAs durable as a Primordial's hide.	0	EQ_ARM_BRACELET	96	10	4	1	1	0	1	it_getsp1	0	65	0	0	0	0	0	0	0	0	0	0	0	0																								
@@ -312,7 +312,7 @@
 291	Chaos Hand	DEF+44, Adds Random Effect	Gauntlets containing chaotic anarchy.$nAdds random status effect when attacking.	0	EQ_ARM_BRACELET	104	34	4	1	1	0	1	it_getsp1	0	44	ZOKU_ABILITY_RANDOM	30	0	0	0	0	0	0	0	0	0	0																								
 292	Savage Wristband	DEF+75/STR+50/HP+300/Poisoned	Increases stats, but inflicts$nthe wearer with Poison.	0	EQ_ARM_BRACELET	105	37	5	1	1	0	1	it_getsp1	50	75	ZOKU_ABILITY_HPUP	30	ZOKU_POISON	-1	0	0	0	0	0	0	0	0																								
 293	Eternal Gauntlets	DEF+100/HP+1000, Crit Rate +15%	Ancient gauntlets, discarded by a god, that$ncan commune with the laws of the world.	0	EQ_ARM_BRACELET	359	45	5	1	1	0	1	it_getsp1	0	100	ZOKU_ABILITY_CRITICAL	15	ZOKU_ABILITY_HPUP	100	0	0	0	0	0	0	0	0																								
-294	---		---	0	0	0	0	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+294	Broken Lure	A broken lure	Maybe Euron can fix them.	0	ITEM_TYPE_INVENTORY	178	130	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 295	Light Arm Guard	DEF+50	Gauntlets that protect the wrist, and$nemphasize defense and mobility.	0	EQ_ARM_BRACELET	360	40	2	0	0	0	0	it_getsp1	0	50	0	0	0	0	0	0	0	0	0	0	0	0																								
 296	Needle Gauntlets	DEF+30/STR+10, Adds Poison	Gauntlets embedded with the venomous$nbarbs of a Saurian. Adds Poison.	0	EQ_ARM_BRACELET	361	41	2	0	0	0	0	it_getsp1	10	30	ZOKU_ABILITY_POISON	20	0	0	0	0	0	0	0	0	0	0																								
 297	Rai-Koo Gauntlets	DEF+35/STR+10, Adds Paralysis	Gauntlets coated with electrified fur.$nAdds Paralysis.	0	EQ_ARM_BRACELET	362	42	3	0	0	0	0	it_getsp1	10	35	ZOKU_ABILITY_PARALYZE	10	0	0	0	0	0	0	0	0	0	0																								
@@ -429,7 +429,7 @@
 403	Soft Fiber	Beast Material (Rank 1/Rare)	These natural beast fibers$nare both strong and durable.	0	ITEM_TYPE_R_MATERIAL	185	3	1	1	1	0	1	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 404	Gwaranga Pincer	Beast Material (Rank 1/Rare)	These strong pincers can$ncut through metal.	0	ITEM_TYPE_R_MATERIAL	186	4	1	1	1	0	1	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 405	Bullfrodon Mucus	Beast Material (Rank 1/Rare)	Sweet mucus from a frog$nthat invites heartburn.	0	ITEM_TYPE_R_MATERIAL	187	5	1	1	1	0	1	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-406	---	---	---	0	0	0	0	1	1	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+406	Odd rock	An odd rock	Maybe Euron can make something out of it.	0	ITEM_TYPE_INVENTORY	178	131	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 407	---	---	---	0	0	0	0	1	1	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 408	---	---	---	0	0	0	0	1	1	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 409	---	---	---	0	0	0	0	1	1	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
