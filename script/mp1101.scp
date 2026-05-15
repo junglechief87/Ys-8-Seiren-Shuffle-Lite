@@ -2885,7 +2885,7 @@ function "EV_M01S170"		//³®‚É’Tõ‚ğŠJn‚·‚é
 	//@@‚±‚±‚Å’n}ƒƒjƒ…[‚ğ•Â‚¶‚éB
 
 		PlaySE(SE_MAP_SETDESTINATION,100,0,  0, 0, 1.0f, 0)		//Ÿ‰¼
-		SetMapMarker(SMI_SYMBOL, PAGE_F001, MARKER_EV_M01S180, 54.36f, -1220.11f, 8.06f, 54.36f, -1220.11f, MARKER_EV_M01S180, MN_F_SOUTHWEST_PLANE_MP1103,0)	// ’n}ì‚è‚ğŠJn‚µ‚½			mp1103:ƒTƒnƒh‡—¬
+		//SetMapMarker(SMI_SYMBOL, PAGE_F001, MARKER_EV_M01S180, 54.36f, -1220.11f, 8.06f, 54.36f, -1220.11f, MARKER_EV_M01S180, MN_F_SOUTHWEST_PLANE_MP1103,0)	// ’n}ì‚è‚ğŠJn‚µ‚½			mp1103:ƒTƒnƒh‡—¬
 		Wait(30)
 		Wait(10)
 
@@ -3878,7 +3878,7 @@ function "EV_M02S540"	//ƒJ[ƒ‰ƒ“‹¨‚Ì‹~o‚ÉŒü‚©‚¤
 
 	//@@’n}ã‚É–Ú“I’n‚Éˆó‚ğ‚Â‚¯‚éB
 	PlaySE(SE_MAP_SETDESTINATION,100,0,  0, 0, 1.0f, 0)		//Ÿ‰¼
-	SetMapMarker(SMI_SYMBOL,PAGE_F005,MARKER_EV_M02S550,665.18f,-1616.51f,1.63f,665.18f,-1616.51f,MARKER_EV_M02S550, MN_F_MP1134,0)	//ƒJ[ƒ‰ƒ“‹¨‚Ì‹~o‚ÉŒü‚©‚¤
+	//SetMapMarker(SMI_SYMBOL,PAGE_F005,MARKER_EV_M02S550,665.18f,-1616.51f,1.63f,665.18f,-1616.51f,MARKER_EV_M02S550, MN_F_MP1134,0)	//ƒJ[ƒ‰ƒ“‹¨‚Ì‹~o‚ÉŒü‚©‚¤
 
 	Wait(40)
 
@@ -6062,7 +6062,7 @@ function "EV_M03S071_ED"											//ƒCƒxƒ“ƒgƒXƒLƒbƒv—p‚ÉI—¹ˆ—‚ğ•Ê‚Ìfunction‚
 	
 
 	//ƒ}ƒbƒvƒ}[ƒJ[
-	SetMapMarker(SMI_SYMBOL,PAGE_F002,MARKER_EV_M03S080,75.45f, -265.87f, 186.17f ,75.45f, -265.87f, MARKER_EV_M03S080, MN_F_MP3104,0)	//ƒWƒƒƒ“ƒ_ƒ‹ƒ€‚Ö‚Ì‹¬’J
+	//SetMapMarker(SMI_SYMBOL,PAGE_F002,MARKER_EV_M03S080,75.45f, -265.87f, 186.17f ,75.45f, -265.87f, MARKER_EV_M03S080, MN_F_MP3104,0)	//ƒWƒƒƒ“ƒ_ƒ‹ƒ€‚Ö‚Ì‹¬’J
 	
 	//ƒCƒxƒ“ƒgŒã‚ÌÄ”z’uˆÊ’u
 	SetChrPos("LEADER", 56.26f, -1402.62f, 10.47f)
