@@ -1609,9 +1609,9 @@ def danaPastEvents(pastItem):
     return scripts.get(pastItem, '')
 
 #Sword of Psyches event. Adol gets Mistletein(probably mispelled that)
-#we make sure the weapon is equipped here when it is received, if progressive super weapons we just set the flag for haivng received it so Kathleen will know the upgrade can happen at shop rank max 
+#we make sure the weapon is equipped here when it is received, if progressive super items we just set the flag for haivng received it so Kathleen will know the upgrade can happen at shop rank max 
 def sopEvent(options):
-    if options["progressive_super_weapons"] == 1:
+    if options["progressive_super_items"] == 1:
         script = "\tSetFlag(GF_TBOX_DUMMY071,1)\n"
     else:
         script = (
@@ -1623,7 +1623,7 @@ def sopEvent(options):
 
 #dana spirit ring
 def spiritRingEvent(options):
-    if options["progressive_super_weapons"] == 1:
+    if options["progressive_super_items"] == 1:
         script = "\tSetFlag(GF_TBOX_DUMMY108,1)\n"
     else:
         script = (

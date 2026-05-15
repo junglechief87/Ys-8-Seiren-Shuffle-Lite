@@ -2648,7 +2648,7 @@ enum {
 	GF_TBOX_DUMMY106, //flag for ship blueprints
 	GF_TBOX_DUMMY107, //new flag for second carlan join check
 	GF_TBOX_DUMMY108, //flag for spirit ring Celesdia
-	GF_TBOX_DUMMY109, //flag for progressive super weapons
+	GF_TBOX_DUMMY109, //flag for progressive super items
 	GF_TBOX_DUMMY110, //Silvia fight
 	GF_TBOX_DUMMY111, //flag for skill shuffle
 	GF_TBOX_DUMMY112, //flag for release the psyches

@@ -60,7 +60,7 @@ def buildStartParameters(patch):
         gameSettingFlags = gameSettingFlags + """
     SetFlag(GF_TBOX_DUMMY114,1)
     """
-    if patch.settings["options"]["progressive_super_weapons"] == 1:
+    if patch.settings["options"]["progressive_super_items"] == 1:
         gameSettingFlags = gameSettingFlags + """
     SetFlag(GF_TBOX_DUMMY109,1)
     """

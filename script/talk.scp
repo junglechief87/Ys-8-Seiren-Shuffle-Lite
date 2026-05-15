@@ -15795,6 +15795,42 @@ function "Talk_Aaron"
 				ResetMoveVec("this")
 				ChangeAnimation( "this", "ANI_WAIT", -1, 1 )	// ë“ã@
 			}
+
+			if (FLAG[GF_TBOX_DUMMY109] && if ALLITEMWORK[ICON3D_139] >= 7)
+			{
+				TalkPopup("Aaron",0,0,0,0,0)
+				{
+					"#7CLooks like you found something special."
+					"#7CLet me see what I can do with this."
+				}
+				WaitPrompt()
+				WaitCloseWindow()
+
+				if(ALLITEMWORK[ICON3D_279] >= 1)
+				{
+					GetItem(ICON3D_263,1)
+					GetItemMessageExPlus(ICON3D_263,1,ITEMMSG_SE_NORMAL," Obtained.",0,0)
+					DeleteItem(ICON3D_279,999)
+				}
+				if(ALLITEMWORK[ICON3D_294] >= 1)
+				{
+					GetItem(ICON3D_264,1)
+					GetItemMessageExPlus(ICON3D_264,1,ITEMMSG_SE_NORMAL," Obtained.",0,0)
+					DeleteItem(ICON3D_280,999)
+				}
+				if(ALLITEMWORK[ICON3D_280] >= 1)
+				{
+					GetItem(ICON3D_265,1)
+					GetItemMessageExPlus(ICON3D_265,1,ITEMMSG_SE_NORMAL," Obtained.",0,0)
+					DeleteItem(ICON3D_294,999)
+				}
+				if(ALLITEMWORK[ICON3D_406] >= 1)
+				{
+					GetItem(ICON3D_278,1)
+					GetItemMessageExPlus(ICON3D_278,1,ITEMMSG_SE_NORMAL," Obtained.",0,0)
+					DeleteItem(ICON3D_406,999)
+				}
+			}
 			
 			// ëIëéàçÏê¨
 			MenuReset()
@@ -27373,7 +27409,7 @@ function "Talk_Katrin"
 		WaitCloseWindow()
 		ResetStopFlag(STOPFLAG_TALK)
 	}
-	if (FLAG[GF_TBOX_DUMMY071] && FLAG[GF_TBOX_DUMMY109] && FLAG[GF_TBOX_DUMMY086] && ALLITEMWORK[ICON3D_WP_ADOL_008] < 1 && ALLITEMWORK[ICON3D_FIRESTONE] == 0) //If mistilteinn, progressive super weapons, and final forge level
+	if (FLAG[GF_TBOX_DUMMY071] && FLAG[GF_TBOX_DUMMY109] && FLAG[GF_TBOX_DUMMY086] && ALLITEMWORK[ICON3D_WP_ADOL_008] < 1 && ALLITEMWORK[ICON3D_FIRESTONE] == 0) //If mistilteinn, progressive super items, and final forge level
 	{
 		SetStopFlag(STOPFLAG_SIMPLEEVENT2)
 		SetFlag( TF_MENU_SELECT, 0 )
@@ -27423,7 +27459,7 @@ function "Talk_Katrin"
 			ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
 		}
 	}
-	if (FLAG[GF_TBOX_DUMMY108] && FLAG[GF_TBOX_DUMMY109] && FLAG[GF_TBOX_DUMMY086] && ALLITEMWORK[ICON3D_WP_DANA_005] < 1 && ALLITEMWORK[ICON3D_FIRESTONE] == 0) //If spirit ring, progressive super weapons, and final forge level
+	if (FLAG[GF_TBOX_DUMMY108] && FLAG[GF_TBOX_DUMMY109] && FLAG[GF_TBOX_DUMMY086] && ALLITEMWORK[ICON3D_WP_DANA_005] < 1 && ALLITEMWORK[ICON3D_FIRESTONE] == 0) //If spirit ring, progressive super items, and final forge level
 	{
 		SetStopFlag(STOPFLAG_SIMPLEEVENT2)
 		SetFlag( TF_MENU_SELECT, 0 )
