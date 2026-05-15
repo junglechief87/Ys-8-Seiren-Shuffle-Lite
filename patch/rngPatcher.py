@@ -146,8 +146,8 @@ def rngPatcherMain(patch, progress_callback=None):
             progress_callback(f"Building location from item map: {location}")
 
     # Handling Options
-    bossScalingScript = bossScaling()
-    patchFile = patchFile + bossScalingScript
+    bossLevelsScript = bossLevels()
+    patchFile = patchFile + bossLevelsScript
 
     if patch.settings['options']['final_boss_access'] == 2:
         patchFile = patchFile + buildPsyches(patch.settings)
@@ -218,14 +218,11 @@ def genericItemMessage(location_id, patch, vanillaScript):
         eventScripts += spiritRingEvent(options)
     elif itemId == 770: #logbook from east coast cave
         eventScripts += f"\tSetFlag(GF_05MP7411_READ_NOTE1, 1)\n"
-    elif itemId in [760,761,762,763]: #T memos
-        eventScripts += interceptUnlock()
+
     elif itemId == 629: #fishing rod
         eventScripts += f"\tGetItem(ICON3D_FISHBAIT_WORM,30)\n"
     elif itemId == 779: #ship blueprints
         eventScripts += f"\tSetFlag(GF_SUBEV_06_1111_LOOK_BOAT,1)\n"
-    # if itemId in [750,751,752,753,754,755,760,761,762,763] and options['memo_hints']:
-    #     script = script + memoHints(itemId)
     elif itemId == 218:
         #Adding the other 2 medals to the slash medal check
         eventScripts += (
@@ -277,192 +274,170 @@ def buildLandmarks(location_id, patch, vanillaScript):
 # ==========================================================================================================
 # Boss Scaling Function
 # ==========================================================================================================
-def bossScaling():
-    return "function \"bossScaling\"\n{\n\t//placeholder to keep existing build functioning until features are implemented\n}\n"
-#     bossLevels = [5,7,13,14,20,23,26,28,29,32,35,40,43,45,48,51,53,58,60,60,80]
-#     bossIDs = {'Byfteriza': 'M0111',
-#                'Avalodragil': 'B150',
-#                'Serpentus': 'B100',
-#                'Clareon': 'B000',
-#                'Lonbrigius': 'B101B',
-#                'Gargantula': 'B001',
-#                'Magamandra': 'B102',
-#                'Laspisus': 'B002',
-#                'Kiergaard Weissman': 'B152',
-#                'Avalodragil 2': 'B154',
-#                'Giasburn': 'B003',
-#                'Brachion': 'B006',
-#                'Exmetal': 'B104',
-#                'Carveros': 'B004',
-#                'Pirate Revenant': 'B103',
-#                'Coelacantos': 'B106',
-#                'Oceanus': 'B007',
-#                'Doxa Griel': 'B105',
-#                'Basileus': 'B005',
-#                'Mephorash': 'B153',
-#                'Silvia': 'B155',}
-#     remainingBosses = []
-#     finalBossLevels = []
-#     bossLevelsDictByRegion = {}
-#     HPmod = 0.5
-#     firstPostSecondCharacterBoss = ''
-#     partySize = 0
-#     secondCharacterSphere = 0
-#     soloPartyBoss = True
-#     secondCharacterFound = False
+def bossLevels():
+    return "function \"bossLevels\"\n{\n\t//placeholder to keep existing build functioning until features are implemented\n}\n"
+    bossLevels = [5,7,13,14,20,23,26,28,29,32,35,40,43,45,48,51,53,58,60,60,80]
+    bossIDs = {'Byfteriza': 'M0111',
+               'Avalodragil': 'B150',
+               'Serpentus': 'B100',
+               'Clareon': 'B000',
+               'Lonbrigius': 'B101B',
+               'Gargantula': 'B001',
+               'Magamandra': 'B102',
+               'Laspisus': 'B002',
+               'Kiergaard Weissman': 'B152',
+               'Avalodragil 2': 'B154',
+               'Giasburn': 'B003',
+               'Brachion': 'B006',
+               'Exmetal': 'B104',
+               'Carveros': 'B004',
+               'Pirate Revenant': 'B103',
+               'Coelacantos': 'B106',
+               'Oceanus': 'B007',
+               'Doxa Griel': 'B105',
+               'Basileus': 'B005',
+               'Mephorash': 'B153',
+               'Silvia': 'B155',}
+    remainingBosses = []
+    finalBossLevels = []
+    bossLevelsDictByRegion = {}
+    HPmod = 0.5
+    firstPostSecondCharacterBoss = ''
+    partySize = 0
+    secondCharacterSphere = 0
+    soloPartyBoss = True
+    secondCharacterFound = False
 
-#     if not parameters.goal == 'Untouchable' and parameters.formerSanctuaryCrypt: # Make sure Melaiduma's level and ID are in the pool if he's not the goal
-#         bossLevels.append(99) 
-#         bossIDs['Melaiduma'] = 'B170' 
+    if not parameters.goal == 'Untouchable' and parameters.formerSanctuaryCrypt: # Make sure Melaiduma's level and ID are in the pool if he's not the goal
+        bossLevels.append(99) 
+        bossIDs['Melaiduma'] = 'B170' 
 
-#     if not parameters.goal == 'Release the Psyches': # Make sure the Psyches' levels and IDs are in the pool if they aren't the goal
-#         bossLevels.extend([67,70,73,75])
-#         bossIDs['Psyche-Hydra'] = 'B112'
-#         bossIDs['Psyche-Minos'] = 'B110'
-#         bossIDs['Psyche-Nestor'] = 'B111'
-#         bossIDs['Psyche-Ura'] = 'B008'
+    if not parameters.goal == 'Release the Psyches': # Make sure the Psyches' levels and IDs are in the pool if they aren't the goal
+        bossLevels.extend([67,70,73,75])
+        bossIDs['Psyche-Hydra'] = 'B112'
+        bossIDs['Psyche-Minos'] = 'B110'
+        bossIDs['Psyche-Nestor'] = 'B111'
+        bossIDs['Psyche-Ura'] = 'B008'
 
-#     for location in playthroughAllProgression.locations:
-#         if location.party:
-#             partySize += 1
-#             if partySize >= 2:
-#                 secondCharacterSphere = location.sphere
-#                 secondCharacterFound = True
-#                 print('Second character joins in sphere: ' + str(secondCharacterSphere))
-#                 print(location.itemName)
-#                 break
+    for location in playthroughAllProgression.locations:
+        if location.party:
+            partySize += 1
+            if partySize >= 2:
+                secondCharacterSphere = location.sphere
+                secondCharacterFound = True
+                print('Second character joins in sphere: ' + str(secondCharacterSphere))
+                print(location.itemName)
+                break
 
-#     for location in playthroughAllProgression.locations:
-#         if location.mapCheckID in bossIDs.keys() and location.sphere >= secondCharacterSphere and secondCharacterFound:
-#             firstPostSecondCharacterBoss = bossIDs.get(location.mapCheckID)
-#             break
+    for location in playthroughAllProgression.locations:
+        if location.mapCheckID in bossIDs.keys() and location.sphere >= secondCharacterSphere and secondCharacterFound:
+            firstPostSecondCharacterBoss = bossIDs.get(location.mapCheckID)
+            break
                 
 
 
-#     # build out a list of IDs for us to track what bosses aren't in the pool
-#     for boss in bossIDs.keys():
-#         remainingBosses.append(bossIDs.get(boss))
+    # build out a list of IDs for us to track what bosses aren't in the pool
+    for boss in bossIDs.keys():
+        remainingBosses.append(bossIDs.get(boss))
 
-#     random.seed(parameters.seed)
-#     spoilerLog.write(f'\n'
-#                      f'Boss Levels:\n')   
-#     # process bosses that are accessible before the goal in the seed and assign them levels in ascending order as the playthrough should have them in order
-#     for boss in playthroughAllProgression.bosses:
-#         if boss.mapCheckID in bossIDs.keys():
-#             bossID = bossIDs.get(boss.mapCheckID)
-#             bossLevel = bossLevels.pop(0)
-#             finalNonGoalBossLevel = random.randrange(bossLevel-2,bossLevel+2)
-#             finalBossLevels.append([remainingBosses.pop(remainingBosses.index(bossID)),random.randrange(bossLevel-2,bossLevel+2)])
-#             spoilerLog.write(f'\tBoss: {boss.mapCheckID} - Level {finalBossLevels[-1][1]}\n')
+    random.seed(parameters.seed)
+    spoilerLog.write(f'\n'
+                     f'Boss Levels:\n')   
+    # process bosses that are accessible before the goal in the seed and assign them levels in ascending order as the playthrough should have them in order
+    for boss in playthroughAllProgression.bosses:
+        if boss.mapCheckID in bossIDs.keys():
+            bossID = bossIDs.get(boss.mapCheckID)
+            bossLevel = bossLevels.pop(0)
+            finalNonGoalBossLevel = random.randrange(bossLevel-2,bossLevel+2)
+            finalBossLevels.append([remainingBosses.pop(remainingBosses.index(bossID)),random.randrange(bossLevel-2,bossLevel+2)])
+            spoilerLog.write(f'\tBoss: {boss.mapCheckID} - Level {finalBossLevels[-1][1]}\n')
 
-#             if boss.mapCheckID in ['Clareon','Gargantula','Laspisus','Giasburn','Brachion','Carveros','Pirate Revenant','Oceanus','Basileus','Mephorash']:  #only bosses with psyches flags 
-#                 bossLevelsDictByRegion[boss.locRegion] = finalBossLevels[-1][1] #storing this for use with psyches
-#         elif boss.mapCheckID == 'Gilkyra Encounter':
-#             finalBossLevels.append(['M0902', max(random.randrange(bossLevel-4,bossLevel+4), 5)])
+            if boss.mapCheckID in ['Clareon','Gargantula','Laspisus','Giasburn','Brachion','Carveros','Pirate Revenant','Oceanus','Basileus','Mephorash']:  #only bosses with psyches flags 
+                bossLevelsDictByRegion[boss.locRegion] = finalBossLevels[-1][1] #storing this for use with psyches
+        elif boss.mapCheckID == 'Gilkyra Encounter':
+            finalBossLevels.append(['M0902', max(random.randrange(bossLevel-4,bossLevel+4), 5)])
     
-#     # bosses post goal have their levels shuffled from among the remaining levels in the boss level pool
-#     random.shuffle(bossLevels)
-#     for bossID in remainingBosses:
-#         bossLevel = bossLevels.pop(0)
-#         finalBossLevels.append([bossID,random.randrange(bossLevel-2,bossLevel+2)])
-#         bossName = [name for name, id in bossIDs.items() if id == bossID][0]
-#         spoilerLog.write(f'\tBoss: {bossName} - Level {finalBossLevels[-1][1]}\n')
+    # bosses post goal have their levels shuffled from among the remaining levels in the boss level pool
+    random.shuffle(bossLevels)
+    for bossID in remainingBosses:
+        bossLevel = bossLevels.pop(0)
+        finalBossLevels.append([bossID,random.randrange(bossLevel-2,bossLevel+2)])
+        bossName = [name for name, id in bossIDs.items() if id == bossID][0]
+        spoilerLog.write(f'\tBoss: {bossName} - Level {finalBossLevels[-1][1]}\n')
 
-#     fscBosses = ''
-#     fscBossesHP = ''
-#     script = '\tfunction "bossScaling"\n\t{\n'
-#     for boss in finalBossLevels:
-#         script = script + '\t\tSetChrWorkGroup(' + boss[0] + ', CWK_LV, ' + str(boss[1]) + ')\n'
+    fscBosses = ''
+    fscBossesHP = ''
+    script = '\tfunction "bossScaling"\n\t{\n'
+    for boss in finalBossLevels:
+        script = script + '\t\tSetChrWorkGroup(' + boss[0] + ', CWK_LV, ' + str(boss[1]) + ')\n'
 
-#         #balance decision to lower boss HP if there are any bosses before party join, some fights are super tedious in early game if they show up and it's more punishing to lose them than we want for game pacing. 
-#         if firstPostSecondCharacterBoss == boss[0]:
-#             soloPartyBoss = False
+        #balance decision to lower boss HP if there are any bosses before party join, some fights are super tedious in early game if they show up and it's more punishing to lose them than we want for game pacing. 
+        if firstPostSecondCharacterBoss == boss[0]:
+            soloPartyBoss = False
 
-#         if soloPartyBoss and parameters.charMode != 'Past Dana':
-#             if boss[0] == 'M0111':
-#                 script = script + '\t\tSetChrWork("tu_m0111_01", CWK_MAXHP, (tu_m0111_01.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
-#                 script = script + '\t\tSetChrWork("tu_m0111_01", CWK_HP, (tu_m0111_01.CHRWORK[CWK_MAXHP]))\n'
-#             elif boss[0] == 'B101B':
-#                 script = script + '\t\tSetChrWork("b101a", CWK_MAXHP, (b101a.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
-#                 script = script + '\t\tSetChrWork("b101a", CWK_HP, (b101a.CHRWORK[CWK_MAXHP]))\n'
-#                 script = script + '\t\tSetChrWork("b101b", CWK_MAXHP, (b101b.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
-#                 script = script + '\t\tSetChrWork("b101b", CWK_HP, (b101b.CHRWORK[CWK_MAXHP]))\n'
-#                 script = script + '\t\tSetChrWork("b101c", CWK_MAXHP, (b101c.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
-#                 script = script + '\t\tSetChrWork("b101c", CWK_HP, (b101c.CHRWORK[CWK_MAXHP]))\n'
-#                 script = script + '\t\tSetChrWork("b101d", CWK_MAXHP, (b101d.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
-#                 script = script + '\t\tSetChrWork("b101d", CWK_HP, (b101d.CHRWORK[CWK_MAXHP]))\n'
-#                 script = script + '\t\tSetChrWork("b101", CWK_MAXHP, (b101.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
-#                 script = script + '\t\tSetChrWork("b101", CWK_HP, (b101.CHRWORK[CWK_MAXHP]))\n'
-#             elif boss[0] in ['B150','B100']:
-#                 script = script + '\t\tSetChrWorkGroup(' + boss[0] + ', CWK_MAXHP, (' + boss[0] + '.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
-#                 script = script + '\t\tSetChrWorkGroup(' + boss[0] + ', CWK_HP, (' + boss[0] + '.CHRWORK[CWK_MAXHP]))\n'
-#             else:
-#                 script = script + '\t\tSetChrWork("' + boss[0].lower() + '", CWK_MAXHP, (' + boss[0].lower() + '.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
-#                 script = script + '\t\tSetChrWork("' + boss[0].lower() + '", CWK_HP, (' + boss[0].lower() + '.CHRWORK[CWK_MAXHP]))\n'
+        if soloPartyBoss and parameters.charMode != 'Past Dana':
+            if boss[0] == 'M0111':
+                script = script + '\t\tSetChrWork("tu_m0111_01", CWK_MAXHP, (tu_m0111_01.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
+                script = script + '\t\tSetChrWork("tu_m0111_01", CWK_HP, (tu_m0111_01.CHRWORK[CWK_MAXHP]))\n'
+            elif boss[0] == 'B101B':
+                script = script + '\t\tSetChrWork("b101a", CWK_MAXHP, (b101a.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
+                script = script + '\t\tSetChrWork("b101a", CWK_HP, (b101a.CHRWORK[CWK_MAXHP]))\n'
+                script = script + '\t\tSetChrWork("b101b", CWK_MAXHP, (b101b.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
+                script = script + '\t\tSetChrWork("b101b", CWK_HP, (b101b.CHRWORK[CWK_MAXHP]))\n'
+                script = script + '\t\tSetChrWork("b101c", CWK_MAXHP, (b101c.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
+                script = script + '\t\tSetChrWork("b101c", CWK_HP, (b101c.CHRWORK[CWK_MAXHP]))\n'
+                script = script + '\t\tSetChrWork("b101d", CWK_MAXHP, (b101d.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
+                script = script + '\t\tSetChrWork("b101d", CWK_HP, (b101d.CHRWORK[CWK_MAXHP]))\n'
+                script = script + '\t\tSetChrWork("b101", CWK_MAXHP, (b101.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
+                script = script + '\t\tSetChrWork("b101", CWK_HP, (b101.CHRWORK[CWK_MAXHP]))\n'
+            elif boss[0] in ['B150','B100']:
+                script = script + '\t\tSetChrWorkGroup(' + boss[0] + ', CWK_MAXHP, (' + boss[0] + '.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
+                script = script + '\t\tSetChrWorkGroup(' + boss[0] + ', CWK_HP, (' + boss[0] + '.CHRWORK[CWK_MAXHP]))\n'
+            else:
+                script = script + '\t\tSetChrWork("' + boss[0].lower() + '", CWK_MAXHP, (' + boss[0].lower() + '.CHRWORK[CWK_MAXHP] * '+ str(HPmod) +'))\n'
+                script = script + '\t\tSetChrWork("' + boss[0].lower() + '", CWK_HP, (' + boss[0].lower() + '.CHRWORK[CWK_MAXHP]))\n'
                 
 
-#             #handling special cases for bosses with forms or minions
-#             if boss[0] == 'B005':
-#                 script = script + '\t\tSetChrWorkGroup(M0644, CWK_MAXHP, (M0644.CHRWORK[CWK_MAXHP] *' + str(HPmod) + '))\n'
-#                 script = script + '\t\tSetChrWorkGroup(M0644, CWK_HP, (M0644.CHRWORK[CWK_MAXHP]))\n'
-#                 script = script + '\t\tSetChrWorkGroup(M0643, CWK_MAXHP, (M0643.CHRWORK[CWK_MAXHP] *' + str(HPmod) + '))\n' #if you can beat these enemies you can reach basileus so scale them too; this is the force garmr required to beat to reach basileus
-#                 script = script + '\t\tSetChrWorkGroup(M0643, CWK_HP, (M0643.CHRWORK[CWK_MAXHP]))\n'
-#             if boss[0] == 'B170': 
-#                 fscBossesHP = (
-#                             f'\t\tSetChrWorkGroup(B103,	CWK_MAXHP,	(B103.CHRWORK[CWK_MAXHP] * ' + str(HPmod) + '))\n'
-#                             f'\t\tSetChrWorkGroup(B103,	CWK_HP,	(B103.CHRWORK[CWK_MAXHP]))\n'
-#                             f'\t\tSetChrWorkGroup(B006,	CWK_MAXHP,	(B006.CHRWORK[CWK_MAXHP] * ' + str(HPmod) + '))\n'
-#                             f'\t\tSetChrWorkGroup(B006,	CWK_HP,	(B006.CHRWORK[CWK_MAXHP]))\n'
-#                             f'\t\tSetChrWorkGroup(B001,	CWK_MAXHP,	(B001.CHRWORK[CWK_MAXHP] * ' + str(HPmod) + '))\n'
-#                             f'\t\tSetChrWorkGroup(B001,	CWK_HP,	(B001.CHRWORK[CWK_MAXHP]))\n'
-#                             f'\t\tSetChrWorkGroup(B105,	CWK_MAXHP,	(B105.CHRWORK[CWK_MAXHP] * ' + str(HPmod) + '))\n'
-#                             f'\t\tSetChrWorkGroup(B105,	CWK_HP,	(B105.CHRWORK[CWK_MAXHP]))\n'
-#                             f'\t\tSetChrWorkGroup(B161,	CWK_MAXHP,	(B161.CHRWORK[CWK_MAXHP] * ' + str(HPmod) + '))\n'
-#                             f'\t\tSetChrWorkGroup(B161,	CWK_HP,	(B161.CHRWORK[CWK_MAXHP]))\n'
-#                             )
+            #handling special cases for bosses with forms or minions
+            if boss[0] == 'B005':
+                script = script + '\t\tSetChrWorkGroup(M0644, CWK_MAXHP, (M0644.CHRWORK[CWK_MAXHP] *' + str(HPmod) + '))\n'
+                script = script + '\t\tSetChrWorkGroup(M0644, CWK_HP, (M0644.CHRWORK[CWK_MAXHP]))\n'
+                script = script + '\t\tSetChrWorkGroup(M0643, CWK_MAXHP, (M0643.CHRWORK[CWK_MAXHP] *' + str(HPmod) + '))\n' #if you can beat these enemies you can reach basileus so scale them too; this is the force garmr required to beat to reach basileus
+                script = script + '\t\tSetChrWorkGroup(M0643, CWK_HP, (M0643.CHRWORK[CWK_MAXHP]))\n'
+            if boss[0] == 'B170': 
+                fscBossesHP = (
+                            f'\t\tSetChrWorkGroup(B103,	CWK_MAXHP,	(B103.CHRWORK[CWK_MAXHP] * ' + str(HPmod) + '))\n'
+                            f'\t\tSetChrWorkGroup(B103,	CWK_HP,	(B103.CHRWORK[CWK_MAXHP]))\n'
+                            f'\t\tSetChrWorkGroup(B006,	CWK_MAXHP,	(B006.CHRWORK[CWK_MAXHP] * ' + str(HPmod) + '))\n'
+                            f'\t\tSetChrWorkGroup(B006,	CWK_HP,	(B006.CHRWORK[CWK_MAXHP]))\n'
+                            f'\t\tSetChrWorkGroup(B001,	CWK_MAXHP,	(B001.CHRWORK[CWK_MAXHP] * ' + str(HPmod) + '))\n'
+                            f'\t\tSetChrWorkGroup(B001,	CWK_HP,	(B001.CHRWORK[CWK_MAXHP]))\n'
+                            f'\t\tSetChrWorkGroup(B105,	CWK_MAXHP,	(B105.CHRWORK[CWK_MAXHP] * ' + str(HPmod) + '))\n'
+                            f'\t\tSetChrWorkGroup(B105,	CWK_HP,	(B105.CHRWORK[CWK_MAXHP]))\n'
+                            f'\t\tSetChrWorkGroup(B161,	CWK_MAXHP,	(B161.CHRWORK[CWK_MAXHP] * ' + str(HPmod) + '))\n'
+                            f'\t\tSetChrWorkGroup(B161,	CWK_HP,	(B161.CHRWORK[CWK_MAXHP]))\n'
+                            )
     
-#         #handling special cases for bosses with forms or minions
-#         if boss[0] == 'B005':
-#             script = script + '\t\tSetChrWorkGroup(M0644, CWK_LV, ' + str(boss[1]) + ')\n'
-#             script = script + '\t\tSetChrWorkGroup(M0643, CWK_LV, ' + str(boss[1]-1) + ')\n' #if you can beat these enemies you can reach basileus so scale them too
-#         if boss[0] == 'B101B':
-#             script = script + '\t\tSetChrWorkGroup(B101, CWK_LV, ' + str(boss[1]) + ')\n'
-#         if boss[0] == 'B170': # set FSC bosses relative to Melaiduma if Melaiduma is scaled
-#             fscBosses = (f'\n\tfunction "fscBosses"\n'
-#                          f'\t{{\n'
-#                          f'\t\tSetChrWorkGroup(B103,	CWK_LV,	' + str(max(1,boss[1]-10)) + ')\n'
-#                          f'\t\tSetChrWorkGroup(B006,	CWK_LV,	' + str(max(1,boss[1]-12)) + ')\n'
-#                          f'\t\tSetChrWorkGroup(B001,	CWK_LV,	' + str(max(1,boss[1]-14)) + ')\n'
-#                          f'\t\tSetChrWorkGroup(B105,	CWK_LV,	' + str(max(1,boss[1]-16)) + ')\n'
-#                          f'\t\tSetChrWorkGroup(B161,	CWK_LV,	' + str(max(1,boss[1]-18)) + ')\n'
-#                          f'\n' + fscBossesHP + '\n'
-#                          f'\t}}\n')
+        #handling special cases for bosses with forms or minions
+        if boss[0] == 'B005':
+            script = script + '\t\tSetChrWorkGroup(M0644, CWK_LV, ' + str(boss[1]) + ')\n'
+            script = script + '\t\tSetChrWorkGroup(M0643, CWK_LV, ' + str(boss[1]-1) + ')\n' #if you can beat these enemies you can reach basileus so scale them too
+        if boss[0] == 'B101B':
+            script = script + '\t\tSetChrWorkGroup(B101, CWK_LV, ' + str(boss[1]) + ')\n'
+        if boss[0] == 'B170': # set FSC bosses relative to Melaiduma if Melaiduma is scaled
+            fscBosses = (f'\n\tfunction "fscBosses"\n'
+                         f'\t{{\n'
+                         f'\t\tSetChrWorkGroup(B103,	CWK_LV,	' + str(max(1,boss[1]-10)) + ')\n'
+                         f'\t\tSetChrWorkGroup(B006,	CWK_LV,	' + str(max(1,boss[1]-12)) + ')\n'
+                         f'\t\tSetChrWorkGroup(B001,	CWK_LV,	' + str(max(1,boss[1]-14)) + ')\n'
+                         f'\t\tSetChrWorkGroup(B105,	CWK_LV,	' + str(max(1,boss[1]-16)) + ')\n'
+                         f'\t\tSetChrWorkGroup(B161,	CWK_LV,	' + str(max(1,boss[1]-18)) + ')\n'
+                         f'\n' + fscBossesHP + '\n'
+                         f'\t}}\n')
                         
-#     script = script + '\t}'
+    script = script + '\t}'
 
-#     return script + fscBosses, finalNonGoalBossLevel, bossLevelsDictByRegion
-# def memoHints(itemID):
-#     match itemID:
-#         case 750:
-#             return "\n\t\tSetFlag(GF_SUBEV_GET_MEMO_P_01,1)\n"
-#         case 751:
-#             return "\n\t\tSetFlag(GF_SUBEV_GET_MEMO_P_02,1)\n"
-#         case 752:
-#             return "\n\t\tSetFlag(GF_SUBEV_GET_MEMO_P_03,1)\n"
-#         case 753:
-#             return "\n\t\tSetFlag(GF_SUBEV_GET_MEMO_P_04,1)\n"
-#         case 754:
-#             return "\n\t\tSetFlag(GF_SUBEV_GET_MEMO_P_05,1)\n"
-#         case 755:
-#             return "\n\t\tSetFlag(GF_SUBEV_GET_MEMO_P_06,1)\n"
-#         case 760:
-#             return "\n\t\tSetFlag(GF_SUBEV_GET_MEMO_T_01,1)\n"
-#         case 761:
-#             return "\n\t\tSetFlag(GF_SUBEV_GET_MEMO_T_02,1)\n"
-#         case 762:
-#             return "\n\t\tSetFlag(GF_SUBEV_GET_MEMO_T_03,1)\n"
-#         case 763:
-#             return "\n\t\tSetFlag(GF_SUBEV_GET_MEMO_T_04,1)\n"
+    return script + fscBosses, finalNonGoalBossLevel, bossLevelsDictByRegion
 
 # ==========================================================================================================
 #  Psyche Checkpoint Function
@@ -1729,29 +1704,6 @@ function "newInterceptControl"
 
     return script
 
-#the order intercepts unlock for finding T's Memos
-def interceptUnlock():
-    script = """
-    if( !FLAG[GF_TBOX_DUMMY100])
-    {
-        SetFlag(GF_TBOX_DUMMY100,1)
-    }
-    else if( !FLAG[GF_TBOX_DUMMY101])
-    {
-        SetFlag(GF_TBOX_DUMMY094,1)
-        SetFlag(GF_TBOX_DUMMY101,1)
-    }
-    else if( !FLAG[GF_TBOX_DUMMY102])
-    {
-        SetFlag(GF_TBOX_DUMMY102,1)
-    }
-    else if ( !FLAG[GF_TBOX_DUMMY103])
-    {
-        SetFlag(GF_TBOX_DUMMY103,1)
-    }
-"""
-    return script
-
 # ==========================================================================================================
 # Helper functions
 # ==========================================================================================================
@@ -1798,7 +1750,7 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
         itemId = int(loc_data['item_id'])
         itemIcon = getIcon(itemId) if itemId != AP_ITEM else -1
 
-    requiresScript = itemId in [AP_ITEM, LANDMARK_ITEM, CASTAWAY_ITEM, SKILL_ITEM]
+    requiresScript = itemId in [AP_ITEM, LANDMARK_ITEM, CASTAWAY_ITEM, SKILL_ITEM, PROGRESSIVE_SHOP_RANK_ITEM]
 
     # If there is no script and it's a chest location and isn't an AP Item then we return and small empty script to avoid errors.
     # Chests always point to a script because of the patcher so we need something and this will create a blank one.
@@ -1829,15 +1781,16 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
         getItemMessage = (
             f"\tif (ALLITEMWORK[{itemIcon}] >= 8)\n"
             f"\t{{\n"
-            f"\t\tGetItem({itemIcon},{itemQuantity})\n"
-            f"\t\tGetItemMessageExPlus({itemIcon},{itemQuantity},{ITEM_SOUND},\"{message}\",0,0)\n"
+            f"\t\tGetItem(ICON3D_MT_N4_STONE,5)\n"
+            f"\t\tGetItemMessageExPlus(ICON3D_MT_N4_STONE,5,{ITEM_SOUND},\"{message}\",0,0)\n"
+            f"\t\tDelteItem({itemIcon},{itemQuantity})\n" # We delete the shop rank so the shop rank trackers shows correctly
             f"\t\tWaitPrompt()\n"
             f"\t\tWaitCloseWindow()\n"
             f"\t}}\n"
             f"\telse\n"
             f"\t{{\n"
-            f"\t\tGetItem(ICON3D_MT_N4_STONE,5)\n"
-            f"\t\tGetItemMessageExPlus(ICON3D_MT_N4_STONE,5,{ITEM_SOUND},\"{message}\",0,0)\n"
+            f"\t\tGetItem({itemIcon},{itemQuantity})\n"
+            f"\t\tGetItemMessageExPlus({itemIcon},{itemQuantity},{ITEM_SOUND},\"{message}\",0,0)\n"
             f"\t\tWaitPrompt()\n"
             f"\t\tWaitCloseWindow()\n"
             f"\t}}\n"
