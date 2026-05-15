@@ -296,9 +296,9 @@
 275	Blue Bracelet	DEF+24, Adds Freeze	A blue magical stone is set$nin it. Adds Freeze.	0	EQ_ARM_BRACELET	92	30	3	1	1	0	1	it_getsp1	0	24	ZOKU_ABILITY_FREEZE	25	0	0	0	0	0	0	0	0	0	0																								
 276	Barbaric Bracelet	DEF+26, Adds Random Effect	Adds a random status effect$nwhen attacking.	0	EQ_ARM_BRACELET	93	33	3	1	1	0	1	it_getsp1	0	26	ZOKU_ABILITY_RANDOM	15	0	0	0	0	0	0	0	0	0	0																								
 277	AP Fury	STR+50, Hits All Weaknesses	The fury of all BKs.	0	EQ_ARM_BRACELET	101	45	5	1	0	0	0	it_getsp1	50	0	ZOKU_WEAK_CUTTING	100	ZOKU_WEAK_SHOOT	100	ZOKU_WEAK_CRUSH	100	0	0	0	0	0	0																								
-278	One Final Delivery	STR+100,HP+400	Professional until the end.$nGrant additional Flash Guard Bonuses.	40	EQ_AC_HUMMEL_ONLY	342	103	5	1	0	0	0	it_getsp1	100	0	ZOKU_ABILITY_FG_HEAL	50	ZOKU_ABILITY_FG_LONG	180	ZOKU_ABILITY_HPUP	40	0	0	0	0	0	0																								
+278	One Final Delivery	STR+100/HP+400	Professional until the end.$nGrant additional Flash Guard Bonuses.	40	EQ_AC_HUMMEL_ONLY	342	103	5	1	0	0	0	it_getsp1	100	0	ZOKU_ABILITY_FG_HEAL	50	ZOKU_ABILITY_FG_LONG	180	ZOKU_ABILITY_HPUP	40	0	0	0	0	0	0																								
 279	Broken Glasses	A broken pair of glasses	Maybe Euron can fix them.	0	ITEM_TYPE_INVENTORY	178	128	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-280	Broken Necklass	A broken necklace	Maybe Euron can fix it.	0	ITEM_TYPE_INVENTORY	178	129	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+280	Broken Necklace	A broken necklace	Maybe Euron can fix it.	0	ITEM_TYPE_INVENTORY	178	129	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 281	Rough Gloves	DEF+50/HP+500	Comfortable gloves made$nfrom Primordial hide.	0	EQ_ARM_BRACELET	94	3	4	0	1	0	1	it_getsp1	0	50	ZOKU_ABILITY_HPUP	50	0	0	0	0	0	0	0	0	0	0																								
 282	Thorny Wristband	DEF+55, Adds Poison	Wristband lined with deadly thorns.$nAdds Poison.	0	EQ_ARM_BRACELET	95	6	4	0	1	0	1	it_getsp1	0	54	ZOKU_ABILITY_POISON	40	0	0	0	0	0	0	0	0	0	0																								
 283	Essence Shield	DEF+65	A shield made of crystallized Essence.$nAs durable as a Primordial's hide.	0	EQ_ARM_BRACELET	96	10	4	1	1	0	1	it_getsp1	0	65	0	0	0	0	0	0	0	0	0	0	0	0																								
@@ -429,7 +429,7 @@
 403	Soft Fiber	Beast Material (Rank 1/Rare)	These natural beast fibers$nare both strong and durable.	0	ITEM_TYPE_R_MATERIAL	185	3	1	1	1	0	1	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 404	Gwaranga Pincer	Beast Material (Rank 1/Rare)	These strong pincers can$ncut through metal.	0	ITEM_TYPE_R_MATERIAL	186	4	1	1	1	0	1	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 405	Bullfrodon Mucus	Beast Material (Rank 1/Rare)	Sweet mucus from a frog$nthat invites heartburn.	0	ITEM_TYPE_R_MATERIAL	187	5	1	1	1	0	1	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
-406	Odd rock	An odd rock	Maybe Euron can make something out of it.	0	ITEM_TYPE_INVENTORY	178	131	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
+406	Odd Rock	An odd rock	Maybe Euron can make something out of it.	0	ITEM_TYPE_INVENTORY	178	131	0	0	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 407	---	---	---	0	0	0	0	1	1	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 408	---	---	---	0	0	0	0	1	1	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								
 409	---	---	---	0	0	0	0	1	1	0	0	0	it_getsp1	0	0	0	0	0	0	0	0	0	0	0	0	0	0																								

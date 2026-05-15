@@ -15796,39 +15796,49 @@ function "Talk_Aaron"
 				ChangeAnimation( "this", "ANI_WAIT", -1, 1 )	// ‘Ò‹@
 			}
 
-			if (FLAG[GF_TBOX_DUMMY109] && if ALLITEMWORK[ICON3D_139] >= 7)
+			if (FLAG[GF_TBOX_DUMMY109] && ALLITEMWORK[ICON3D_139] >= 7)
 			{
-				TalkPopup("Aaron",0,0,0,0,0)
+				if(ALLITEMWORK[ICON3D_279] >= 1 || ALLITEMWORK[ICON3D_294] >= 1 || ALLITEMWORK[ICON3D_280] >= 1 || ALLITEMWORK[ICON3D_MT_R1_PARTS07] >= 1)
 				{
-					"#7CLooks like you found something special."
-					"#7CLet me see what I can do with this."
+					TalkPopup("Aaron",0,0,0,0,0)
+					{
+						"#7CLooks like you found something special."
+						"#7CLet me see what I can do with this."
+					}
+					WaitPrompt()
+					WaitCloseWindow()
 				}
-				WaitPrompt()
-				WaitCloseWindow()
-
 				if(ALLITEMWORK[ICON3D_279] >= 1)
 				{
 					GetItem(ICON3D_263,1)
 					GetItemMessageExPlus(ICON3D_263,1,ITEMMSG_SE_NORMAL," Obtained.",0,0)
+					WaitPrompt()
+					WaitCloseWindow()
 					DeleteItem(ICON3D_279,999)
 				}
 				if(ALLITEMWORK[ICON3D_294] >= 1)
 				{
 					GetItem(ICON3D_264,1)
 					GetItemMessageExPlus(ICON3D_264,1,ITEMMSG_SE_NORMAL," Obtained.",0,0)
-					DeleteItem(ICON3D_280,999)
+					WaitPrompt()
+					WaitCloseWindow()
+					DeleteItem(ICON3D_294,999)
 				}
 				if(ALLITEMWORK[ICON3D_280] >= 1)
 				{
 					GetItem(ICON3D_265,1)
 					GetItemMessageExPlus(ICON3D_265,1,ITEMMSG_SE_NORMAL," Obtained.",0,0)
-					DeleteItem(ICON3D_294,999)
+					WaitPrompt()
+					WaitCloseWindow()
+					DeleteItem(ICON3D_280,999)
 				}
-				if(ALLITEMWORK[ICON3D_406] >= 1)
+				if(ALLITEMWORK[ICON3D_MT_R1_PARTS07] >= 1)
 				{
 					GetItem(ICON3D_278,1)
 					GetItemMessageExPlus(ICON3D_278,1,ITEMMSG_SE_NORMAL," Obtained.",0,0)
-					DeleteItem(ICON3D_406,999)
+					WaitPrompt()
+					WaitCloseWindow()
+					DeleteItem(ICON3D_MT_R1_PARTS07,999)
 				}
 			}
 			

@@ -277,8 +277,8 @@ ID,Name,Progression,3DIcon
 276,Barbaric Bracelet,0,ICON3D_AR_030
 277,AP Fury,0,ICON3D_AR_031
 278,One Final Delivery,0,ICON3D_278
-279,---,0,ICON3D_279
-280,---,0,ICON3D_280
+279,Broken Glasses,0,ICON3D_279
+280,Broken Necklace,0,ICON3D_280
 281,Rough Gloves,0,ICON3D_AR_040
 282,Thorny Wristband,0,ICON3D_AR_041
 283,Essence Shield,0,ICON3D_AR_042
@@ -292,7 +292,7 @@ ID,Name,Progression,3DIcon
 291,Chaos Hand,0,ICON3D_AR_050
 292,Savage Wristband,0,ICON3D_AR_051
 293,Eternal Gauntlets,0,ICON3D_AR_052
-294,---,0,ICON3D_294
+294,Broken Lure,0,ICON3D_294
 295,Light Arm Guard,0,ICON3D_AR_054
 296,Needle Gauntlets,0,ICON3D_AR_055
 297,Rai-Koo Gauntlets,0,ICON3D_AR_056
@@ -404,7 +404,7 @@ ID,Name,Progression,3DIcon
 403,Soft Fiber,0,ICON3D_MT_R1_PARTS04
 404,Gwaranga Pincer,0,ICON3D_MT_R1_PARTS05
 405,Bullfrodon Mucus,0,ICON3D_MT_R1_PARTS06
-406,---,0,ICON3D_MT_R1_PARTS07
+406,Odd Rock,0,ICON3D_MT_R1_PARTS07
 407,---,0,ICON3D_407
 408,---,0,ICON3D_408
 409,---,0,ICON3D_409
