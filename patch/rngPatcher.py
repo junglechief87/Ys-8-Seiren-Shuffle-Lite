@@ -1785,7 +1785,7 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
 
     if message_type == 'skill':
         getItem = f"\tGetSkill({character},{skillID},1)\n"
-    elif itemId in [AP_ITEM, PROGRESSIVE_SHOP_RANK_ITEM] or not locationIsEvent:
+    elif itemId in [AP_ITEM] or not locationIsEvent:
         getItem = ""
     else:
         getItem = f"\tGetItem({itemIcon},{itemQuantity})\n"
@@ -1810,7 +1810,7 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
             f"\t}}\n"
             f"\telse\n"
             f"\t{{\n"
-            f"\t\tGetItem({itemIcon},{itemQuantity})\n"
+            f"\t{getItem}"
             f"\t\tGetItemMessageExPlus({itemIcon},{itemQuantity},{ITEM_SOUND},\"{message}\",0,0)\n"
             f"\t\tWaitPrompt()\n"
             f"\t\tWaitCloseWindow()\n"
