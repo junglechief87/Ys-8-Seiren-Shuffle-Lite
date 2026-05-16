@@ -1797,7 +1797,7 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
             f"\t{{\n"
             f"\t\tGetItem(ICON3D_MT_N4_STONE,5)\n"
             f"\t\tGetItemMessageExPlus(ICON3D_MT_N4_STONE,5,{ITEM_SOUND},\"{message}\",0,0)\n"
-            f"\t\tDelteItem({itemIcon},{itemQuantity})\n" # We delete the shop rank so the shop rank trackers shows correctly
+            f"\t\tDeleteItem({itemIcon},{itemQuantity})\n" # We delete the shop rank so the shop rank trackers shows correctly
             f"\t\tWaitPrompt()\n"
             f"\t\tWaitCloseWindow()\n"
             f"\t}}\n"
