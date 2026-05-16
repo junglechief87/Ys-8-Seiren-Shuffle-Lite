@@ -1790,6 +1790,13 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
     else:
         getItem = f"\tGetItem({itemIcon},{itemQuantity})\n"
 
+    # We delete the shop rank so the shop rank tracker shows correctly.
+    # We only do this if it's a chest because the chest will give the shop rank item no matter what because of the chest contents.
+    if (itemId == PROGRESSIVE_SHOP_RANK_ITEM and not locationIsEvent):
+        keepShopRankLevel = f"\t\tDeleteItem({itemIcon},{itemQuantity})\n" 
+    else:
+        keepShopRankLevel = ""
+
     #overflow handling for progressive shop ranks.
     if itemId == PROGRESSIVE_SHOP_RANK_ITEM:
         getItemMessage = (
@@ -1797,7 +1804,7 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
             f"\t{{\n"
             f"\t\tGetItem(ICON3D_MT_N4_STONE,5)\n"
             f"\t\tGetItemMessageExPlus(ICON3D_MT_N4_STONE,5,{ITEM_SOUND},\"{message}\",0,0)\n"
-            f"\t\tDeleteItem({itemIcon},{itemQuantity})\n" # We delete the shop rank so the shop rank trackers shows correctly
+            f"{keepShopRankLevel}"
             f"\t\tWaitPrompt()\n"
             f"\t\tWaitCloseWindow()\n"
             f"\t}}\n"
