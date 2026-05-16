@@ -1819,12 +1819,13 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
     #if it's an event location or a landmark or castaway reward or skill reward we want the message to be in the event script instead of the chest script
     elif locationIsEvent or requiresScript: 
         getItemMessage = (
+            f"\t{getItem}\n"
             f"\tGetItemMessageExPlus({itemIcon},{itemQuantity},{ITEM_SOUND},\"{message}\",0,0)\n"
             f"\tWaitPrompt()\n"
             f"\tWaitCloseWindow()\n"
         )
     else: 
-        getItemMessage = ""
+        getItemMessage = getItem
 
     if not locationIsEvent and (eventScripts != "" or getItemMessage != ""):
         setStopFlag = f"\tSetStopFlag({SCRIPT_STOP_FLAG})\n"
@@ -1838,7 +1839,6 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
         f"function \"{scriptName}\"\n"
         f"{{\n"
         f"{setStopFlag}"
-        f"{getItem}"
         f"{getItemMessage}"
         f"{eventScripts}"
         f"{resetStopFlag}"
