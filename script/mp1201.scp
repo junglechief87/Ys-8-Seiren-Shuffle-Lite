@@ -110,6 +110,7 @@ function "init"
 		{
 			GetItem(ICON3D_143,1) 
 			SetDiaryFlag( DF_JOIN_DOGI, 1 ) //Footprint memo: Rescued Dogi.
+			JoinNPC(NPC_DOGI, JOIN_NPC_JOIN) // Participate in Dogi interception battle
 		}
         Intercept(INTERCEPT_STAGE01,1)
         Intercept(INTERCEPT_STAGE02,1)

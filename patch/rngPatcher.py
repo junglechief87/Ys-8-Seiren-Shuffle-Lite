@@ -1753,7 +1753,7 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
     itemName = loc_data['item_name']
     itemQuantity = loc_data['item_quantity']
     
-    if message_type in ITEM_TYPE_CONFIG:
+    if message_type in ITEM_TYPE_CONFIG and not AP_ITEM:
         config = ITEM_TYPE_CONFIG[message_type]
         itemIcon = config['icon']
         itemId = config['id']
