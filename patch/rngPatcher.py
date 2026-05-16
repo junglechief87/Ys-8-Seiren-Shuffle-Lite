@@ -1743,7 +1743,7 @@ def buildMessage(itemId, itemName, classification, player, message_type=None, is
     # Map message_type to message template
     message_map = {
         'landmark': f"{GOLD}{itemName}{GREEN}{LANDMARK_MESSAGE}",
-        'castaway': f"{GOLD}{itemName}{GREEN}{'PARTY_MESSAGE' if isParty else CREW_MESSAGE}",
+        'castaway': f"{GOLD}{itemName}{GREEN}{PARTY_MESSAGE if isParty else CREW_MESSAGE}",
         'skill': f"{GREEN}{characterName}{SKILL_MESSAGE}{itemName}{GREEN}.",
     }
     
