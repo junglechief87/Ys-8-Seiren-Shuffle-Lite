@@ -929,22 +929,7 @@ def talkHints(locations):
     dogiHints = """
 function "interceptRewardPreview"
 {{
-    if(FLAG[GF_TBOX_DUMMY100] && !FLAG[GF_TBOX_DUMMY102])
-    {{ 
-        TalkPopup("Dogi",0,2,0,0,0)
-        {{
-            "Hey! Look what I got for you!"
-            "If you clear stage 2: #2C {0}#0C"
-            "If you clear stage 3: #2C {1}#0C"
-            "If you clear stage 5: #2C {2}#0C"
-            "If you clear stage 7: #2C {3}#0C"
-        }}
-        WaitPrompt()
-        WaitCloseWindow()
-        
-        Wait(5)
-    }}
-    if(FLAG[GF_TBOX_DUMMY102])
+    if(ALLITEMWORK[ICON3D_764] >= 3)
     {{ 
         TalkPopup("Dogi",0,2,0,0,0)
         {{
@@ -960,6 +945,35 @@ function "interceptRewardPreview"
         
         Wait(5)
     }}
+    else if(ALLITEMWORK[ICON3D_764] >= 2)
+    {{ 
+        TalkPopup("Dogi",0,2,0,0,0)
+        {{
+            "Hey! Look what I got for you!"
+            "If you clear stage 2: #2C {0}#0C"
+            "If you clear stage 3: #2C {1}#0C"
+            "If you clear stage 5: #2C {2}#0C"
+            "If you clear stage 7: #2C {3}#0C"
+        }}
+        WaitPrompt()
+        WaitCloseWindow()
+        
+        Wait(5)
+    }}
+    else if(ALLITEMWORK[ICON3D_764] >= 1)
+    {{ 
+        TalkPopup("Dogi",0,2,0,0,0)
+        {{
+            "Hey! Look what I got for you!"
+            "If you clear stage 2: #2C {0}#0C"
+            "If you clear stage 3: #2C {1}#0C"
+        }}
+        WaitPrompt()
+        WaitCloseWindow()
+        
+        Wait(5)
+    }}
+    
 }}
     """.format(*intReward)
     
