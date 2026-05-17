@@ -1624,6 +1624,7 @@ def spiritRingEvent(options):
 
 #this builds out all our intercept rewards, it's called every time we return from an intercept in castaway village by checking the flags for last stage rank and stage clear
 def interceptionHandler(options):
+    interceptionRewards = getIntRewards()
 
     script = """
 function "newInterceptControl"
@@ -1647,65 +1648,63 @@ function "newInterceptControl"
 
 """
 
-    if options['additional_intercept_rewards'] == 1:
-        interceptionRewards = getIntRewards()
-        for stage in interceptionRewards:
-            stageCheck = """
-            if (FLAG[GF_INTERCEPT_LASTSTAGEID] == {0})
-            {{
-                SetStopFlag(STOPFLAG_TALK)
+    for stage in interceptionRewards:
+        stageCheck = """
+        if (FLAG[GF_INTERCEPT_LASTSTAGEID] == {0})
+        {{
+            SetStopFlag(STOPFLAG_TALK)
 
-    """
-            script = script + stageCheck.format(stage.stage)
+"""
+        script = script + stageCheck.format(stage.stage)
 
-            if options['additional_intercept_rewards'] == 1:
-                totalReward = 0
-                for index,reward in enumerate(stage.rewards):
-                    if index % 2 == 0 or index == 0:
-                        item = reward
-                    else:
-                        itemNum = reward
+        if options['additional_intercept_rewards'] == 1:
+            totalReward = 0
+            for index,reward in enumerate(stage.rewards):
+                if index % 2 == 0 or index == 0:
+                    item = reward
+                else:
+                    itemNum = reward
 
-                    totalReward+=1
-                    if totalReward == 2:
-                        rewardGet = """
+                totalReward+=1
+                if totalReward == 2:
+                    rewardGet = """
 
-                    GetItem({0},{1})
-                    GetItemMessageExPlus({0},{1},ITEMMSG_SE_NORMAL,"{2}",0,0)
-                    WaitPrompt()
-                    WaitCloseWindow()
+                GetItem({0},{1})
+                GetItemMessageExPlus({0},{1},ITEMMSG_SE_NORMAL,"{2}",0,0)
+                WaitPrompt()
+                WaitCloseWindow()
 
-                    """
-                        script = script + rewardGet.format(item,itemNum,OBTAINED_ITEM_MESSAGE)
-                        totalReward = 0
-
-            if stage.stage == 'INTERCEPT_STAGE02':
-                dogiReward = """
-                SetFlag(GF_TBOX_DUMMY089,1)
                 """
-            elif stage.stage == 'INTERCEPT_STAGE03':
-                dogiReward = """
-                SetFlag(GF_TBOX_DUMMY090,1)"""
-            elif stage.stage == 'INTERCEPT_STAGE05':
-                dogiReward = """
-                SetFlag(GF_TBOX_DUMMY091,1)
-                """
-            elif stage.stage == 'INTERCEPT_STAGE07':
-                dogiReward = """
-                SetFlag(GF_TBOX_DUMMY092,1)
-                """
-            elif stage.stage == 'INTERCEPT_STAGE09':
-                dogiReward = """
-                SetFlag(GF_TBOX_DUMMY093,1)
-                """
-            else:
-                dogiReward = ''
+                    script = script + rewardGet.format(item,itemNum,OBTAINED_ITEM_MESSAGE)
+                    totalReward = 0
 
-            stageFooter = """
-                ResetStopFlag(STOPFLAG_TALK)
-            }"""  
-        
-            script = script + dogiReward + stageFooter
+        if stage.stage == 'INTERCEPT_STAGE02':
+            dogiReward = """
+            SetFlag(GF_TBOX_DUMMY089,1)
+            """
+        elif stage.stage == 'INTERCEPT_STAGE03':
+            dogiReward = """
+            SetFlag(GF_TBOX_DUMMY090,1)"""
+        elif stage.stage == 'INTERCEPT_STAGE05':
+            dogiReward = """
+            SetFlag(GF_TBOX_DUMMY091,1)
+            """
+        elif stage.stage == 'INTERCEPT_STAGE07':
+            dogiReward = """
+            SetFlag(GF_TBOX_DUMMY092,1)
+            """
+        elif stage.stage == 'INTERCEPT_STAGE09':
+            dogiReward = """
+            SetFlag(GF_TBOX_DUMMY093,1)
+            """
+        else:
+            dogiReward = ''
+
+        stageFooter = """
+            ResetStopFlag(STOPFLAG_TALK)
+        }"""  
+    
+        script = script + dogiReward + stageFooter
 
     scriptFooter = """
         SetFlag(GF_INTERCEPT_LASTRESULT, 0)
@@ -1756,6 +1755,7 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
     if message_type in ITEM_TYPE_CONFIG:
         config = ITEM_TYPE_CONFIG[message_type]
         itemIcon = config['icon']
+        eventIcon = getIcon(config['id'])
         itemId = config['id']
         if config['needs_skill_info']:
             skillInfo = getSkillInfo(itemName)
@@ -1787,6 +1787,8 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
         getItem = f"\tGetSkill({character},{skillID},1)\n"
     elif itemId in [AP_ITEM] or not locationIsEvent:
         getItem = ""
+    elif itemId in [LANDMARK_ITEM, CASTAWAY_ITEM]:
+        getItem = f"\tGetItem({eventIcon},{itemQuantity})\n"
     else:
         getItem = f"\tGetItem({itemIcon},{itemQuantity})\n"
 
@@ -1819,7 +1821,7 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
     #if it's an event location or a landmark or castaway reward or skill reward we want the message to be in the event script instead of the chest script
     elif locationIsEvent or requiresScript: 
         getItemMessage = (
-            f"\t{getItem}\n"
+            f"{getItem}"
             f"\tGetItemMessageExPlus({itemIcon},{itemQuantity},{ITEM_SOUND},\"{message}\",0,0)\n"
             f"\tWaitPrompt()\n"
             f"\tWaitCloseWindow()\n"
