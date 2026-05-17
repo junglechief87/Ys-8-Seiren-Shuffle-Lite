@@ -29,7 +29,7 @@ FRAME_TITLE_STYLE = {
 }
 
 SETTINGS_FILE = "seirenShuffleLiteSettings.json"
-VERSION_NUM = "0.9.3"
+VERSION_NUM = "0.9.4"
 
 
 def resource_path(relative_path):
