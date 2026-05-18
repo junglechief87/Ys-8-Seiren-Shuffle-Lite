@@ -1220,6 +1220,7 @@ function "it_pestcide"
 
 		// 消費する
 		UseItem(ICON3D_US_PESTCIDE, 1)
+		GetItem(ICON3D_US_PESTCIDE, 1) //Give one back making them infinite
 
 		// アイテムスクリプトスレッドで実際の効果を実行
 		ItemCue("item:do_pestcide")
