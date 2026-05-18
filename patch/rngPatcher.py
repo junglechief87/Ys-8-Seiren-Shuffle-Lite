@@ -229,12 +229,30 @@ def genericItemMessage(location_id, patch, vanillaScript):
             f"\tGetItem(ICON3D_AC_068,1)\n"
             f"\tGetItem(ICON3D_AC_069,1)\n"
         )
-    elif itemId == 206: #Jade pendant
-        if options['former_sanctuary_crypt'] == 1:
+    elif itemId == 206 and options['former_sanctuary_crypt'] == 1: #Jade pendant
             eventScripts += (
                 f"\tSetFlag(SF_SYS_CLEARED, 1)\n"
                 f"\tSetFlag(GF_SUBEV_PAST_07_CLEAR, 1)\n"
             )
+    elif itemId == PROGRESSIVE_SHOP_RANK_ITEM:
+        eventScripts += (
+            f"\tif(!FLAG[DF_JOIN_KATRIN])\n"
+            f"\t{{\n"
+            f"\t\tGetItem(ICON3D_143,1) \n"
+            f"\t\tSetDiaryFlag( DF_JOIN_KATRIN, 1 ) //Footprint memo: Rescued Katrin.\n"
+            f"\t\tJoinNPC( NPC_KATRIN, JOIN_NPC_JOIN ) // Katrin has joined\n"
+            f"\t\tSetFlag( GF_02MP1201_JOIN_KATRIN , 1 )\n"
+            f"\t}}\n"
+        )
+    elif itemId == 764:
+        eventScripts += (
+            f"\tif(!FLAG[DF_JOIN_KATRIN])\n"
+            f"\t{{\n"
+            f"\t\tGetItem(ICON3D_143,1) \n"
+            f"\t\tSetDiaryFlag( DF_JOIN_DOGI, 1 ) //Footprint memo: Rescued Dogi.\n"
+            f"\t\tJoinNPC( NPC_DOGI, JOIN_NPC_JOIN ) // Dogi has joined\n"
+            f"\t}}\n"
+        )
 
     eventScripts += vanillaScript
     return formatGetItemScript(location_id, loc_data, eventScripts)
@@ -245,10 +263,8 @@ def genericItemMessage(location_id, patch, vanillaScript):
 #function used for all people function generations
 def buildCrewLocation(location_id, patch, vanillaScript):
     loc_data = patch.item_map[location_id]
-
     crewFlags = getCrewFlags(loc_data['item_name'])
     eventScripts = crewFlags + vanillaScript
- 
     return formatGetItemScript(location_id, loc_data, eventScripts, message_type="castaway", isParty=loc_data['party_flag'])
 
 # ==========================================================================================================
@@ -258,7 +274,6 @@ def buildCrewLocation(location_id, patch, vanillaScript):
 def buildSkillLocation(location_id, patch, vanillaScript):
     loc_data = patch.item_map[location_id]
     eventScripts = vanillaScript
-
     return formatGetItemScript(location_id, loc_data, eventScripts, message_type='skill')
 
 # ==========================================================================================================
@@ -266,11 +281,10 @@ def buildSkillLocation(location_id, patch, vanillaScript):
 # ==========================================================================================================
 def buildLandmarks(location_id, patch, vanillaScript):
     loc_data = patch.item_map[location_id]
-    
     landmarkFlag = "\tSetFlag(" + LANDMARKS.get(loc_data['item_name']) + ",1)\n"
     eventScripts = landmarkFlag + vanillaScript
-
     return formatGetItemScript(location_id, loc_data, eventScripts, message_type='landmark')
+
 # ==========================================================================================================
 # Boss Scaling Function
 # ==========================================================================================================
@@ -1765,6 +1779,7 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
         itemIcon = getIcon(itemId) if itemId != AP_ITEM else -1
 
     requiresScript = itemId in [AP_ITEM, LANDMARK_ITEM, CASTAWAY_ITEM, SKILL_ITEM, PROGRESSIVE_SHOP_RANK_ITEM]
+    locationIsEvent = loc_data['location_type'] in ['event', 'landmark', 'fsc_event']
 
     # If there is no script and it's a chest location and isn't an AP Item then we return and small empty script to avoid errors.
     # Chests always point to a script because of the patcher so we need something and this will create a blank one.
@@ -1778,7 +1793,6 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
     scriptName = buildLocScripts(location_id,False)
     player = loc_data['player'] if loc_data['player'] else ""
     classification = loc_data['item_classification'] if loc_data['item_classification'] else ""
-    locationIsEvent = loc_data['location_type'] in ['event', 'landmark', 'fsc_event']
 
     message = buildMessage(itemId,itemName,classification,player,message_type,isParty,
                            characterName if message_type == 'skill' else None)
@@ -1794,10 +1808,8 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
 
     # We delete the shop rank so the shop rank tracker shows correctly.
     # We only do this if it's a chest because the chest will give the shop rank item no matter what because of the chest contents.
-    if (itemId == PROGRESSIVE_SHOP_RANK_ITEM and not locationIsEvent):
-        keepShopRankLevel = f"\t\tDeleteItem({itemIcon},{itemQuantity})\n" 
-    else:
-        keepShopRankLevel = ""
+    keepShopRankLevel = f"\t\tDeleteItem({itemIcon},{itemQuantity})\n" \
+        if(itemId == PROGRESSIVE_SHOP_RANK_ITEM and not locationIsEvent) else ""
 
     #overflow handling for progressive shop ranks.
     if itemId == PROGRESSIVE_SHOP_RANK_ITEM:
@@ -1829,14 +1841,15 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
     else: 
         getItemMessage = getItem
 
-    if not locationIsEvent and (eventScripts != "" or getItemMessage != ""):
-        setStopFlag = f"\tSetStopFlag({SCRIPT_STOP_FLAG})\n"
-        resetStopFlag = f"\tResetStopFlag({SCRIPT_STOP_FLAG})\n"
-    else: 
-        setStopFlag = ""
-        resetStopFlag = ""
+    setStopFlag = f"\tSetStopFlag({SCRIPT_STOP_FLAG})\n" \
+        if not locationIsEvent and (eventScripts or getItemMessage) else ""
+    resetStopFlag = f"\tResetStopFlag({SCRIPT_STOP_FLAG})\n" \
+        if setStopFlag else ""
 
-    getItemFunction = ( 
+    if not locationIsEvent:
+        fillChest(location_id,itemId,itemQuantity)
+
+    return ( 
         f"\n"
         f"function \"{scriptName}\"\n"
         f"{{\n"
@@ -1847,11 +1860,6 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
         f"}}\n"
         f"\n"
     )
-
-    if not locationIsEvent:
-        fillChest(location_id,itemId,itemQuantity)
-    
-    return getItemFunction
 
 
 

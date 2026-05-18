@@ -119,12 +119,14 @@ function "init"
     }
     if(ALLITEMWORK[ICON3D_764] >= 2)
     {
+		// These two unlock hunts
 		SetFlag(GF_QS303_QUESTCLEAR,1)
+		SetFlag(GF_TBOX_DUMMY094,1)
+
 		Intercept(INTERCEPT_STAGE05,1)
         Intercept(INTERCEPT_STAGE06,1)
         Intercept(INTERCEPT_STAGE07,1)
         Intercept(INTERCEPT_STAGE31,1)
-        
     }
     if(ALLITEMWORK[ICON3D_764] >= 3)
     {
@@ -132,7 +134,6 @@ function "init"
         Intercept(INTERCEPT_STAGE09,1)
 		Intercept(INTERCEPT_STAGE32,1)
         Intercept(INTERCEPT_STAGE33,1)
-        SetFlag(GF_TBOX_DUMMY102,1)
     }
     if (ALLITEMWORK[ICON3D_764] >= 4)
     {
