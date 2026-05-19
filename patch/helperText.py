@@ -7,6 +7,7 @@ helpTextMessageDict = {
     701:    "Eternia to the Palace is open and the secret room is unlocked.",
     702:    "Baja Tower can be reached. Breath Fountain is revealed.",
     727:    "The way to Eternal Hill is open.",
+    739:    "Night exploration can now be undertaken.",
     764:    "Raid list updated.",
     770:    "The gangway to the Eleftheria is down.",
     779:    "The damaged boat on the Nameless Coast Shore has been repaired.",
