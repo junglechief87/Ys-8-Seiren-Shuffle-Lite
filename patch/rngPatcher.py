@@ -1862,7 +1862,7 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
         fillChest(location_id,itemId,itemQuantity)
 
     if helperText == 1:
-        helpTextMessage = getHelperText(itemId)
+        helpTextMessage = getHelperText(itemName)
 
     return ( 
         f"\n"
