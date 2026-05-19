@@ -1307,6 +1307,7 @@ function "sys_warpmenu"
 			//　～！GF_05MP6345_KILL_MIDBOSS,		//王家の谷中ボス戦闘終了
 			AddWarpDisableList(CP_CRYSTAL_START, CP_CRYSTAL_MAX)			//全体禁止
 			AddWarpDisableList(CP_L_MP1112, CP_LOCATION_MAX)				//全体禁止（ロケーションポイント）
+			AddWarpDisableList(CP_MP6511,CP_MP6511) //disable FSC warp
 		}
 		if(	FLAG[GF_TBOX_DUMMY087] &&			//調査のためジャンダルムへ向かう
 			!FLAG[GF_06MP4341_SEE_COCOON] )		//大樹の異変を目撃する
@@ -1399,6 +1400,7 @@ function "sys_warpmenu"
 			//　GF_SUBEV_LOOK_REJA1			//レーヤの合流イベント①を見た
 			//　～！GF_SUBEV_JOIN_REJA,		//レーヤと合流した
 			AddWarpDisableList(CP_CRYSTAL_START, CHECK_POINT_MAX)			//全体禁止（ロケーションポイント含む）
+			AddWarpDisableList(CP_MP6511,CP_MP6511) // guarantee fsc crystal disabled
 			//AddWarpDisableList(CP_CRYSTAL_START, CP_CRYSTAL_MAX)			//全体禁止
 			//AddWarpDisableList(CP_L_MP1112, CP_LOCATION_MAX)				//全体禁止（ロケーションポイント）
 		}

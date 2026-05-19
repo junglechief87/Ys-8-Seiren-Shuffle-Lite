@@ -3807,7 +3807,7 @@ function "EV_M01S182"
 
 function "EV_M01S182_ED"
 {
-	SetStopFlag(STOPFLAG_EVENTIMPOSE)
+	SetStopFlag(STOPFLAG_EVENT)
 	RestoreEventState()
 	SetSkipScript("")
 
@@ -3896,7 +3896,7 @@ function "EV_M01S182_ED"
 		SoundEfx( SEFX_HILL, 15 )
 		SetEnvSEPlayState(-1, 1)	//ŠÂ‹«SE•œ‹A
 
-		ResetStopFlag(STOPFLAG_EVENTIMPOSE)
+		ResetStopFlag(STOPFLAG_EVENT)
 
 		FadeIn(FADE_BLACK,FADE_FAST)
 		//WaitFade()

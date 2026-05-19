@@ -54,8 +54,6 @@ function "init"
 			SetFlag( GF_04MP5102_RESCUE_RICOTTA, 1 )			// リコッタを住処から救出する
 			SetFlag(GF_SUBEV_BACKTO_MP5104, 1 )
 			SetFlag(GF_04MP5102_CATCH_MONS, 1 )
-			SetFlag(GF_04MP5401_FIND_RICOTTA, 1 )
-			SetFlag(GF_04MP5401_TALK_RICOTTA, 1 )
 			SetFlag(GF_04MP5102_MISS_RICOTTA,1)
 			//EventAreaEnable("evb2_M04S080", 1)
 		}
@@ -2549,8 +2547,6 @@ function "EV_M04S092_ED"
 	SetFlag( GF_04MP5102_RESCUE_RICOTTA, 1 )			// リコッタを住処から救出する
 	SetFlag(GF_SUBEV_BACKTO_MP5104, 1 )
 	SetFlag(GF_04MP5102_CATCH_MONS, 1 )
-	SetFlag(GF_04MP5401_FIND_RICOTTA, 1 )
-	SetFlag(GF_04MP5401_TALK_RICOTTA, 1 )
 	//SetFlag( SF_MISSIONNO, MS_04_04 )	//★冒険メモ：島の北部を探索しよう。
 	SetFlag( TF_LAIR_ST, 1 )	//【ストッパー：リコッタを助けた後しばらく古代種の住処に入れない】用のローカルフラグです
 

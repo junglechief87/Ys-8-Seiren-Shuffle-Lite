@@ -152,8 +152,8 @@ def getCrewFlags(name):
     SetDiaryFlag( DF_JOIN_DINA, 1 )  //Footprints memo: Dina was rescued.
     JoinNPC( NPC_DINA, JOIN_NPC_JOIN ) //Rescued Dina
     
-    GetItem(ICON3D_US_PESTCIDE,99)
-    GetItemMessageExPlus(ICON3D_US_PESTCIDE,99,ITEMMSG_SE_NORMAL," Obtained.",0,0)
+    GetItem(ICON3D_US_PESTCIDE,1)
+    GetItemMessageExPlus(ICON3D_US_PESTCIDE,1,ITEMMSG_SE_NORMAL," Obtained.",0,0)
     WaitPrompt()
     WaitCloseWindow()	
 """

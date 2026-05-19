@@ -12,7 +12,7 @@ entranceEvent =	{
         "Seiren North Access": {'load': 'map/mp4103/mp4103.arg', 'entry_event': 'rng:4103_entry'},
         "Nameless Coast North": {'load': 'map/mp1105/mp1105.arg', 'entry_event': 'rng:1105_entry'},
         "Nostalgia Cape Area": {'load': 'map/mp1116/mp1116.arg', 'entry_event': 'rng:1116_entry'},
-        "Octus Overlook": {'load': 'map/mp6301/mp6301.arg', 'entry_event': 'rng:6301_entry'},
+        "Octus Overlook Entrance": {'load': 'map/mp6301/mp6301.arg', 'entry_event': 'rng:6301_entry'},
         "Odd Rock Coast": {'load': 'map/mp1118/mp1118.arg', 'entry_event': 'rng:1118_entry'},
         "Primordial Passage Gendarme Entrance": {'load': 'map/mp3105/mp3105.arg', 'entry_event': 'rng:3105_entry'},
         "Metavolicalis Area": {'load': 'map/mp1117/mp1117.arg', 'entry_event': 'rng:1117_entry'},
@@ -410,7 +410,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("rng:warpmask")
 		LoadArg("{0}")
 		EventCue("{1}",1)
-	}}""".format(entranceEvent[entranceList["TGTG OO Entrance"]]["load"], entranceEvent[entranceList["TGTG OO Entrance"]]["entry_event"])
+	}}""".format(entranceEvent[entranceList["OO Entrance"]]["load"], entranceEvent[entranceList["OO Entrance"]]["entry_event"])
 
 	entranceScript += """
 

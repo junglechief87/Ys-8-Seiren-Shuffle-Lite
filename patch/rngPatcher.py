@@ -6,6 +6,7 @@ from patch.gameStartFunctions import *
 from patch.chestPatcher import *
 from patch.miscPatches import randomizeOctoBosses, newExpMult
 from patch.buildEntrances import *
+from patch.helperText import getHelperText
 import shared.config as config
 
 #This is essentially the BnB for how this rando works. This script writes a big .scp file, the game's native scripting files, that we call for all randomized locations (as well as some other important functions for a rando)
@@ -87,9 +88,14 @@ TREASURE_SCRIPTS = {
 "9":    "mp0403:EV_M05S151_ED"
 }
 
+helperText = False
+
 def rngPatcherMain(patch, progress_callback=None):
     global patchFile
+    global helperText
+
     patchFile = ''
+    helperText = patch.settings['options']['helper_text']
     rngScriptFile = getLocFile('rng','script')
     
     # If rng.scp file not found, construct path manually in script directory and ensure it exists
@@ -1287,8 +1293,8 @@ def octoBosses(settings):
     octoBossAliases = ['"ev_mons01"','"ev_mons02"','"ev_mons03"','"ev_mons04"','"ev_mons05"','"ev_mons06"','"ev_mons07"','"ev_mons08"','"ev_mons09"','"ev_mons10"']
     #octus bosses exp and HP go up based on bosses leading into the end game. This is to help prep for the final boss.
     #the HP mod is just a percentage of a rough approcimation of the highest level the final boss could get to if unlucky.
-    HPmod = 0.75
-    EXPMod = 8.0
+    HPmod = 0.9
+    EXPMod = 10.0
     script = 'function "setOctoBossLevels"\n\t{\n'
     for boss in octoBossAliases:
         bossLevel = random.randrange(65,75)
@@ -1296,7 +1302,7 @@ def octoBosses(settings):
             f'\t\tSetLevel({boss}, {bossLevel})\n'
             f'\t\tSetChrWork({boss}, CWK_MAXHP, ({boss}.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
             f'\t\tSetChrWork({boss}, CWK_HP, ({boss}.CHRWORK[CWK_MAXHP]))\n'
-            f'\t\tSetChrWorkGroup({boss}, CWK_EXPMUL, {EXPMod}f)\n'
+            f'\t\tSetChrWork({boss}, CWK_EXPMUL, {EXPMod}f)\n'
         )
     script += '\t}\n'
 
@@ -1763,6 +1769,8 @@ def buildMessage(itemId, itemName, classification, player, message_type=None, is
     return message_map.get(message_type, OBTAINED_ITEM_MESSAGE)
 
 def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, isParty=False):
+    global helperText
+
     itemName = loc_data['item_name']
     itemQuantity = loc_data['item_quantity']
     
@@ -1822,14 +1830,18 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
             f"\t\tWaitPrompt()\n"
             f"\t\tWaitCloseWindow()\n"
             f"\t}}\n"
-            f"\telse\n"
-            f"\t{{\n"
-            f"\t{getItem}\n"
-            f"\t\tGetItemMessageExPlus({itemIcon},{itemQuantity},{ITEM_SOUND},\"{message}\",0,0)\n"
-            f"\t\tWaitPrompt()\n"
-            f"\t\tWaitCloseWindow()\n"
-            f"\t}}\n"
         )
+        if locationIsEvent: # We only really need this if we're not already getting the item from a chest
+            getItemMessage += (
+                f"\telse\n"
+                f"\t{{\n"
+                f"\t{getItem}\n"
+                f"\t\tGetItemMessageExPlus({itemIcon},{itemQuantity},{ITEM_SOUND},\"{message}\",0,0)\n"
+                f"\t\tWaitPrompt()\n"
+                f"\t\tWaitCloseWindow()\n"
+                f"\t}}\n"
+            )
+
     #if it's an event location or a landmark or castaway reward or skill reward we want the message to be in the event script instead of the chest script
     elif locationIsEvent or requiresScript: 
         getItemMessage = (
@@ -1849,6 +1861,9 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
     if not locationIsEvent:
         fillChest(location_id,itemId,itemQuantity)
 
+    if helperText == 1:
+        helpTextMessage = getHelperText(itemId)
+
     return ( 
         f"\n"
         f"function \"{scriptName}\"\n"
@@ -1856,6 +1871,7 @@ def formatGetItemScript(location_id, loc_data, eventScripts, message_type=None, 
         f"{setStopFlag}"
         f"{getItemMessage}"
         f"{eventScripts}"
+        f"{helpTextMessage}"
         f"{resetStopFlag}"
         f"}}\n"
         f"\n"

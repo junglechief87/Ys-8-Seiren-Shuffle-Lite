@@ -20,13 +20,6 @@ function "init"
 	//New shop checker for AP, this makes it easier to handle shop ranks coming in from different sources, put the check on the shop rank on the init and have it count progressive shop ranks acquired
 	if (ALLITEMWORK[ICON3D_139] >= 1)
 	{
-		if(!FLAG[DF_JOIN_KATRIN])
-		{
-			GetItem(ICON3D_143,1) 
-			SetDiaryFlag( DF_JOIN_KATRIN, 1 ) //Footprint memo: Rescued Katrin.
-			JoinNPC( NPC_KATRIN, JOIN_NPC_JOIN ) // Katrin has joined
-			SetFlag( GF_02MP1201_JOIN_KATRIN , 1 )
-		}
 		SetFlag(GF_SMITHY_LV,2) //Blacksmith level setting
 		SetDiaryShopFlag(SHOP_ID_WEAPON_A,0) // "Forge (enhanced)"
 		SetDiaryShopFlag(SHOP_ID_WEAPON,1) // "Katlin's Weapon Workshop (Enhancement/Evolution)"
@@ -106,12 +99,6 @@ function "init"
 	// New Intercept checker, makes it easier to manage for AP
 	if(ALLITEMWORK[ICON3D_764] >= 1)
     {
-		if(!FLAG[DF_JOIN_DOGI])
-		{
-			GetItem(ICON3D_143,1) 
-			SetDiaryFlag( DF_JOIN_DOGI, 1 ) //Footprint memo: Rescued Dogi.
-			JoinNPC(NPC_DOGI, JOIN_NPC_JOIN) // Participate in Dogi interception battle
-		}
         Intercept(INTERCEPT_STAGE01,1)
         Intercept(INTERCEPT_STAGE02,1)
         Intercept(INTERCEPT_STAGE03,1)

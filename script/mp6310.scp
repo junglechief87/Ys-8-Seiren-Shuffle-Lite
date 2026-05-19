@@ -59,8 +59,8 @@ function "init"
 		}
 	}
 
-	SetChrWorkGroup(M0870, CWK_EXPMUL, 1.5f)
-	SetChrWorkGroup(M0871, CWK_EXPMUL, 1.5f)
+	SetChrWorkGroup(M0870, CWK_EXPMUL, 5.5f)
+	SetChrWorkGroup(M0871, CWK_EXPMUL, 5.5f)
 
 	SetChrWorkGroup(M0870, CWK_MAXHP, (M0870.CHRWORK[CWK_MAXHP] * 0.75f))
 	SetChrWorkGroup(M0870, CWK_HP, (M0870.CHRWORK[CWK_MAXHP]))
