@@ -122,12 +122,12 @@ def rngPatcherMain(patch, progress_callback=None):
     #    restore_original_bgm()
 
     for inc in SCP_INCLUDE_LIST:
-        patchFile = patchFile + inc + '\n'
+        patchFile += inc + '\n'
     
     # opening cutscene
-    patchFile = patchFile + buildStartParameters(patch) 
-    patchFile = patchFile + manageEarlyGameParty(patch)
-    patchFile = patchFile + soloStartingCharacterEvent(patch)
+    patchFile += buildStartParameters(patch) 
+    patchFile += manageEarlyGameParty(patch)
+    patchFile += soloStartingCharacterEvent(patch)
 
     duplicateChests = [47,48,49,179]
     for location in patch.item_map:
@@ -141,55 +141,55 @@ def rngPatcherMain(patch, progress_callback=None):
                 script = ""
 
             if loc_data['item_type'] in ['Item', '']: # blank is mostly for offworld items
-                patchFile = patchFile + genericItemMessage(loc_id, patch, script)
+                patchFile += genericItemMessage(loc_id, patch, script)
             elif loc_data['category'] == 'Crew':
-                patchFile = patchFile + buildCrewLocation(loc_id, patch, script)
+                patchFile += buildCrewLocation(loc_id, patch, script)
             elif 'Skill' in loc_data['category']: #skills contain the character name in the category
-                patchFile = patchFile + buildSkillLocation(loc_id, patch, script)
+                patchFile += buildSkillLocation(loc_id, patch, script)
             elif loc_data['category'] == 'Landmark':
-                patchFile = patchFile + buildLandmarks(loc_id, patch, script)
+                patchFile += buildLandmarks(loc_id, patch, script)
         if progress_callback:
             progress_callback(f"Building location from item map: {location}")
 
     # Handling Options
-    bossLevelsScript = bossLevels()
-    patchFile = patchFile + bossLevelsScript
+    bossLevelsScript = bossLevels(patch.boss_stats, patch.settings['options'])
+    patchFile += bossLevelsScript
 
     if patch.settings['options']['final_boss_access'] == 2:
-        patchFile = patchFile + buildPsyches(patch.settings)
+        patchFile += buildPsyches(patch.settings)
     if patch.settings['options']['former_sanctuary_crypt'] == 1:
-        patchFile = patchFile + buildFSCWarp()
+        patchFile += buildFSCWarp()
     if patch.settings['options']['dungeon_entrance_shuffle'] == 1:
-        patchFile = patchFile + buildEntrances(patch.dungeon_entrance_randomization, patch.settings['options'])
+        patchFile += buildEntrances(patch.dungeon_entrance_randomization, patch.settings['options'])
     if patch.settings['options']['octus_paths_opened'] == 1:
-        patchFile = patchFile + octoBosses(patch.settings)
+        patchFile += octoBosses(patch.settings)
     else:
         #this is to restore the original values
         randomizeOctoBosses(patch.settings)
     if progress_callback:
         progress_callback("Handling options")
 
-    patchFile = patchFile + interceptionHandler(patch.settings['options'])
+    patchFile += interceptionHandler(patch.settings['options'])
     if progress_callback:
         progress_callback("Setting up interceptions")
 
-    patchFile = patchFile + jewelTrade(patch.item_map)
+    patchFile += jewelTrade(patch.item_map)
     if progress_callback:
         progress_callback("Setting up Dina's shop")
 
-    patchFile = patchFile + talkHints(patch.item_map)
+    patchFile += talkHints(patch.item_map)
     if progress_callback:
         progress_callback("Setting up NPC item hints")
 
-    patchFile = patchFile + octusGoal(patch.settings['options'])
+    patchFile += octusGoal(patch.settings['options'])
     if progress_callback:
         progress_callback("Setting up goal")
 
-    patchFile = patchFile + goal(patch.settings['options'])
+    patchFile += goal(patch.settings['options'])
     if progress_callback:
         progress_callback("Setting up final boss")
 
-    patchFile = patchFile + endingHandler(patch.settings['options'])
+    patchFile += endingHandler(patch.settings['options'])
     expMult(patch.settings['options'])
     if progress_callback:
         progress_callback("Setting up ending")
@@ -294,13 +294,15 @@ def buildLandmarks(location_id, patch, vanillaScript):
 # ==========================================================================================================
 # Boss Scaling Function
 # ==========================================================================================================
-def bossLevels():
-    return "function \"bossLevels\"\n{\n\t//placeholder to keep existing build functioning until features are implemented\n}\n"
+def bossLevels(boss_stats, settings):
+    if settings['shuffle_boss_levels'] == 0:
+        return "function \"bossScaling\"\n{\n\t\n}\n"
+    
     HPmod = 0.5
     fscBossesHP = ''
     fscBosses = ''
-    script = '\tfunction "bossScaling"\n\t{\n'
-    for boss in boss_levels:
+    script = '\tfunction \"bossScaling\"\n\t{\n'
+    for boss in boss_stats.values():
         boss_id = boss['boss_id']
         level = boss['level']
         script += f'\t\tSetChrWorkGroup({boss_id}, CWK_LV, {level})\n'

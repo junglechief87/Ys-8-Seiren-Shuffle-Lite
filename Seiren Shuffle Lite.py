@@ -66,6 +66,7 @@ class patch_data:
         self.item_map = {}
         self.dungeon_entrance_randomization = {}
         self.settings = {}
+        self.boss_stats = {}
         
 
 class ExecutableLocationFrame(ctk.CTkFrame):
@@ -338,11 +339,14 @@ class CommandsFrame(ctk.CTkFrame):
                     self.item_map = json.loads(zf.read(name))
                 elif name == "dungeon_entrance_randomization.json":
                     self.dungeon_entrance_randomization = json.loads(zf.read(name))
+                elif name == "boss_stats.json":
+                    self.boss_stats = json.loads(zf.read(name))
 
         patch_data_obj = patch_data()
         patch_data_obj.item_map = self.item_map
         patch_data_obj.dungeon_entrance_randomization = self.dungeon_entrance_randomization
         patch_data_obj.settings = self.settings
+        patch_data_obj.boss_stats = self.boss_stats
 
         rngPatcherMain(patch_data_obj, progress_callback)
 

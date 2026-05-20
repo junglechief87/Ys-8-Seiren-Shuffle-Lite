@@ -2667,7 +2667,7 @@ enum {
 	GF_TBOX_DUMMY124, 
 	GF_TBOX_DUMMY125, 
 	GF_TBOX_DUMMY126, 
-	GF_TBOX_DUMMY127, //Used to check if in a warden fight -- this may be able to be deprecated in the future too (if space is needed)
+	GF_TBOX_DUMMY127, //Used to check if in a warden fight
 	GF_TBOX_DUMMY128, //Remove monolith flag from tower top
 	GF_TBOX_DUMMY129, //Past Dana Mode
 	GF_TBOX_DUMMY130, //Used for hints
