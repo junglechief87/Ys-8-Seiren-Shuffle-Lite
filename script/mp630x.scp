@@ -29,7 +29,7 @@ function "init"
 	//ƒm[ƒh§ŒäŒÄ‚Ño‚µ
 	CallFunc("mp630x:open_event")
 
-	CallFunc("rng:setOctoBossLevels")
+	//CallFunc("rng:setOctoBossLevels")
 
 }
 
