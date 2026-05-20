@@ -28,7 +28,7 @@ function "init"
 		//リトライやデバッグボスジャンプからのボス戦
 		SetWork( WK_BGM , BGM_Nothing )
 
-		CallFunc("rng:finalBossLevel")
+		CallFunc("rng:bossScaling")
 		
 		EventCue("mp8323:EV_RetryBoss")
 	}
@@ -186,7 +186,7 @@ function "EV_RetryBoss"
 	SetChrPos("PLAYER1",32.88f,-31.04f,0.00f)
 	
 	//ボス配置・アニメ--------------------------------
-	CallFunc("rng:finalBossLevel")
+	CallFunc("rng:bossScaling")
 	
 	if (FLAG[GF_MP8323_2NDBATTLE])
 	{

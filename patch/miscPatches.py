@@ -318,50 +318,63 @@ def makeResourceDropsGuaranteed(progress_callback=None):
     if progress_callback:
         progress_callback(f"Updated: {os.path.basename(resourcePointDropTable)}")
 
+DEFAULT_ELEMENTS = {
+    'ADOL': {'属性1': 'ZOKU_WATER', '属性1値': 100},
+    'LAXIA': {'属性1': 'ZOKU_LIGHT', '属性1値': 100},
+    'SAHAD': {'属性1': 'ZOKU_EARTH', '属性1値': 100},
+    'HUMMEL': {'属性1': 'ZOKU_LIGHT', '属性1値': 100},
+    'RICOTTA': {'属性1': 'ZOKU_EARTH', '属性1値': 100},
+    'DANA': {'属性1': 'ZOKU_WATER', '属性1値': 100},
+    'DANA2': {'属性1': 'ZOKU_EARTH', '属性1値': 100},
+    'DANA3': {'属性1': 'ZOKU_LIGHT', '属性1値': 100},
+}
+
+DEFAULT_EXP_VALUES = {
+    'ADOL': {'EXPMIN': 100, 'EXPMAX': 500000},
+    'LAXIA': {'EXPMIN': 95, 'EXPMAX': 450000},
+    'SAHAD': {'EXPMIN': 105, 'EXPMAX': 550000},
+    'HUMMEL': {'EXPMIN': 90, 'EXPMAX': 420000},
+    'RICOTTA': {'EXPMIN': 97, 'EXPMAX': 480000},
+    'DANA': {'EXPMIN': 102, 'EXPMAX': 520000},
+    'DANA2': {'EXPMIN': 102, 'EXPMAX': 520000},
+    'DANA3': {'EXPMIN': 102, 'EXPMAX': 520000},
+}
+
+MONSTER_NEST_EXP_VALUES = {
+    'G0001': {'EXPMIN': 80, 'EXPMAX': 80},
+    'G0002': {'EXPMIN': 100, 'EXPMAX': 100},
+    'G0003': {'EXPMIN': 120, 'EXPMAX': 120},
+    'G0004': {'EXPMIN': 140, 'EXPMAX': 140},
+    'G0005': {'EXPMIN': 160, 'EXPMAX': 160},
+    'G0006': {'EXPMIN': 180, 'EXPMAX': 180},
+    'G0007': {'EXPMIN': 210, 'EXPMAX': 210},
+    'G0008': {'EXPMIN': 230, 'EXPMAX': 230},
+    'G0009': {'EXPMIN': 250, 'EXPMAX': 250},
+}
+
 def newExpMult(exp_multiplier):
     statusFileLoc = os.path.join(config.executable_directory, "text/en/status.csv")
-    defaultExpValues = {'ADOL': {'EXPMIN':100, 'EXPMAX':500000},
-                        'LAXIA':{'EXPMIN':95, 'EXPMAX':450000},
-                        'SAHAD':{'EXPMIN':105, 'EXPMAX':550000},
-                        'HUMMEL':{'EXPMIN':90, 'EXPMAX':420000},
-                        'RICOTTA':{'EXPMIN':97, 'EXPMAX':480000},
-                        'DANA':{'EXPMIN':102, 'EXPMAX':520000},
-                        'DANA2':{'EXPMIN':102, 'EXPMAX':520000},
-                        'DANA3':{'EXPMIN':102, 'EXPMAX':520000},}
-    
-    monsterNestExpValues = {'G0001':{'EXPMIN':80, 'EXPMAX':80},
-                            'G0002':{'EXPMIN':100, 'EXPMAX':100},
-                            'G0003':{'EXPMIN':120, 'EXPMAX':120},
-                            'G0004':{'EXPMIN':140, 'EXPMAX':140},
-                            'G0005':{'EXPMIN':160, 'EXPMAX':160},
-                            'G0006':{'EXPMIN':180, 'EXPMAX':180},
-                            'G0007':{'EXPMIN':210, 'EXPMAX':210},
-                            'G0008':{'EXPMIN':230, 'EXPMAX':230},
-                            'G0009':{'EXPMIN':250, 'EXPMAX':250},}
-
-    with open (statusFileLoc, 'r', encoding='utf-8') as csvFile:
-        statusFile = csv.DictReader(csvFile,delimiter='\t',lineterminator='\n',strict=True)
+    with open(statusFileLoc, 'r', encoding='utf-8') as csvFile:
+        statusFile = csv.DictReader(csvFile, delimiter='\t', lineterminator='\n', strict=True)
+        fieldNames = statusFile.fieldnames
         newStatusFile = []
-        fieldNames = []
         for row in statusFile:
-            # csv doesn't read in field names until it begins reading rows. 
-            # so to gather the field names for later use we need to do it during the first iteration of the loop.
-            if len(fieldNames) == 0:
-                fieldNames = statusFile.fieldnames
-            if row['キャラＩＤ'] in defaultExpValues.keys():
-                row['EXPMIN'] = int(defaultExpValues[row['キャラＩＤ']]['EXPMIN'] / exp_multiplier)
-                row['EXPMAX'] = int(defaultExpValues[row['キャラＩＤ']]['EXPMAX'] / exp_multiplier)
-            if row['キャラＩＤ'] in monsterNestExpValues.keys():
-                row['EXPMIN'] = int(monsterNestExpValues[row['キャラＩＤ']]['EXPMIN'])
-                row['EXPMAX'] = int(monsterNestExpValues[row['キャラＩＤ']]['EXPMAX'])
+            char_id = row['キャラＩＤ']
+            # Only update if in our dicts, else leave row untouched
+            if char_id in DEFAULT_EXP_VALUES:
+                row['EXPMIN'] = int(DEFAULT_EXP_VALUES[char_id]['EXPMIN'] / exp_multiplier)
+                row['EXPMAX'] = int(DEFAULT_EXP_VALUES[char_id]['EXPMAX'] / exp_multiplier)
+                row['属性1'] = DEFAULT_ELEMENTS[char_id]['属性1']
+                row['属性1値'] = DEFAULT_ELEMENTS[char_id]['属性1値']
+            elif char_id in MONSTER_NEST_EXP_VALUES:
+                row['EXPMIN'] = int(MONSTER_NEST_EXP_VALUES[char_id]['EXPMIN'])
+                row['EXPMAX'] = int(MONSTER_NEST_EXP_VALUES[char_id]['EXPMAX'])
+            # else: leave row as-is
             newStatusFile.append(row)
-        csvFile.close()
-
-        with open (statusFileLoc, 'w', encoding='utf-8') as csvFile:
-            writer = csv.DictWriter(csvFile,fieldNames,delimiter='\t',lineterminator='\n',strict=True)
-            writer.writeheader()
-            writer.writerows(newStatusFile)
-            csvFile.close()
+    with open(statusFileLoc, 'w', encoding='utf-8') as csvFile:
+        writer = csv.DictWriter(csvFile, fieldNames, delimiter='\t', lineterminator='\n', strict=True)
+        writer.writeheader()
+        writer.writerows(newStatusFile)
     
 def AddWarpToFSCCrystal(progress_callback=None):
     '''
