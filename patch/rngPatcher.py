@@ -1,7 +1,8 @@
 import random
 import os
 from shared.functions import *  
-from patch.crew import getCrewFlags
+from patch.crew import CREW_FLAGS
+from patch.bossCue import BOSS_CUE
 from patch.gameStartFunctions import *
 from patch.chestPatcher import *
 from patch.miscPatches import randomizeOctoBosses, newExpMult
@@ -93,6 +94,7 @@ helperText = False
 def rngPatcherMain(patch, progress_callback=None):
     global patchFile
     global helperText
+    random.seed(patch.settings['seed'])
 
     patchFile = ''
     helperText = patch.settings['options']['helper_text']
@@ -250,9 +252,9 @@ def genericItemMessage(location_id, patch, vanillaScript):
             f"\t\tSetFlag( GF_02MP1201_JOIN_KATRIN , 1 )\n"
             f"\t}}\n"
         )
-    elif itemId == 764:
+    elif itemId == 764: #Progressive Raid List
         eventScripts += (
-            f"\tif(!FLAG[DF_JOIN_KATRIN])\n"
+            f"\tif(!FLAG[DF_JOIN_DOGI])\n"
             f"\t{{\n"
             f"\t\tGetItem(ICON3D_143,1) \n"
             f"\t\tSetDiaryFlag( DF_JOIN_DOGI, 1 ) //Footprint memo: Rescued Dogi.\n"
@@ -269,7 +271,7 @@ def genericItemMessage(location_id, patch, vanillaScript):
 #function used for all people function generations
 def buildCrewLocation(location_id, patch, vanillaScript):
     loc_data = patch.item_map[location_id]
-    crewFlags = getCrewFlags(loc_data['item_name'])
+    crewFlags = CREW_FLAGS.get(loc_data['item_name'], "")
     eventScripts = crewFlags + vanillaScript
     return formatGetItemScript(location_id, loc_data, eventScripts, message_type="castaway", isParty=loc_data['party_flag'])
 
@@ -327,18 +329,6 @@ def bossLevels(boss_stats, settings):
                 script += f'\t\tSetChrWorkGroup({boss}, CWK_LV, {level + 1})\n'
         # Special case: B170 (Melaiduma)
         elif boss_id == 'B170':
-            fscBossesHP = (
-                f'\t\tSetChrWorkGroup(B103, CWK_MAXHP, (B103.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
-                f'\t\tSetChrWorkGroup(B103, CWK_HP, (B103.CHRWORK[CWK_MAXHP]))\n'
-                f'\t\tSetChrWorkGroup(B006, CWK_MAXHP, (B006.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
-                f'\t\tSetChrWorkGroup(B006, CWK_HP, (B006.CHRWORK[CWK_MAXHP]))\n'
-                f'\t\tSetChrWorkGroup(B001, CWK_MAXHP, (B001.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
-                f'\t\tSetChrWorkGroup(B001, CWK_HP, (B001.CHRWORK[CWK_MAXHP]))\n'
-                f'\t\tSetChrWorkGroup(B105, CWK_MAXHP, (B105.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
-                f'\t\tSetChrWorkGroup(B105, CWK_HP, (B105.CHRWORK[CWK_MAXHP]))\n'
-                f'\t\tSetChrWorkGroup(B161, CWK_MAXHP, (B161.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
-                f'\t\tSetChrWorkGroup(B161, CWK_HP, (B161.CHRWORK[CWK_MAXHP]))\n'
-            )
             fscBosses = (
                 f'\n\tfunction \"fscBosses\"\n'
                 f'\t{{\n'
@@ -347,7 +337,6 @@ def bossLevels(boss_stats, settings):
                 f'\t\tSetChrWorkGroup(B001, CWK_LV, {max(1, level-14)})\n'
                 f'\t\tSetChrWorkGroup(B105, CWK_LV, {max(1, level-16)})\n'
                 f'\t\tSetChrWorkGroup(B161, CWK_LV, {max(1, level-18)})\n'
-                f'\n{fscBossesHP}\n'
                 f'\t}}\n'
             )
     script += '\t}'
@@ -360,87 +349,6 @@ def bossLevels(boss_stats, settings):
 #New version of this script hacks the checkpoint in Castaway Village and uses the boss flags for activation of the custom shop
 #The boss menu is essentially a custom shop, it uses Dina's jewel trade menu as a base, there are two version of it depending on game mode
 def buildPsyches(settings):
-    bossCue = {
-        "Psyche-Hydra Psyches": {
-            'mapLoad': 'LoadArg("map/mp6305b/mp6305b.arg")',
-            'eventCue': 'EventCue("mp6305b:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6305b',
-            'characterID': 'B112'
-        },
-        "Psyche-Minos Psyches": {
-            'mapLoad': 'LoadArg("map/mp6306b/mp6306b.arg")',
-            'eventCue': 'EventCue("mp6306b:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6306b',
-            'characterID': 'B110'
-        },
-        "Psyche-Nestor Psyches": {
-            'mapLoad': 'LoadArg("map/mp6307b/mp6307b.arg")',
-            'eventCue': 'EventCue("mp6307b:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6307b',
-            'characterID': 'B111'
-        },
-        "Psyche-Ura Psyches": {
-            'mapLoad': 'LoadArg("map/mp6308b/mp6308b.arg")',
-            'eventCue': 'EventCue("mp6308b:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6308b',
-            'characterID': 'B008'
-        },
-        "Le-Erythos Psyches": {
-            'mapLoad': 'LoadArg("map/mp6409b/mp6409b.arg")',
-            'eventCue': 'EventCue("mp6409b:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6409B',
-            'characterID': 'B012'
-        },
-        "Grazios Psyches": {
-            'mapLoad': 'LoadArg("map/mp6519m/mp6519m.arg")',
-            'eventCue': 'EventCue("mp6519m:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6519M',
-            'characterID': 'B161',
-            'pastMode': True
-        },
-        "Nebritia Psyches": {
-            'mapLoad': 'LoadArg("map/mp6529m/mp6529m.arg")',
-            'eventCue': 'EventCue("mp6529m:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6529M',
-            'characterID': 'B162',
-            'pastMode': True
-        },
-        "Argura Psyches": {
-            'mapLoad': 'LoadArg("map/mp6539m/mp6539m.arg")',
-            'eventCue': 'EventCue("mp6539m:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6539M',
-            'characterID': 'B163',
-            'pastMode': True
-        },
-        "Crusos Psyches": {
-            'mapLoad': 'LoadArg("map/mp6549m/mp6549m.arg")',
-            'eventCue': 'EventCue("mp6549m:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6549M',
-            'characterID': 'B011',
-            'pastMode': True
-        },
-        "Blasphima Psyches": {
-            'mapLoad': 'LoadArg("map/mp6559m/mp6559m.arg")',
-            'eventCue': 'EventCue("mp6559m:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6559M',
-            'characterID': 'B164',
-            'pastMode': True
-        },
-        "Le-Kyanos Psyches": {
-            'mapLoad': 'LoadArg("map/mp6204m/mp6204m.arg")',
-            'eventCue': 'EventCue("mp6204m:EV_Boss_Jump")',
-            'mapID': 'MN_F_MP6204M',
-            'characterID': 'B165',
-            'pastMode': True
-        },
-        "Melaiduma Psyches": {
-            'mapLoad': 'LoadArg("map/mp6569/mp6569.arg")',
-            'eventCue': 'EventCue("mp6569:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6569',
-            'characterID': 'B170',
-            'pastMode': True
-        }
-    }
     
     bossFlagDict = {
         "Silent Tower Second Basement Mephorash Psyches": {'FLAG': 'FLAG[GF_SUBEV_06_6413_KILL_BOSS]', 'simpleName': 'Silent Tower Boss'},
@@ -464,9 +372,16 @@ def buildPsyches(settings):
     }
     
     # Build warden scaling once
-    wardenScaling = 'SetChrWork("b012", CWK_MAXHP, (b012.CHRWORK[CWK_MAXHP] * 3.0f))\nSetChrWork("b012", CWK_HP, (b012.CHRWORK[CWK_MAXHP]))\n'
+    wardenScaling = ('\tSetChrWork("b012", CWK_MAXHP, (b012.CHRWORK[CWK_MAXHP] * 3.0f))\n'
+                     '\tSetChrWork("b012", CWK_HP, (b012.CHRWORK[CWK_MAXHP]))\n'
+                     f'\tSetChrWork("B161", CWK_LV, {random.randrange(65,75)})\n'
+                     f'\tSetChrWork("B162", CWK_LV, {random.randrange(65,75)})\n'
+                     f'\tSetChrWork("B163", CWK_LV, {random.randrange(65,75)})\n'
+                     f'\tSetChrWork("B011", CWK_LV, {random.randrange(65,75)})\n'
+                     f'\tSetChrWork("B164", CWK_LV, {random.randrange(65,75)})\n'
+                     f'\tSetChrWork("B165", CWK_LV, {random.randrange(65,75)})\n')
     if settings['options']['former_sanctuary_crypt'] == 0:
-        wardenScaling += 'SetChrWork(B170, CWK_LV, 65)\n'
+        wardenScaling += f'\tSetChrWork(B170, CWK_LV, {random.randrange(65,75)})\n'
     
     bossCheckpoint = (
         '\n'
@@ -494,7 +409,7 @@ def buildPsyches(settings):
         simpleName = bossFlagDict[accessBoss]["simpleName"]
         bossName = psyche[:psyche.rfind(" ")]
 
-        if bossCue[psyche].get('pastMode', False):
+        if BOSS_CUE[psyche].get('pastMode', False):
             pastModeOn = '\t\tSetFlag(SF_PAST_MODE, 1)\n'
             pastModeOff = '\t\tSetFlag(SF_PAST_MODE, 0)\n'
         else:
@@ -524,14 +439,14 @@ def buildPsyches(settings):
             f"\t\tMenuClose(10, 0)\n"
             f"\t\tSetFlag(GF_TBOX_DUMMY127,1)\n\t\tGetItem(ICON3D_831,1)\n"
             f"{pastModeOn}"
-            f"\t\t{bossCue[psyche]['mapLoad']}\n"
-            f"\t\t{bossCue[psyche]['eventCue']}\n\t\tWaitFade()\n"
+            f"\t\t{BOSS_CUE[psyche]['mapLoad']}\n"
+            f"\t\t{BOSS_CUE[psyche]['eventCue']}\n\t\tWaitFade()\n"
             f"\t}}"
         )
         
         bossReturn += (
             f"\n"
-            f"\t{condition}(WORK[WK_MAPNAMENO] == {bossCue[psyche]['mapID']})\n"
+            f"\t{condition}(WORK[WK_MAPNAMENO] == {BOSS_CUE[psyche]['mapID']})\n"
             f"\t{{\n"
             f"\t\tSetFlag({flagKey},1)\n"
             f"{pastModeOff}"
@@ -560,7 +475,7 @@ def buildPsyches(settings):
         '\n'
         'function "wardenScaling"\n'
         '{\n'
-        f'\t{wardenScaling}\n'
+        f'{wardenScaling}'
         '}\n'
         '\n'
         'function "bossReturn"\n'
@@ -1199,22 +1114,23 @@ def goal(options):
 #  Randomize Octus Bosses and levels, also make them more rewarding.
 # ==========================================================================================================
 def octoBosses(settings):
-    random.seed(settings['seed'])
     octoBossAliases = ['"ev_mons01"','"ev_mons02"','"ev_mons03"','"ev_mons04"','"ev_mons05"','"ev_mons06"','"ev_mons07"','"ev_mons08"','"ev_mons09"','"ev_mons10"']
     #octus bosses exp and HP go up based on bosses leading into the end game. This is to help prep for the final boss.
     #the HP mod is just a percentage of a rough approcimation of the highest level the final boss could get to if unlucky.
-    HPmod = 0.9
+    HPmod = 0.7
     EXPMod = 10.0
-    script = 'function "setOctoBossLevels"\n\t{\n'
+    script = ''
     for boss in octoBossAliases:
         bossLevel = random.randrange(65,75)
         script += (
-            f'\t\tSetLevel({boss}, {bossLevel})\n'
-            f'\t\tSetChrWork({boss}, CWK_MAXHP, ({boss}.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
-            f'\t\tSetChrWork({boss}, CWK_HP, ({boss}.CHRWORK[CWK_MAXHP]))\n'
-            f'\t\tSetChrWork({boss}, CWK_EXPMUL, {EXPMod}f)\n'
+            f'function "set_{boss.replace("\"", "")}"\n'
+            '{\n'
+            f'\tSetLevel({boss}, {bossLevel})\n'
+            f'\tSetChrWork({boss}, CWK_MAXHP, ({boss}.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
+            f'\tSetChrWork({boss}, CWK_HP, ({boss}.CHRWORK[CWK_MAXHP]))\n'
+            f'\tSetChrWork({boss}, CWK_EXPMUL, {EXPMod}f)\n'
+            '}\n'
         )
-    script += '\t}\n'
 
     randomizeOctoBosses(settings)
 
@@ -1228,18 +1144,7 @@ def octoBosses(settings):
 #if we're only doing theos then the theos start script calls theos and the ending script calls the ending cutscene.
 #if we're doing both then the ending cutscene script instead calls origin.
 #if we're only doing origin then the theos start script calls the origin boss fight.
-#for Past Dana we only load the Io fight
 def endingHandler(options):
-    # if options.charMode == 'Past Dana':
-    #     ioFightLoad = """
-    # function "finalBoss"
-    # {
-    #     LoadArg("map/mp6569m/c.arg")
-	#     EventCue("mp6569m:EV_RetryBoss")
-    # }
-    # """
-    #     return ioFightLoad + finalBossLevelScript
-    # leaving here in case we add something later and so we don't need to update the script for the selection sphere.
 
     # Phase mappings
     theos_phases = {
@@ -1361,20 +1266,38 @@ def endingHandler(options):
                 '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
                 '}\n'
             )
-        )
+        ),
+        3: (  # Io only
+            (  
+                '\n'
+                'function "finalBoss"\n'
+                '{\n'
+                '\tSetFlag(SF_PAST_MODE,1)\n'
+                '\tLoadArg("map/mp6569m/mp6569m.arg")\n'
+                '\tEventCue("mp6569m:EV_RetryBoss")\n'
+                '}\n'
+            ),
+            (
+                '\n'
+                'function "ending"\n'
+                '{\n'
+                '\tLoadArg("map/mp0021/mp0021.arg")\n'
+                '\tEventCue("mp0021:EV_M07S130")\n'
+                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
+                '}\n'
+                'function "ending2"\n'
+                '{\n'
+                '\tLoadArg("map/mp0021/mp0021.arg")\n'
+                '\tEventCue("mp0021:EV_M07S130")\n'
+                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
+                '}\n'
+            )
+        ),
     }
     
     theos_script, ending_script = boss_scripts[options['final_boss']]
     
-    finalBossLevelScript = (
-        '\n'
-        'function "finalBossLevel"\n'
-        '{\n'
-        '}\n'
-    )
-    
-    return theos_script + ending_script + finalBossLevelScript
-
+    return theos_script + ending_script
 # ==========================================================================================================
 #  Exp Muiltiplier handling and scaled exp items.
 # ==========================================================================================================

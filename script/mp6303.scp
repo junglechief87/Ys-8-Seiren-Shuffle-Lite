@@ -701,6 +701,8 @@ function "Retry_S_Boss03"
 	SetStopFlag(STOPFLAG_EVENT)
 	FadeOut(FADE_BLACK,0)
 	WaitFade()
+	
+	CallFunc("rng:set_ev_mons04")
 
 	//ボス配置・アニメ--------------------------------
 	ResetChrPos((CHRTYPE_MONS | REMOVE_POS))
@@ -908,6 +910,8 @@ function "Retry_S_Boss04"
 	SetStopFlag(STOPFLAG_EVENT)
 	FadeOut(FADE_BLACK,0)
 	WaitFade()
+	
+	CallFunc("rng:set_ev_mons05")
 
 	//ボス配置・アニメ--------------------------------
 	ResetChrPos((CHRTYPE_MONS | REMOVE_POS))
@@ -1113,6 +1117,8 @@ function "Retry_S_Boss05"
 	SetStopFlag(STOPFLAG_EVENT)
 	FadeOut(FADE_BLACK,0)
 	WaitFade()
+	
+	CallFunc("rng:set_ev_mons06")
 
 	//ボス配置・アニメ--------------------------------
 	ResetChrPos((CHRTYPE_MONS | REMOVE_POS))

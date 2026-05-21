@@ -69,25 +69,15 @@ def miscFixes(progress_callback=None):
     if progress_callback:
         progress_callback(f"Fixed: {os.path.basename(locFile)}")
 
-    #executable patches
-    exeBytes = readFileIntoBuffer(config.executable_path)
+    #remove talk script from thanatos near palace
+    nearPalaceLocFile = getLocFile('mp6204', 'map')
+    fileBytes = readFileIntoBuffer(nearPalaceLocFile)
+    thanatosLoc = fileBytes.find('talk:Talk_Thanatos'.encode('utf-8'))
+    fileBytes = writeStringToBytes(fileBytes, thanatosLoc, '------------------') #removes the script name so it won't be able to call it, effectively removing the talk option for thanatos near the palace
+    writeBufferIntoFile(nearPalaceLocFile,fileBytes)
 
-    """
-    # remove exp level scaling: old but might be useful in the future so commenting it out
-    exeBytes[0x29B61C:0x29B61E] = [0x29,0xC9] #convert opcode sub ecx, ebp to sub ecx, ecx
-    exeBytes[0x29B64F:0x29B651] = [0x29,0xC9] #convert opcode sub ecx, ebp to sub ecx, ecx
-    exeBytes[0x29B632:0x29B634] = [0x29,0xC9] #convert opcode sub ecx, ebp to sub ecx, ecx
-    exeBytes[0x29B665:0x29B667] = [0x29,0xC0] #convert opcode sub eax, ebp to sub eax, eax
-    
-    # Caps min exp to enemy base exp
-    exeBytes[0x28FCFC:0x28FD04] = [0xF3,0x0F,0x10,0x05,0xDC,0x83,0x31,0x00]
-    exeBytes[0x28FD0E:0x28FD16] = [0xF3,0x0F,0x10,0x05,0xCA,0x83,0x31,0x00]
-    exeBytes[0x29B698:0x29B6A0] = [0xF3,0x0F,0x10,0x05,0x40,0xCA,0x30,0x00]
-    # removing until I understand these formulas better.
-    """
-    writeBufferIntoFile(config.executable_path,exeBytes)
     if progress_callback:
-        progress_callback(f"Patched: {os.path.basename(config.executable_path)}")
+        progress_callback(f"Patched: {os.path.basename(nearPalaceLocFile)}")
 
     # speeds up respawn time of exploding plants to reduce downtime in Oceanus fight
     explosivePlant = os.path.join(config.executable_directory, "chr/enemy/m0660/m0660.mtb")
