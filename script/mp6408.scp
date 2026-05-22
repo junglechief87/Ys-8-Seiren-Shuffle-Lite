@@ -21,6 +21,7 @@
 
 function "init"
 {
+	EventCue("rng:dungeonEntrances")
 	
 
 	// イベントエリア設定制御

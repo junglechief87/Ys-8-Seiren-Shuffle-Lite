@@ -1,4 +1,4 @@
-from patch.crew import *
+from patch.script_constants.crew import CREW_FLAGS
 import struct
 
 #This functions was getting too big with so many flags so I split it into it's own file

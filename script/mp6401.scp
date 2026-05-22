@@ -22,6 +22,7 @@
 // init
 function "init"
 {
+	EventCue("rng:dungeonEntrances")
 	
 	if( FLAG[SF_EVENT_ON] )
 	{

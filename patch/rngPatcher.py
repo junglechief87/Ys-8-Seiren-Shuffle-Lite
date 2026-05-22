@@ -1,9 +1,9 @@
 import random
 import os
 from shared.functions import *  
-from script_constants.crew import CREW_FLAGS
-from script_constants.bossCue import BOSS_CUE
-from script_constants.fscWarp import FSC_WARP
+from patch.script_constants.crew import CREW_FLAGS
+from patch.script_constants.bossCue import BOSS_CUE
+from patch.script_constants.fscWarp import FSC_WARP
 from patch.gameStartFunctions import *
 from patch.chestPatcher import *
 from patch.miscPatches import randomizeOctoBosses, newExpMult

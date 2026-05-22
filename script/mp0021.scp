@@ -1126,7 +1126,7 @@ function "EV_M07S130_ED"
 	StopSE(-1, 200)
 	SetEnvSEPlayState(-1, 0)	//環境SE全停止
 
-	SetFlag(GF_TBOX_DUMMY120, 1) //Goal flag
+	//SetFlag(GF_TBOX_DUMMY120, 1) //Goal flag
 	
 	// 通常
 	if ( !FLAG[SF_GALLERY_EVENT] )
@@ -1371,12 +1371,12 @@ function "EV_M07S140"	//クリアデータ保存
 	}
 
 	//クリアフラグをセット
-	SetFlag( SF_CLEARFLG, 1 )		// クリアフラグ
-	SetFlag( SF_SYS_CLEARED, 1 )		// （システムセーブ）クリアフラグ
+	//SetFlag( SF_CLEARFLG, 1 )		// クリアフラグ
+	//SetFlag( SF_SYS_CLEARED, 1 )		// （システムセーブ）クリアフラグ
 
 	//真EDを見た
 	if(FLAG[GF_TRUE_END]){
-		SetFlag( SF_SYS_TRUECLEARED, 1 )		// （システムセーブ）真EDクリアフラグ
+		//SetFlag( SF_SYS_TRUECLEARED, 1 )		// （システムセーブ）真EDクリアフラグ
 	}
 
 	//トロフィー「蒼き波濤の果て」入手

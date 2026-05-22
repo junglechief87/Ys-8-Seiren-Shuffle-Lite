@@ -73,7 +73,7 @@ function "init"
 			SetWork( WK_BGM , BGM_Nothing )
 			EventAreaEnable( "evb2_M01S180" , 1 )
 		}
-		if( FLAG[GF_02MP1111_WOUND_BARBAROSS] && !FLAG[GF_02MP1103_KILL_KIERGAARD] && !FLAG[GF_EVENT_CTL] )
+		if( FLAG[GF_02MP1111_WOUND_BARBAROSS] && !FLAG[GF_02MP1103_KILL_KIERGAARD] && !FLAG[GF_EVENT_CTL] && FLAG[GF_01MP1103_JOIN_SAHAD]) // Make fight dependant on first Ava fight
 		{
 			EventCue("mp1103:EV_M02S660")
 		}

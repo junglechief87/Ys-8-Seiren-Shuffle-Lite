@@ -22,6 +22,7 @@
 
 function "init"
 {
+	EventCue("rng:dungeonEntrances")
 	
 	//初期状態
 	MapAnime("saidan_kusa" , "grass_stop1" )
@@ -233,8 +234,6 @@ function "LP_warpin_mp6301"
 	DelMapMarker( SMI_SYMBOL ,PAGE_MP6409, MARKER_EV_M06S120, 0,0)		//メイン：オクトゥスへ侵入する
 
 	SetFlag( TF_LOADING_TIPS_OFF, 1 )	//NowLoading 時の Tips 表示をカット
-
-	LoadArg("map/mp6301/mp6301.arg")
 	
 	if(FLAG[GF_TBOX_DUMMY114])
 	{
@@ -243,9 +242,11 @@ function "LP_warpin_mp6301"
 	else if (!FLAG[GF_06MP6301_GOTO_BOSSROOM]	// ▽[M06S220][《選択の間》へ進む]
 	&& FLAG[GF_06MP6350_GET_MISTILTEINN]) {	// ▼[M06S210][想剣ミストルティンを入手する[
 		//EventCue("mp6301:EV_M06S220")
+		LoadArg("map/mp6301/mp6301.arg")
 		EventCue("mp6301:Entry_warpout_mp6409")
 	}
 	else if(FLAG[GF_06MP6301_INTO_WORLDTREE]){	//オクトゥスの攻略を開始する
+		LoadArg("map/mp6301/mp6301.arg")
 		EventCue("mp6301:Entry_warpout_mp6409")
 	}
 	ResetStopFlag(STOPFLAG_EVENT)
