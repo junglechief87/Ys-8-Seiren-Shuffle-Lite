@@ -2184,7 +2184,8 @@ function "EV_M06S245_ED"
 	CallFunc("mp6310b:boss3_end")
 	SetFlag(SF_BOSS_BATTLE, 0)
 
-	EventCue("mp6310b:EV_M06S241")
+	//EventCue("mp6310b:EV_M06S241")
+	EventCue("rng:ending")
 	ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
 
 	//I—¹ˆ—‚±‚±‚Ü‚Å----------------------------------------------------
@@ -3782,7 +3783,7 @@ function "EV_M06S244_ED"
 			//SetFlag(GF_MP1202_NOW,1)		//‰®“à‚É’¼Ú”ò‚Ôê‡
 			//LoadArg("map/mp1201/mp1201.arg")
 			//EventCue("mp1201:EV_M07S000")
-			CallFunc("rng:ending")
+			//CallFunc("rng:ending")
 
 			SetEnvSEPlayState(-1, 0)	//ŠÂ‹«SE‘S’â~
 

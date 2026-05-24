@@ -79,6 +79,17 @@ def miscFixes(progress_callback=None):
     if progress_callback:
         progress_callback(f"Patched: {os.path.basename(nearPalaceLocFile)}")
 
+    ys8EXE = config.executable_path
+    exeBytes = readFileIntoBuffer(ys8EXE)
+    exeBytes[0x29B1BA:0x29B1C3] = [0xF3,0x44,0x0F,0x59, 0x15, 0xA5, 0xE1, 0x30, 0x00] 
+    # Changes ys8.exe+29BDBA - F3 44 0F59 15 D5653100  - mulss xmm10,[ys8.exe+5B2398] { (0.10) }
+    # to ys8.exe+29BDBA - F3 44 0F59 15 A5E13000  - mulss xmm10,[ys8.exe+5A9F68] { (1.50) }
+    # makes raids and intercepts more rewarding
+    writeBufferIntoFile(ys8EXE, exeBytes)
+
+    if progress_callback:
+        progress_callback(f"Patched: Ys8.exe")
+
     # speeds up respawn time of exploding plants to reduce downtime in Oceanus fight
     explosivePlant = os.path.join(config.executable_directory, "chr/enemy/m0660/m0660.mtb")
     plantRespawn = readFileIntoBuffer(explosivePlant)
@@ -330,18 +341,6 @@ DEFAULT_EXP_VALUES = {
     'DANA3': {'EXPMIN': 102, 'EXPMAX': 520000},
 }
 
-MONSTER_NEST_EXP_VALUES = {
-    'G0001': {'EXPMIN': 80, 'EXPMAX': 80},
-    'G0002': {'EXPMIN': 100, 'EXPMAX': 100},
-    'G0003': {'EXPMIN': 120, 'EXPMAX': 120},
-    'G0004': {'EXPMIN': 140, 'EXPMAX': 140},
-    'G0005': {'EXPMIN': 160, 'EXPMAX': 160},
-    'G0006': {'EXPMIN': 180, 'EXPMAX': 180},
-    'G0007': {'EXPMIN': 210, 'EXPMAX': 210},
-    'G0008': {'EXPMIN': 230, 'EXPMAX': 230},
-    'G0009': {'EXPMIN': 250, 'EXPMAX': 250},
-}
-
 def newExpMult(exp_multiplier):
     statusFileLoc = os.path.join(config.executable_directory, "text/en/status.csv")
     with open(statusFileLoc, 'r', encoding='utf-8') as csvFile:
@@ -356,9 +355,6 @@ def newExpMult(exp_multiplier):
                 row['EXPMAX'] = int(DEFAULT_EXP_VALUES[char_id]['EXPMAX'] / exp_multiplier)
                 row['属性1'] = DEFAULT_ELEMENTS[char_id]['属性1']
                 row['属性1値'] = DEFAULT_ELEMENTS[char_id]['属性1値']
-            elif char_id in MONSTER_NEST_EXP_VALUES:
-                row['EXPMIN'] = int(MONSTER_NEST_EXP_VALUES[char_id]['EXPMIN'])
-                row['EXPMAX'] = int(MONSTER_NEST_EXP_VALUES[char_id]['EXPMAX'])
             # else: leave row as-is
             newStatusFile.append(row)
     with open(statusFileLoc, 'w', encoding='utf-8') as csvFile:

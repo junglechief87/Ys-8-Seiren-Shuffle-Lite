@@ -76,5 +76,38 @@ BOSS_CUE = {
             'eventCue': 'EventCue("mp6569:EV_RetryBoss")',
             'mapID': 'MN_D_MP6569',
             'characterID': 'B170',
-        }
+        },
+        "Theos":
+        {
+            'mapLoad': 'LoadArg("map/mp6310b/mp6310b.arg")',
+            'eventCue': 'EventCue("mp6310b:EV_M06S240")',
+            'mapID': 'MN_D_MP6310',
+            'characterID': 'B020',
+            'pastMode': False
+        },
+        "Origin":
+        {
+            'mapLoad': 'LoadArg("map/mp8323/mp8323.arg")',
+            'eventCue': 'EventCue("mp8323:init")',
+            'mapID': 'MN_D_MP8323',
+            'characterID': 'B020',
+            'pastMode': False
+        },
+        "Io":
+        {
+            'mapLoad': 'LoadArg("map/mp6569m/mp6569m.arg")',
+            'eventCue': 'EventCue("mp6569m:EV_RetryBoss")',
+            'mapID': 'MN_D_MP6569M',
+            'characterID': 'B020',
+            'pastMode': True
+        },
     }
+
+def pastModeToggle(boss):
+        if BOSS_CUE[boss].get('pastMode', False):
+            return 'SetFlag(SF_PAST_MODE, 1)', 'SetFlag(SF_PAST_MODE, 0)'
+        else:
+            return '', ''
+        
+def getBossCue(boss):    
+     return f"{BOSS_CUE[boss]['mapLoad']}",  f"{BOSS_CUE[boss]['eventCue']}"

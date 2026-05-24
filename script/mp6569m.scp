@@ -142,7 +142,8 @@ function "EV_Boss_Dead"
 	}
 	else if (FLAG[SF_EVENT_ON])
 	{
-		EventCue("mp6569m:SubEV_Past_07_Main061")
+		EventCue("rng:ending")
+		//EventCue("mp6569m:SubEV_Past_07_Main061")
 		ResetStopFlag(STOPFLAG_EVENT)
 	}
 	else

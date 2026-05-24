@@ -2,7 +2,7 @@ import random
 import os
 from shared.functions import *  
 from patch.script_constants.crew import CREW_FLAGS
-from patch.script_constants.bossCue import BOSS_CUE
+from patch.script_constants.bossCue import BOSS_CUE, pastModeToggle, getBossCue
 from patch.script_constants.fscWarp import FSC_WARP
 from patch.gameStartFunctions import *
 from patch.chestPatcher import *
@@ -89,6 +89,19 @@ TREASURE_SCRIPTS = {
 "13":   "mp0404:EV_M05S150_ED",
 "9":    "mp0403:EV_M05S151_ED"
 }
+
+FINAL_BOSS_OPTIONS = {
+    0: "Theos",
+    1: "Origin",
+    2: "Theos and Origin",
+    3: "Io",
+}
+
+ENDING = (
+    '\tLoadArg("map/mp0021/mp0021.arg")\n'
+    '\tEventCue("mp0021:EV_M07S130")\n'
+    '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
+)
 
 helperText = False
 
@@ -409,14 +422,10 @@ def buildPsyches(settings):
         flagKey = psycheFlag[rewards[psyche]]
         simpleName = bossFlagDict[accessBoss]["simpleName"]
         bossName = psyche[:psyche.rfind(" ")]
-
-        if BOSS_CUE[psyche].get('pastMode', False):
-            pastModeOn = '\t\tSetFlag(SF_PAST_MODE, 1)\n'
-            pastModeOff = '\t\tSetFlag(SF_PAST_MODE, 0)\n'
-        else:
-            pastModeOn = ''
-            pastModeOff = ''
         
+        pastModeOn, pastModeOff = pastModeToggle(psyche)
+        mapLoad, eventCue = getBossCue(psyche)
+
         formattedPsyche = f"{simpleName}:{rewards[psyche]}({bossName})"
         enabledFormattedPsyche = f"{GOLD}{formattedPsyche}"
         
@@ -439,9 +448,10 @@ def buildPsyches(settings):
             f"\t{{\n"
             f"\t\tMenuClose(10, 0)\n"
             f"\t\tSetFlag(GF_TBOX_DUMMY127,1)\n\t\tGetItem(ICON3D_831,1)\n"
-            f"{pastModeOn}"
-            f"\t\t{BOSS_CUE[psyche]['mapLoad']}\n"
-            f"\t\t{BOSS_CUE[psyche]['eventCue']}\n\t\tWaitFade()\n"
+            f"\t\t{pastModeOn}\n"
+            f"\t\t{mapLoad}\n"
+            f"\t\t{eventCue}\n"
+            f"\t\tWaitFade()\n"
             f"\t}}"
         )
         
@@ -450,7 +460,7 @@ def buildPsyches(settings):
             f"\t{condition}(WORK[WK_MAPNAMENO] == {BOSS_CUE[psyche]['mapID']})\n"
             f"\t{{\n"
             f"\t\tSetFlag({flagKey},1)\n"
-            f"{pastModeOff}"
+            f"\t\t{pastModeOff}\n"
             f"\t}}"
         )
         
@@ -1075,122 +1085,84 @@ def endingHandler(options):
         )
     }
     
-    theos_phase = theos_phases[options['theos_start_phase']]
-    origin_phase = origin_phases[options['origin_start_phase']]
-    package = packages[options['origin_care_package']]
+    final_boss = FINAL_BOSS_OPTIONS[options['final_boss']]
+
+    if final_boss == "Theos and Origin":
+        mapLoadTheos, eventCueTheos = getBossCue("Theos")
+        mapLoadOrigin, eventCueOrigin = getBossCue("Origin")
+    else:
+        mapLoad, eventCue = getBossCue(final_boss)
     
-    # Final boss scripts
-    boss_scripts = {
-        0: (  # Theos only
-            (
-                '\n'
-                'function "finalBoss"\n'
-                '{\n'
-                f'\t{theos_phase}\n'
-                '\tLoadArg("map/mp6310b/mp6310b.arg")\n'
-                '\tEventCue("mp6310b:EV_M06S240")\n'
-                '}\n'
-            ),
-            (
-                '\n'
-                'function "ending"\n'
-                '{\n'
-                '\tLoadArg("map/mp0021/mp0021.arg")\n'
-                '\tEventCue("mp0021:EV_M07S130")\n'
-                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
-                '}\n'
-                'function "ending2"\n'
-                '{\n'
-                '\tLoadArg("map/mp0021/mp0021.arg")\n'
-                '\tEventCue("mp0021:EV_M07S130")\n'
-                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
-                '}\n'
-            )
-        ),
-        1: (  # Origin only
-            (
-                '\n'
-                'function "finalBoss"\n'
-                '{\n'
-                f'\t{origin_phase}\n'
-                '\tLoadArg("map/mp8323/mp8323.arg")\n'
-                '\tEventCue("mp8323:init")\n'
-                '}\n'
-            ),
-            (
-                '\n'
-                'function "ending"\n'
-                '{\n'
-                '\tLoadArg("map/mp0021/mp0021.arg")\n'
-                '\tEventCue("mp0021:EV_M07S130")\n'
-                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
-                '}\n'
-                'function "ending2"\n'
-                '{\n'
-                '\tLoadArg("map/mp0021/mp0021.arg")\n'
-                '\tEventCue("mp0021:EV_M07S130")\n'
-                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
-                '}\n'
-            )
-        ),
-        2: (  # Both (Theos -> Origin)
-            (
-                '\n'
-                'function "finalBoss"\n'
-                '{\n'
-                f'\t{theos_phase}\n'
-                '\tLoadArg("map/mp6310b/mp6310b.arg")\n'
-                '\tEventCue("mp6310b:EV_M06S240")\n'
-                '}\n'
-            ),
-            (
-                '\n'
-                'function "ending"\n'
-                '{\n'
-                f'\t{origin_phase}\n'
-                f'\t{package}\n'
-                '\tLoadArg("map/mp8323/mp8323.arg")\n'
-                '\tEventCue("mp8323:init")\n'
-                '}\n'
-                'function "ending2"\n'
-                '{\n'
-                '\tLoadArg("map/mp0021/mp0021.arg")\n'
-                '\tEventCue("mp0021:EV_M07S130")\n'
-                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
-                '}\n'
-            )
-        ),
-        3: (  # Io only
-            (  
-                '\n'
-                'function "finalBoss"\n'
-                '{\n'
-                '\tSetFlag(SF_PAST_MODE,1)\n'
-                '\tLoadArg("map/mp6569m/mp6569m.arg")\n'
-                '\tEventCue("mp6569m:EV_RetryBoss")\n'
-                '}\n'
-            ),
-            (
-                '\n'
-                'function "ending"\n'
-                '{\n'
-                '\tLoadArg("map/mp0021/mp0021.arg")\n'
-                '\tEventCue("mp0021:EV_M07S130")\n'
-                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
-                '}\n'
-                'function "ending2"\n'
-                '{\n'
-                '\tLoadArg("map/mp0021/mp0021.arg")\n'
-                '\tEventCue("mp0021:EV_M07S130")\n'
-                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
-                '}\n'
-            )
-        ),
+    pastModeOn, pastModeOff = pastModeToggle(final_boss)
+
+    boss_flags = {
+        "Theos": theos_phases[options['theos_start_phase']],
+        "Origin": origin_phases[options['origin_start_phase']],
     }
+
+    if final_boss != "Theos and Origin":
+        final_boss_script = (   
+            '\n'
+            'function "finalBoss"\n'
+            '{\n'
+            f'\t{pastModeOn}\n'
+            f'\t{boss_flags.get(final_boss, "")}\n'
+            f'\t{mapLoad}\n'
+            f'\t{eventCue}\n'
+            '}\n'
+        )
+        if final_boss != "Origin":
+            ending_scripts = (
+                '\n'
+                'function "ending"\n'
+                '{\n'
+                f'\t{pastModeOff}\n'
+                f'{ENDING}'
+                '}\n'
+                'function "ending2"\n'
+                '{\n'
+                '}\n'
+            )
+        else:
+            ending_scripts = (
+                '\n'
+                'function "ending"\n'
+                '{\n'          
+                '}\n'
+                'function "ending2"\n'
+                '{\n'
+                f'{ENDING}'
+                '}\n'
+            )
+
+    else:
+        package = packages[options['origin_care_package']]
+        final_boss_script = (   
+            '\n'
+            'function "finalBoss"\n'
+            '{\n'
+            f'\t{pastModeOn}\n'
+            f'\t{boss_flags["Theos"]}\n'
+            f'\t{mapLoadTheos}\n'
+            f'\t{eventCueTheos}\n'
+            '}\n'
+        )
+        ending_scripts = (
+            '\n'
+            'function "ending"\n'
+            '{\n'
+            f'\t{package}\n'
+            f'\t{boss_flags["Origin"]}\n'
+            f'\t{mapLoadOrigin}\n'
+            f'\t{eventCueOrigin}\n'
+            '}\n'
+            'function "ending2"\n'
+            '{\n'
+            f'{ENDING}'
+            '}\n'
+        )
     
-    theos_script, ending_script = boss_scripts[options['final_boss']]
-    
-    return theos_script + ending_script
+    return final_boss_script + ending_scripts
 # ==========================================================================================================
 #  Exp Muiltiplier handling and scaled exp items.
 # ==========================================================================================================
