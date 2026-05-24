@@ -1029,8 +1029,8 @@ def octoBosses(settings):
             f'function "set_{boss.replace("\"", "")}"\n'
             '{\n'
             f'\tSetLevel({boss}, {bossLevel})\n'
-            f'\tSetChrWork({boss}, CWK_MAXHP, ({boss}.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
-            f'\tSetChrWork({boss}, CWK_HP, ({boss}.CHRWORK[CWK_MAXHP]))\n'
+            f'\tSetChrWork({boss}, CWK_MAXHP, ({boss.replace("\"", "")}.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
+            f'\tSetChrWork({boss}, CWK_HP, ({boss.replace("\"", "")}.CHRWORK[CWK_MAXHP]))\n'
             f'\tSetChrWork({boss}, CWK_EXPMUL, {EXPMod}f)\n'
             '}\n'
         )

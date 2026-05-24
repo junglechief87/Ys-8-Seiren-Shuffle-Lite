@@ -81,9 +81,9 @@ def miscFixes(progress_callback=None):
 
     ys8EXE = config.executable_path
     exeBytes = readFileIntoBuffer(ys8EXE)
-    exeBytes[0x29B1BA:0x29B1C3] = [0xF3,0x44,0x0F,0x59, 0x15, 0xA5, 0xE1, 0x30, 0x00] 
+    exeBytes[0x29B1BA:0x29B1C3] = [0xF3,0x44,0x0F,0x59, 0x15, 0x21, 0xCF, 0x30, 0x00] 
     # Changes ys8.exe+29BDBA - F3 44 0F59 15 D5653100  - mulss xmm10,[ys8.exe+5B2398] { (0.10) }
-    # to ys8.exe+29BDBA - F3 44 0F59 15 A5E13000  - mulss xmm10,[ys8.exe+5A9F68] { (1.50) }
+    # to ys8.exe+29BDBA - F3 44 0F59 15 21CF3000  - mulss xmm10,[ys8.exe+5A8CE4] { (4.00) }
     # makes raids and intercepts more rewarding
     writeBufferIntoFile(ys8EXE, exeBytes)
 
@@ -341,6 +341,18 @@ DEFAULT_EXP_VALUES = {
     'DANA3': {'EXPMIN': 102, 'EXPMAX': 520000},
 }
 
+HUNT_BOSS_SPAWN_WAVE = {
+    "st_31_p.tbb": {"Offset": 0x72C, "OriginalValue": 0x35},
+    "st_32_p.tbb": {"Offset": 0x728, "OriginalValue": 0x35},
+    "st_33_p.tbb": {"Offset": 0x79C, "OriginalValue": 0x39},
+    "st_34_p.tbb": {"Offset": 0x762, "OriginalValue": 0x31},
+    "st_35_p.tbb": {"Offset": 0x760, "OriginalValue": 0x34},
+    "st_36_p.tbb": {"Offset": 0x751, "OriginalValue": 0x32},
+    "st_37_p.tbb": {"Offset": 0x742, "OriginalValue": 0x39},
+    "st_38_p.tbb": {"Offset": 0x784, "OriginalValue": 0x33},
+    "st_39_p.tbb": {"Offset": 0x7D5, "OriginalValue": 0x34},
+}
+
 def newExpMult(exp_multiplier):
     statusFileLoc = os.path.join(config.executable_directory, "text/en/status.csv")
     with open(statusFileLoc, 'r', encoding='utf-8') as csvFile:
@@ -361,6 +373,13 @@ def newExpMult(exp_multiplier):
         writer = csv.DictWriter(csvFile, fieldNames, delimiter='\t', lineterminator='\n', strict=True)
         writer.writeheader()
         writer.writerows(newStatusFile)
+
+    for huntFileName, data in HUNT_BOSS_SPAWN_WAVE.items():
+        huntFileLoc = os.path.join(config.executable_directory, "text/stage", huntFileName)
+        readFileIntoBuffer(huntFileLoc) 
+        huntFileBytes = readFileIntoBuffer(huntFileLoc)
+        huntFileBytes[data['Offset']] = 0x31 # changes boss spawn wave to 1
+        writeBufferIntoFile(huntFileLoc, huntFileBytes)
     
 def AddWarpToFSCCrystal(progress_callback=None):
     '''
