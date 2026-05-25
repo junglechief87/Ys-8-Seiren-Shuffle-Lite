@@ -83,7 +83,6 @@ TREASURE_SCRIPTS = {
 "317":  "mp6531m:EvOpenTBox",
 "291":  "mp6519:EvOpenTBox",
 "288":  "mp6513:EvOpenTBox",
-"239":  "mp6345:SubEV_05_Get_Bell_ED",
 "19":   "mp0408:EV_M05S152_ED",
 "18":   "mp0405:EV_M05S170_ED",
 "13":   "mp0404:EV_M05S150_ED",
