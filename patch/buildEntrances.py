@@ -19,7 +19,7 @@ entranceEvent =	{
         "Schlamm Jungle After Boss": {'load': 'map/mp2308/mp2308.arg', 'entry_event': 'rng:2308_entry'},
         "Schlamm Jungle Front": {'load': 'map/mp2301/mp2301.arg', 'entry_event': 'rng:2301_entry'},
         "Sunrise Beach": {'load': 'map/mp1119/mp1119.arg', 'entry_event': 'rng:1119_entry'},
-        "Temple of the Great Tree Garden": {'load': 'map/mp6409/mp6409.arg', 'entry_event': 'rng:6409_entry'},
+        "Temple of the Great Tree Garden": {'load': 'map/mp6409/mp6409.arg', 'entry_event': 'rng:6409_entry_1'},
         "Bridge to Archeozoic Chasm": {'load': 'map/mp6204/mp6204.arg', 'entry_event': 'rng:6204_entry'},
         "Towal Highway Baja Tower Entrance": {'load': 'map/mp6110/mp6110.arg', 'entry_event': 'rng:6110_entry'},
         "Towering Coral Forest After Boss": {'load': 'map/mp1308/mp1308.arg', 'entry_event': 'rng:1308_entry'},
@@ -31,6 +31,10 @@ entranceEvent =	{
 		"Silent Tower": {'load': 'map/mp6411/mp6411.arg', 'entry_event': 'rng:6411_entry'},
 		"Former Sanctuary Crypt Front": {'load': 'map/mp6511/mp6511.arg', 'entry_event': 'rng:6511_entry'},
 		"Ruins of Eternia Hidden Passage": {'load': 'map/mp6211/mp6211.arg', 'entry_event': 'rng:6211_entry'},
+		"Temple of the Great Tree After Boss": {'load': 'map/mp6410/mp6410.arg', 'entry_event': 'rng:6410_entry'},
+		"Temple of the Great Tree Garden Entrance": {'load': 'map/mp6409/mp6409.arg', 'entry_event': 'rng:6409_entry_2'},
+		"Temple of the Great Tree Entrance": {'load': 'map/mp6408/mp6408.arg', 'entry_event': 'rng:6408_entry'},
+		"Temple of the Great Tree": {'load': 'map/mp6401/mp6401.arg', 'entry_event': 'rng:6401_entry'},
     }
 
 def buildEntrances(entranceList, options):
@@ -294,7 +298,42 @@ def buildEntrances(entranceList, options):
 				EventCue("{1}",1)	
 			}}""".format(entranceEvent[entranceList["ST Entrance"]]["load"], entranceEvent[entranceList["ST Entrance"]]["entry_event"])
 	
-
+	entranceScript += """
+			if(FLAG[SF_LASTENTRY_NO] == 7 && WORK[WK_MAPNAMENO] == MN_D_MP6409) //entrance from Temple of the Great Tree After Boss - Temple of the Great Tree Garden Entrance
+			{{
+				SetFlag(SF_LASTENTRY_NO, -2)
+				CallFunc("rng:warpmask")
+				LoadArg("{0}")
+				EventCue("{1}",1)	
+			}}""".format(entranceEvent[entranceList["TGT Garden Exit"]]["load"], entranceEvent[entranceList["TGT Garden Exit"]]["entry_event"])
+	
+	entranceScript += """
+			if(FLAG[SF_LASTENTRY_NO] == 6 && WORK[WK_MAPNAMENO] == MN_D_MP6408) //entrance from Temple of the Great Tree - Temple of the Great Tree Entrance
+			{{
+				SetFlag(SF_LASTENTRY_NO, -2)
+				CallFunc("rng:warpmask")
+				LoadArg("{0}")
+				EventCue("{1}",1)	
+			}}""".format(entranceEvent[entranceList["TGT Entrance Exit"]]["load"], entranceEvent[entranceList["TGT Entrance Exit"]]["entry_event"])
+	
+	entranceScript += """
+			if(FLAG[SF_LASTENTRY_NO] == 1 && WORK[WK_MAPNAMENO] == MN_D_MP6410) //entrance from Temple of the Great Tree Garden Entrance - Temple of the Great Tree After Boss
+			{{
+				SetFlag(SF_LASTENTRY_NO, -2)
+				CallFunc("rng:warpmask")
+				LoadArg("{0}")
+				EventCue("{1}",1)	
+			}}""".format(entranceEvent[entranceList["TGT Garden Entrance"]]["load"], entranceEvent[entranceList["TGT Garden Entrance"]]["entry_event"])
+	
+	entranceScript += """
+			if(FLAG[SF_LASTENTRY_NO] == 0 && WORK[WK_MAPNAMENO] == MN_D_MP6401) //entrance from Temple of the Great Tree Entrance - Temple of the Great Tree
+			{{
+				SetFlag(SF_LASTENTRY_NO, -2)
+				CallFunc("rng:warpmask")
+				LoadArg("{0}")
+				EventCue("{1}",1)	
+			}}""".format(entranceEvent[entranceList["TGT Entrance"]]["load"], entranceEvent[entranceList["TGT Entrance"]]["entry_event"])
+	
 	if options['former_sanctuary_crypt'] == 1:
 		entranceScript += """
 				if(FLAG[SF_LASTENTRY_NO] == 2 && WORK[WK_MAPNAMENO] == MN_F_MP6211) //entrance from FSC - Exit to Central Stupa
@@ -1036,9 +1075,85 @@ def buildEntrances(entranceList, options):
 		EventCue("mp6301:Entry_warpout_mp6409")
 	}
 
-	function "6409_entry"
+	function "6409_entry_1"
 	{
 		EventCue("mp6409:Entry_warpout_mp6301")
+	}
+
+	function "6410_entry"
+	{
+		VisualName("visual/mapname/mn_6401.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//浸食谷
+		SetFlag( TF_MAPNAME_SHOWN, 1 )				// 地名表示した（テンポラリ）
+		SetStopFlag(STOPFLAG_EVENT)
+		RestoreEventState()
+		ReleaseEventPartyChr()
+		ResetMapParam(-1)
+		CallFunc("6410:init")
+		SetChrPos("LEADER",-8.02f,217.62f,0.0f)
+		Turn("LEADER",0.0f,360.0f)
+		ResetPartyPos()
+		ResetFollowPoint()
+		RotateCamera(0, 180.0f, 0)				// 角度
+		CallFunc("system:camera_reset")
+		ResetStopFlag(STOPFLAG_EVENT)
+		FadeIn(FADE_BLACK, FADE_FAST)
+	}
+
+	function "6409_entry_2"
+	{
+		VisualName("visual/mapname/mn_6409.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//浸食谷
+		SetFlag( TF_MAPNAME_SHOWN, 1 )				// 地名表示した（テンポラリ）
+		SetStopFlag(STOPFLAG_EVENT)
+		RestoreEventState()
+		ReleaseEventPartyChr()
+		ResetMapParam(-1)
+		CallFunc("6409:init")
+		SetChrPos("LEADER",-215.83f,461.34f,115.1f)
+		Turn("LEADER",340.0f,360.0f)
+		ResetPartyPos()
+		ResetFollowPoint()
+		RotateCamera(0, 205.0f, 0)				// 角度
+		CallFunc("system:camera_reset")
+		ResetStopFlag(STOPFLAG_EVENT)
+		FadeIn(FADE_BLACK, FADE_FAST)
+	}
+
+	function "6408_entry"
+	{
+		VisualName("visual/mapname/mn_4111.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//浸食谷
+		SetFlag( TF_MAPNAME_SHOWN, 1 )				// 地名表示した（テンポラリ）
+		SetStopFlag(STOPFLAG_EVENT)
+		RestoreEventState()
+		ReleaseEventPartyChr()
+		ResetMapParam(-1)
+		CallFunc("6408:init")
+		SetChrPos("LEADER",-237.51f,511.56f,115.77f)
+		Turn("LEADER",160.0f,360.0f)
+		ResetPartyPos()
+		ResetFollowPoint()
+		RotateCamera(0, 25.0f, 0)				// 角度
+		CallFunc("system:camera_reset")
+		ResetStopFlag(STOPFLAG_EVENT)
+		FadeIn(FADE_BLACK, FADE_FAST)
+	}
+
+	function "6401_entry"
+	{
+		VisualName("visual/mapname/mn_6401.itp",VN_NAMEMAP2,-1,-1,VN_MAPNAME_TIME)//浸食谷
+		SetFlag( TF_MAPNAME_SHOWN, 1 )				// 地名表示した（テンポラリ）
+		SetStopFlag(STOPFLAG_EVENT)
+		RestoreEventState()
+		ReleaseEventPartyChr()
+		ResetMapParam(-1)
+		CallFunc("6401:init")
+		SetChrPos("LEADER",-8.05f,-94.72f,0.0f)
+		Turn("LEADER",180.0f,360.0f)
+		ResetPartyPos()
+		ResetFollowPoint()
+		RotateCamera(0, 0.0f, 0)				// 角度
+		CallFunc("system:camera_reset")
+		ResetStopFlag(STOPFLAG_EVENT)
+		FadeIn(FADE_BLACK, FADE_FAST)
 	}
 
 	function "warpmask"

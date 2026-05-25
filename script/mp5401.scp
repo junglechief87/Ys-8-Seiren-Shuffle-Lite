@@ -91,7 +91,7 @@ function "Retry_M04S090"
 	WaitFade()
 
 	SetChrWorkGroup(M1014,	CWK_EXPMUL,	9.0f)
-	SetChrWorkGroup(M1011,	CWK_EXPMUL,	9.0f)
+	SetChrWorkGroup(M1011,	CWK_EXPMUL,	20.0f)
 	
 	//ボス配置・アニメ--------------------------------
 	SetFlag(TF_KILLENEMY_CNT, 0)

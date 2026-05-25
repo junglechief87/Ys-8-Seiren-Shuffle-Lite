@@ -291,7 +291,7 @@ function "EV_RetryBoss"
 	CallFunc("mp6310b:show_boss")
 	Wait(1)
 
-	CallFunc("rng:bossScaling")
+	CallFunc("rng:finalBossLevel")
 	if (FLAG[GF_MP6310B_ENDROGRAM_STEP] == 0)	// 第一段階・触手戦
 	{
 		CallFunc("mp6310b:Phase1_set")
@@ -2184,7 +2184,8 @@ function "EV_M06S245_ED"
 	CallFunc("mp6310b:boss3_end")
 	SetFlag(SF_BOSS_BATTLE, 0)
 
-	EventCue("mp6310b:EV_M06S241")
+	//EventCue("mp6310b:EV_M06S241")
+	EventCue("rng:ending")
 	ResetStopFlag(STOPFLAG_SIMPLEEVENT2)
 
 	//終了処理ここまで----------------------------------------------------
@@ -3689,7 +3690,7 @@ function "EV_M06S244_ED"
 		else
 		{
 			//フラグ処理
-			SetFlag(GF_06MPxxxx_6TH_CHAPTER_FINISH,1)// 第六部了
+			//SetFlag(GF_06MPxxxx_6TH_CHAPTER_FINISH,1)// 第六部了
 			SetFlag( GF_CAMP_SHIPYARD_LV, 9 )	// 漂流村の発展設定：造船所LV9
 			SetFlag(SF_CAMP_CANT_EQUIP, 0)	// キャンプメニュー：装備禁止解除
 			SetFlag(SF_BOSS_BATTLE, 0)		//ボス戦終了
@@ -3779,10 +3780,10 @@ function "EV_M06S244_ED"
 			StopBGM(30)
 			SetFlag(SF_NOCHANGEBGM, 1)
 
-			SetFlag(GF_MP1202_NOW,1)		//屋内に直接飛ぶ場合
+			//SetFlag(GF_MP1202_NOW,1)		//屋内に直接飛ぶ場合
 			//LoadArg("map/mp1201/mp1201.arg")
 			//EventCue("mp1201:EV_M07S000")
-			CallFunc("rng:ending")
+			//CallFunc("rng:ending")
 
 			SetEnvSEPlayState(-1, 0)	//環境SE全停止
 

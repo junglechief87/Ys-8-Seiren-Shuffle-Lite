@@ -7778,7 +7778,7 @@ function "EV_M07S100_ED"
 	if ( !FLAG[SF_GALLERY_EVENT] )
 	{
 		// フラグ処理
-		SetFlag(GF_07MP6409_DUNGEON_CLEAR, 1)
+		//SetFlag(GF_07MP6409_DUNGEON_CLEAR, 1)
 		////SetDiaryCharaFlag( DRCHA_DANA, DRCHA_FLAG_INFO4, 1 )	//★人物メモ：追加情報の開放４（ダーナ）	ダーナ（２）側のみの登録なので、ダーナ（１）側はマスクしてあります
 		//SetDiaryCharaFlag( DRCHA_DANA2, DRCHA_FLAG_INFO4, 1 )	//★人物メモ：追加情報の開放４（ダーナ）
 		SetFlag(SF_BOSS_BATTLE,0)				// ボスバトルを下ろす
@@ -7792,7 +7792,7 @@ function "EV_M07S100_ED"
 		StopBGM(60)
 		SetFlag(SF_NOCHANGEBGM, 1)
 
-		CallFunc("rng:ending2")
+		//CallFunc("rng:ending2")
 		//LoadArg("map/mp1201t3/mp1201t3.arg")
 		//EventCue("mp1201:EV_M07S110")	// NEXT：ＥＤⅢ セイレン島を脱出する
 		ResetStopFlag(STOPFLAG_EVENTIMPOSE)

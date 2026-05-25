@@ -22,6 +22,7 @@
 // init
 function "init"
 {
+	EventCue("rng:dungeonEntrances")
 	
 	// ボス戦用扉開ける
 	MapAnime("CT_stopper","CT_down")	//逃げられないストッパーOFF

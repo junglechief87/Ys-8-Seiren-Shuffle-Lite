@@ -1,7 +1,9 @@
 import random
 import os
 from shared.functions import *  
-from patch.crew import getCrewFlags
+from patch.script_constants.crew import CREW_FLAGS
+from patch.script_constants.bossCue import BOSS_CUE, pastModeToggle, getBossCue
+from patch.script_constants.fscWarp import FSC_WARP
 from patch.gameStartFunctions import *
 from patch.chestPatcher import *
 from patch.miscPatches import randomizeOctoBosses, newExpMult
@@ -81,18 +83,31 @@ TREASURE_SCRIPTS = {
 "317":  "mp6531m:EvOpenTBox",
 "291":  "mp6519:EvOpenTBox",
 "288":  "mp6513:EvOpenTBox",
-"239":  "mp6345:SubEV_05_Get_Bell_ED",
 "19":   "mp0408:EV_M05S152_ED",
 "18":   "mp0405:EV_M05S170_ED",
 "13":   "mp0404:EV_M05S150_ED",
 "9":    "mp0403:EV_M05S151_ED"
 }
 
+FINAL_BOSS_OPTIONS = {
+    0: "Theos",
+    1: "Origin",
+    2: "Theos and Origin",
+    3: "Io",
+}
+
+ENDING = (
+    '\tLoadArg("map/mp0021/mp0021.arg")\n'
+    '\tEventCue("mp0021:EV_M07S130")\n'
+    '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
+)
+
 helperText = False
 
 def rngPatcherMain(patch, progress_callback=None):
     global patchFile
     global helperText
+    random.seed(patch.settings['seed'])
 
     patchFile = ''
     helperText = patch.settings['options']['helper_text']
@@ -122,12 +137,12 @@ def rngPatcherMain(patch, progress_callback=None):
     #    restore_original_bgm()
 
     for inc in SCP_INCLUDE_LIST:
-        patchFile = patchFile + inc + '\n'
+        patchFile += inc + '\n'
     
     # opening cutscene
-    patchFile = patchFile + buildStartParameters(patch) 
-    patchFile = patchFile + manageEarlyGameParty(patch)
-    patchFile = patchFile + soloStartingCharacterEvent(patch)
+    patchFile += buildStartParameters(patch) 
+    patchFile += manageEarlyGameParty(patch)
+    patchFile += soloStartingCharacterEvent(patch)
 
     duplicateChests = [47,48,49,179]
     for location in patch.item_map:
@@ -141,55 +156,55 @@ def rngPatcherMain(patch, progress_callback=None):
                 script = ""
 
             if loc_data['item_type'] in ['Item', '']: # blank is mostly for offworld items
-                patchFile = patchFile + genericItemMessage(loc_id, patch, script)
+                patchFile += genericItemMessage(loc_id, patch, script)
             elif loc_data['category'] == 'Crew':
-                patchFile = patchFile + buildCrewLocation(loc_id, patch, script)
+                patchFile += buildCrewLocation(loc_id, patch, script)
             elif 'Skill' in loc_data['category']: #skills contain the character name in the category
-                patchFile = patchFile + buildSkillLocation(loc_id, patch, script)
+                patchFile += buildSkillLocation(loc_id, patch, script)
             elif loc_data['category'] == 'Landmark':
-                patchFile = patchFile + buildLandmarks(loc_id, patch, script)
+                patchFile += buildLandmarks(loc_id, patch, script)
         if progress_callback:
             progress_callback(f"Building location from item map: {location}")
 
     # Handling Options
-    bossLevelsScript = bossLevels()
-    patchFile = patchFile + bossLevelsScript
+    bossLevelsScript = bossLevels(patch.boss_stats, patch.settings['options'])
+    patchFile += bossLevelsScript
 
     if patch.settings['options']['final_boss_access'] == 2:
-        patchFile = patchFile + buildPsyches(patch.settings)
+        patchFile += buildPsyches(patch.settings)
     if patch.settings['options']['former_sanctuary_crypt'] == 1:
-        patchFile = patchFile + buildFSCWarp()
+        patchFile += FSC_WARP
     if patch.settings['options']['dungeon_entrance_shuffle'] == 1:
-        patchFile = patchFile + buildEntrances(patch.dungeon_entrance_randomization, patch.settings['options'])
+        patchFile += buildEntrances(patch.dungeon_entrance_randomization, patch.settings['options'])
     if patch.settings['options']['octus_paths_opened'] == 1:
-        patchFile = patchFile + octoBosses(patch.settings)
+        patchFile += octoBosses(patch.settings)
     else:
         #this is to restore the original values
         randomizeOctoBosses(patch.settings)
     if progress_callback:
         progress_callback("Handling options")
 
-    patchFile = patchFile + interceptionHandler(patch.settings['options'])
+    patchFile += interceptionHandler(patch.settings['options'])
     if progress_callback:
         progress_callback("Setting up interceptions")
 
-    patchFile = patchFile + jewelTrade(patch.item_map)
+    patchFile += jewelTrade(patch.item_map)
     if progress_callback:
         progress_callback("Setting up Dina's shop")
 
-    patchFile = patchFile + talkHints(patch.item_map)
+    patchFile += talkHints(patch.item_map)
     if progress_callback:
         progress_callback("Setting up NPC item hints")
 
-    patchFile = patchFile + octusGoal(patch.settings['options'])
+    patchFile += octusGoal(patch.settings['options'])
     if progress_callback:
         progress_callback("Setting up goal")
 
-    patchFile = patchFile + goal(patch.settings['options'])
+    patchFile += goal(patch.settings['options'])
     if progress_callback:
         progress_callback("Setting up final boss")
 
-    patchFile = patchFile + endingHandler(patch.settings['options'])
+    patchFile += endingHandler(patch.settings['options'])
     expMult(patch.settings['options'])
     if progress_callback:
         progress_callback("Setting up ending")
@@ -250,9 +265,9 @@ def genericItemMessage(location_id, patch, vanillaScript):
             f"\t\tSetFlag( GF_02MP1201_JOIN_KATRIN , 1 )\n"
             f"\t}}\n"
         )
-    elif itemId == 764:
+    elif itemId == 764: #Progressive Raid List
         eventScripts += (
-            f"\tif(!FLAG[DF_JOIN_KATRIN])\n"
+            f"\tif(!FLAG[DF_JOIN_DOGI])\n"
             f"\t{{\n"
             f"\t\tGetItem(ICON3D_143,1) \n"
             f"\t\tSetDiaryFlag( DF_JOIN_DOGI, 1 ) //Footprint memo: Rescued Dogi.\n"
@@ -269,7 +284,7 @@ def genericItemMessage(location_id, patch, vanillaScript):
 #function used for all people function generations
 def buildCrewLocation(location_id, patch, vanillaScript):
     loc_data = patch.item_map[location_id]
-    crewFlags = getCrewFlags(loc_data['item_name'])
+    crewFlags = CREW_FLAGS.get(loc_data['item_name'], "")
     eventScripts = crewFlags + vanillaScript
     return formatGetItemScript(location_id, loc_data, eventScripts, message_type="castaway", isParty=loc_data['party_flag'])
 
@@ -294,13 +309,15 @@ def buildLandmarks(location_id, patch, vanillaScript):
 # ==========================================================================================================
 # Boss Scaling Function
 # ==========================================================================================================
-def bossLevels():
-    return "function \"bossLevels\"\n{\n\t//placeholder to keep existing build functioning until features are implemented\n}\n"
+def bossLevels(boss_stats, settings):
+    if settings['shuffle_boss_levels'] == 0:
+        return "function \"bossScaling\"\n{\n\t\n}\n"
+    
     HPmod = 0.5
     fscBossesHP = ''
     fscBosses = ''
-    script = '\tfunction "bossScaling"\n\t{\n'
-    for boss in boss_levels:
+    script = '\tfunction \"bossScaling\"\n\t{\n'
+    for boss in boss_stats.values():
         boss_id = boss['boss_id']
         level = boss['level']
         script += f'\t\tSetChrWorkGroup({boss_id}, CWK_LV, {level})\n'
@@ -325,18 +342,6 @@ def bossLevels():
                 script += f'\t\tSetChrWorkGroup({boss}, CWK_LV, {level + 1})\n'
         # Special case: B170 (Melaiduma)
         elif boss_id == 'B170':
-            fscBossesHP = (
-                f'\t\tSetChrWorkGroup(B103, CWK_MAXHP, (B103.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
-                f'\t\tSetChrWorkGroup(B103, CWK_HP, (B103.CHRWORK[CWK_MAXHP]))\n'
-                f'\t\tSetChrWorkGroup(B006, CWK_MAXHP, (B006.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
-                f'\t\tSetChrWorkGroup(B006, CWK_HP, (B006.CHRWORK[CWK_MAXHP]))\n'
-                f'\t\tSetChrWorkGroup(B001, CWK_MAXHP, (B001.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
-                f'\t\tSetChrWorkGroup(B001, CWK_HP, (B001.CHRWORK[CWK_MAXHP]))\n'
-                f'\t\tSetChrWorkGroup(B105, CWK_MAXHP, (B105.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
-                f'\t\tSetChrWorkGroup(B105, CWK_HP, (B105.CHRWORK[CWK_MAXHP]))\n'
-                f'\t\tSetChrWorkGroup(B161, CWK_MAXHP, (B161.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
-                f'\t\tSetChrWorkGroup(B161, CWK_HP, (B161.CHRWORK[CWK_MAXHP]))\n'
-            )
             fscBosses = (
                 f'\n\tfunction \"fscBosses\"\n'
                 f'\t{{\n'
@@ -345,7 +350,6 @@ def bossLevels():
                 f'\t\tSetChrWorkGroup(B001, CWK_LV, {max(1, level-14)})\n'
                 f'\t\tSetChrWorkGroup(B105, CWK_LV, {max(1, level-16)})\n'
                 f'\t\tSetChrWorkGroup(B161, CWK_LV, {max(1, level-18)})\n'
-                f'\n{fscBossesHP}\n'
                 f'\t}}\n'
             )
     script += '\t}'
@@ -358,87 +362,6 @@ def bossLevels():
 #New version of this script hacks the checkpoint in Castaway Village and uses the boss flags for activation of the custom shop
 #The boss menu is essentially a custom shop, it uses Dina's jewel trade menu as a base, there are two version of it depending on game mode
 def buildPsyches(settings):
-    bossCue = {
-        "Psyche-Hydra Psyches": {
-            'mapLoad': 'LoadArg("map/mp6305b/mp6305b.arg")',
-            'eventCue': 'EventCue("mp6305b:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6305b',
-            'characterID': 'B112'
-        },
-        "Psyche-Minos Psyches": {
-            'mapLoad': 'LoadArg("map/mp6306b/mp6306b.arg")',
-            'eventCue': 'EventCue("mp6306b:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6306b',
-            'characterID': 'B110'
-        },
-        "Psyche-Nestor Psyches": {
-            'mapLoad': 'LoadArg("map/mp6307b/mp6307b.arg")',
-            'eventCue': 'EventCue("mp6307b:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6307b',
-            'characterID': 'B111'
-        },
-        "Psyche-Ura Psyches": {
-            'mapLoad': 'LoadArg("map/mp6308b/mp6308b.arg")',
-            'eventCue': 'EventCue("mp6308b:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6308b',
-            'characterID': 'B008'
-        },
-        "Le-Erythos Psyches": {
-            'mapLoad': 'LoadArg("map/mp6409b/mp6409b.arg")',
-            'eventCue': 'EventCue("mp6409b:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6409B',
-            'characterID': 'B012'
-        },
-        "Grazios Psyches": {
-            'mapLoad': 'LoadArg("map/mp6519m/mp6519m.arg")',
-            'eventCue': 'EventCue("mp6519m:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6519M',
-            'characterID': 'B161',
-            'pastMode': True
-        },
-        "Nebritia Psyches": {
-            'mapLoad': 'LoadArg("map/mp6529m/mp6529m.arg")',
-            'eventCue': 'EventCue("mp6529m:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6529M',
-            'characterID': 'B162',
-            'pastMode': True
-        },
-        "Argura Psyches": {
-            'mapLoad': 'LoadArg("map/mp6539m/mp6539m.arg")',
-            'eventCue': 'EventCue("mp6539m:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6539M',
-            'characterID': 'B163',
-            'pastMode': True
-        },
-        "Crusos Psyches": {
-            'mapLoad': 'LoadArg("map/mp6549m/mp6549m.arg")',
-            'eventCue': 'EventCue("mp6549m:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6549M',
-            'characterID': 'B011',
-            'pastMode': True
-        },
-        "Blasphima Psyches": {
-            'mapLoad': 'LoadArg("map/mp6559m/mp6559m.arg")',
-            'eventCue': 'EventCue("mp6559m:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6559M',
-            'characterID': 'B164',
-            'pastMode': True
-        },
-        "Le-Kyanos Psyches": {
-            'mapLoad': 'LoadArg("map/mp6204m/mp6204m.arg")',
-            'eventCue': 'EventCue("mp6204m:EV_Boss_Jump")',
-            'mapID': 'MN_F_MP6204M',
-            'characterID': 'B165',
-            'pastMode': True
-        },
-        "Melaiduma Psyches": {
-            'mapLoad': 'LoadArg("map/mp6569/mp6569.arg")',
-            'eventCue': 'EventCue("mp6569:EV_RetryBoss")',
-            'mapID': 'MN_D_MP6569',
-            'characterID': 'B170',
-            'pastMode': True
-        }
-    }
     
     bossFlagDict = {
         "Silent Tower Second Basement Mephorash Psyches": {'FLAG': 'FLAG[GF_SUBEV_06_6413_KILL_BOSS]', 'simpleName': 'Silent Tower Boss'},
@@ -462,9 +385,16 @@ def buildPsyches(settings):
     }
     
     # Build warden scaling once
-    wardenScaling = 'SetChrWork("b012", CWK_MAXHP, (b012.CHRWORK[CWK_MAXHP] * 3.0f))\nSetChrWork("b012", CWK_HP, (b012.CHRWORK[CWK_MAXHP]))\n'
+    wardenScaling = ('\tSetChrWork("b012", CWK_MAXHP, (b012.CHRWORK[CWK_MAXHP] * 3.0f))\n'
+                     '\tSetChrWork("b012", CWK_HP, (b012.CHRWORK[CWK_MAXHP]))\n'
+                     f'\tSetChrWork("B161", CWK_LV, {random.randrange(65,75)})\n'
+                     f'\tSetChrWork("B162", CWK_LV, {random.randrange(65,75)})\n'
+                     f'\tSetChrWork("B163", CWK_LV, {random.randrange(65,75)})\n'
+                     f'\tSetChrWork("B011", CWK_LV, {random.randrange(65,75)})\n'
+                     f'\tSetChrWork("B164", CWK_LV, {random.randrange(65,75)})\n'
+                     f'\tSetChrWork("B165", CWK_LV, {random.randrange(65,75)})\n')
     if settings['options']['former_sanctuary_crypt'] == 0:
-        wardenScaling += 'SetChrWork(B170, CWK_LV, 65)\n'
+        wardenScaling += f'\tSetChrWork(B170, CWK_LV, {random.randrange(65,75)})\n'
     
     bossCheckpoint = (
         '\n'
@@ -491,14 +421,10 @@ def buildPsyches(settings):
         flagKey = psycheFlag[rewards[psyche]]
         simpleName = bossFlagDict[accessBoss]["simpleName"]
         bossName = psyche[:psyche.rfind(" ")]
-
-        if bossCue[psyche].get('pastMode', False):
-            pastModeOn = '\t\tSetFlag(SF_PAST_MODE, 1)\n'
-            pastModeOff = '\t\tSetFlag(SF_PAST_MODE, 0)\n'
-        else:
-            pastModeOn = ''
-            pastModeOff = ''
         
+        pastModeOn, pastModeOff = pastModeToggle(psyche)
+        mapLoad, eventCue = getBossCue(psyche)
+
         formattedPsyche = f"{simpleName}:{rewards[psyche]}({bossName})"
         enabledFormattedPsyche = f"{GOLD}{formattedPsyche}"
         
@@ -521,18 +447,19 @@ def buildPsyches(settings):
             f"\t{{\n"
             f"\t\tMenuClose(10, 0)\n"
             f"\t\tSetFlag(GF_TBOX_DUMMY127,1)\n\t\tGetItem(ICON3D_831,1)\n"
-            f"{pastModeOn}"
-            f"\t\t{bossCue[psyche]['mapLoad']}\n"
-            f"\t\t{bossCue[psyche]['eventCue']}\n\t\tWaitFade()\n"
+            f"\t\t{pastModeOn}\n"
+            f"\t\t{mapLoad}\n"
+            f"\t\t{eventCue}\n"
+            f"\t\tWaitFade()\n"
             f"\t}}"
         )
         
         bossReturn += (
             f"\n"
-            f"\t{condition}(WORK[WK_MAPNAMENO] == {bossCue[psyche]['mapID']})\n"
+            f"\t{condition}(WORK[WK_MAPNAMENO] == {BOSS_CUE[psyche]['mapID']})\n"
             f"\t{{\n"
             f"\t\tSetFlag({flagKey},1)\n"
-            f"{pastModeOff}"
+            f"\t\t{pastModeOff}\n"
             f"\t}}"
         )
         
@@ -558,7 +485,7 @@ def buildPsyches(settings):
         '\n'
         'function "wardenScaling"\n'
         '{\n'
-        f'\t{wardenScaling}\n'
+        f'{wardenScaling}'
         '}\n'
         '\n'
         'function "bossReturn"\n'
@@ -572,114 +499,6 @@ def buildPsyches(settings):
     
     return bossCheckpoint
 
-# ==========================================================================================================
-#  FSC Checkpoint Function
-# ==========================================================================================================
-def buildFSCWarp():
-    function = ''
-    function = function + """
-function "FSC_warp"
-{
-    SetStopFlag(STOPFLAG_TALK)
-    SetFlag(TF_MENU_SELECT2, 0)
-    MenuReset()
-    MenuType(MENUTYPE_POPUP)
-
-    if(FLAG[GF_TBOX_DUMMY156])
-    {
-        MenuAdd(10, "1F - Chamber of Braziers, Ent")	
-    }
-    else if(!FLAG[GF_TBOX_DUMMY156])
-    {
-        MenuAdd(11, "1F - Chamber of Braziers, Ent")	
-    }
-
-    if(FLAG[GF_TBOX_DUMMY157])
-    {
-        MenuAdd(20, "2F - Chamber of Stone, Ent")	
-    }
-    else if(!FLAG[GF_TBOX_DUMMY157])
-    {
-        MenuAdd(21, "2F - Chamber of Stone, Ent")	
-    }
-
-    if(FLAG[GF_TBOX_DUMMY158])
-    {
-        MenuAdd(30, "3F - Chamber of Clairvoyance, Ent")	
-    }
-    else if(!FLAG[GF_TBOX_DUMMY158])
-    {
-        MenuAdd(31, "3F - Chamber of Clairvoyance, Ent")	
-    }
-
-    if(FLAG[GF_TBOX_DUMMY159])
-    {
-        MenuAdd(40, "4F - Chamber of Frost, Ent")	
-    }
-    else if(!FLAG[GF_TBOX_DUMMY159])
-    {
-        MenuAdd(41, "4F - Chamber of Frost, Ent")	
-    }
-
-    if(FLAG[GF_TBOX_DUMMY160])
-    {
-        MenuAdd(50, "5F - Chamber of Magma, Ent")	
-    }
-    else if(!FLAG[GF_TBOX_DUMMY160])
-    {
-        MenuAdd(51, "5F - Chamber of Magma, Ent")	
-    }
-
-    MenuEnable( 11, 0)
-    MenuEnable( 21, 0)
-    MenuEnable( 31, 0)
-    MenuEnable( 41, 0)
-    MenuEnable( 51, 0)
-    MenuOpen( TF_MENU_SELECT2 , 283 , ADOLMENU_PPOSY , -2 , -2 , 10 , 1)
-    WaitMenu(0)
-    CloseMessage(6,0)
-    WaitCloseMessage(6)
-    MenuClose(10, 0)
-    
-    if(FLAG[TF_MENU_SELECT2] == 10)
-    {
-        MenuClose(10, 0)
-        LoadArg("map/mp6511/mp6511.arg")
-        EventCue("mp6511:init")
-        WaitFade()
-    }
-    else if(FLAG[TF_MENU_SELECT2] == 20)
-    {
-        MenuClose(20, 0)
-        LoadArg("map/mp6521/mp6521.arg")
-        EventCue("mp6521:init")
-        WaitFade()
-    }
-    else if(FLAG[TF_MENU_SELECT2] == 30)
-    {
-        MenuClose(30, 0)
-        LoadArg("map/mp6531/mp6531.arg")
-        EventCue("mp6531:init")
-        WaitFade()
-    }
-    else if(FLAG[TF_MENU_SELECT2] == 40)
-    {
-        MenuClose(40, 0)
-        LoadArg("map/mp6541/mp6541.arg")
-        EventCue("mp6541:init")
-        WaitFade()
-    }
-            else if(FLAG[TF_MENU_SELECT2] == 50)
-    {
-        MenuClose(50, 0)
-        LoadArg("map/mp6551/mp6551.arg")
-        EventCue("mp6551:init")
-        WaitFade()
-    }
-    ResetStopFlag(STOPFLAG_TALK)
-}
-"""
-    return function
 # ==========================================================================================================
 #  Dina's Shop Function (Jewel Trade)
 # ==========================================================================================================
@@ -1197,22 +1016,23 @@ def goal(options):
 #  Randomize Octus Bosses and levels, also make them more rewarding.
 # ==========================================================================================================
 def octoBosses(settings):
-    random.seed(settings['seed'])
     octoBossAliases = ['"ev_mons01"','"ev_mons02"','"ev_mons03"','"ev_mons04"','"ev_mons05"','"ev_mons06"','"ev_mons07"','"ev_mons08"','"ev_mons09"','"ev_mons10"']
     #octus bosses exp and HP go up based on bosses leading into the end game. This is to help prep for the final boss.
     #the HP mod is just a percentage of a rough approcimation of the highest level the final boss could get to if unlucky.
-    HPmod = 0.9
+    HPmod = 0.7
     EXPMod = 10.0
-    script = 'function "setOctoBossLevels"\n\t{\n'
+    script = ''
     for boss in octoBossAliases:
         bossLevel = random.randrange(65,75)
         script += (
-            f'\t\tSetLevel({boss}, {bossLevel})\n'
-            f'\t\tSetChrWork({boss}, CWK_MAXHP, ({boss}.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
-            f'\t\tSetChrWork({boss}, CWK_HP, ({boss}.CHRWORK[CWK_MAXHP]))\n'
-            f'\t\tSetChrWork({boss}, CWK_EXPMUL, {EXPMod}f)\n'
+            f'function "set_{boss.replace("\"", "")}"\n'
+            '{\n'
+            f'\tSetLevel({boss}, {bossLevel})\n'
+            f'\tSetChrWork({boss}, CWK_MAXHP, ({boss.replace("\"", "")}.CHRWORK[CWK_MAXHP] * {HPmod}))\n'
+            f'\tSetChrWork({boss}, CWK_HP, ({boss.replace("\"", "")}.CHRWORK[CWK_MAXHP]))\n'
+            f'\tSetChrWork({boss}, CWK_EXPMUL, {EXPMod}f)\n'
+            '}\n'
         )
-    script += '\t}\n'
 
     randomizeOctoBosses(settings)
 
@@ -1226,18 +1046,7 @@ def octoBosses(settings):
 #if we're only doing theos then the theos start script calls theos and the ending script calls the ending cutscene.
 #if we're doing both then the ending cutscene script instead calls origin.
 #if we're only doing origin then the theos start script calls the origin boss fight.
-#for Past Dana we only load the Io fight
 def endingHandler(options):
-    # if options.charMode == 'Past Dana':
-    #     ioFightLoad = """
-    # function "finalBoss"
-    # {
-    #     LoadArg("map/mp6569m/c.arg")
-	#     EventCue("mp6569m:EV_RetryBoss")
-    # }
-    # """
-    #     return ioFightLoad + finalBossLevelScript
-    # leaving here in case we add something later and so we don't need to update the script for the selection sphere.
 
     # Phase mappings
     theos_phases = {
@@ -1275,104 +1084,84 @@ def endingHandler(options):
         )
     }
     
-    theos_phase = theos_phases[options['theos_start_phase']]
-    origin_phase = origin_phases[options['origin_start_phase']]
-    package = packages[options['origin_care_package']]
-    
-    # Final boss scripts
-    boss_scripts = {
-        0: (  # Theos only
-            (
-                '\n'
-                'function "finalBoss"\n'
-                '{\n'
-                f'\t{theos_phase}\n'
-                '\tLoadArg("map/mp6310b/mp6310b.arg")\n'
-                '\tEventCue("mp6310b:EV_M06S240")\n'
-                '}\n'
-            ),
-            (
-                '\n'
-                'function "ending"\n'
-                '{\n'
-                '\tLoadArg("map/mp0021/mp0021.arg")\n'
-                '\tEventCue("mp0021:EV_M07S130")\n'
-                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
-                '}\n'
-                'function "ending2"\n'
-                '{\n'
-                '\tLoadArg("map/mp0021/mp0021.arg")\n'
-                '\tEventCue("mp0021:EV_M07S130")\n'
-                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
-                '}\n'
-            )
-        ),
-        1: (  # Origin only
-            (
-                '\n'
-                'function "finalBoss"\n'
-                '{\n'
-                f'\t{origin_phase}\n'
-                '\tLoadArg("map/mp8323/mp8323.arg")\n'
-                '\tEventCue("mp8323:init")\n'
-                '}\n'
-            ),
-            (
-                '\n'
-                'function "ending"\n'
-                '{\n'
-                '\tLoadArg("map/mp0021/mp0021.arg")\n'
-                '\tEventCue("mp0021:EV_M07S130")\n'
-                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
-                '}\n'
-                'function "ending2"\n'
-                '{\n'
-                '\tLoadArg("map/mp0021/mp0021.arg")\n'
-                '\tEventCue("mp0021:EV_M07S130")\n'
-                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
-                '}\n'
-            )
-        ),
-        2: (  # Both (Theos -> Origin)
-            (
-                '\n'
-                'function "finalBoss"\n'
-                '{\n'
-                f'\t{theos_phase}\n'
-                '\tLoadArg("map/mp6310b/mp6310b.arg")\n'
-                '\tEventCue("mp6310b:EV_M06S240")\n'
-                '}\n'
-            ),
-            (
-                '\n'
-                'function "ending"\n'
-                '{\n'
-                f'\t{origin_phase}\n'
-                f'\t{package}\n'
-                '\tLoadArg("map/mp8323/mp8323.arg")\n'
-                '\tEventCue("mp8323:init")\n'
-                '}\n'
-                'function "ending2"\n'
-                '{\n'
-                '\tLoadArg("map/mp0021/mp0021.arg")\n'
-                '\tEventCue("mp0021:EV_M07S130")\n'
-                '\tSetFlag(GF_TBOX_DUMMY120,1)\n'
-                '}\n'
-            )
-        )
-    }
-    
-    theos_script, ending_script = boss_scripts[options['final_boss']]
-    
-    finalBossLevelScript = (
-        '\n'
-        'function "finalBossLevel"\n'
-        '{\n'
-        '}\n'
-    )
-    
-    return theos_script + ending_script + finalBossLevelScript
+    final_boss = FINAL_BOSS_OPTIONS[options['final_boss']]
 
+    if final_boss == "Theos and Origin":
+        mapLoadTheos, eventCueTheos = getBossCue("Theos")
+        mapLoadOrigin, eventCueOrigin = getBossCue("Origin")
+    else:
+        mapLoad, eventCue = getBossCue(final_boss)
+    
+    pastModeOn, pastModeOff = pastModeToggle(final_boss)
+
+    boss_flags = {
+        "Theos": theos_phases[options['theos_start_phase']],
+        "Origin": origin_phases[options['origin_start_phase']],
+    }
+
+    if final_boss != "Theos and Origin":
+        final_boss_script = (   
+            '\n'
+            'function "finalBoss"\n'
+            '{\n'
+            f'\t{pastModeOn}\n'
+            f'\t{boss_flags.get(final_boss, "")}\n'
+            f'\t{mapLoad}\n'
+            f'\t{eventCue}\n'
+            '}\n'
+        )
+        if final_boss != "Origin":
+            ending_scripts = (
+                '\n'
+                'function "ending"\n'
+                '{\n'
+                f'\t{pastModeOff}\n'
+                f'{ENDING}'
+                '}\n'
+                'function "ending2"\n'
+                '{\n'
+                '}\n'
+            )
+        else:
+            ending_scripts = (
+                '\n'
+                'function "ending"\n'
+                '{\n'          
+                '}\n'
+                'function "ending2"\n'
+                '{\n'
+                f'{ENDING}'
+                '}\n'
+            )
+
+    else:
+        package = packages[options['origin_care_package']]
+        final_boss_script = (   
+            '\n'
+            'function "finalBoss"\n'
+            '{\n'
+            f'\t{pastModeOn}\n'
+            f'\t{boss_flags["Theos"]}\n'
+            f'\t{mapLoadTheos}\n'
+            f'\t{eventCueTheos}\n'
+            '}\n'
+        )
+        ending_scripts = (
+            '\n'
+            'function "ending"\n'
+            '{\n'
+            f'\t{package}\n'
+            f'\t{boss_flags["Origin"]}\n'
+            f'\t{mapLoadOrigin}\n'
+            f'\t{eventCueOrigin}\n'
+            '}\n'
+            'function "ending2"\n'
+            '{\n'
+            f'{ENDING}'
+            '}\n'
+        )
+    
+    return final_boss_script + ending_scripts
 # ==========================================================================================================
 #  Exp Muiltiplier handling and scaled exp items.
 # ==========================================================================================================

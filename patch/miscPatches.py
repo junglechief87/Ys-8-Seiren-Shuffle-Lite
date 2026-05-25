@@ -69,25 +69,26 @@ def miscFixes(progress_callback=None):
     if progress_callback:
         progress_callback(f"Fixed: {os.path.basename(locFile)}")
 
-    #executable patches
-    exeBytes = readFileIntoBuffer(config.executable_path)
+    #remove talk script from thanatos near palace
+    nearPalaceLocFile = getLocFile('mp6204', 'map')
+    fileBytes = readFileIntoBuffer(nearPalaceLocFile)
+    thanatosLoc = fileBytes.find('talk:Talk_Thanatos'.encode('utf-8'))
+    fileBytes = writeStringToBytes(fileBytes, thanatosLoc, '------------------') #removes the script name so it won't be able to call it, effectively removing the talk option for thanatos near the palace
+    writeBufferIntoFile(nearPalaceLocFile,fileBytes)
 
-    """
-    # remove exp level scaling: old but might be useful in the future so commenting it out
-    exeBytes[0x29B61C:0x29B61E] = [0x29,0xC9] #convert opcode sub ecx, ebp to sub ecx, ecx
-    exeBytes[0x29B64F:0x29B651] = [0x29,0xC9] #convert opcode sub ecx, ebp to sub ecx, ecx
-    exeBytes[0x29B632:0x29B634] = [0x29,0xC9] #convert opcode sub ecx, ebp to sub ecx, ecx
-    exeBytes[0x29B665:0x29B667] = [0x29,0xC0] #convert opcode sub eax, ebp to sub eax, eax
-    
-    # Caps min exp to enemy base exp
-    exeBytes[0x28FCFC:0x28FD04] = [0xF3,0x0F,0x10,0x05,0xDC,0x83,0x31,0x00]
-    exeBytes[0x28FD0E:0x28FD16] = [0xF3,0x0F,0x10,0x05,0xCA,0x83,0x31,0x00]
-    exeBytes[0x29B698:0x29B6A0] = [0xF3,0x0F,0x10,0x05,0x40,0xCA,0x30,0x00]
-    # removing until I understand these formulas better.
-    """
-    writeBufferIntoFile(config.executable_path,exeBytes)
     if progress_callback:
-        progress_callback(f"Patched: {os.path.basename(config.executable_path)}")
+        progress_callback(f"Patched: {os.path.basename(nearPalaceLocFile)}")
+
+    ys8EXE = config.executable_path
+    exeBytes = readFileIntoBuffer(ys8EXE)
+    exeBytes[0x29B1BA:0x29B1C3] = [0xF3,0x44,0x0F,0x59, 0x15, 0x21, 0xCF, 0x30, 0x00] 
+    # Changes ys8.exe+29BDBA - F3 44 0F59 15 D5653100  - mulss xmm10,[ys8.exe+5B2398] { (0.10) }
+    # to ys8.exe+29BDBA - F3 44 0F59 15 21CF3000  - mulss xmm10,[ys8.exe+5A8CE4] { (4.00) }
+    # makes raids and intercepts more rewarding
+    writeBufferIntoFile(ys8EXE, exeBytes)
+
+    if progress_callback:
+        progress_callback(f"Patched: Ys8.exe")
 
     # speeds up respawn time of exploding plants to reduce downtime in Oceanus fight
     explosivePlant = os.path.join(config.executable_directory, "chr/enemy/m0660/m0660.mtb")
@@ -340,16 +341,16 @@ DEFAULT_EXP_VALUES = {
     'DANA3': {'EXPMIN': 102, 'EXPMAX': 520000},
 }
 
-MONSTER_NEST_EXP_VALUES = {
-    'G0001': {'EXPMIN': 80, 'EXPMAX': 80},
-    'G0002': {'EXPMIN': 100, 'EXPMAX': 100},
-    'G0003': {'EXPMIN': 120, 'EXPMAX': 120},
-    'G0004': {'EXPMIN': 140, 'EXPMAX': 140},
-    'G0005': {'EXPMIN': 160, 'EXPMAX': 160},
-    'G0006': {'EXPMIN': 180, 'EXPMAX': 180},
-    'G0007': {'EXPMIN': 210, 'EXPMAX': 210},
-    'G0008': {'EXPMIN': 230, 'EXPMAX': 230},
-    'G0009': {'EXPMIN': 250, 'EXPMAX': 250},
+HUNT_BOSS_SPAWN_WAVE = {
+    "st_31_p.tbb": {"Offset": 0x72C, "OriginalValue": 0x35},
+    "st_32_p.tbb": {"Offset": 0x728, "OriginalValue": 0x35},
+    "st_33_p.tbb": {"Offset": 0x79C, "OriginalValue": 0x39},
+    "st_34_p.tbb": {"Offset": 0x762, "OriginalValue": 0x31},
+    "st_35_p.tbb": {"Offset": 0x760, "OriginalValue": 0x34},
+    "st_36_p.tbb": {"Offset": 0x751, "OriginalValue": 0x32},
+    "st_37_p.tbb": {"Offset": 0x742, "OriginalValue": 0x39},
+    "st_38_p.tbb": {"Offset": 0x784, "OriginalValue": 0x33},
+    "st_39_p.tbb": {"Offset": 0x7D5, "OriginalValue": 0x34},
 }
 
 def newExpMult(exp_multiplier):
@@ -366,15 +367,19 @@ def newExpMult(exp_multiplier):
                 row['EXPMAX'] = int(DEFAULT_EXP_VALUES[char_id]['EXPMAX'] / exp_multiplier)
                 row['属性1'] = DEFAULT_ELEMENTS[char_id]['属性1']
                 row['属性1値'] = DEFAULT_ELEMENTS[char_id]['属性1値']
-            elif char_id in MONSTER_NEST_EXP_VALUES:
-                row['EXPMIN'] = int(MONSTER_NEST_EXP_VALUES[char_id]['EXPMIN'])
-                row['EXPMAX'] = int(MONSTER_NEST_EXP_VALUES[char_id]['EXPMAX'])
             # else: leave row as-is
             newStatusFile.append(row)
     with open(statusFileLoc, 'w', encoding='utf-8') as csvFile:
         writer = csv.DictWriter(csvFile, fieldNames, delimiter='\t', lineterminator='\n', strict=True)
         writer.writeheader()
         writer.writerows(newStatusFile)
+
+    for huntFileName, data in HUNT_BOSS_SPAWN_WAVE.items():
+        huntFileLoc = os.path.join(config.executable_directory, "text/stage", huntFileName)
+        readFileIntoBuffer(huntFileLoc) 
+        huntFileBytes = readFileIntoBuffer(huntFileLoc)
+        huntFileBytes[data['Offset']] = 0x31 # changes boss spawn wave to 1
+        writeBufferIntoFile(huntFileLoc, huntFileBytes)
     
 def AddWarpToFSCCrystal(progress_callback=None):
     '''

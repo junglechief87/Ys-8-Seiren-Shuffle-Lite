@@ -7,7 +7,8 @@ import shared.config as config
 repo = fsspec.filesystem("github", org="junglechief87", repo="Ys-8-Seiren-Shuffle-Lite", sha='master')
 folders = ['script/',
            'inc/',
-           'text/en/']
+           'text/en/',
+           'text/stage/']
 
 def countOriginalGameFiles():
     """Count files to be backed up from the game directory"""

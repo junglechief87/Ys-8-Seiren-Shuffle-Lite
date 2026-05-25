@@ -1,4 +1,4 @@
-from patch.crew import *
+from patch.script_constants.crew import CREW_FLAGS
 import struct
 
 #This functions was getting too big with so many flags so I split it into it's own file
@@ -8,7 +8,7 @@ def buildStartParameters(patch):
     APScript = ''
     pastDanaFlags = '' #setting the past dana flags after loading castaway village was the only way I found to fix a problem where you spawn at a black map with either barbaros or katheew
     seed = struct.unpack('<I', struct.pack('<f', float(int(patch.settings["seed_name"]))))[0] # convert seed to float32 so it fits in the 32 bit flag space, will be stored in GF_TBOX_DUMMY117. It won't be the exact seed number but it'll be close enough for save marking.
-    startingCharacter = getCrewFlags(patch.settings["starting_character"]) 
+    startingCharacter = CREW_FLAGS[patch.settings["starting_character"]] 
 
     APScript = """
     function "setSeed"
