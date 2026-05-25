@@ -67,15 +67,26 @@ def copyOriginalGameFiles(progress_callback=None):
 def downloadFiles(progress_callback=None):
     for folder in folders:
         os.makedirs(os.path.join(config.executable_directory, folder), exist_ok=True)
-        
         # Determine encoding based on folder
         encoding = 'shift-jis' if folder in ['script/', 'inc/'] else 'utf-8'
-        
+
         for file in repo.ls(folder):
             dest_path = os.path.join(config.executable_directory, folder, file.split('/')[-1])
-            with repo.open(file, 'r', encoding=encoding, errors='surrogateescape') as src:
-                with open(dest_path, 'w', encoding=encoding, errors='surrogateescape') as dst:
-                    dst.write(src.read())
+            _, ext = os.path.splitext(dest_path)
+            ext = ext.lower()
+
+            # For .tbb files (binary game data) copy raw bytes to avoid newline/encoding changes
+            if ext == '.tbb':
+                with repo.open(file, 'rb') as src:
+                    data = src.read()
+                with open(dest_path, 'wb') as dst:
+                    dst.write(data)
+            else:
+                # Use text mode with appropriate encoding for script/text files
+                with repo.open(file, 'r', encoding=encoding, errors='surrogateescape') as src:
+                    with open(dest_path, 'w', encoding=encoding, errors='surrogateescape') as dst:
+                        dst.write(src.read())
+
             if progress_callback:
                 progress_callback(f"Downloaded: {file.split('/')[-1]}")
 
