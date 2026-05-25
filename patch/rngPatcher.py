@@ -314,7 +314,6 @@ def bossLevels(boss_stats, settings):
         return "function \"bossScaling\"\n{\n\t\n}\n"
     
     HPmod = 0.5
-    fscBossesHP = ''
     fscBosses = ''
     script = '\tfunction \"bossScaling\"\n\t{\n'
     for boss in boss_stats.values():
