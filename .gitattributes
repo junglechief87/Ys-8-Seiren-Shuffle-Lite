@@ -1,1 +1,3 @@
 *.tbb binary
+*.tbb -text -diff
+*.mtb -text -diff
