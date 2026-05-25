@@ -42,7 +42,7 @@ function "init"
 	}
 	else if( FLAG[SF_EVENT_ON] )
 	{
-		if (!FLAG[GF_SUBEV_05_6435_GET_BELL] && ALLITEMWORK[ICON3D_MT_R4_GOLD] >= 1)
+		if (!FLAG[GF_SUBEV_05_6435_GET_BELL] && ALLITEMWORK[ICON3D_SILVERBELL] >= 1)
 		{
 			EventCue("mp6345:SubEV_05_Get_Bell_ED")
 		}
