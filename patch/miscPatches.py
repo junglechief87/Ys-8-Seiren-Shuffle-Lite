@@ -376,10 +376,12 @@ def newExpMult(exp_multiplier):
 
     for huntFileName, data in HUNT_BOSS_SPAWN_WAVE.items():
         huntFileLoc = os.path.join(config.executable_directory, "text/stage", huntFileName)
-        readFileIntoBuffer(huntFileLoc) 
         huntFileBytes = readFileIntoBuffer(huntFileLoc)
-        huntFileBytes[data['Offset']] = 0x31 # changes boss spawn wave to 1
-        writeBufferIntoFile(huntFileLoc, huntFileBytes)
+        if data['Offset'] >= len(huntFileBytes):
+            print(f"Offset {data['Offset']} is out of range for file {huntFileName} (size {len(huntFileBytes)})")
+        else:
+            huntFileBytes[data['Offset']] = 0x31 # changes boss spawn wave to 1
+            writeBufferIntoFile(huntFileLoc, huntFileBytes)
     
 def AddWarpToFSCCrystal(progress_callback=None):
     '''
@@ -425,10 +427,7 @@ def AddWarpToFSCCrystal(progress_callback=None):
 
 def readFileIntoBuffer(path):
     with open(path,"rb") as buffer:
-        while (curByte := buffer.read()):
-            array = curByte
-
-    return bytearray(array)
+        return bytearray(buffer.read())
 
 def writeBufferIntoFile(path,array):
     with open(path,"wb") as buffer:
