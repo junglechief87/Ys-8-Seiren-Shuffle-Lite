@@ -1088,10 +1088,10 @@ def endingHandler(options):
     if final_boss == "Theos and Origin":
         mapLoadTheos, eventCueTheos = getBossCue("Theos")
         mapLoadOrigin, eventCueOrigin = getBossCue("Origin")
+        pastModeOn, pastModeOff = "", ""
     else:
         mapLoad, eventCue = getBossCue(final_boss)
-    
-    pastModeOn, pastModeOff = pastModeToggle(final_boss)
+        pastModeOn, pastModeOff = pastModeToggle(final_boss)
 
     boss_flags = {
         "Theos": theos_phases[options['theos_start_phase']],
