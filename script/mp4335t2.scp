@@ -25,10 +25,6 @@
 
 function "init"
 {
-	
-
-	// adding interact with cabin door to exit night exploration
-	SetChrPos("QS_505_Event_2",4.587f,-75.472f,424.600f)
 
 	if(FLAG[GF_MP433x_GIM_04] ){		// mp4335 ショートカット_復帰用倒木
 		//ショートカット１を開通状態に

@@ -319,26 +319,15 @@ def makeResourceDropsGuaranteed(progress_callback=None):
     if progress_callback:
         progress_callback(f"Updated: {os.path.basename(resourcePointDropTable)}")
 
-DEFAULT_ELEMENTS = {
-    'ADOL': {'属性1': 'ZOKU_WATER', '属性1値': 100},
-    'LAXIA': {'属性1': 'ZOKU_LIGHT', '属性1値': 100},
-    'SAHAD': {'属性1': 'ZOKU_EARTH', '属性1値': 100},
-    'HUMMEL': {'属性1': 'ZOKU_LIGHT', '属性1値': 100},
-    'RICOTTA': {'属性1': 'ZOKU_EARTH', '属性1値': 100},
-    'DANA': {'属性1': 'ZOKU_WATER', '属性1値': 100},
-    'DANA2': {'属性1': 'ZOKU_EARTH', '属性1値': 100},
-    'DANA3': {'属性1': 'ZOKU_LIGHT', '属性1値': 100},
-}
-
-DEFAULT_EXP_VALUES = {
-    'ADOL': {'EXPMIN': 100, 'EXPMAX': 500000},
-    'LAXIA': {'EXPMIN': 95, 'EXPMAX': 450000},
-    'SAHAD': {'EXPMIN': 105, 'EXPMAX': 550000},
-    'HUMMEL': {'EXPMIN': 90, 'EXPMAX': 420000},
-    'RICOTTA': {'EXPMIN': 97, 'EXPMAX': 480000},
-    'DANA': {'EXPMIN': 102, 'EXPMAX': 520000},
-    'DANA2': {'EXPMIN': 102, 'EXPMAX': 520000},
-    'DANA3': {'EXPMIN': 102, 'EXPMAX': 520000},
+STATUS_DEFAULTS = {
+    'ADOL': {'EXPMIN': 100, 'EXPMAX': 500000, '属性1': 'ZOKU_WATER', '属性1値': 100},
+    'LAXIA': {'EXPMIN': 95, 'EXPMAX': 450000, '属性1': 'ZOKU_LIGHT', '属性1値': 100},
+    'SAHAD': {'EXPMIN': 105, 'EXPMAX': 550000, '属性1': 'ZOKU_EARTH', '属性1値': 100},
+    'HUMMEL': {'EXPMIN': 90, 'EXPMAX': 420000, '属性1': 'ZOKU_LIGHT', '属性1値': 100},
+    'RICOTTA': {'EXPMIN': 97, 'EXPMAX': 480000, '属性1': 'ZOKU_EARTH', '属性1値': 100},
+    'DANA': {'EXPMIN': 102, 'EXPMAX': 520000, '属性1': 'ZOKU_WATER', '属性1値': 100},
+    'DANA2': {'EXPMIN': 102, 'EXPMAX': 520000, '属性1': 'ZOKU_EARTH', '属性1値': 100},
+    'DANA3': {'EXPMIN': 102, 'EXPMAX': 520000, '属性1': 'ZOKU_LIGHT', '属性1値': 100},
 }
 
 HUNT_BOSS_SPAWN_WAVE = {
@@ -362,17 +351,32 @@ def newExpMult(exp_multiplier):
         for row in statusFile:
             char_id = row['キャラＩＤ']
             # Only update if in our dicts, else leave row untouched
-            if char_id in DEFAULT_EXP_VALUES:
-                row['EXPMIN'] = int(DEFAULT_EXP_VALUES[char_id]['EXPMIN'] / exp_multiplier)
-                row['EXPMAX'] = int(DEFAULT_EXP_VALUES[char_id]['EXPMAX'] / exp_multiplier)
-                row['属性1'] = DEFAULT_ELEMENTS[char_id]['属性1']
-                row['属性1値'] = DEFAULT_ELEMENTS[char_id]['属性1値']
+            if char_id in STATUS_DEFAULTS:
+                row['EXPMIN'] = int(STATUS_DEFAULTS[char_id]['EXPMIN'] / exp_multiplier)
+                row['EXPMAX'] = int(STATUS_DEFAULTS[char_id]['EXPMAX'] / exp_multiplier)
+                row['属性1'] = STATUS_DEFAULTS[char_id]['属性1']
+                row['属性1値'] = STATUS_DEFAULTS[char_id]['属性1値']
             # else: leave row as-is
             newStatusFile.append(row)
     with open(statusFileLoc, 'w', encoding='utf-8') as csvFile:
         writer = csv.DictWriter(csvFile, fieldNames, delimiter='\t', lineterminator='\n', strict=True)
         writer.writeheader()
         writer.writerows(newStatusFile)
+
+    """ needs tested more
+    statusEdits = {}
+    
+    for character in STATUS_DEFAULTS:
+        statusEdits[character] = {
+            'EXPMIN': int(STATUS_DEFAULTS[character]['EXPMIN'] / exp_multiplier),
+            'EXPMAX': int(STATUS_DEFAULTS[character]['EXPMAX'] / exp_multiplier),
+            '属性1': STATUS_DEFAULTS[character]['属性1'],
+            '属性1値': STATUS_DEFAULTS[character]['属性1値']
+        }
+
+
+    edit_csv(statusFileLoc, STATUS_DEFAULTS)
+    """
 
     for huntFileName, data in HUNT_BOSS_SPAWN_WAVE.items():
         huntFileLoc = os.path.join(config.executable_directory, "text/stage", huntFileName)
@@ -382,7 +386,67 @@ def newExpMult(exp_multiplier):
         else:
             huntFileBytes[data['Offset']] = 0x31 # changes boss spawn wave to 1
             writeBufferIntoFile(huntFileLoc, huntFileBytes)
+
+#
+RAID_STAGE_DEFAULTS = {
+    "INTERCEPT_STAGE01": {"ウェイブファイル１": "text/stage/st_01_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 30000, "ランクＡ:判定スコア": 55000, "ランクＳ:判定スコア": 80000},
+    "INTERCEPT_STAGE02": {"ウェイブファイル１": "text/stage/st_02_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 35000, "ランクＡ:判定スコア": 60000, "ランクＳ:判定スコア": 85000},
+    "INTERCEPT_STAGE03": {"ウェイブファイル１": "text/stage/st_03_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 20000, "ランクＡ:判定スコア": 45000, "ランクＳ:判定スコア": 65000},
+    "INTERCEPT_STAGE04": {"ウェイブファイル１": "text/stage/st_04_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 20000, "ランクＡ:判定スコア": 45000, "ランクＳ:判定スコア": 65000},
+    "INTERCEPT_STAGE05": {"ウェイブファイル１": "text/stage/st_05_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 30000, "ランクＡ:判定スコア": 50000, "ランクＳ:判定スコア": 70000},
+    "INTERCEPT_STAGE06": {"ウェイブファイル１": "text/stage/st_06_p.csv", "メニュー表示用ウェーブ数": 5, "ランクＢ:判定スコア": 40000, "ランクＡ:判定スコア": 80000, "ランクＳ:判定スコア": 120000},
+    "INTERCEPT_STAGE07": {"ウェイブファイル１": "text/stage/st_07_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 35000, "ランクＡ:判定スコア": 65000, "ランクＳ:判定スコア": 90000},
+    "INTERCEPT_STAGE08": {"ウェイブファイル１": "text/stage/st_08_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 60000, "ランクＡ:判定スコア": 100000, "ランクＳ:判定スコア": 135000},
+    "INTERCEPT_STAGE09": {"ウェイブファイル１": "text/stage/st_09_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 40000, "ランクＡ:判定スコア": 65000, "ランクＳ:判定スコア": 90000},
+    "INTERCEPT_STAGE11": {"ウェイブファイル１": "text/stage/st_11_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 40000, "ランクＡ:判定スコア": 80000, "ランクＳ:判定スコア": 115000},
+    "INTERCEPT_STAGE12": {"ウェイブファイル１": "text/stage/st_12_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 50000, "ランクＡ:判定スコア": 100000, "ランクＳ:判定スコア": 150000},
+    "INTERCEPT_STAGE21": {"ウェイブファイル１": "text/stage/st_21_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 40000, "ランクＡ:判定スコア": 70000, "ランクＳ:判定スコア": 95000},
+    "INTERCEPT_STAGE22": {"ウェイブファイル１": "text/stage/st_22_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 50000, "ランクＡ:判定スコア": 100000, "ランクＳ:判定スコア": 140000},
+    "INTERCEPT_STAGE23": {"ウェイブファイル１": "text/stage/st_23_p.csv", "メニュー表示用ウェーブ数": 6, "ランクＢ:判定スコア": 90000, "ランクＡ:判定スコア": 135000, "ランクＳ:判定スコア": 170000},
+    "INTERCEPT_STAGE24": {"ウェイブファイル１": "text/stage/st_24_p.csv", "メニュー表示用ウェーブ数": 6, "ランクＢ:判定スコア": 80000, "ランクＡ:判定スコア": 135000, "ランクＳ:判定スコア": 185000},
+    "INTERCEPT_STAGE25": {"ウェイブファイル１": "text/stage/st_25_p.csv", "メニュー表示用ウェーブ数": 9, "ランクＢ:判定スコア": 110000, "ランクＡ:判定スコア": 160000, "ランクＳ:判定スコア": 230000},
+    "INTERCEPT_STAGE26": {"ウェイブファイル１": "text/stage/st_26_p.csv", "メニュー表示用ウェーブ数": 9, "ランクＢ:判定スコア": 180000, "ランクＡ:判定スコア": 260000, "ランクＳ:判定スコア": 340000},
+    "INTERCEPT_STAGE27": {"ウェイブファイル１": "text/stage/st_27_p.csv", "メニュー表示用ウェーブ数": 6, "ランクＢ:判定スコア": 130000, "ランクＡ:判定スコア": 160000, "ランクＳ:判定スコア": 180000},
+}
+
+HUNT_STAGE_DEFAULTS = {
+    "INTERCEPT_STAGE31": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
+    "INTERCEPT_STAGE32": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
+    "INTERCEPT_STAGE33": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
+    "INTERCEPT_STAGE34": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
+    "INTERCEPT_STAGE35": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
+    "INTERCEPT_STAGE36": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
+    "INTERCEPT_STAGE37": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
+    "INTERCEPT_STAGE38": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
+    "INTERCEPT_STAGE39": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
+}
+
+def fastIntercepts(progress_callback=None):
+    intFileLoc = os.path.join(config.executable_directory, "text/en/intstage.csv")
+    stageEdits = {}
+
+    for huntFileName, data in HUNT_BOSS_SPAWN_WAVE.items():
+        huntFileLoc = os.path.join(config.executable_directory, "text/stage", huntFileName)
+        huntFileBytes = readFileIntoBuffer(huntFileLoc)
+        huntFileBytes[data['Offset']] = 0x31 # changes boss spawn wave to 1
+        writeBufferIntoFile(huntFileLoc, huntFileBytes)
     
+    for raid, data in RAID_STAGE_DEFAULTS.items():
+        data['ウェイブファイル１'] = data['ウェイブファイル１'].replace(".csv", "_short.csv")
+        data['メニュー表示用ウェーブ数'] = data['メニュー表示用ウェーブ数'] // 2
+        data["ランクＢ:判定スコア"] = round(data["ランクＢ:判定スコア"] * 0.6, -3)
+        data["ランクＡ:判定スコア"] = round(data["ランクＡ:判定スコア"] * 0.6, -3)
+        data["ランクＳ:判定スコア"] = round(data["ランクＳ:判定スコア"] * 0.6, -3)
+        stageEdits[raid] = data
+    
+    for hunt, data in HUNT_STAGE_DEFAULTS.items():
+        data["ランクＢ:判定スコア"] = round(data["ランクＢ:判定スコア"] * 0.6, -3)
+        data["ランクＡ:判定スコア"] = round(data["ランクＡ:判定スコア"] * 0.6, -3)
+        data["ランクＳ:判定スコア"] = round(data["ランクＳ:判定スコア"] * 0.6, -3)
+        stageEdits[hunt] = data
+
+    edit_csv(intFileLoc, stageEdits)
+
 def AddWarpToFSCCrystal(progress_callback=None):
     '''
       if you ever want to undo this byte modifications we can just replace the same byte sequence for 2D (2D = "-") as the length of the sequence was never modified.

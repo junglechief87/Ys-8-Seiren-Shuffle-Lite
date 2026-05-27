@@ -200,3 +200,21 @@ def getCharacterJoinLv(character):
             lvScript = lvScript + "\telse if(FLAG[GF_TBOX_DUMMY121] == " + str(lv) + "){SetLevel(" + character + "," + str(lv) + ")} \n"
 
     return lvScript
+
+def edit_csv(file, edits):
+    newCSVdata = []
+    with open(file, 'r', encoding='utf-8') as csvFile:
+        CSVdata = csv.DictReader(csvFile, delimiter='\t', lineterminator='\n', strict=True)
+    
+        for row in CSVdata:
+            rowID = row[CSVdata.fieldnames[0]]  # Assumes first column is unique ID
+            if rowID in edits:
+                for column, newValue in edits[rowID].items():
+                    if column in CSVdata.fieldnames:
+                        row[column] = newValue
+            newCSVdata.append(row)
+
+    with open(file, 'w', encoding='utf-8') as csvFile:
+        writer = csv.DictWriter(csvFile, fieldnames=CSVdata.fieldnames, delimiter='\t', lineterminator='\n', strict=True)
+        writer.writeheader()
+        writer.writerows(newCSVdata)
