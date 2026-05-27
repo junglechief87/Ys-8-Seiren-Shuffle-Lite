@@ -330,6 +330,12 @@ STATUS_DEFAULTS = {
     'DANA3': {'EXPMIN': 102, 'EXPMAX': 520000, '属性1': 'ZOKU_LIGHT', '属性1値': 100},
 }
 
+STATUS_ASSOCIATIONS = {
+    'Slash': 'ZOKU_WATER',
+    'Strike': 'ZOKU_EARTH',
+    'Pierce': 'ZOKU_LIGHT',
+}
+
 HUNT_BOSS_SPAWN_WAVE = {
     "st_31_p.tbb": {"Offset": 0x72C, "OriginalValue": 0x35},
     "st_32_p.tbb": {"Offset": 0x728, "OriginalValue": 0x35},
@@ -342,6 +348,11 @@ HUNT_BOSS_SPAWN_WAVE = {
     "st_39_p.tbb": {"Offset": 0x7D5, "OriginalValue": 0x34},
 }
 
+def setElementalAssociations(damageMapping, charID):
+    for damageType, character in damageMapping.items():
+        if character == charID:
+            return STATUS_ASSOCIATIONS[damageType]
+
 def newExpMult(exp_multiplier):
     statusFileLoc = os.path.join(config.executable_directory, "text/en/status.csv")
     with open(statusFileLoc, 'r', encoding='utf-8') as csvFile:
@@ -349,13 +360,13 @@ def newExpMult(exp_multiplier):
         fieldNames = statusFile.fieldnames
         newStatusFile = []
         for row in statusFile:
-            char_id = row['キャラＩＤ']
+            charID = row['キャラＩＤ']
             # Only update if in our dicts, else leave row untouched
-            if char_id in STATUS_DEFAULTS:
-                row['EXPMIN'] = int(STATUS_DEFAULTS[char_id]['EXPMIN'] / exp_multiplier)
-                row['EXPMAX'] = int(STATUS_DEFAULTS[char_id]['EXPMAX'] / exp_multiplier)
-                row['属性1'] = STATUS_DEFAULTS[char_id]['属性1']
-                row['属性1値'] = STATUS_DEFAULTS[char_id]['属性1値']
+            if charID in STATUS_DEFAULTS:
+                row['EXPMIN'] = int(STATUS_DEFAULTS[charID]['EXPMIN'] / exp_multiplier)
+                row['EXPMAX'] = int(STATUS_DEFAULTS[charID]['EXPMAX'] / exp_multiplier)
+                row['属性1'] = STATUS_DEFAULTS[charID]['属性1']
+                row['属性1値'] = STATUS_DEFAULTS[charID]['属性1値']
             # else: leave row as-is
             newStatusFile.append(row)
     with open(statusFileLoc, 'w', encoding='utf-8') as csvFile:
