@@ -58,7 +58,7 @@ function "init"
 		{
 			if(FLAG[GF_QS505_GET_HERB_ALL] && !FLAG[GF_QS505_EVENT_2])
 			{
-				SetChrPos("QS_505_Event_2",4.587f,-75.472f,424.600f)
+				//SetChrPos("QS_505_Event_2",4.587f,-75.472f,424.600f)
 			}
 		}
 	}
