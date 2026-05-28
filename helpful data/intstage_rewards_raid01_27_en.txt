@@ -1,0 +1,410 @@
+INTERCEPT_STAGE01:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_N2_STONE x2
+    Repeatable (random): ICON3D_MT_R1_PARTS03 x2 / ICON3D_MT_R1_PARTS03 x2
+  Rank B — Score threshold: 30000
+    First-time (guaranteed): ICON3D_MT_R1_PARTS05 x2
+    Repeatable (random): ICON3D_MT_R1_PARTS01 x2 / ICON3D_MT_R1_PARTS01 x2
+  Rank A — Score threshold: 55000
+    First-time (guaranteed): ICON3D_US_ADD_EXP_02 x1
+    Repeatable (random): ICON3D_MT_R1_PARTS02 x2 / ICON3D_MT_R1_PARTS02 x2
+  Rank S — Score threshold: 80000
+    First-time (guaranteed): ICON3D_US_ADD_HP x1
+    Repeatable (random): ICON3D_MT_R1_PARTS04 x2 / ICON3D_MT_R1_PARTS04 x2
+
+
+INTERCEPT_STAGE02:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_N2_STONE x5
+    Repeatable (random): ICON3D_MT_R1_PARTS03 x4 / ICON3D_MT_R1_PARTS03 x4
+  Rank B — Score threshold: 35000
+    First-time (guaranteed): ICON3D_MT_R1_PARTS06 x2
+    Repeatable (random): ICON3D_MT_R1_PARTS02 x4 / ICON3D_MT_R1_PARTS02 x4
+  Rank A — Score threshold: 60000
+    First-time (guaranteed): ICON3D_US_ADD_DEF x1
+    Repeatable (random): ICON3D_MT_R1_PARTS01 x4 / ICON3D_MT_R1_PARTS01 x4
+  Rank S — Score threshold: 85000
+    First-time (guaranteed): ICON3D_US_ADD_SP x1
+    Repeatable (random): ICON3D_MT_R1_PARTS04 x4 / ICON3D_MT_R1_PARTS04 x4
+
+
+INTERCEPT_STAGE03:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_US_COCONUT_S x5
+    Repeatable (random): ICON3D_MT_R1_PARTS03 x5 / ICON3D_MT_R1_PARTS03 x5
+  Rank B — Score threshold: 20000
+    First-time (guaranteed): ICON3D_MT_R2_PARTS05 x2
+    Repeatable (random): ICON3D_MT_R1_PARTS01 x5 / ICON3D_MT_R1_PARTS01 x5
+  Rank A — Score threshold: 45000
+    First-time (guaranteed): ICON3D_US_ADD_LEVEL x1
+    Repeatable (random): ICON3D_MT_R1_PARTS02 x5 / ICON3D_MT_R1_PARTS02 x5
+  Rank S — Score threshold: 65000
+    First-time (guaranteed): ICON3D_AC_037 x1
+    Repeatable (random): ICON3D_MT_R1_PARTS04 x5 / ICON3D_MT_R1_PARTS04 x5
+
+
+INTERCEPT_STAGE04:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_FD_MEAT_02 x10
+    Repeatable (random): ICON3D_MT_N2_STONE x5 / ICON3D_MT_N2_STONE x5
+  Rank B — Score threshold: 20000
+    First-time (guaranteed): ICON3D_FD_MEAT_01 x10
+    Repeatable (random): ICON3D_MT_R1_PARTS05 x2 / ICON3D_MT_R1_PARTS05 x2
+  Rank A — Score threshold: 45000
+    First-time (guaranteed): ICON3D_US_ADD_STR x1
+    Repeatable (random): ICON3D_MT_R1_PARTS06 x2 / ICON3D_MT_R1_PARTS06 x2
+  Rank S — Score threshold: 65000
+    First-time (guaranteed): ICON3D_AR_005 x1
+    Repeatable (random): ICON3D_MT_R2_PARTS05 x2 / ICON3D_MT_R2_PARTS05 x2
+
+
+INTERCEPT_STAGE05:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_N3_STONE x2
+    Repeatable (random): ICON3D_MT_R2_PARTS03 x2 / ICON3D_MT_R2_PARTS03 x2
+  Rank B — Score threshold: 30000
+    First-time (guaranteed): ICON3D_MT_R2_PARTS06 x2
+    Repeatable (random): ICON3D_MT_R2_PARTS04 x2 / ICON3D_MT_R2_PARTS04 x2
+  Rank A — Score threshold: 50000
+    First-time (guaranteed): ICON3D_US_ADD_HP x1
+    Repeatable (random): ICON3D_MT_R2_PARTS01 x2 / ICON3D_MT_R2_PARTS01 x2
+  Rank S — Score threshold: 70000
+    First-time (guaranteed): ICON3D_US_ADD_SP x1
+    Repeatable (random): ICON3D_MT_R2_PARTS02 x2 / ICON3D_MT_R2_PARTS02 x2
+
+
+INTERCEPT_STAGE06:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_N3_STONE x3
+    Repeatable (random): ICON3D_MT_R2_PARTS03 x3 / ICON3D_MT_R2_PARTS03 x3
+  Rank B — Score threshold: 40000
+    First-time (guaranteed): ICON3D_MT_R3_FLOWER x3
+    Repeatable (random): ICON3D_MT_R2_PARTS04 x3 / ICON3D_MT_R2_PARTS04 x3
+  Rank A — Score threshold: 80000
+    First-time (guaranteed): ICON3D_US_ADD_DEF x1
+    Repeatable (random): ICON3D_MT_R2_PARTS01 x3 / ICON3D_MT_R2_PARTS01 x3
+  Rank S — Score threshold: 120000
+    First-time (guaranteed): ICON3D_AC_046 x1
+    Repeatable (random): ICON3D_MT_R2_PARTS02 x3 / ICON3D_MT_R2_PARTS02 x3
+
+
+INTERCEPT_STAGE07:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_N3_STONE x5
+    Repeatable (random): ICON3D_MT_R2_PARTS03 x5 / ICON3D_MT_R2_PARTS03 x5
+  Rank B — Score threshold: 35000
+    First-time (guaranteed): ICON3D_MT_R3_PARTS05 x2
+    Repeatable (random): ICON3D_MT_R2_PARTS04 x5 / ICON3D_MT_R2_PARTS04 x5
+  Rank A — Score threshold: 65000
+    First-time (guaranteed): ICON3D_US_ADD_EXP_03 x1
+    Repeatable (random): ICON3D_MT_R2_PARTS01 x5 / ICON3D_MT_R2_PARTS01 x5
+  Rank S — Score threshold: 90000
+    First-time (guaranteed): ICON3D_AC_024 x1
+    Repeatable (random): ICON3D_MT_R2_PARTS02 x5 / ICON3D_MT_R2_PARTS02 x5
+
+
+INTERCEPT_STAGE08:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_N4_STONE x2
+    Repeatable (random): ICON3D_MT_R3_PARTS03 x2 / ICON3D_MT_R3_PARTS03 x2
+  Rank B — Score threshold: 60000
+    First-time (guaranteed): ICON3D_MT_R3_PARTS06 x2
+    Repeatable (random): ICON3D_MT_R3_PARTS01 x2 / ICON3D_MT_R3_PARTS01 x2
+  Rank A — Score threshold: 100000
+    First-time (guaranteed): ICON3D_US_ADD_HP x1
+    Repeatable (random): ICON3D_MT_R3_PARTS02 x2 / ICON3D_MT_R3_PARTS02 x2
+  Rank S — Score threshold: 135000
+    First-time (guaranteed): ICON3D_US_ADD_SP x1
+    Repeatable (random): ICON3D_MT_R3_PARTS04 x2 / ICON3D_MT_R3_PARTS04 x2
+
+
+INTERCEPT_STAGE09:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_N4_STONE x3
+    Repeatable (random): ICON3D_MT_R3_PARTS03 x3 / ICON3D_MT_R3_PARTS03 x3
+  Rank B — Score threshold: 40000
+    First-time (guaranteed): ICON3D_MT_R4_PARTS05 x2
+    Repeatable (random): ICON3D_MT_R3_PARTS01 x3 / ICON3D_MT_R3_PARTS01 x3
+  Rank A — Score threshold: 65000
+    First-time (guaranteed): ICON3D_US_ADD_STR x1
+    Repeatable (random): ICON3D_MT_R3_PARTS02 x3 / ICON3D_MT_R3_PARTS02 x3
+  Rank S — Score threshold: 90000
+    First-time (guaranteed): ICON3D_AC_047 x1
+    Repeatable (random): ICON3D_MT_R3_PARTS04 x3 / ICON3D_MT_R3_PARTS04 x3
+
+
+INTERCEPT_STAGE10:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): -1 x0
+    Repeatable (random): -1 x0 / -1 x0
+  Rank B — Score threshold: 0
+    First-time (guaranteed): -1 x0
+    Repeatable (random): -1 x0 / -1 x0
+  Rank A — Score threshold: 0
+    First-time (guaranteed): -1 x0
+    Repeatable (random): -1 x0 / -1 x0
+  Rank S — Score threshold: 0
+    First-time (guaranteed): -1 x0
+    Repeatable (random): -1 x0 / -1 x0
+
+
+INTERCEPT_STAGE11:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_N4_STONE x5
+    Repeatable (random): ICON3D_MT_R4_PARTS03 x2 / ICON3D_MT_R4_PARTS03 x2
+  Rank B — Score threshold: 40000
+    First-time (guaranteed): ICON3D_MT_R4_PARTS06 x2
+    Repeatable (random): ICON3D_MT_R4_PARTS01 x2 / ICON3D_MT_R4_PARTS01 x2
+  Rank A — Score threshold: 80000
+    First-time (guaranteed): ICON3D_US_ADD_EXP_03 x2
+    Repeatable (random): ICON3D_MT_R4_PARTS02 x2 / ICON3D_MT_R4_PARTS02 x2
+  Rank S — Score threshold: 115000
+    First-time (guaranteed): ICON3D_AR_051 x1
+    Repeatable (random): ICON3D_MT_R4_PARTS04 x2 / ICON3D_MT_R4_PARTS04 x2
+
+
+INTERCEPT_STAGE12:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_R4_WOOD x2
+    Repeatable (random): ICON3D_MT_R4_PARTS03 x3 / ICON3D_MT_R4_PARTS03 x3
+  Rank B — Score threshold: 50000
+    First-time (guaranteed): ICON3D_MT_R4_STONE x2
+    Repeatable (random): ICON3D_MT_R4_PARTS01 x3 / ICON3D_MT_R4_PARTS01 x3
+  Rank A — Score threshold: 100000
+    First-time (guaranteed): ICON3D_PRESENT_CURRAN x1
+    Repeatable (random): ICON3D_MT_R4_PARTS02 x3 / ICON3D_MT_R4_PARTS02 x3
+  Rank S — Score threshold: 150000
+    First-time (guaranteed): ICON3D_AC_064 x1
+    Repeatable (random): ICON3D_MT_R4_PARTS04 x3 / ICON3D_MT_R4_PARTS04 x3
+
+
+INTERCEPT_STAGE21:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_R5_PARTS05 x2
+    Repeatable (random): ICON3D_MT_R3_PARTS05 x1 / ICON3D_MT_R3_PARTS05 x1
+  Rank B — Score threshold: 40000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS06 x2
+    Repeatable (random): ICON3D_MT_R3_PARTS06 x1 / ICON3D_MT_R3_PARTS06 x1
+  Rank A — Score threshold: 70000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS07 x1
+    Repeatable (random): ICON3D_MT_R4_PARTS05 x1 / ICON3D_MT_R4_PARTS05 x1
+  Rank S — Score threshold: 95000
+    First-time (guaranteed): ICON3D_US_ADD_LEVEL x1
+    Repeatable (random): ICON3D_MT_R4_PARTS06 x1 / ICON3D_MT_R4_PARTS06 x1
+
+
+INTERCEPT_STAGE22:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_R5_PARTS05 x2
+    Repeatable (random): ICON3D_MT_R3_PARTS05 x1 / ICON3D_MT_R3_PARTS05 x1
+  Rank B — Score threshold: 50000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS06 x2
+    Repeatable (random): ICON3D_MT_R3_PARTS06 x1 / ICON3D_MT_R3_PARTS06 x1
+  Rank A — Score threshold: 100000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS07 x1
+    Repeatable (random): ICON3D_MT_R4_PARTS05 x1 / ICON3D_MT_R4_PARTS05 x1
+  Rank S — Score threshold: 140000
+    First-time (guaranteed): ICON3D_US_ADD_LEVEL x1
+    Repeatable (random): ICON3D_MT_R4_PARTS06 x1 / ICON3D_MT_R4_PARTS06 x1
+
+
+INTERCEPT_STAGE23:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_R5_PARTS05 x2
+    Repeatable (random): ICON3D_MT_R3_PARTS05 x1 / ICON3D_MT_R3_PARTS05 x1
+  Rank B — Score threshold: 90000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS06 x2
+    Repeatable (random): ICON3D_MT_R3_PARTS06 x1 / ICON3D_MT_R3_PARTS06 x1
+  Rank A — Score threshold: 135000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS07 x1
+    Repeatable (random): ICON3D_MT_R4_PARTS05 x1 / ICON3D_MT_R4_PARTS05 x1
+  Rank S — Score threshold: 170000
+    First-time (guaranteed): ICON3D_US_ADD_LEVEL x1
+    Repeatable (random): ICON3D_MT_R4_PARTS06 x1 / ICON3D_MT_R4_PARTS06 x1
+
+
+INTERCEPT_STAGE24:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_R5_PARTS05 x2
+    Repeatable (random): ICON3D_MT_R3_PARTS05 x1 / ICON3D_MT_R3_PARTS05 x1
+  Rank B — Score threshold: 80000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS06 x2
+    Repeatable (random): ICON3D_MT_R3_PARTS06 x1 / ICON3D_MT_R3_PARTS06 x1
+  Rank A — Score threshold: 135000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS07 x1
+    Repeatable (random): ICON3D_MT_R4_PARTS05 x1 / ICON3D_MT_R4_PARTS05 x1
+  Rank S — Score threshold: 185000
+    First-time (guaranteed): ICON3D_US_ADD_LEVEL x1
+    Repeatable (random): ICON3D_MT_R4_PARTS06 x1 / ICON3D_MT_R4_PARTS06 x1
+
+
+INTERCEPT_STAGE25:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_R5_PARTS05 x2
+    Repeatable (random): ICON3D_MT_R3_PARTS05 x1 / ICON3D_MT_R3_PARTS05 x1
+  Rank B — Score threshold: 110000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS06 x2
+    Repeatable (random): ICON3D_MT_R3_PARTS06 x1 / ICON3D_MT_R3_PARTS06 x1
+  Rank A — Score threshold: 160000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS07 x1
+    Repeatable (random): ICON3D_MT_R4_PARTS05 x1 / ICON3D_MT_R4_PARTS05 x1
+  Rank S — Score threshold: 230000
+    First-time (guaranteed): ICON3D_US_ADD_LEVEL x1
+    Repeatable (random): ICON3D_MT_R4_PARTS06 x1 / ICON3D_MT_R4_PARTS06 x1
+
+
+INTERCEPT_STAGE26:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_R5_PARTS05 x5
+    Repeatable (random): ICON3D_MT_R4_PARTS01 x10 / ICON3D_MT_R4_PARTS01 x10
+  Rank B — Score threshold: 180000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS06 x5
+    Repeatable (random): ICON3D_MT_R4_PARTS02 x10 / ICON3D_MT_R4_PARTS02 x10
+  Rank A — Score threshold: 260000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS07 x3
+    Repeatable (random): ICON3D_MT_R4_PARTS03 x10 / ICON3D_MT_R4_PARTS03 x10
+  Rank S — Score threshold: 340000
+    First-time (guaranteed): ICON3D_MT_R5_FLOWER x30
+    Repeatable (random): ICON3D_MT_R4_PARTS04 x10 / ICON3D_MT_R4_PARTS04 x10
+
+
+INTERCEPT_STAGE27:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_R5_PARTS06 x5
+    Repeatable (random): ICON3D_MT_R4_PARTS02 x10 / ICON3D_MT_R4_PARTS02 x10
+  Rank B — Score threshold: 130000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS07 x5
+    Repeatable (random): ICON3D_MT_R4_PARTS04 x10 / ICON3D_MT_R4_PARTS04 x10
+  Rank A — Score threshold: 160000
+    First-time (guaranteed): ICON3D_MT_NR5_FLOWER x3
+    Repeatable (random): ICON3D_MT_R4_PARTS07 x3 / ICON3D_MT_R4_PARTS07 x3
+  Rank S — Score threshold: 180000
+    First-time (guaranteed): ICON3D_MT_R5_FLOWER x60
+    Repeatable (random): ICON3D_MT_R4_STONE x10 / ICON3D_MT_R4_STONE x10
+
+
+INTERCEPT_STAGE31:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_FD_LAND_EGG x5
+    Repeatable (random): ICON3D_MT_N2_STONE x5 / ICON3D_MT_N2_STONE x5
+  Rank B — Score threshold: 270000
+    First-time (guaranteed): ICON3D_FD_WHEAT x10
+    Repeatable (random): ICON3D_MT_R2_PARTS01 x2 / ICON3D_MT_R2_PARTS01 x2
+  Rank A — Score threshold: 330000
+    First-time (guaranteed): ICON3D_FD_LAND_HONEY x10
+    Repeatable (random): ICON3D_FD_VG_CABBAGE x5 / ICON3D_FD_VG_CABBAGE x5
+  Rank S — Score threshold: 390000
+    First-time (guaranteed): ICON3D_AR_020 x1
+    Repeatable (random): ICON3D_MT_R2_PARTS02 x2 / ICON3D_MT_R2_PARTS02 x2
+
+INTERCEPT_STAGE32:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_FD_MUSHROOM x5
+    Repeatable (random): ICON3D_FD_VG_EGGPLANT x3 / ICON3D_FD_VG_EGGPLANT x3
+  Rank B — Score threshold: 270000
+    First-time (guaranteed): ICON3D_FD_VG_PUMPKIN x5
+    Repeatable (random): ICON3D_US_PESTCIDE x1 / ICON3D_US_PESTCIDE x1
+  Rank A — Score threshold: 330000
+    First-time (guaranteed): ICON3D_US_ADD_HP x1
+    Repeatable (random): ICON3D_MT_R3_PARTS04 x3 / ICON3D_MT_R3_PARTS04 x3
+  Rank S — Score threshold: 390000
+    First-time (guaranteed): ICON3D_AR_040 x1
+    Repeatable (random): ICON3D_MT_R3_PARTS05 x1 / ICON3D_MT_R3_PARTS05 x1
+
+INTERCEPT_STAGE33:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_FISHBAIT_WORM x10
+    Repeatable (random): ICON3D_MT_R3_PARTS02 x2 / ICON3D_MT_R3_PARTS02 x2
+  Rank B — Score threshold: 270000
+    First-time (guaranteed): ICON3D_MT_R3_FLOWER x5
+    Repeatable (random): ICON3D_MT_R3_PARTS01 x2 / ICON3D_MT_R3_PARTS01 x2
+  Rank A — Score threshold: 330000
+    First-time (guaranteed): ICON3D_US_ADD_EXP_03 x1
+    Repeatable (random): ICON3D_FD_VG_TOMATO x2 / ICON3D_FD_VG_TOMATO x2
+  Rank S — Score threshold: 390000
+    First-time (guaranteed): ICON3D_US_EXTRA_02 x1
+    Repeatable (random): ICON3D_MT_R3_PARTS04 x2 / ICON3D_MT_R3_PARTS04 x2
+
+INTERCEPT_STAGE34:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_FD_MEAT_03 x5
+    Repeatable (random): ICON3D_MT_R4_PARTS01 x2 / ICON3D_MT_R4_PARTS01 x2
+  Rank B — Score threshold: 270000
+    First-time (guaranteed): ICON3D_MT_R4_PARTS05 x2
+    Repeatable (random): ICON3D_MT_R4_PARTS03 x2 / ICON3D_MT_R4_PARTS03 x2
+  Rank A — Score threshold: 330000
+    First-time (guaranteed): ICON3D_MT_NR3_FLOWER x5
+    Repeatable (random): ICON3D_MT_R3_PARTS07 x7 / ICON3D_MT_R3_PARTS07 x7
+  Rank S — Score threshold: 390000
+    First-time (guaranteed): ICON3D_AR_042 x1
+    Repeatable (random): ICON3D_MT_R4_PARTS04 x2 / ICON3D_MT_R4_PARTS04 x2
+
+INTERCEPT_STAGE35:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_N4_LIQUID x5
+    Repeatable (random): ICON3D_MT_R4_PARTS04 x1 / ICON3D_MT_R4_PARTS04 x1
+  Rank B — Score threshold: 270000
+    First-time (guaranteed): ICON3D_MT_R4_STONE x1
+    Repeatable (random): ICON3D_MT_R4_PARTS01 x2 / ICON3D_MT_R4_PARTS01 x2
+  Rank A — Score threshold: 330000
+    First-time (guaranteed): ICON3D_US_ADD_DEF x1
+    Repeatable (random): ICON3D_MT_R4_PARTS03 x2 / ICON3D_MT_R4_PARTS03 x2
+  Rank S — Score threshold: 390000
+    First-time (guaranteed): ICON3D_US_ADD_LEVEL x1
+    Repeatable (random): ICON3D_MT_NR3_FLOWER x1 / ICON3D_MT_NR3_FLOWER x1
+
+INTERCEPT_STAGE36:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_R4_WOOD x2
+    Repeatable (random): ICON3D_MT_R4_PARTS03 x3 / ICON3D_MT_R4_PARTS03 x3
+  Rank B — Score threshold: 270000
+    First-time (guaranteed): ICON3D_MT_R4_WOOD x2
+    Repeatable (random): ICON3D_MT_R4_PARTS01 x3 / ICON3D_MT_R4_PARTS01 x3
+  Rank A — Score threshold: 330000
+    First-time (guaranteed): ICON3D_AC_540 x1
+    Repeatable (random): ICON3D_MT_R4_PARTS02 x3 / ICON3D_MT_R4_PARTS02 x3
+  Rank S — Score threshold: 390000
+    First-time (guaranteed): ICON3D_MT_R2_PEARL x5
+    Repeatable (random): ICON3D_MT_R4_PARTS04 x3 / ICON3D_MT_R4_PARTS04 x3
+
+INTERCEPT_STAGE37:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_R5_PARTS05 x3
+    Repeatable (random): ICON3D_MT_R2_PARTS05 x1 / ICON3D_MT_R2_PARTS05 x1
+  Rank B — Score threshold: 270000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS06 x2
+    Repeatable (random): ICON3D_MT_R3_PARTS07 x2 / ICON3D_MT_R3_PARTS07 x2
+  Rank A — Score threshold: 330000
+    First-time (guaranteed): ICON3D_MT_R5_FLOWER x3
+    Repeatable (random): ICON3D_MT_R4_PARTS05 x1 / ICON3D_MT_R4_PARTS05 x1
+  Rank S — Score threshold: 390000
+    First-time (guaranteed): ICON3D_MT_R4_GOLD x1
+    Repeatable (random): ICON3D_MT_R4_PARTS06 x1 / ICON3D_MT_R4_PARTS06 x1
+
+INTERCEPT_STAGE38:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_MT_R5_PARTS05 x5
+    Repeatable (random): ICON3D_MT_NR5_FLOWER x1 / ICON3D_MT_NR5_FLOWER x1
+  Rank B — Score threshold: 270000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS06 x4
+    Repeatable (random): ICON3D_MT_R3_PARTS06 x1 / ICON3D_MT_R3_PARTS06 x1
+  Rank A — Score threshold: 330000
+    First-time (guaranteed): ICON3D_MT_R5_PARTS07 x1
+    Repeatable (random): ICON3D_MT_R4_PARTS06 x1 / ICON3D_MT_R4_PARTS06 x1
+  Rank S — Score threshold: 390000
+    First-time (guaranteed): ICON3D_MT_R4_GOLD x3
+    Repeatable (random): ICON3D_MT_R4_PARTS07 x1 / ICON3D_MT_R4_PARTS07 x1
+
+INTERCEPT_STAGE39:
+  Rank C — Score threshold: 0
+    First-time (guaranteed): ICON3D_US_CURE_ALL x5
+    Repeatable (random): ICON3D_MT_NR2_STONE x3 / ICON3D_MT_NR2_STONE x3
+  Rank B — Score threshold: 270000
+    First-time (guaranteed): ICON3D_MT_R2_PEARL x5
+    Repeatable (random): ICON3D_MT_NR3_FLOWER x3 / ICON3D_MT_NR3_FLOWER x3
+  Rank A — Score threshold: 330000
+    First-time (guaranteed): ICON3D_US_RESSURECT_02 x1
+    Repeatable (random): ICON3D_MT_NR5_FLOWER x2 / ICON3D_MT_NR5_FLOWER x2
+  Rank S — Score threshold: 390000
+    First-time (guaranteed): ICON3D_MT_R4_GOLD x5
+    Repeatable (random): ICON3D_FISHBAIT_WORM x10 / ICON3D_FISHBAIT_WORM x10

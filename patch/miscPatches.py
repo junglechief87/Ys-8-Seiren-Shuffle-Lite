@@ -336,6 +336,87 @@ STATUS_ASSOCIATIONS = {
     'Pierce': 'ZOKU_LIGHT',
 }
 
+def setElementalAssociations(damageMapping, charID):
+    for damageType, character in damageMapping.items():
+        if charID in [character.upper() for character in character]:
+            return STATUS_ASSOCIATIONS[damageType]
+
+def updateStatusCSV(settings):
+    options = settings['options']
+    exp_multiplier = options['experience_multiplier']
+    statusFileLoc = os.path.join(config.executable_directory, "text/en/status.csv")
+    statusEdits = {}
+    
+    for character in STATUS_DEFAULTS:
+        statusEdits[character] = {
+            'EXPMIN': int(STATUS_DEFAULTS[character]['EXPMIN'] / exp_multiplier),
+            'EXPMAX': int(STATUS_DEFAULTS[character]['EXPMAX'] / exp_multiplier),
+            '属性1': STATUS_DEFAULTS[character]['属性1'] if options['shuffle_damage_types'] != 1 else setElementalAssociations(settings['damage_mapping'], character),
+            '属性1値': STATUS_DEFAULTS[character]['属性1値']
+        }
+
+    edit_csv(statusFileLoc, statusEdits)
+
+RAID_STAGE_DEFAULTS = {
+    "INTERCEPT_STAGE01": {"ウェイブファイル１": "text/stage/st_01_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 30000, "ランクＡ:判定スコア": 55000, "ランクＳ:判定スコア": 80000,
+                          "ランクＣ：判定スコア": 1000, "ランクＢ：判定スコア": 10000, "ランクＡ：判定スコア": 20000, "ランクＳ：判定スコア": 30000},
+    "INTERCEPT_STAGE02": {"ウェイブファイル１": "text/stage/st_02_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 35000, "ランクＡ:判定スコア": 60000, "ランクＳ:判定スコア": 85000,
+                          "ランクＣ：判定スコア": 1000, "ランクＢ：判定スコア": 10000, "ランクＡ：判定スコア": 25000, "ランクＳ：判定スコア": 45000},
+    "INTERCEPT_STAGE03": {"ウェイブファイル１": "text/stage/st_03_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 20000, "ランクＡ:判定スコア": 45000, "ランクＳ:判定スコア": 65000,
+                          "ランクＣ：判定スコア": 5000, "ランクＢ：判定スコア": 15000, "ランクＡ：判定スコア": 30000, "ランクＳ：判定スコア": 55000},
+    "INTERCEPT_STAGE04": {"ウェイブファイル１": "text/stage/st_04_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 20000, "ランクＡ:判定スコア": 45000, "ランクＳ:判定スコア": 65000,
+                          "ランクＣ：判定スコア": 5000, "ランクＢ：判定スコア": 20000, "ランクＡ：判定スコア": 40000, "ランクＳ：判定スコア": 65000},
+    "INTERCEPT_STAGE05": {"ウェイブファイル１": "text/stage/st_05_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 30000, "ランクＡ:判定スコア": 50000, "ランクＳ:判定スコア": 70000,
+                          "ランクＣ：判定スコア": 10000, "ランクＢ：判定スコア": 30000, "ランクＡ：判定スコア": 50000, "ランクＳ：判定スコア": 80000},
+    "INTERCEPT_STAGE06": {"ウェイブファイル１": "text/stage/st_06_p.csv", "メニュー表示用ウェーブ数": 5, "ランクＢ:判定スコア": 40000, "ランクＡ:判定スコア": 80000, "ランクＳ:判定スコア": 120000,
+                          "ランクＣ：判定スコア": 10000, "ランクＢ：判定スコア": 35000, "ランクＡ：判定スコア": 65000, "ランクＳ：判定スコア": 100000},
+    "INTERCEPT_STAGE07": {"ウェイブファイル１": "text/stage/st_07_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 35000, "ランクＡ:判定スコア": 65000, "ランクＳ:判定スコア": 90000,
+                          "ランクＣ：判定スコア": 10000, "ランクＢ：判定スコア": 35000, "ランクＡ：判定スコア": 70000, "ランクＳ：判定スコア": 130000},
+    "INTERCEPT_STAGE08": {"ウェイブファイル１": "text/stage/st_08_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 60000, "ランクＡ:判定スコア": 100000, "ランクＳ:判定スコア": 135000,
+                          "ランクＣ：判定スコア": 30000, "ランクＢ：判定スコア": 70000, "ランクＡ：判定スコア": 120000, "ランクＳ：判定スコア": 180000},
+    "INTERCEPT_STAGE09": {"ウェイブファイル１": "text/stage/st_09_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 40000, "ランクＡ:判定スコア": 65000, "ランクＳ:判定スコア": 90000,
+                          "ランクＣ：判定スコア": 10000, "ランクＢ：判定スコア": 40000, "ランクＡ：判定スコア": 80000, "ランクＳ：判定スコア": 130000},
+    "INTERCEPT_STAGE11": {"ウェイブファイル１": "text/stage/st_11_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 40000, "ランクＡ:判定スコア": 80000, "ランクＳ:判定スコア": 115000,
+                          "ランクＣ：判定スコア": 20000, "ランクＢ：判定スコア": 50000, "ランクＡ：判定スコア": 100000, "ランクＳ：判定スコア": 140000},
+    "INTERCEPT_STAGE12": {"ウェイブファイル１": "text/stage/st_12_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 50000, "ランクＡ:判定スコア": 100000, "ランクＳ:判定スコア": 150000,
+                          "ランクＣ：判定スコア": 10000, "ランクＢ：判定スコア": 30000, "ランクＡ：判定スコア": 110000, "ランクＳ：判定スコア": 170000},
+    "INTERCEPT_STAGE21": {"ウェイブファイル１": "text/stage/st_21_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 40000, "ランクＡ:判定スコア": 70000, "ランクＳ:判定スコア": 95000,
+                          "ランクＣ：判定スコア": 10000, "ランクＢ：判定スコア": 30000, "ランクＡ：判定スコア": 80000, "ランクＳ：判定スコア": 110000},
+    "INTERCEPT_STAGE22": {"ウェイブファイル１": "text/stage/st_22_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 50000, "ランクＡ:判定スコア": 100000, "ランクＳ:判定スコア": 140000,
+                          "ランクＣ：判定スコア": 5000, "ランクＢ：判定スコア": 50000, "ランクＡ：判定スコア": 80000, "ランクＳ：判定スコア": 135000},
+    "INTERCEPT_STAGE23": {"ウェイブファイル１": "text/stage/st_23_p.csv", "メニュー表示用ウェーブ数": 6, "ランクＢ:判定スコア": 90000, "ランクＡ:判定スコア": 135000, "ランクＳ:判定スコア": 170000,
+                          "ランクＣ：判定スコア": 5000, "ランクＢ：判定スコア": 80000, "ランクＡ：判定スコア": 160000, "ランクＳ：判定スコア": 230000},
+    "INTERCEPT_STAGE24": {"ウェイブファイル１": "text/stage/st_24_p.csv", "メニュー表示用ウェーブ数": 6, "ランクＢ:判定スコア": 80000, "ランクＡ:判定スコア": 135000, "ランクＳ:判定スコア": 185000,
+                          "ランクＣ：判定スコア": 10000, "ランクＢ：判定スコア": 50000, "ランクＡ：判定スコア": 250000, "ランクＳ：判定スコア": 400000},
+    "INTERCEPT_STAGE25": {"ウェイブファイル１": "text/stage/st_25_p.csv", "メニュー表示用ウェーブ数": 9, "ランクＢ:判定スコア": 110000, "ランクＡ:判定スコア": 160000, "ランクＳ:判定スコア": 230000,
+                          "ランクＣ：判定スコア": 20000, "ランクＢ：判定スコア": 100000, "ランクＡ：判定スコア": 240000, "ランクＳ：判定スコア": 380000},
+    "INTERCEPT_STAGE26": {"ウェイブファイル１": "text/stage/st_26_p.csv", "メニュー表示用ウェーブ数": 9, "ランクＢ:判定スコア": 180000, "ランクＡ:判定スコア": 260000, "ランクＳ:判定スコア": 340000,
+                          "ランクＣ：判定スコア": 50000, "ランクＢ：判定スコア": 150000, "ランクＡ：判定スコア": 350000, "ランクＳ：判定スコア": 700000},
+    "INTERCEPT_STAGE27": {"ウェイブファイル１": "text/stage/st_27_p.csv", "メニュー表示用ウェーブ数": 6, "ランクＢ:判定スコア": 130000, "ランクＡ:判定スコア": 160000, "ランクＳ:判定スコア": 180000,
+                          "ランクＣ：判定スコア": 50000, "ランクＢ：判定スコア": 100000, "ランクＡ：判定スコア": 150000, "ランクＳ：判定スコア": 200000},
+}
+
+HUNT_STAGE_DEFAULTS = {
+    "INTERCEPT_STAGE31": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000,
+                          "ランクＣ：判定スコア": 700000, "ランクＢ：判定スコア": 800000, "ランクＡ：判定スコア": 950000, "ランクＳ：判定スコア": 1100000},
+    "INTERCEPT_STAGE32": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000,
+                          "ランクＣ：判定スコア": 700000, "ランクＢ：判定スコア": 800000, "ランクＡ：判定スコア": 950000, "ランクＳ：判定スコア": 1100000},
+    "INTERCEPT_STAGE33": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000,
+                          "ランクＣ：判定スコア": 700000, "ランクＢ：判定スコア": 800000, "ランクＡ：判定スコア": 950000, "ランクＳ：判定スコア": 1100000},
+    "INTERCEPT_STAGE34": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000,
+                          "ランクＣ：判定スコア": 700000, "ランクＢ：判定スコア": 800000, "ランクＡ：判定スコア": 950000, "ランクＳ：判定スコア": 1100000},
+    "INTERCEPT_STAGE35": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000,
+                          "ランクＣ：判定スコア": 700000, "ランクＢ：判定スコア": 800000, "ランクＡ：判定スコア": 950000, "ランクＳ：判定スコア": 1100000},
+    "INTERCEPT_STAGE36": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000,
+                          "ランクＣ：判定スコア": 700000, "ランクＢ：判定スコア": 800000, "ランクＡ：判定スコア": 950000, "ランクＳ：判定スコア": 1100000},
+    "INTERCEPT_STAGE37": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000,
+                          "ランクＣ：判定スコア": 700000, "ランクＢ：判定スコア": 800000, "ランクＡ：判定スコア": 950000, "ランクＳ：判定スコア": 1100000},
+    "INTERCEPT_STAGE38": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000,
+                          "ランクＣ：判定スコア": 700000, "ランクＢ：判定スコア": 800000, "ランクＡ：判定スコア": 950000, "ランクＳ：判定スコア": 1100000},
+    "INTERCEPT_STAGE39": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000,
+                          "ランクＣ：判定スコア": 700000, "ランクＢ：判定スコア": 800000, "ランクＡ：判定スコア": 950000, "ランクＳ：判定スコア": 1100000},
+}
+
 HUNT_BOSS_SPAWN_WAVE = {
     "st_31_p.tbb": {"Offset": 0x72C, "OriginalValue": 0x35},
     "st_32_p.tbb": {"Offset": 0x728, "OriginalValue": 0x35},
@@ -348,115 +429,52 @@ HUNT_BOSS_SPAWN_WAVE = {
     "st_39_p.tbb": {"Offset": 0x7D5, "OriginalValue": 0x34},
 }
 
-def setElementalAssociations(damageMapping, charID):
-    for damageType, character in damageMapping.items():
-        if character == charID:
-            return STATUS_ASSOCIATIONS[damageType]
-
-def newExpMult(exp_multiplier):
-    statusFileLoc = os.path.join(config.executable_directory, "text/en/status.csv")
-    with open(statusFileLoc, 'r', encoding='utf-8') as csvFile:
-        statusFile = csv.DictReader(csvFile, delimiter='\t', lineterminator='\n', strict=True)
-        fieldNames = statusFile.fieldnames
-        newStatusFile = []
-        for row in statusFile:
-            charID = row['キャラＩＤ']
-            # Only update if in our dicts, else leave row untouched
-            if charID in STATUS_DEFAULTS:
-                row['EXPMIN'] = int(STATUS_DEFAULTS[charID]['EXPMIN'] / exp_multiplier)
-                row['EXPMAX'] = int(STATUS_DEFAULTS[charID]['EXPMAX'] / exp_multiplier)
-                row['属性1'] = STATUS_DEFAULTS[charID]['属性1']
-                row['属性1値'] = STATUS_DEFAULTS[charID]['属性1値']
-            # else: leave row as-is
-            newStatusFile.append(row)
-    with open(statusFileLoc, 'w', encoding='utf-8') as csvFile:
-        writer = csv.DictWriter(csvFile, fieldNames, delimiter='\t', lineterminator='\n', strict=True)
-        writer.writeheader()
-        writer.writerows(newStatusFile)
-
-    """ needs tested more
-    statusEdits = {}
-    
-    for character in STATUS_DEFAULTS:
-        statusEdits[character] = {
-            'EXPMIN': int(STATUS_DEFAULTS[character]['EXPMIN'] / exp_multiplier),
-            'EXPMAX': int(STATUS_DEFAULTS[character]['EXPMAX'] / exp_multiplier),
-            '属性1': STATUS_DEFAULTS[character]['属性1'],
-            '属性1値': STATUS_DEFAULTS[character]['属性1値']
-        }
-
-
-    edit_csv(statusFileLoc, STATUS_DEFAULTS)
-    """
-
-    for huntFileName, data in HUNT_BOSS_SPAWN_WAVE.items():
-        huntFileLoc = os.path.join(config.executable_directory, "text/stage", huntFileName)
-        huntFileBytes = readFileIntoBuffer(huntFileLoc)
-        if data['Offset'] >= len(huntFileBytes):
-            print(f"Offset {data['Offset']} is out of range for file {huntFileName} (size {len(huntFileBytes)})")
-        else:
-            huntFileBytes[data['Offset']] = 0x31 # changes boss spawn wave to 1
-            writeBufferIntoFile(huntFileLoc, huntFileBytes)
-
-#
-RAID_STAGE_DEFAULTS = {
-    "INTERCEPT_STAGE01": {"ウェイブファイル１": "text/stage/st_01_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 30000, "ランクＡ:判定スコア": 55000, "ランクＳ:判定スコア": 80000},
-    "INTERCEPT_STAGE02": {"ウェイブファイル１": "text/stage/st_02_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 35000, "ランクＡ:判定スコア": 60000, "ランクＳ:判定スコア": 85000},
-    "INTERCEPT_STAGE03": {"ウェイブファイル１": "text/stage/st_03_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 20000, "ランクＡ:判定スコア": 45000, "ランクＳ:判定スコア": 65000},
-    "INTERCEPT_STAGE04": {"ウェイブファイル１": "text/stage/st_04_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 20000, "ランクＡ:判定スコア": 45000, "ランクＳ:判定スコア": 65000},
-    "INTERCEPT_STAGE05": {"ウェイブファイル１": "text/stage/st_05_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 30000, "ランクＡ:判定スコア": 50000, "ランクＳ:判定スコア": 70000},
-    "INTERCEPT_STAGE06": {"ウェイブファイル１": "text/stage/st_06_p.csv", "メニュー表示用ウェーブ数": 5, "ランクＢ:判定スコア": 40000, "ランクＡ:判定スコア": 80000, "ランクＳ:判定スコア": 120000},
-    "INTERCEPT_STAGE07": {"ウェイブファイル１": "text/stage/st_07_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 35000, "ランクＡ:判定スコア": 65000, "ランクＳ:判定スコア": 90000},
-    "INTERCEPT_STAGE08": {"ウェイブファイル１": "text/stage/st_08_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 60000, "ランクＡ:判定スコア": 100000, "ランクＳ:判定スコア": 135000},
-    "INTERCEPT_STAGE09": {"ウェイブファイル１": "text/stage/st_09_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 40000, "ランクＡ:判定スコア": 65000, "ランクＳ:判定スコア": 90000},
-    "INTERCEPT_STAGE11": {"ウェイブファイル１": "text/stage/st_11_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 40000, "ランクＡ:判定スコア": 80000, "ランクＳ:判定スコア": 115000},
-    "INTERCEPT_STAGE12": {"ウェイブファイル１": "text/stage/st_12_p.csv", "メニュー表示用ウェーブ数": 4, "ランクＢ:判定スコア": 50000, "ランクＡ:判定スコア": 100000, "ランクＳ:判定スコア": 150000},
-    "INTERCEPT_STAGE21": {"ウェイブファイル１": "text/stage/st_21_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 40000, "ランクＡ:判定スコア": 70000, "ランクＳ:判定スコア": 95000},
-    "INTERCEPT_STAGE22": {"ウェイブファイル１": "text/stage/st_22_p.csv", "メニュー表示用ウェーブ数": 3, "ランクＢ:判定スコア": 50000, "ランクＡ:判定スコア": 100000, "ランクＳ:判定スコア": 140000},
-    "INTERCEPT_STAGE23": {"ウェイブファイル１": "text/stage/st_23_p.csv", "メニュー表示用ウェーブ数": 6, "ランクＢ:判定スコア": 90000, "ランクＡ:判定スコア": 135000, "ランクＳ:判定スコア": 170000},
-    "INTERCEPT_STAGE24": {"ウェイブファイル１": "text/stage/st_24_p.csv", "メニュー表示用ウェーブ数": 6, "ランクＢ:判定スコア": 80000, "ランクＡ:判定スコア": 135000, "ランクＳ:判定スコア": 185000},
-    "INTERCEPT_STAGE25": {"ウェイブファイル１": "text/stage/st_25_p.csv", "メニュー表示用ウェーブ数": 9, "ランクＢ:判定スコア": 110000, "ランクＡ:判定スコア": 160000, "ランクＳ:判定スコア": 230000},
-    "INTERCEPT_STAGE26": {"ウェイブファイル１": "text/stage/st_26_p.csv", "メニュー表示用ウェーブ数": 9, "ランクＢ:判定スコア": 180000, "ランクＡ:判定スコア": 260000, "ランクＳ:判定スコア": 340000},
-    "INTERCEPT_STAGE27": {"ウェイブファイル１": "text/stage/st_27_p.csv", "メニュー表示用ウェーブ数": 6, "ランクＢ:判定スコア": 130000, "ランクＡ:判定スコア": 160000, "ランクＳ:判定スコア": 180000},
-}
-
-HUNT_STAGE_DEFAULTS = {
-    "INTERCEPT_STAGE31": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
-    "INTERCEPT_STAGE32": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
-    "INTERCEPT_STAGE33": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
-    "INTERCEPT_STAGE34": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
-    "INTERCEPT_STAGE35": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
-    "INTERCEPT_STAGE36": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
-    "INTERCEPT_STAGE37": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
-    "INTERCEPT_STAGE38": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
-    "INTERCEPT_STAGE39": {"ランクＢ:判定スコア": 450000, "ランクＡ:判定スコア": 550000, "ランクＳ:判定スコア": 650000},
-}
-
-def fastIntercepts(progress_callback=None):
+def fastIntercepts(options):
     intFileLoc = os.path.join(config.executable_directory, "text/en/intstage.csv")
     stageEdits = {}
 
-    for huntFileName, data in HUNT_BOSS_SPAWN_WAVE.items():
-        huntFileLoc = os.path.join(config.executable_directory, "text/stage", huntFileName)
-        huntFileBytes = readFileIntoBuffer(huntFileLoc)
-        huntFileBytes[data['Offset']] = 0x31 # changes boss spawn wave to 1
-        writeBufferIntoFile(huntFileLoc, huntFileBytes)
-    
-    for raid, data in RAID_STAGE_DEFAULTS.items():
-        data['ウェイブファイル１'] = data['ウェイブファイル１'].replace(".csv", "_short.csv")
-        data['メニュー表示用ウェーブ数'] = data['メニュー表示用ウェーブ数'] // 2
-        data["ランクＢ:判定スコア"] = round(data["ランクＢ:判定スコア"] * 0.6, -3)
-        data["ランクＡ:判定スコア"] = round(data["ランクＡ:判定スコア"] * 0.6, -3)
-        data["ランクＳ:判定スコア"] = round(data["ランクＳ:判定スコア"] * 0.6, -3)
-        stageEdits[raid] = data
-    
-    for hunt, data in HUNT_STAGE_DEFAULTS.items():
-        data["ランクＢ:判定スコア"] = round(data["ランクＢ:判定スコア"] * 0.6, -3)
-        data["ランクＡ:判定スコア"] = round(data["ランクＡ:判定スコア"] * 0.6, -3)
-        data["ランクＳ:判定スコア"] = round(data["ランクＳ:判定スコア"] * 0.6, -3)
-        stageEdits[hunt] = data
+    if options['fast_intercepts'] == 1:
+        for huntFileName, data in HUNT_BOSS_SPAWN_WAVE.items():
+            huntFileLoc = os.path.join(config.executable_directory, "text/stage", huntFileName)
+            huntFileBytes = readFileIntoBuffer(huntFileLoc)
+            huntFileBytes[data['Offset']] = 0x31 # changes boss spawn wave to 1
+            writeBufferIntoFile(huntFileLoc, huntFileBytes)
+        
+        for raid, data in RAID_STAGE_DEFAULTS.items():
+            data['ウェイブファイル１'] = data['ウェイブファイル１'].replace(".csv", "_short.csv")
+            data['メニュー表示用ウェーブ数'] = data['メニュー表示用ウェーブ数'] // 2
+            data["ランクＢ:判定スコア"] = int(round(data["ランクＢ:判定スコア"] * 0.55, -3))
+            data["ランクＡ:判定スコア"] = int(round(data["ランクＡ:判定スコア"] * 0.55, -3))
+            data["ランクＳ:判定スコア"] = int(round(data["ランクＳ:判定スコア"] * 0.55, -3))
+            data["ランクＣ：判定スコア"] = int(round(data["ランクＣ：判定スコア"] * 0.55, -3))
+            data["ランクＢ：判定スコア"] = int(round(data["ランクＢ：判定スコア"] * 0.55, -3))
+            data["ランクＡ：判定スコア"] = int(round(data["ランクＡ：判定スコア"] * 0.55, -3))
+            data["ランクＳ：判定スコア"] = int(round(data["ランクＳ：判定スコア"] * 0.55, -3))
+            stageEdits[raid] = data
+        
+        for hunt, data in HUNT_STAGE_DEFAULTS.items():
+            data["ランクＢ:判定スコア"] = int(round(data["ランクＢ:判定スコア"] * 0.55, -3))
+            data["ランクＡ:判定スコア"] = int(round(data["ランクＡ:判定スコア"] * 0.55, -3))
+            data["ランクＳ:判定スコア"] = int(round(data["ランクＳ:判定スコア"] * 0.55, -3))
+            data["ランクＣ：判定スコア"] = int(round(data["ランクＣ：判定スコア"] * 0.55, -3))
+            data["ランクＢ：判定スコア"] = int(round(data["ランクＢ：判定スコア"] * 0.55, -3))
+            data["ランクＡ：判定スコア"] = int(round(data["ランクＡ：判定スコア"] * 0.55, -3))
+            data["ランクＳ：判定スコア"] = int(round(data["ランクＳ：判定スコア"] * 0.55, -3))
+            stageEdits[hunt] = data
 
-    edit_csv(intFileLoc, stageEdits)
+    else: # restore default values if not enabled
+        for huntFileName, data in HUNT_BOSS_SPAWN_WAVE.items():
+            huntFileLoc = os.path.join(config.executable_directory, "text/stage", huntFileName)
+            huntFileBytes = readFileIntoBuffer(huntFileLoc)
+            huntFileBytes[data['Offset']] = data['OriginalValue'] # restore original boss spawn wave
+            writeBufferIntoFile(huntFileLoc, huntFileBytes)
+
+        for raid, data in RAID_STAGE_DEFAULTS.items():
+            stageEdits[raid] = data
+        for hunt, data in HUNT_STAGE_DEFAULTS.items():
+            stageEdits[hunt] = data
+
+    edit_csv(intFileLoc, stageEdits, header_line=1)
 
 def AddWarpToFSCCrystal(progress_callback=None):
     '''

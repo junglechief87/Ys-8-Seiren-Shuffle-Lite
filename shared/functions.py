@@ -201,10 +201,18 @@ def getCharacterJoinLv(character):
 
     return lvScript
 
-def edit_csv(file, edits):
+def edit_csv(file, edits, header_line=0):
+    preamble = []
     newCSVdata = []
-    with open(file, 'r', encoding='utf-8') as csvFile:
-        CSVdata = csv.DictReader(csvFile, delimiter='\t', lineterminator='\n', strict=True)
+    with open(file, 'r', encoding='utf-8', newline='') as csvFile:
+        def getFieldnames(header_line):
+            for i, line in enumerate(csvFile):
+                if i == header_line:
+                    # Strip trailing newlines and whitespace from each header field
+                    raw_fields = line.rstrip('\r\n')
+                    return [f.strip() for f in raw_fields.split('\t')]
+                preamble.append(line)
+        CSVdata = csv.DictReader(csvFile, delimiter='\t', strict=True, fieldnames=getFieldnames(header_line))
     
         for row in CSVdata:
             rowID = row[CSVdata.fieldnames[0]]  # Assumes first column is unique ID
@@ -214,7 +222,11 @@ def edit_csv(file, edits):
                         row[column] = newValue
             newCSVdata.append(row)
 
-    with open(file, 'w', encoding='utf-8') as csvFile:
-        writer = csv.DictWriter(csvFile, fieldnames=CSVdata.fieldnames, delimiter='\t', lineterminator='\n', strict=True)
+    with open(file, 'w', encoding='utf-8', newline='') as csvFile:
+        # Normalize any preamble lines to CRLF to enforce Windows-style line endings
+        for line in preamble:
+            csvFile.write(line.rstrip('\r\n') + '\r\n')
+        # Ensure CSV writer uses CRLF lineterminator
+        writer = csv.DictWriter(csvFile, fieldnames=CSVdata.fieldnames, delimiter='\t', lineterminator='\r\n', strict=True)
         writer.writeheader()
         writer.writerows(newCSVdata)

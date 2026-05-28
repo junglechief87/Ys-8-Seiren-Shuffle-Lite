@@ -6,7 +6,7 @@ from patch.script_constants.bossCue import BOSS_CUE, pastModeToggle, getBossCue
 from patch.script_constants.fscWarp import FSC_WARP
 from patch.gameStartFunctions import *
 from patch.chestPatcher import *
-from patch.miscPatches import randomizeOctoBosses, newExpMult
+from patch.miscPatches import randomizeOctoBosses, updateStatusCSV, fastIntercepts
 from patch.buildEntrances import *
 from patch.helperText import getHelperText
 import shared.config as config
@@ -205,9 +205,16 @@ def rngPatcherMain(patch, progress_callback=None):
         progress_callback("Setting up final boss")
 
     patchFile += endingHandler(patch.settings['options'])
-    expMult(patch.settings['options'])
     if progress_callback:
         progress_callback("Setting up ending")
+
+    updateStatus(patch.settings)
+    if progress_callback:
+        progress_callback("Updating status.csv")
+
+    fastIntercepts(patch.settings['options'])
+    if progress_callback:
+        progress_callback("Setting up fast intercepts")
 
     with open(rngScriptFile, 'w', encoding='Shift-JIS', errors='strip_accents') as fileToPatch: #build the entire rng file from one big string
         fileToPatch.write(patchFile)
@@ -1162,16 +1169,14 @@ def endingHandler(options):
     
     return final_boss_script + ending_scripts
 # ==========================================================================================================
-#  Exp Muiltiplier handling and scaled exp items.
+#  Exp Muiltiplier handling and scaled exp items. Now also where we handle any changes to status.csv
 # ==========================================================================================================
-# we're doing away with this old method and simplifying everything. Max exp is a character stat in this game and the status file contains an editable version of it.
-# so instead of the old method we're going to call a function to divide the character's max exp by our multiplier.
-# this achives the same effect as a global exp multiplier in a far cleaner way than our old method.
-# there is no growth rate anymore because honestly a lot of what it was going for is achieved through boss level scaling better
-def expMult(options):
+def updateStatus(settings):
+    options = settings['options']
     import re
-    newExpMult(options['experience_multiplier'])
+    updateStatusCSV(settings)
 
+    # not part of the status csv but since we're updating exp in the status.csv it makes sense to handle this here too.
     if options['scale_exp_items'] == 1:
         item1 = 100//options['experience_multiplier']
         item2 = 1000//options['experience_multiplier']
