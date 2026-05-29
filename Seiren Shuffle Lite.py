@@ -234,11 +234,6 @@ class CommandsFrame(ctk.CTkFrame):
             file_count = len([f for root, dirs, files in os.walk(backup_dir) for f in files]) if os.path.exists(backup_dir) else 100
 
             def on_complete(error, msg, tb):
-                try:
-                    # record that the user ran the patch operation
-                    self.parent_app.mark_patch_used()
-                except Exception:
-                    pass
                 self.parent_app.set_gui_enabled(True)
 
             tasks = [(restoreOriginalGameFiles, "Restoring Original Game Files")]
@@ -290,6 +285,7 @@ class CommandsFrame(ctk.CTkFrame):
             tasks.append((miscFixes, "Applying Miscellaneous Fixes"))
 
             def on_complete(error, msg, tb):
+                self.parent_app.mark_patch_used()
                 self.parent_app.set_gui_enabled(True)
 
             ProgressWindow(self.parent_app, tasks, total_files, "Patching Game Files", on_complete, ICON_PATH)
