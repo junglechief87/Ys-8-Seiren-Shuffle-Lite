@@ -30,7 +30,6 @@ function "init"
 		if(FLAG[GF_TBOX_DUMMY087] ){	// ƒWƒƒƒ“ƒ_ƒ‹ƒ€‚Ì’¸ã‚É“’…‚·‚é
 			MapHide("ev_kitaground00" , 1 )
 			MapHide("ev_mayu" , 1 )
-			//meaningless update to test patch files
 		}
 	}
 }
