@@ -10,6 +10,63 @@ folders = ['script/',
            'text/en/',
            'text/stage/']
 
+
+def needs_update():
+    """Fast check: compare repo's patch/last_update.json.updated_at to local seirenShuffleLiteSettings.json last_patched_at.
+
+    Returns True if local `last_patched_at` is missing/null or older than repo `updated_at`.
+    No file contents are downloaded beyond the small JSON file.
+    """
+    try:
+        # read local settings file for last_patched_at
+        try:
+            import json
+            settings_path = os.path.join(os.getcwd(), 'seirenShuffleLiteSettings.json')
+            if not os.path.exists(settings_path):
+                return True
+            with open(settings_path, 'r') as f:
+                settings = json.load(f)
+            # If the user has never patched, consider update needed
+            if 'last_patched_at' not in settings or not settings.get('last_patched_at'):
+                return True
+            local_ts = settings.get('last_patched_at')
+        except Exception:
+            # if we can't read settings, assume update needed
+            return True
+        
+        # read remote timestamp file
+        try:
+            with repo.open('patch/last_update.json', 'r') as f:
+                import json
+                remote = json.load(f)
+                remote_ts = remote.get('updated_at')
+        except Exception:
+            return False
+
+        if not remote_ts:
+            return False
+
+        # parse remote timestamp (expect ISO8601 ending with Z or offset)
+        from datetime import datetime, timezone
+        try:
+            r = remote_ts.replace('Z', '+00:00')
+            remote_dt = datetime.fromisoformat(r).astimezone(timezone.utc)
+        except Exception:
+            return False
+
+        if not local_ts:
+            return True
+
+        try:
+            l = local_ts.replace('Z', '+00:00')
+            local_dt = datetime.fromisoformat(l).astimezone(timezone.utc)
+        except Exception:
+            return True
+
+        return remote_dt > local_dt
+    except Exception:
+        return False
+
 def countOriginalGameFiles():
     """Count files to be backed up from the game directory"""
     try:

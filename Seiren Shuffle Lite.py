@@ -10,7 +10,7 @@ import sys
 import subprocess
 from pathlib import Path
 from patch.chestPatcher import cleanChests
-from patch.fileManagement import copyOriginalGameFiles, downloadFiles, restoreOriginalGameFiles, countOriginalGameFiles, countDownloadFiles, countChestLocations
+from patch.fileManagement import copyOriginalGameFiles, downloadFiles, restoreOriginalGameFiles, countOriginalGameFiles, countDownloadFiles, countChestLocations, needs_update
 from patch.rngPatcher import rngPatcherMain
 from patch.miscPatches import AddWarpToFSCCrystal, readFileIntoBuffer, miscFixes, makeResourceDropsGuaranteed, updateINI
 from patch.progressWindow import ProgressWindow
@@ -234,6 +234,11 @@ class CommandsFrame(ctk.CTkFrame):
             file_count = len([f for root, dirs, files in os.walk(backup_dir) for f in files]) if os.path.exists(backup_dir) else 100
 
             def on_complete(error, msg, tb):
+                try:
+                    # record that the user ran the patch operation
+                    self.parent_app.mark_patch_used()
+                except Exception:
+                    pass
                 self.parent_app.set_gui_enabled(True)
 
             tasks = [(restoreOriginalGameFiles, "Restoring Original Game Files")]
@@ -417,6 +422,9 @@ class App(ctk.CTk):
         self.grid_rowconfigure((0, 1, 2), weight=0)
         self.grid_rowconfigure(3, weight=1)
 
+        # track when the user last ran the patch operation (ISO8601 UTC)
+        self.last_patched_at = None
+
         # Create frames
         self.executable_frame = ExecutableLocationFrame(self)
         self.executable_frame.grid(row=0, column=0, padx=10, pady=10, sticky="ew")
@@ -452,6 +460,7 @@ class App(ctk.CTk):
         settings = {
             "executable_path": self.executable_frame.get_path(),
             "patch_file_path": self.patch_file_frame.get_path(),
+            "last_patched_at": self.last_patched_at,
         }
         try:
             with open(SETTINGS_FILE, "w") as f:
@@ -475,8 +484,21 @@ class App(ctk.CTk):
                 if patch_file_path:
                     self.patch_file_frame.set_path(patch_file_path)
                     self.on_patch_file_selected()
+
+                # load last patched timestamp if present
+                self.last_patched_at = settings.get("last_patched_at")
             except Exception as e:
                 messagebox.showerror("Error", f"Failed to load settings: {e}")
+
+    def mark_patch_used(self):
+        """Record the current UTC time as the last patch usage and save settings."""
+        try:
+            from datetime import datetime, timezone
+            # ISO 8601 UTC timestamp, normalized to 'Z'
+            self.last_patched_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z')
+            self.saveSettings()
+        except Exception:
+            pass
 
     def on_executable_selected(self):
         """Called when executable location is selected"""
@@ -498,6 +520,14 @@ class App(ctk.CTk):
         # Enable/disable restore button based on executable selection
         if has_executable:
             self.commands_frame.enable_restore_button()
+            # quick check against repo's last_update marker
+            try:
+                if needs_update():
+                    self.commands_frame.patch_button.configure(text="Patch Files (Update)")
+                else:
+                    self.commands_frame.patch_button.configure(text="Patch Files")
+            except Exception:
+                pass
             self.commands_frame.enable_patch_button()
         else:
             self.commands_frame.disable_patch_button()
