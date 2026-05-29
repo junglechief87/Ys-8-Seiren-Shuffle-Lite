@@ -281,7 +281,7 @@ class CommandsFrame(ctk.CTkFrame):
             total_files += 1
             tasks.append((updateINI, "Updating Language Setting"))
 
-            total_files += 3
+            total_files += 4
             tasks.append((miscFixes, "Applying Miscellaneous Fixes"))
 
             def on_complete(error, msg, tb):
@@ -320,7 +320,7 @@ class CommandsFrame(ctk.CTkFrame):
 
             with ZipFile(config.patch_file_path) as zf:
                 item_map_preview = json.loads(zf.read("item_location_map.json"))
-            total_steps = len(item_map_preview) + 7  # locations + 7 named pipeline steps
+            total_steps = len(item_map_preview) + 9  # locations + 9 named pipeline steps (matches rngPatcherMain callbacks)
 
             tasks = [(seed_gen_task, "Generating Randomized Seed")]
             ProgressWindow(self.parent_app, tasks, total_steps, "Generate Seed", on_complete, ICON_PATH)
@@ -469,7 +469,8 @@ class App(ctk.CTk):
             try:
                 with open(SETTINGS_FILE, "r") as f:
                     settings = json.load(f)
-
+                    
+                self.last_patched_at = settings.get("last_patched_at")
                 executable_path = settings.get("executable_path")
                 patch_file_path = settings.get("patch_file_path")
 
@@ -480,9 +481,6 @@ class App(ctk.CTk):
                 if patch_file_path:
                     self.patch_file_frame.set_path(patch_file_path)
                     self.on_patch_file_selected()
-
-                # load last patched timestamp if present
-                self.last_patched_at = settings.get("last_patched_at")
             except Exception as e:
                 messagebox.showerror("Error", f"Failed to load settings: {e}")
 
