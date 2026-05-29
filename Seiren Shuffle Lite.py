@@ -29,7 +29,7 @@ FRAME_TITLE_STYLE = {
 }
 
 SETTINGS_FILE = "seirenShuffleLiteSettings.json"
-VERSION_NUM = "1.0.0"
+VERSION_NUM = "1.1.0"
 
 
 def resource_path(relative_path):
@@ -469,7 +469,7 @@ class App(ctk.CTk):
             try:
                 with open(SETTINGS_FILE, "r") as f:
                     settings = json.load(f)
-                    
+
                 self.last_patched_at = settings.get("last_patched_at")
                 executable_path = settings.get("executable_path")
                 patch_file_path = settings.get("patch_file_path")
