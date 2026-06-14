@@ -54,18 +54,18 @@ function "init"
 
 		if (FLAG[GF_05MP0405_READ_REED]) {	// ▼[M05S172][キャプテン・リードと別れる２]
 			// 再探索 --------------------------------------------- //
-			MapAnime("ev_water2" , "water_on" )
-			MapSetProp("WL_01" , MNP_GROUND)
+			//MapAnime("ev_water2" , "water_on" )
+			//MapSetProp("WL_01" , MNP_GROUND)
 
 			//初回探索用水面1をOFF
-			MapAnime("ev_water1" ,"water_off" )	// 初回攻略時の水面
-			MapDelProp("WL_00" , MNP_GROUND)
+			//MapAnime("ev_water1" ,"water_off" )	// 初回攻略時の水面
+			//MapDelProp("WL_00" , MNP_GROUND)
 
-			MapHide("ev_awa1" , 1 )	// 再探索時の水中用泡
-			MapHide("ev_awa2" , 1 )	// 再探索時の水中用泡
+			//MapHide("ev_awa1" , 1 )	// 再探索時の水中用泡
+			//MapHide("ev_awa2" , 1 )	// 再探索時の水中用泡
 
-			EventBox( 01 , 1 )	//水面（水中）用カメラボックスです。再探索時に有効にしてください。
-			SetEnvSEPlayState(0408003,1)	// envse
+			//EventBox( 01 , 1 )	//水面（水中）用カメラボックスです。再探索時に有効にしてください。
+			//SetEnvSEPlayState(0408003,1)	// envse
 		}
 		if (FLAG[GF_05MP0404_READ_NOTE4]) {		// ▼[M05S152][リードの航海日誌④を読む]
 			// 扉開放後 ------------------------------------------- //
