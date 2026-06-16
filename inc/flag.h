@@ -2639,10 +2639,10 @@ enum {
 	GF_TBOX_DUMMY097, //Dina item 3 for 2 jewels
 	GF_TBOX_DUMMY098, //Dina item 4 for 10 jewels
 	GF_TBOX_DUMMY099, //Dina item 5 for 25 jewels
-	GF_TBOX_DUMMY100, 
-	GF_TBOX_DUMMY101, 
-	GF_TBOX_DUMMY102, 
-	GF_TBOX_DUMMY103, 
+	GF_TBOX_DUMMY100, //Equivalent for SF_Gratika_Joined
+	GF_TBOX_DUMMY101, //Equivalent for SF_Luminous_Joined
+	GF_TBOX_DUMMY102, //Check if gratika join state changed
+	GF_TBOX_DUMMY103, //Check if luminous join state changed
 	GF_TBOX_DUMMY104, //Austen Joining Event
 	GF_TBOX_DUMMY105, //replaces flag for MISTILTEINN
 	GF_TBOX_DUMMY106, //flag for ship blueprints
@@ -2661,7 +2661,7 @@ enum {
 	GF_TBOX_DUMMY119, //I haven't found a straighforward death flag but I can use this to create one as there's a game over script in system.scp, it calls an internal game function but we can do scripting before that call.
 					  //Also worth noting that because this is set during the game over screen it is never saved and therefore doesn't need cleared on load/retry.
 	GF_TBOX_DUMMY120, //Simple ending flag so the client sees the ending earlier
-	GF_TBOX_DUMMY121, 
+	GF_TBOX_DUMMY121, //average party level
 	GF_TBOX_DUMMY122, 
 	GF_TBOX_DUMMY123, 
 	GF_TBOX_DUMMY124, 

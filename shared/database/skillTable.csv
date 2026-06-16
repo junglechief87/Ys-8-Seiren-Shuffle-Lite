@@ -71,3 +71,11 @@ SKILL_DANA_SP_B5,PARTY_DANA,Mistral Edge
 SKILL_DANA_SP_A1,PARTY_DANA,Ice Age
 SKILL_DANA_SP_A2,PARTY_DANA,Spiel Round Dance
 SKILL_DANA_SP_A3,PARTY_DANA,Water Burst
+SKILL_DANA_SP_C3,PARTY_DANA2,Elemental Shot (Gratika)
+SKILL_DANA_SP_C4,PARTY_DANA2,Dragon Spirit (Gratika)
+SKILL_DANA_SP_B5,PARTY_DANA2,Mistral Edge (Gratika)
+SKILL_DANA_SP_A2,PARTY_DANA2,Spiel Round Dance (Gratika)
+SKILL_DANA_SP_C3,PARTY_DANA3,Elemental Shot (Luminous)
+SKILL_DANA_SP_C4,PARTY_DANA3,Dragon Spirit (Luminous)
+SKILL_DANA_SP_B5,PARTY_DANA3,Mistral Edge (Luminous)
+SKILL_DANA_SP_A2,PARTY_DANA3,Spiel Round Dance (Luminous)

@@ -79,6 +79,16 @@ def miscFixes(progress_callback=None):
     if progress_callback:
         progress_callback(f"Patched: {os.path.basename(nearPalaceLocFile)}")
 
+    #setup paro script
+    calmInletLocFile = getLocFile('mp1201', 'map')
+    fileBytes = readFileIntoBuffer(calmInletLocFile)
+    paroLoc = fileBytes.find('talk:Talk_Paro'.encode('utf-8'))
+    fileBytes = writeStringToBytes(fileBytes, paroLoc, 'rng:Paro_Party') #changes script name to use custom paro script
+    writeBufferIntoFile(calmInletLocFile,fileBytes)
+
+    if progress_callback:
+        progress_callback(f"Patched: {os.path.basename(calmInletLocFile)}")
+
     ys8EXE = config.executable_path
     exeBytes = readFileIntoBuffer(ys8EXE)
     exeBytes[0x29B1BA:0x29B1C3] = [0xF3,0x44,0x0F,0x59, 0x15, 0x21, 0xCF, 0x30, 0x00] 

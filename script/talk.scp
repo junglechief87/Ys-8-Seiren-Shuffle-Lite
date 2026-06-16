@@ -27279,6 +27279,17 @@ function "Talk_Katrin"
 		// やり込みメッセージ（燃石渡し／カトリーン）
 		SetFlag( TF_TALK_TYPE, ( FLAG[TF_TALK_TYPE] + 0x100 ) )	// 0x100:燃石を渡せる
 	}
+	// if dana forms are able to join temporarily disable so the weapon shop functions properly, we restore at the end of the talk_katrin script
+	if (FLAG[SF_DANA2_JOINOK]){
+		SetFlag(SF_DANA2_JOINOK,0)
+		SetFlag(SF_DANA2_JOINOKBK,1)
+		SetFlag(GF_TBOX_DUMMY102,1)
+	}
+	if (FLAG[SF_DANA3_JOINOK]){
+		SetFlag(SF_DANA3_JOINOK,0)
+		SetFlag(SF_DANA3_JOINOKBK,1)
+		SetFlag(GF_TBOX_DUMMY103,1)
+	}
 	//new handler for lower tier weapons for characters that didn't have them in the original game
 	if ((!ALLITEMWORK[ICON3D_987] || !ALLITEMWORK[ICON3D_991] || !ALLITEMWORK[ICON3D_WP_HUMMEL_000]) && FLAG[GF_02MP1201_JOIN_KATRIN] && !FLAG[SF_DEFEAT_ANCIENT])
 	{
@@ -27981,6 +27992,90 @@ function "Talk_Katrin"
 		ResetStopFlag(STOPFLAG_TALK)
 	}
 
+	//setup dana form weapons and restore their previous states
+	if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_986){
+		EquipWeapon(DANA2, ICON3D_986)
+		EquipWeapon(DANA3, ICON3D_986)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_987){
+		EquipWeapon(DANA2, ICON3D_987)
+		EquipWeapon(DANA3, ICON3D_987)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_988){
+		EquipWeapon(DANA2, ICON3D_987)
+		EquipWeapon(DANA3, ICON3D_987)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_989){
+		EquipWeapon(DANA2, ICON3D_987)
+		EquipWeapon(DANA3, ICON3D_987)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_005){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_005)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_005)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_000){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_000)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_000)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_001){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_001)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_001)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_002){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_002)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_002)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_003){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_003)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_003)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_004){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_004)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_004)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_100){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_100)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_100)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_101){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_101)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_101)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_102){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_102)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_102)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_103){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_103)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_103)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_200){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_200)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_200)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_201){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_201)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_201)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_202){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_202)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_202)
+	}
+	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_203){
+		EquipWeapon(DANA2, ICON3D_WP_DANA_203)
+		EquipWeapon(DANA3, ICON3D_WP_DANA_203)
+	}
+	
+	if(FLAG[GF_TBOX_DUMMY102]){
+		SetFlag(SF_DANA2_JOINOK,1)
+		SetFlag(SF_DANA2_JOINOKBK,0)
+	}
+	if(FLAG[GF_TBOX_DUMMY103]){
+		SetFlag(SF_DANA3_JOINOK,1)
+		SetFlag(SF_DANA3_JOINOKBK,0)
+	}
+	SetFlag(GF_TBOX_DUMMY102,0)
+	SetFlag(GF_TBOX_DUMMY103,0)
 	CallFunc( "talk:Talk_Katrin_LookReset" )		//向きリセット処理
 }
 ////////////////////////////////////////////////////

@@ -4,6 +4,7 @@ from shared.functions import *
 from patch.script_constants.crew import CREW_FLAGS
 from patch.script_constants.bossCue import BOSS_CUE, pastModeToggle, getBossCue
 from patch.script_constants.fscWarp import FSC_WARP
+from patch.script_constants.paroMenu import PARTY_MENU
 from patch.gameStartFunctions import *
 from patch.chestPatcher import *
 from patch.miscPatches import randomizeOctoBosses, updateStatusCSV, fastIntercepts
@@ -83,6 +84,7 @@ TREASURE_SCRIPTS = {
 "317":  "mp6531m:EvOpenTBox",
 "291":  "mp6519:EvOpenTBox",
 "288":  "mp6513:EvOpenTBox",
+"239":  "mp6345:init",
 "19":   "mp0408:EV_M05S152_ED",
 "18":   "mp0405:EV_M05S170_ED",
 "13":   "mp0404:EV_M05S150_ED",
@@ -207,6 +209,10 @@ def rngPatcherMain(patch, progress_callback=None):
     patchFile += endingHandler(patch.settings['options'])
     if progress_callback:
         progress_callback("Setting up ending")
+
+    patchFile += PARTY_MENU
+    if progress_callback:
+        progress_callback("Setting up party menu")
 
     updateStatus(patch.settings)
     if progress_callback:

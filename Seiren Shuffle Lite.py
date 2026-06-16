@@ -281,7 +281,7 @@ class CommandsFrame(ctk.CTkFrame):
             total_files += 1
             tasks.append((updateINI, "Updating Language Setting"))
 
-            total_files += 4
+            total_files += 5
             tasks.append((miscFixes, "Applying Miscellaneous Fixes"))
 
             def on_complete(error, msg, tb):
