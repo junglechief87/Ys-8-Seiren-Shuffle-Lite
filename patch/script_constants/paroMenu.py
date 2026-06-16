@@ -278,4 +278,34 @@ function "processParty"
 	}
 }
 
+function "count_party"
+{
+	SetFlag( TF_MENU_SELECT, 0 )
+	// count current active party
+	if(FLAG[SF_ADOL_JOINOK]) {
+		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+	}
+	if(FLAG[SF_LAXIA_JOINOK]) {
+		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+	}
+	if(FLAG[SF_SAHAD_JOINOK]) {
+		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+	}
+	if(FLAG[SF_HUMMEL_JOINOK]) {
+		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+	}
+	if(FLAG[SF_RICOTTA_JOINOK])	{
+		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+	}
+	if(FLAG[SF_DANA_JOINOK]) {
+		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+	}
+	if(FLAG[SF_DANA2_JOINOK]) {
+		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+	}
+	if(FLAG[SF_DANA3_JOINOK]) {
+		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+	}
+}
+
 """

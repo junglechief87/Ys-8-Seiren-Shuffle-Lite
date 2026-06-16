@@ -10,9 +10,16 @@ CREW_FLAGS = {
     }
     else
     {
+        CallFunc("rng:count_party")
+        if (FLAG[TF_MENU_SELECT] >= 6){
+            SetFlag(SF_ADOL_JOINOKBK, 1)
+        }
+        else {
+            SetFlag(SF_ADOL_JOINOK, 1)
+            JoinParty(PARTY_ADOL)
+        }
         SetFlag(SF_ADOL_JOINED, 1)
-        SetFlag(SF_ADOL_JOINOK, 1)
-        JoinParty(PARTY_ADOL)
+        SetFlag(TF_MENU_SELECT, 0)    
     }
 """ + getCharacterJoinLv("ADOL")),
 
@@ -24,9 +31,16 @@ CREW_FLAGS = {
     }
     else
     {
+        CallFunc("rng:count_party")
+        if (FLAG[TF_MENU_SELECT] >= 6){
+            SetFlag(SF_LAXIA_JOINOKBK, 1)
+        }
+        else {
+            SetFlag(SF_LAXIA_JOINOK, 1)
+            JoinParty(PARTY_LAXIA)
+        }
         SetFlag(SF_LAXIA_JOINED, 1)
-        SetFlag(SF_LAXIA_JOINOK, 1)
-        JoinParty(PARTY_LAXIA)
+        SetFlag(TF_MENU_SELECT, 0)
     }
  
     SetDiaryFlag( DF_JOIN_LAXIA, 1 )
@@ -40,9 +54,16 @@ CREW_FLAGS = {
     }
     else
     {
+        CallFunc("rng:count_party")
+        if (FLAG[TF_MENU_SELECT] >= 6){
+            SetFlag(SF_SAHAD_JOINOKBK, 1)
+        }
+        else {
+            SetFlag(SF_SAHAD_JOINOK, 1)
+            JoinParty(PARTY_SAHAD)
+        }
         SetFlag(SF_SAHAD_JOINED, 1)
-        SetFlag(SF_SAHAD_JOINOK, 1)
-        JoinParty(PARTY_SAHAD)
+        SetFlag(TF_MENU_SELECT, 0)    
     }
  
     SetDiaryFlag( DF_JOIN_SAHAD, 1 )		
@@ -56,9 +77,16 @@ CREW_FLAGS = {
     }
     else
     {
+        CallFunc("rng:count_party")
+        if (FLAG[TF_MENU_SELECT] >= 6){
+            SetFlag(SF_RICOTTA_JOINOKBK, 1)
+        }
+        else {
+            SetFlag(SF_RICOTTA_JOINOK, 1)
+            JoinParty(PARTY_RICOTTA)
+        }
         SetFlag(SF_RICOTTA_JOINED, 1)
-        SetFlag(SF_RICOTTA_JOINOK, 1)
-        JoinParty(PARTY_RICOTTA)
+        SetFlag(TF_MENU_SELECT, 0)    
     }
 
     SetDiaryFlag( DF_JOIN_RICOTTA, 1 )
@@ -74,9 +102,15 @@ CREW_FLAGS = {
     }
     else
     {
-        SetFlag(SF_HUMMEL_JOINED, 1)
-        SetFlag(SF_HUMMEL_JOINOK, 1)
-        JoinParty(PARTY_HUMMEL)
+        CallFunc("rng:count_party")
+        if (FLAG[TF_MENU_SELECT] >= 6){
+            SetFlag(SF_HUMMEL_JOINOKBK, 1)
+        }
+        else {
+            SetFlag(SF_HUMMEL_JOINOK, 1)
+            JoinParty(PARTY_HUMMEL)
+        }
+        SetFlag(TF_MENU_SELECT, 0)    
     }
 
     SetDiaryFlag( DF_JOIN_HUMMEL, 1 )
@@ -84,11 +118,46 @@ CREW_FLAGS = {
         
 "Dana":( #vanilla function call on mp1210 script rng:0422
 """
+    CallFunc("rng:count_party")
+    if (FLAG[TF_MENU_SELECT] >= 6){
+        SetFlag(SF_DANA_JOINOKBK, 1)
+    }
+    else {
+        SetFlag(SF_DANA_JOINOK, 1)
+        JoinParty(PARTY_DANA)
+    }
     SetFlag(SF_DANA_JOINED, 1)
-    SetFlag(SF_DANA_JOINOK, 1)
+    SetFlag(TF_MENU_SELECT, 0)
     SetDiaryFlag( DF_JOIN_DANA, 1 )
-    JoinParty(PARTY_DANA)
 """ + getCharacterJoinLv("DANA")),
+
+"Gratika":( 
+"""
+    CallFunc("rng:count_party")
+    if (FLAG[TF_MENU_SELECT] >= 6){
+        SetFlag(SF_DANA2_JOINOKBK, 1)
+    }
+    else {
+        SetFlag(SF_DANA2_JOINOK, 1)
+        JoinParty(PARTY_DANA2)
+    }
+    SetFlag(SF_DANA2_JOINED, 1)
+    SetFlag(TF_MENU_SELECT, 0)
+""" + getCharacterJoinLv("DANA2")),
+
+"Luminous":( 
+"""
+    CallFunc("rng:count_party")
+    if (FLAG[TF_MENU_SELECT] >= 6){
+        SetFlag(SF_DANA3_JOINOKBK, 1)
+    }
+    else {
+        SetFlag(SF_DANA3_JOINOK, 1)
+        JoinParty(PARTY_DANA3)
+    }
+    SetFlag(SF_DANA3_JOINED, 1)
+    SetFlag(TF_MENU_SELECT, 0)
+""" + getCharacterJoinLv("DANA3")),
 
 "Captain Barbaros":( #vanilla function call on mp1201 script rng:0402
 """

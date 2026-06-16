@@ -2639,8 +2639,8 @@ enum {
 	GF_TBOX_DUMMY097, //Dina item 3 for 2 jewels
 	GF_TBOX_DUMMY098, //Dina item 4 for 10 jewels
 	GF_TBOX_DUMMY099, //Dina item 5 for 25 jewels
-	GF_TBOX_DUMMY100, //Equivalent for SF_Gratika_Joined
-	GF_TBOX_DUMMY101, //Equivalent for SF_Luminous_Joined
+	GF_TBOX_DUMMY100, 
+	GF_TBOX_DUMMY101, 
 	GF_TBOX_DUMMY102, //Check if gratika join state changed
 	GF_TBOX_DUMMY103, //Check if luminous join state changed
 	GF_TBOX_DUMMY104, //Austen Joining Event

@@ -27279,6 +27279,11 @@ function "Talk_Katrin"
 		// やり込みメッセージ（燃石渡し／カトリーン）
 		SetFlag( TF_TALK_TYPE, ( FLAG[TF_TALK_TYPE] + 0x100 ) )	// 0x100:燃石を渡せる
 	}
+	// temporarily add dana to the party if she hasn't joined yet but a form has to allow weapon upgrades for dana forms
+	if (FLAG[SF_DANA2_JOINOK] || [SF_DANA3_JOINOK]){
+		SetFlag(SF_DANA_JOINOK,1)
+	}
+
 	// if dana forms are able to join temporarily disable so the weapon shop functions properly, we restore at the end of the talk_katrin script
 	if (FLAG[SF_DANA2_JOINOK]){
 		SetFlag(SF_DANA2_JOINOK,0)
@@ -28065,7 +28070,7 @@ function "Talk_Katrin"
 		EquipWeapon(DANA2, ICON3D_WP_DANA_203)
 		EquipWeapon(DANA3, ICON3D_WP_DANA_203)
 	}
-	
+
 	if(FLAG[GF_TBOX_DUMMY102]){
 		SetFlag(SF_DANA2_JOINOK,1)
 		SetFlag(SF_DANA2_JOINOKBK,0)
@@ -28074,6 +28079,11 @@ function "Talk_Katrin"
 		SetFlag(SF_DANA3_JOINOK,1)
 		SetFlag(SF_DANA3_JOINOKBK,0)
 	}
+
+	if(FLAG[SF_DANA_JOINOKBK] || !FLAG[SF_DANA_JOINED]){
+		SetFlag(SF_DANA2_JOINOK,0)
+	}
+
 	SetFlag(GF_TBOX_DUMMY102,0)
 	SetFlag(GF_TBOX_DUMMY103,0)
 	CallFunc( "talk:Talk_Katrin_LookReset" )		//向きリセット処理
