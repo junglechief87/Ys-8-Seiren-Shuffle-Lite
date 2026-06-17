@@ -81,7 +81,11 @@ def getSkillInfo(itemName):
         elif character == 'PARTY_RICOTTA':
             characterName = 'Ricotta'  
         elif character == 'PARTY_DANA':
-            characterName = 'Dana'  
+            characterName = 'Dana'
+        elif character == 'PARTY_DANA2':
+            characterName = 'Gratika'
+        elif character == 'PARTY_DANA3':
+            characterName = 'Luminous'
 
     return character,skillID,characterName
             

@@ -2,10 +2,8 @@ PARTY_MENU = """
 function "Paro_Party"
 {
 	SetStopFlag(STOPFLAG_TALK)
-	SetFlag(TF_MENU_SELECT, 1) // set to 1 so that we can start our while loop, it will get set to 0 before we get our actual character count
 	SetFlag(TF_MENU_SELECT2, 0)
-	while((FLAG[TF_MENU_SELECT2] != 90 && FLAG[TF_MENU_SELECT2] != -1) && // if close not selected or back button not pressed
-            (FLAG[TF_MENU_SELECT] < 1 || FLAG[TF_MENU_SELECT] > 6)) // if too many or too few active members
+	while(FLAG[TF_MENU_SELECT2] != 90 && FLAG[TF_MENU_SELECT2] != -1) // if close not selected or back button not pressed
 	{
 		SetFlag(TF_MENU_SELECT, 0) // counts active members
 		MenuReset()
@@ -87,11 +85,11 @@ function "Paro_Party"
 		}
 		
 		
-		if (FLAG[TF_MENU_SELECT] < 0 || FLAG[TF_MENU_SELECT] > 6) {
-			MenuAdd(90, "#0CClose")
+		if (FLAG[TF_MENU_SELECT] < 1 || FLAG[TF_MENU_SELECT] > 6) {
+			MenuAdd(91, "Close")
 		}
 		else {
-			MenuAdd(91, "Close")
+			MenuAdd(90, "#0CClose")
 		}
 		//--------------------------------------------------------------------------------------
 		
@@ -217,65 +215,6 @@ function "Paro_Party"
 	SetFlag(TF_MENU_SELECT2, 0)
 	
 	ResetStopFlag(STOPFLAG_TALK)
-}
-
-function "processParty"
-{
-	if(!FLAG[SF_ADOL_JOINOK]){
-		SeparateParty(PARTY_ADOL)
-	}
-	else{
-		JoinParty(PARTY_ADOL)
-	}
-	
-	if(!FLAG[SF_LAXIA_JOINOK]){
-		SeparateParty(PARTY_LAXIA)
-	}
-	else{
-		JoinParty(PARTY_LAXIA)
-	}
-	
-	if(!FLAG[SF_SAHAD_JOINOK]){
-		SeparateParty(PARTY_SAHAD)
-	}
-	else{
-		JoinParty(PARTY_SAHAD)
-	}
-	
-	if(!FLAG[SF_HUMMEL_JOINOK]){
-		SeparateParty(PARTY_HUMMEL)
-	}
-	else{
-		JoinParty(PARTY_HUMMEL)
-	}
-	
-	if(!FLAG[SF_RICOTTA_JOINOK]){
-		SeparateParty(PARTY_RICOTTA)
-	}
-	else{
-		JoinParty(PARTY_RICOTTA)
-	}
-	
-	if(!FLAG[SF_DANA_JOINOK]){
-		SeparateParty(PARTY_DANA)
-	}
-	else{
-		JoinParty(PARTY_DANA)
-	}
-	
-	if(!FLAG[SF_DANA2_JOINOK]){
-		SeparateParty(PARTY_DANA2)
-	}
-	else{
-		JoinParty(PARTY_DANA2)
-	}
-	
-	if(!FLAG[SF_DANA3_JOINOK]){
-		SeparateParty(PARTY_DANA3)
-	}
-	else{
-		JoinParty(PARTY_DANA3)
-	}
 }
 
 function "count_party"
