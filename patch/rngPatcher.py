@@ -1345,6 +1345,8 @@ def spiritRingEvent(options):
         script = (
 	        "\tGetItem(ICON3D_WP_DANA_005,1)\n"
 	        "\tEquipWeapon(DANA,ICON3D_WP_DANA_005)\n"
+            "\tEquipWeapon(DANA2,ICON3D_WP_DANA_005)\n"
+            "\tEquipWeapon(DANA3,ICON3D_WP_DANA_005)\n"
 	        "\tSetFlag(GF_TBOX_DUMMY108,1)\n"
         )
     return script
