@@ -4396,7 +4396,7 @@ function "it_receive_items"
 				WaitCloseWindow()
 				SetFlag(TF_MENU_SELECT2,0)
 			}
-			if(FLAG[SF_ADOL_JOINED] && (!FLAG[SF_ADOL_JOINOK] || !FLAG[SF_ADOL_JOINOKBK]))
+			if(FLAG[SF_ADOL_JOINED] && !FLAG[SF_ADOL_JOINOK] && !FLAG[SF_ADOL_JOINOKBK])
 			{
 				CallFunc("item:count_party")
 				if(FLAG[TF_MENU_SELECT] >= 6){
@@ -4511,7 +4511,7 @@ function "it_receive_items"
 				else{SetLevel(ADOL,99)} 
 				SetFlag(TF_MENU_SELECT2,0)
 			}
-			if(FLAG[SF_LAXIA_JOINED] && (!FLAG[SF_LAXIA_JOINOK] || !FLAG[SF_LAXIA_JOINOKBK]))
+			if(FLAG[SF_LAXIA_JOINED] && !FLAG[SF_LAXIA_JOINOK] && !FLAG[SF_LAXIA_JOINOKBK])
 			{
 				CallFunc("item:count_party")
 				if(FLAG[TF_MENU_SELECT] >= 6){
@@ -4627,7 +4627,7 @@ function "it_receive_items"
 				else{SetLevel(LAXIA,99)} 
 				SetFlag(TF_MENU_SELECT2,0)
 			}
-			if(FLAG[SF_SAHAD_JOINED] && (!FLAG[SF_SAHAD_JOINOK] || !FLAG[SF_SAHAD_JOINOKBK]))
+			if(FLAG[SF_SAHAD_JOINED] && !FLAG[SF_SAHAD_JOINOK] && !FLAG[SF_SAHAD_JOINOKBK])
 			{
 				CallFunc("item:count_party")
 				if(FLAG[TF_MENU_SELECT] >= 6){
@@ -4743,7 +4743,7 @@ function "it_receive_items"
 				else{SetLevel(SAHAD,99)} 
 				SetFlag(TF_MENU_SELECT2,0)
 			}
-			if(FLAG[SF_HUMMEL_JOINED] && (!FLAG[SF_HUMMEL_JOINOK] || !FLAG[SF_HUMMEL_JOINOKBK]))
+			if(FLAG[SF_HUMMEL_JOINED] && !FLAG[SF_HUMMEL_JOINOK] && !FLAG[SF_HUMMEL_JOINOKBK])
 			{
 				CallFunc("item:count_party")
 				if(FLAG[TF_MENU_SELECT] >= 6){
@@ -4859,7 +4859,7 @@ function "it_receive_items"
 				else{SetLevel(HUMMEL,99)} 
 				SetFlag(TF_MENU_SELECT2,0)
 			}
-			if(FLAG[SF_RICOTTA_JOINED] && (!FLAG[SF_RICOTTA_JOINOK] || !FLAG[SF_RICOTTA_JOINOKBK]))
+			if(FLAG[SF_RICOTTA_JOINED] && !FLAG[SF_RICOTTA_JOINOK] && !FLAG[SF_RICOTTA_JOINOKBK])
 			{
 				CallFunc("item:count_party")
 				if(FLAG[TF_MENU_SELECT] >= 6){
@@ -4977,7 +4977,7 @@ function "it_receive_items"
 				else{SetLevel(RICOTTA,99)} 
 				SetFlag(TF_MENU_SELECT2,0)
 			}
-			if(FLAG[SF_DANA_JOINED] && (!FLAG[SF_DANA_JOINOK] || !FLAG[SF_DANA_JOINOKBK]))
+			if(FLAG[SF_DANA_JOINED] && !FLAG[SF_DANA_JOINOK] && !FLAG[SF_DANA_JOINOKBK])
 			{
 				CallFunc("item:count_party")
 				if(FLAG[TF_MENU_SELECT] >= 6){
@@ -5093,7 +5093,7 @@ function "it_receive_items"
 				else{SetLevel(DANA,99)} 
 				SetFlag(TF_MENU_SELECT2,0)
 			}
-			if(FLAG[SF_DANA2_JOINED] && (!FLAG[SF_DANA2_JOINOK] || !FLAG[SF_DANA2s_JOINOKBK]))
+			if(FLAG[SF_DANA2_JOINED] && !FLAG[SF_DANA2_JOINOK] && !FLAG[SF_DANA2s_JOINOKBK])
 			{
 				CallFunc("item:count_party")
 				if(FLAG[TF_MENU_SELECT] >= 6){
@@ -5208,7 +5208,7 @@ function "it_receive_items"
 				else{SetLevel(DANA2,99)} 
 				SetFlag(TF_MENU_SELECT2,0)
 			}
-			if(FLAG[SF_DANA3_JOINED] && (!FLAG[SF_DANA3_JOINOK] || !FLAG[SF_DANA3_JOINOKBK]))
+			if(FLAG[SF_DANA3_JOINED] && !FLAG[SF_DANA3_JOINOK] && !FLAG[SF_DANA3_JOINOKBK])
 			{
 				CallFunc("item:count_party")
 				if(FLAG[TF_MENU_SELECT] >= 6){
