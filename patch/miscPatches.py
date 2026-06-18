@@ -95,6 +95,10 @@ def miscFixes(progress_callback=None):
     # Changes ys8.exe+29BDBA - F3 44 0F59 15 D5653100  - mulss xmm10,[ys8.exe+5B2398] { (0.10) }
     # to ys8.exe+29BDBA - F3 44 0F59 15 21CF3000  - mulss xmm10,[ys8.exe+5A8CE4] { (4.00) }
     # makes raids and intercepts more rewarding
+    exeBytes[0x29B2A0:0x29B2A1] = [0xEB] 
+    # Changes ys8.exe+29B2A0 - 74 12 - je ys8.exe+29B2AD
+    # to ys8.exe+29B2A0 - EB 12 - jmp ys8.exe+29B2AD
+    # skips check on party leader that prevents Dana forms from getting exp
     writeBufferIntoFile(ys8EXE, exeBytes)
 
     if progress_callback:

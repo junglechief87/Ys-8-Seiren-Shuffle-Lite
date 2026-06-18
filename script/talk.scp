@@ -28007,12 +28007,12 @@ function "Talk_Katrin"
 		EquipWeapon(DANA3, ICON3D_987)
 	}
 	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_988){
-		EquipWeapon(DANA2, ICON3D_987)
-		EquipWeapon(DANA3, ICON3D_987)
+		EquipWeapon(DANA2, ICON3D_988)
+		EquipWeapon(DANA3, ICON3D_988)
 	}
 	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_989){
-		EquipWeapon(DANA2, ICON3D_987)
-		EquipWeapon(DANA3, ICON3D_987)
+		EquipWeapon(DANA2, ICON3D_989)
+		EquipWeapon(DANA3, ICON3D_989)
 	}
 	else if(DANA.CHRWORK[CWK_WEAPON] == ICON3D_WP_DANA_005){
 		EquipWeapon(DANA2, ICON3D_WP_DANA_005)

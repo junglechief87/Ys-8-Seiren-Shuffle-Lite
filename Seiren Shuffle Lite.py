@@ -320,7 +320,7 @@ class CommandsFrame(ctk.CTkFrame):
 
             with ZipFile(config.patch_file_path) as zf:
                 item_map_preview = json.loads(zf.read("item_location_map.json"))
-            total_steps = len(item_map_preview) + 9  # locations + 9 named pipeline steps (matches rngPatcherMain callbacks)
+            total_steps = len(item_map_preview) + 10  # locations + 10 named pipeline steps (matches rngPatcherMain callbacks)
 
             tasks = [(seed_gen_task, "Generating Randomized Seed")]
             ProgressWindow(self.parent_app, tasks, total_steps, "Generate Seed", on_complete, ICON_PATH)
