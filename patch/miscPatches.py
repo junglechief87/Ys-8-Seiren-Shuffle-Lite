@@ -351,6 +351,10 @@ STATUS_ASSOCIATIONS = {
 }
 
 def setElementalAssociations(damageMapping, charID):
+    if charID == 'DANA2':
+        charID = 'GRATIKA'
+    elif charID == 'DANA3':
+        charID = 'LUMINOUS'
     for damageType, character in damageMapping.items():
         if charID in [character.upper() for character in character]:
             return STATUS_ASSOCIATIONS[damageType]
