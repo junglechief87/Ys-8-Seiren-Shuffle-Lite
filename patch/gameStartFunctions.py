@@ -749,8 +749,8 @@ def soloStartingCharacterEvent(patch):
     SetFlag(SF_HUMMEL_JOINOK, 0)
     SetFlag(SF_RICOTTA_JOINOK, 0)
     SetFlag(SF_DANA_JOINOK, 0)
-    SetFlag(SF_GRATIKA_JOINOK, 0)
-    SetFlag(SF_LUMINOUS_JOINOK, 0)
+    SetFlag(SF_DANA2_JOINOK, 0)
+    SetFlag(SF_DANA3_JOINOK, 0)
 """
         case 'Laxia':
             flags = """
@@ -760,8 +760,8 @@ def soloStartingCharacterEvent(patch):
     SetFlag(SF_HUMMEL_JOINOK, 0)
     SetFlag(SF_RICOTTA_JOINOK, 0)
     SetFlag(SF_DANA_JOINOK, 0)
-    SetFlag(SF_GRATIKA_JOINOK, 0)
-    SetFlag(SF_LUMINOUS_JOINOK, 0)
+    SetFlag(SF_DANA2_JOINOK, 0)
+    SetFlag(SF_DANA3_JOINOK, 0)
 """
         case 'Sahad':
             flags = """
@@ -771,8 +771,8 @@ def soloStartingCharacterEvent(patch):
     SetFlag(SF_HUMMEL_JOINOK, 0)
     SetFlag(SF_RICOTTA_JOINOK, 0)
     SetFlag(SF_DANA_JOINOK, 0)
-    SetFlag(SF_GRATIKA_JOINOK, 0)
-    SetFlag(SF_LUMINOUS_JOINOK, 0)
+    SetFlag(SF_DANA2_JOINOK, 0)
+    SetFlag(SF_DANA3_JOINOK, 0)
 """
         case 'Hummel':
             flags = """
@@ -782,8 +782,8 @@ def soloStartingCharacterEvent(patch):
     SetFlag(SF_HUMMEL_JOINOK, 1)
     SetFlag(SF_RICOTTA_JOINOK, 0)
     SetFlag(SF_DANA_JOINOK, 0)
-    SetFlag(SF_GRATIKA_JOINOK, 0)
-    SetFlag(SF_LUMINOUS_JOINOK, 0)
+    SetFlag(SF_DANA2_JOINOK, 0)
+    SetFlag(SF_DANA3_JOINOK, 0)
 """
         case 'Ricotta':
             flags = """
@@ -793,8 +793,8 @@ def soloStartingCharacterEvent(patch):
     SetFlag(SF_HUMMEL_JOINOK, 0)
     SetFlag(SF_RICOTTA_JOINOK, 1)
     SetFlag(SF_DANA_JOINOK, 0)
-    SetFlag(SF_GRATIKA_JOINOK, 0)
-    SetFlag(SF_LUMINOUS_JOINOK, 0)
+    SetFlag(SF_DANA2_JOINOK, 0)
+    SetFlag(SF_DANA3_JOINOK, 0)
 """
         case 'Dana':
             flags = """
@@ -804,8 +804,8 @@ def soloStartingCharacterEvent(patch):
     SetFlag(SF_HUMMEL_JOINOK, 0)
     SetFlag(SF_RICOTTA_JOINOK, 0)
     SetFlag(SF_DANA_JOINOK, 1)
-    SetFlag(SF_GRATIKA_JOINOK, 0)
-    SetFlag(SF_LUMINOUS_JOINOK, 0)
+    SetFlag(SF_DANA2_JOINOK, 0)
+    SetFlag(SF_DANA3_JOINOK, 0)
 """
         case 'Gratika':
             flags = """
@@ -815,8 +815,8 @@ def soloStartingCharacterEvent(patch):
     SetFlag(SF_HUMMEL_JOINOK, 0)
     SetFlag(SF_RICOTTA_JOINOK, 0)
     SetFlag(SF_DANA_JOINOK, 0)
-    SetFlag(SF_GRATIKA_JOINOK, 1)
-    SetFlag(SF_LUMINOUS_JOINOK, 0)
+    SetFlag(SF_DANA2_JOINOK, 1)
+    SetFlag(SF_DANA3_JOINOK, 0)
 """
         case 'Luminous':
             flags = """
@@ -826,8 +826,8 @@ def soloStartingCharacterEvent(patch):
     SetFlag(SF_HUMMEL_JOINOK, 0)
     SetFlag(SF_RICOTTA_JOINOK, 0)
     SetFlag(SF_DANA_JOINOK, 0)
-    SetFlag(SF_GRATIKA_JOINOK, 0)
-    SetFlag(SF_LUMINOUS_JOINOK, 1)
+    SetFlag(SF_DANA2_JOINOK, 0)
+    SetFlag(SF_DANA3_JOINOK, 1)
 """
     partyFlags = """
 function "soloEvent"
