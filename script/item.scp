@@ -982,7 +982,7 @@ function it_expup1
 		//ResetMoveVec("PARTYALL")
 	
 		// ＥＸＰアップ
-		GetExp(100)
+		GetExp(12)
 	
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 	
@@ -1017,7 +1017,7 @@ function it_expup2
 		//ResetMoveVec("PARTYALL")
 	
 		// ＥＸＰアップ
-		GetExp(1000)
+		GetExp(125)
 	
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 	
@@ -1052,7 +1052,7 @@ function it_expup3
 		//ResetMoveVec("PARTYALL")
 	
 		// ＥＸＰアップ
-		GetExp(10000)
+		GetExp(1250)
 	
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 	
@@ -2498,6 +2498,8 @@ function "it_usfood01"	//魚介スープ
 		HP_Heal( HUMMEL ,  400)
 		HP_Heal( RICOTTA , 400)
 		HP_Heal( DANA ,    400)
+		HP_Heal( DANA2 ,   400)
+		HP_Heal( DANA3 ,   400)
 
 		UseFood(FOODEFFID_BREAKUP1)			// 与ブレイク量アップ1
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
@@ -2649,6 +2651,8 @@ function "it_usfood02"	//キノコオムレツ
 		HP_Heal( HUMMEL ,  350)
 		HP_Heal( RICOTTA , 350)
 		HP_Heal( DANA ,    350)
+		HP_Heal( DANA2 ,   350)
+		HP_Heal( DANA3 ,   350)
 
 		//状態異常も完全回復
 		Cure(ADOL, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
@@ -2657,6 +2661,8 @@ function "it_usfood02"	//キノコオムレツ
 		Cure(HUMMEL, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		Cure(RICOTTA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		Cure(DANA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(DANA2, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(DANA3, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		UseFood(FOODEFFID_CURE1)			// 状態異常回復、無効化１
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
@@ -2773,6 +2779,8 @@ function "it_usfood03"	//肉厚ラタトゥイユ
 		HP_Heal( HUMMEL ,  600)
 		HP_Heal( RICOTTA , 600)
 		HP_Heal( DANA ,    600)
+		HP_Heal( DANA2 ,   600)
+		HP_Heal( DANA3 ,   600)
 
 		UseFood(FOODEFFID_SPHEAL1)			// SP回復1
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
@@ -2890,6 +2898,8 @@ function "it_usfood04"	//彩りムニエル
 		HP_Heal( HUMMEL ,  300)
 		HP_Heal( RICOTTA , 300)
 		HP_Heal( DANA ,    300)
+		HP_Heal( DANA2 ,   300)
+		HP_Heal( DANA3 ,   300)
 
 		UseFood(FOODEFFID_STRDEFUP1)		// 与ダメＵＰ，被ダメＤＯＷＮ2
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
@@ -3007,6 +3017,8 @@ function "it_usfood05"	//海鮮キッシュ
 		HP_Heal( HUMMEL ,  500)
 		HP_Heal( RICOTTA , 500)
 		HP_Heal( DANA ,    500)
+		HP_Heal( DANA2 ,   500)
+		HP_Heal( DANA3 ,   500)
 
 		UseFood(FOODEFFID_EXPUP1)			// 入手経験値アップ１
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
@@ -3124,6 +3136,8 @@ function "it_usfood06"	//ロールキャベツ
 		HP_Heal( HUMMEL ,  700)
 		HP_Heal( RICOTTA , 700)
 		HP_Heal( DANA ,    700)
+		HP_Heal( DANA2 ,   700)
+		HP_Heal( DANA3 ,   700)
 
 		UseFood(FOODEFFID_HPHEAL1)			// HP回復１
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
@@ -3244,6 +3258,8 @@ function "it_usfood11"	//肉巻きキノコーン
 		HP_Heal( HUMMEL ,  2000)
 		HP_Heal( RICOTTA , 2000)
 		HP_Heal( DANA ,    2000)
+		HP_Heal( DANA2 ,   2000)
+		HP_Heal( DANA3 ,   2000)
 
 		Cure(ADOL, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		Cure(LAXIA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
@@ -3251,6 +3267,8 @@ function "it_usfood11"	//肉巻きキノコーン
 		Cure(HUMMEL, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		Cure(RICOTTA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		Cure(DANA, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(DANA2, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
+		Cure(DANA3, (EFXFLAG1_DARK | EFXFLAG1_PARALYZE | EFXFLAG1_POISON | EFXFLAG1_FREEZE | EFXFLAG1_FLAME | EFXFLAG1_BLOOD_LOSS))
 		UseFood(FOODEFFID_CURE2)			// 状態異常回復、無効化2
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 
@@ -3367,6 +3385,8 @@ function "it_usfood12"	//フィッシュフライ
 		HP_Heal( HUMMEL ,  1800)
 		HP_Heal( RICOTTA , 1800)
 		HP_Heal( DANA ,    1800)
+		HP_Heal( DANA2 ,   1800)
+		HP_Heal( DANA3 ,   1800)
 
 		UseFood(FOODEFFID_BREAKUP2)			// 与ブレイク量アップ2
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
@@ -3484,6 +3504,8 @@ function "it_usfood13"	//パイレーツプレート
 		HP_Heal( HUMMEL ,  1500)
 		HP_Heal( RICOTTA , 1500)
 		HP_Heal( DANA ,    1500)
+		HP_Heal( DANA2 ,   1500)
+		HP_Heal( DANA3 ,   1500)
 		
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		UseFood(FOODEFFID_EXPUP2)			// 入手経験値アップ2
@@ -3601,6 +3623,8 @@ function "it_usfood14"	//贅沢コールスロー
 		HP_Heal( HUMMEL ,  2100)
 		HP_Heal( RICOTTA , 2100)
 		HP_Heal( DANA ,    2100)
+		HP_Heal( DANA2 ,   2100)
+		HP_Heal( DANA3 ,   2100)
 		
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		UseFood(FOODEFFID_HPHEAL2)			// HP回復2
@@ -3718,6 +3742,8 @@ function "it_usfood15"	//真心ボロネーゼ
 		HP_Heal( HUMMEL ,  2200)
 		HP_Heal( RICOTTA , 2200)
 		HP_Heal( DANA ,    2200)
+		HP_Heal( DANA2 ,   2200)
+		HP_Heal( DANA3 ,   2200)
 		
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
 		UseFood(FOODEFFID_SPHEAL2)			// SP回復2
@@ -3835,6 +3861,8 @@ function "it_usfood16"	//王様パンプキンパイ
 		HP_Heal( HUMMEL ,  2500)
 		HP_Heal( RICOTTA , 2500)
 		HP_Heal( DANA ,    2500)
+		HP_Heal( DANA2 ,   2500)
+		HP_Heal( DANA3 ,   2500)
 		
 		UseFood(FOODEFFID_STRDEFUP2)		// 与ダメＵＰ，被ダメＤＯＷＮ2
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
@@ -3940,6 +3968,8 @@ function "it_usdrink"	//野菜ジュース
 		HP_Heal( HUMMEL ,  100)
 		HP_Heal( RICOTTA , 100)
 		HP_Heal( DANA ,    100)
+		HP_Heal( DANA2 ,   100)
+		HP_Heal( DANA3 ,   100)
 		
 		UseFood(-1)		// 料理効果解除
 		PlaySE( SE_HEAL , 100 , 0,  0, 0, 1.0f, 0)
@@ -4336,36 +4366,6 @@ function "it_foodstuff15"//	キングパンプキン
 	}
 }
 
-function "count_party"
-{
-	SetFlag( TF_MENU_SELECT, 0 )
-	// count current active party
-	if(FLAG[SF_ADOL_JOINOK]) {
-		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
-	}
-	if(FLAG[SF_LAXIA_JOINOK]) {
-		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
-	}
-	if(FLAG[SF_SAHAD_JOINOK]) {
-		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
-	}
-	if(FLAG[SF_HUMMEL_JOINOK]) {
-		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
-	}
-	if(FLAG[SF_RICOTTA_JOINOK])	{
-		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
-	}
-	if(FLAG[SF_DANA_JOINOK]) {
-		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
-	}
-	if(FLAG[SF_DANA2_JOINOK]) {
-		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
-	}
-	if(FLAG[SF_DANA3_JOINOK]) {
-		SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
-	}
-}
-
 function "it_receive_items"
 {
 	SetFlag( TF_MENU_SELECT2, 0 )
@@ -4398,7 +4398,33 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_ADOL_JOINED] && !FLAG[SF_ADOL_JOINOK] && !FLAG[SF_ADOL_JOINOKBK])
 			{
-				CallFunc("item:count_party")
+				SetFlag( TF_MENU_SELECT, 0 )
+				// count current active party
+				if(FLAG[SF_ADOL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_LAXIA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_SAHAD_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_HUMMEL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_RICOTTA_JOINOK])	{
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA2_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA3_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+
 				if(FLAG[TF_MENU_SELECT] >= 6){
 					SetFlag(SF_ADOL_JOINOKBK, 1)
 				}
@@ -4513,7 +4539,33 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_LAXIA_JOINED] && !FLAG[SF_LAXIA_JOINOK] && !FLAG[SF_LAXIA_JOINOKBK])
 			{
-				CallFunc("item:count_party")
+				SetFlag( TF_MENU_SELECT, 0 )
+				// count current active party
+				if(FLAG[SF_ADOL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_LAXIA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_SAHAD_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_HUMMEL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_RICOTTA_JOINOK])	{
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA2_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA3_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				
 				if(FLAG[TF_MENU_SELECT] >= 6){
 					SetFlag(SF_LAXIA_JOINOKBK, 1)
 				}
@@ -4629,7 +4681,33 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_SAHAD_JOINED] && !FLAG[SF_SAHAD_JOINOK] && !FLAG[SF_SAHAD_JOINOKBK])
 			{
-				CallFunc("item:count_party")
+				SetFlag( TF_MENU_SELECT, 0 )
+				// count current active party
+				if(FLAG[SF_ADOL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_LAXIA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_SAHAD_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_HUMMEL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_RICOTTA_JOINOK])	{
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA2_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA3_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				
 				if(FLAG[TF_MENU_SELECT] >= 6){
 					SetFlag(SF_SAHAD_JOINOKBK, 1)
 				}
@@ -4745,7 +4823,33 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_HUMMEL_JOINED] && !FLAG[SF_HUMMEL_JOINOK] && !FLAG[SF_HUMMEL_JOINOKBK])
 			{
-				CallFunc("item:count_party")
+				SetFlag( TF_MENU_SELECT, 0 )
+				// count current active party
+				if(FLAG[SF_ADOL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_LAXIA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_SAHAD_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_HUMMEL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_RICOTTA_JOINOK])	{
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA2_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA3_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				
 				if(FLAG[TF_MENU_SELECT] >= 6){
 					SetFlag(SF_HUMMEL_JOINOKBK, 1)
 				}
@@ -4861,7 +4965,33 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_RICOTTA_JOINED] && !FLAG[SF_RICOTTA_JOINOK] && !FLAG[SF_RICOTTA_JOINOKBK])
 			{
-				CallFunc("item:count_party")
+				SetFlag( TF_MENU_SELECT, 0 )
+				// count current active party
+				if(FLAG[SF_ADOL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_LAXIA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_SAHAD_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_HUMMEL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_RICOTTA_JOINOK])	{
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA2_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA3_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				
 				if(FLAG[TF_MENU_SELECT] >= 6){
 					SetFlag(SF_RICOTTA_JOINOKBK, 1)
 				}
@@ -4979,7 +5109,33 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_DANA_JOINED] && !FLAG[SF_DANA_JOINOK] && !FLAG[SF_DANA_JOINOKBK])
 			{
-				CallFunc("item:count_party")
+				SetFlag( TF_MENU_SELECT, 0 )
+				// count current active party
+				if(FLAG[SF_ADOL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_LAXIA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_SAHAD_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_HUMMEL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_RICOTTA_JOINOK])	{
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA2_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA3_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				
 				if(FLAG[TF_MENU_SELECT] >= 6){
 					SetFlag(SF_DANA_JOINOKBK, 1)
 				}
@@ -5095,7 +5251,33 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_DANA2_JOINED] && !FLAG[SF_DANA2_JOINOK] && !FLAG[SF_DANA2s_JOINOKBK])
 			{
-				CallFunc("item:count_party")
+				SetFlag( TF_MENU_SELECT, 0 )
+				// count current active party
+				if(FLAG[SF_ADOL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_LAXIA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_SAHAD_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_HUMMEL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_RICOTTA_JOINOK])	{
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA2_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA3_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				
 				if(FLAG[TF_MENU_SELECT] >= 6){
 					SetFlag(SF_DANA2_JOINOKBK, 1)
 				}
@@ -5210,7 +5392,33 @@ function "it_receive_items"
 			}
 			if(FLAG[SF_DANA3_JOINED] && !FLAG[SF_DANA3_JOINOK] && !FLAG[SF_DANA3_JOINOKBK])
 			{
-				CallFunc("item:count_party")
+				SetFlag( TF_MENU_SELECT, 0 )
+				// count current active party
+				if(FLAG[SF_ADOL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_LAXIA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_SAHAD_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_HUMMEL_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_RICOTTA_JOINOK])	{
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA2_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				if(FLAG[SF_DANA3_JOINOK]) {
+					SetFlag( TF_MENU_SELECT, (FLAG[TF_MENU_SELECT] + 1))
+				}
+				
 				if(FLAG[TF_MENU_SELECT] >= 6){
 					SetFlag(SF_DANA3_JOINOKBK, 1)
 				}

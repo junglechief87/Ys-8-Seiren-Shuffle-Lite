@@ -39,7 +39,7 @@ function "init"
 			
 			if(WORK[WK_NPCNUM] >= 22 )
 			{
-				EventCue("mp2101:SubEV_Sien14")
+				EventCue("mp6107:SubEV_Sien14")
 			}
 			else 
 			{

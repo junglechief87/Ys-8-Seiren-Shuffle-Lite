@@ -28082,6 +28082,7 @@ function "Talk_Katrin"
 
 	if(FLAG[SF_DANA_JOINOKBK] || !FLAG[SF_DANA_JOINED]){
 		SetFlag(SF_DANA_JOINOK,0)
+		EquipArmor(DANA, -1)
 	}
 
 	SetFlag(GF_TBOX_DUMMY102,0)
