@@ -5249,7 +5249,7 @@ function "it_receive_items"
 				else{SetLevel(DANA,99)} 
 				SetFlag(TF_MENU_SELECT2,0)
 			}
-			if(FLAG[SF_DANA2_JOINED] && !FLAG[SF_DANA2_JOINOK] && !FLAG[SF_DANA2s_JOINOKBK])
+			if(FLAG[SF_DANA2_JOINED] && !FLAG[SF_DANA2_JOINOK] && !FLAG[SF_DANA2_JOINOKBK])
 			{
 				SetFlag( TF_MENU_SELECT, 0 )
 				// count current active party
