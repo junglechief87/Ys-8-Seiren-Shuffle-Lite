@@ -369,7 +369,7 @@ def updateStatusCSV(settings):
         statusEdits[character] = {
             'EXPMIN': int(STATUS_DEFAULTS[character]['EXPMIN'] / exp_multiplier),
             'EXPMAX': int(STATUS_DEFAULTS[character]['EXPMAX'] / exp_multiplier),
-            '属性1': STATUS_DEFAULTS[character]['属性1'] if options['shuffle_damage_types'] != 1 else setElementalAssociations(settings['damage_mapping'], character),
+            '属性1': setElementalAssociations(settings['damage_mapping'], character) or STATUS_DEFAULTS[character]['属性1'],
             '属性1値': STATUS_DEFAULTS[character]['属性1値']
         }
 
