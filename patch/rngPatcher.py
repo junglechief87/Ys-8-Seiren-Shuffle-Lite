@@ -612,7 +612,10 @@ function "newTradeHandler"
 
 }}
 """
-    item_names = [locations[str(i)]['item_name'] + ("(!)" if 'PROGRESSION' in locations[str(i)]['item_classification'] else "") for i in range(461, 471)]
+
+    item_names = [(locations[str(i)]['item_name'] if len(locations[str(i)]['item_name']) <= 45 else (locations[str(i)]['item_name'][:45] + "..."))
+                  + ("(!)" if 'PROGRESSION' in locations[str(i)]['item_classification'] else "")
+                  for i in range(461, 471)]
     return script.format(*item_names)
 
 # ==========================================================================================================
@@ -1466,7 +1469,11 @@ def buildMessage(itemId, itemName, classification, player, message_type=None, is
             'TRAP': ORANGE,
         }
         color = color_map.get(classification, BLUE)
-        return f"Sent {color}{itemName}{WHITE} to {GOLD}{player}."
+
+        if (len(itemName) + len(player)) > 70:
+            return f"Sent {color}{itemName}\n{WHITE}to {GOLD}{player}."
+        else:
+            return f"Sent {color}{itemName}{WHITE} to {GOLD}{player}."
     
     # Map message_type to message template
     message_map = {
