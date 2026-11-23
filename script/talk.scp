@@ -27280,7 +27280,7 @@ function "Talk_Katrin"
 		SetFlag( TF_TALK_TYPE, ( FLAG[TF_TALK_TYPE] + 0x100 ) )	// 0x100:îRêŒÇìnÇπÇÈ
 	}
 	// temporarily add dana to the party if she hasn't joined yet but a form has to allow weapon upgrades for dana forms
-	if (FLAG[SF_DANA2_JOINOK] || [SF_DANA3_JOINOK]){
+	if (FLAG[SF_DANA2_JOINOK] || FLAG[SF_DANA3_JOINOK]){
 		SetFlag(SF_DANA_JOINOK,1)
 	}
 

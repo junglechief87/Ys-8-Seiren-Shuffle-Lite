@@ -481,7 +481,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "1105_entry"
@@ -501,7 +501,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "1301_entry"
@@ -522,7 +522,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "1118_entry"
@@ -542,7 +542,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "1308_entry"
@@ -562,7 +562,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "1117_entry"
@@ -582,7 +582,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "2103_entry"
@@ -602,7 +602,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "2301_entry"
@@ -627,7 +627,7 @@ def buildEntrances(entranceList, options):
 			SetFlag(GF_02MP2302_LOOK_MAN,1)  //get rid of scene later in dungeon
 			EventCue("mp2301:EV_M02S390_ED")
 		}
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 				
 	function "2308_entry"
@@ -647,7 +647,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "1201_entry"
@@ -668,7 +668,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "7301_entry"
@@ -688,7 +688,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "4102_entry"
@@ -708,7 +708,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "4309_entry"
@@ -728,7 +728,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "1119_entry"
@@ -748,7 +748,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "7411_entry"
@@ -768,7 +768,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "1116_entry"
@@ -788,7 +788,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "3105_entry"
@@ -814,7 +814,7 @@ def buildEntrances(entranceList, options):
 			CallFunc("system:camera_reset")
 			ResetStopFlag(STOPFLAG_EVENT)
 			FadeIn(FADE_BLACK, FADE_FAST)
-			SetFlag(GF_TBOX_DUMMY100, 1) 
+			 
 		}
 	}
 
@@ -835,7 +835,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "4107_entry"
@@ -855,7 +855,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "4103_entry"
@@ -875,7 +875,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "6110_entry"
@@ -895,7 +895,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 
@@ -916,7 +916,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "6204_entry"
@@ -942,7 +942,7 @@ def buildEntrances(entranceList, options):
 			CallFunc("system:camera_reset")
 			ResetStopFlag(STOPFLAG_EVENT)
 			FadeIn(FADE_BLACK, FADE_FAST)
-			SetFlag(GF_TBOX_DUMMY100, 1) 
+			 
 		}
 	}
 
@@ -963,7 +963,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "6108_entry"
@@ -983,7 +983,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "6341_entry"
@@ -1003,7 +1003,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "6411_entry"
@@ -1023,7 +1023,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 	
 	function "2104_entry"
@@ -1049,7 +1049,7 @@ def buildEntrances(entranceList, options):
 			CallFunc("system:camera_reset")
 			ResetStopFlag(STOPFLAG_EVENT)
 			FadeIn(FADE_BLACK, FADE_FAST)
-			SetFlag(GF_TBOX_DUMMY100, 1) 
+			 
 		}
 	}
 	
@@ -1076,7 +1076,7 @@ def buildEntrances(entranceList, options):
 			CallFunc("system:camera_reset")
 			ResetStopFlag(STOPFLAG_EVENT)
 			FadeIn(FADE_BLACK, FADE_FAST)
-			SetFlag(GF_TBOX_DUMMY100, 1) 
+			 
 		}
 	}
 	
@@ -1097,19 +1097,19 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "6301_entry"
 	{
 		EventCue("mp6301:Entry_warpout_mp6409")
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "6409_entry_1"
 	{
 		EventCue("mp6409:Entry_warpout_mp6301")
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "6410_entry"
@@ -1129,7 +1129,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "6409_entry_2"
@@ -1149,7 +1149,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "6408_entry"
@@ -1169,7 +1169,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "6401_entry"
@@ -1189,7 +1189,7 @@ def buildEntrances(entranceList, options):
 		CallFunc("system:camera_reset")
 		ResetStopFlag(STOPFLAG_EVENT)
 		FadeIn(FADE_BLACK, FADE_FAST)
-		SetFlag(GF_TBOX_DUMMY100, 1) 
+		 
 	}
 
 	function "warpmask"
