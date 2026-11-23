@@ -447,6 +447,14 @@ HUNT_BOSS_SPAWN_WAVE = {
     "st_39_p.tbb": {"Offset": 0x7D5, "OriginalValue": 0x34},
 }
 
+def toggleShortStageFile(filename, enable):
+    isShort = filename.endswith("_short.csv")
+    if enable and not isShort:
+        return filename.replace(".csv", "_short.csv")
+    if not enable and isShort:
+        return filename.replace("_short.csv", ".csv")
+    return filename
+
 def fastIntercepts(options):
     intFileLoc = os.path.join(config.executable_directory, "text/en/intstage.csv")
     stageEdits = {}
@@ -458,8 +466,9 @@ def fastIntercepts(options):
             huntFileBytes[data['Offset']] = 0x31 # changes boss spawn wave to 1
             writeBufferIntoFile(huntFileLoc, huntFileBytes)
         
-        for raid, data in RAID_STAGE_DEFAULTS.items():
-            data['ウェイブファイル１'] = data['ウェイブファイル１'].replace(".csv", "_short.csv")
+        for raid, defaultData in RAID_STAGE_DEFAULTS.items():
+            data = defaultData.copy()
+            data['ウェイブファイル１'] = toggleShortStageFile(data['ウェイブファイル１'], True)
             data['メニュー表示用ウェーブ数'] = data['メニュー表示用ウェーブ数'] // 2
             data["ランクＢ:判定スコア"] = int(round(data["ランクＢ:判定スコア"] * 0.55, -3))
             data["ランクＡ:判定スコア"] = int(round(data["ランクＡ:判定スコア"] * 0.55, -3))
@@ -470,7 +479,8 @@ def fastIntercepts(options):
             data["ランクＳ：判定スコア"] = int(round(data["ランクＳ：判定スコア"] * 0.55, -3))
             stageEdits[raid] = data
         
-        for hunt, data in HUNT_STAGE_DEFAULTS.items():
+        for hunt, defaultData in HUNT_STAGE_DEFAULTS.items():
+            data = defaultData.copy()
             data["ランクＢ:判定スコア"] = int(round(data["ランクＢ:判定スコア"] * 0.55, -3))
             data["ランクＡ:判定スコア"] = int(round(data["ランクＡ:判定スコア"] * 0.55, -3))
             data["ランクＳ:判定スコア"] = int(round(data["ランクＳ:判定スコア"] * 0.55, -3))
@@ -487,7 +497,9 @@ def fastIntercepts(options):
             huntFileBytes[data['Offset']] = data['OriginalValue'] # restore original boss spawn wave
             writeBufferIntoFile(huntFileLoc, huntFileBytes)
 
-        for raid, data in RAID_STAGE_DEFAULTS.items():
+        for raid, defaultData in RAID_STAGE_DEFAULTS.items():
+            data = defaultData.copy()
+            data['ウェイブファイル１'] = toggleShortStageFile(data['ウェイブファイル１'], False)
             stageEdits[raid] = data
         for hunt, data in HUNT_STAGE_DEFAULTS.items():
             stageEdits[hunt] = data
